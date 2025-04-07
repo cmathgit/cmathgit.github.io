@@ -1,0 +1,25 @@
+# more media
+*.pdf
+*.mp4
+*.mp3
+*.wav
+*.avi
+*.mkv
+*.flv
+*.wmv
+*.mov
+*.flac
+*.flp
+*.png
+*.jpg
+*.jpeg
+*.gif
+.cursorignore
+.env
+env/** */
+venv/** */
+gen_favicon.py
+crossofthemessiah/scripts/**/*
+crossofthemessiah/scripts/cross_of_the_messiah_qr.png
+crossofthemessiah/scripts/cross_of_the_messiah_qr_portfolio.png
+crossofthemessiah/scripts/qr_code_gen.py

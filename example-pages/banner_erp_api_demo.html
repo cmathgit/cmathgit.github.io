@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<title>API GUID Demo</title>
+<meta charset="UTF-8"> <!-- Globally Unique Identifier (GUID) GUID is a unique 128 bit number. You use GUIDS when there are multiple independent
+systems or when generating unique IDs.-->
+<body>
+
+<h2>Globally Unique Identifier (GUID)</h2>
+<h3>Inspired by Banner (ERP) Student API Handbook 9.5</h3>
+
+<p>GUIDs can be generated using various programming languages such as Java or C#/.NET. Many languages provide a utility function for generating version 4 GUIDs. Since Java 1.5, java.util.UUID.randomUUID() has been used to generate random, unique 128 bit numbers. .NET provides the Guid.NewGuid() function. Microsoft SQL Server provides the NEWID() method call, e.g., SELECT NEWID(); <br> <br> Generation of GUIDs using JavaScript should be restricted to server side. Tools like TamperMonkey make subverting GUID generation relatively easy for clients. JavaScript does not have a built in method for generating version 4 GUIDs.</p>
+
+<h4>Use JavaScript to generate an RFC 4122 version 4 compliant UUID.</h4>
+
+<p> This program offsets the first 13 hex numbers by a hex portion of the timestamp, and once depleted offsets by a hex portion of the microseconds since pageload. If Math.random is on the same seed, both clients would have to generate the UUID the exact same number of microseconds since pageload (if high-perfomance time is supported) AND at the exact same millisecond (or 10,000+ years later) to get the same UUID:</p>
+
+<p id="uuid"></p>
+<button id="generateUUID" onclick="onClick();">Generate UUID</button>
+
+<!--
+
+Note: All examples in the following documentation show HTTP against a
+local host. The client will want to deploy the war file to a server that has
+HTTPS and the URL for the API will be for that server and HTTPS. The
+web service definition for the API includes the pattern for HTTPS and for
+the server and port information.
+
+Generating a GUID using JavaScript
+Generation of GUIDS using JavaScript should be restricted to server side JavaScript. It is
+relatively easy to use browser tools like GreaseMonkey on Firefox or TamperMonkey on
+Chrome to subvert the GUID generation.
+JavaScript does not have a built in method for generating Version 4 GUIDS.
+
+-->
+
+
+<!--Include external javascript -->
+<script src="scripts/generate_guid.js"></script>
+
+</body>
+</html>
