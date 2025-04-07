@@ -367,6 +367,17 @@ body {
     text-decoration: underline;
 }
 
+/* Add styling for the security note */
+.security-note {
+    font-size: 0.75rem; /* Smaller font size */
+    color: var(--text-dark); /* Muted text color */
+    text-align: center; /* Center align */
+    flex-basis: 100%; /* Make it take full width */
+    order: 1; /* Position it below the textarea but before the button in flex layout */
+    margin-top: -10px; /* Adjust spacing */
+    margin-bottom: 10px;
+}
+
 /* Additional styles from ATM_index.html (e.g., random verse, BG widget) */
 #random-verse-section { /* Style the new section */
     border-top: 3px solid #003366;
