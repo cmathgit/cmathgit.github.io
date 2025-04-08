@@ -16,10 +16,21 @@
 *.gif
 .cursorignore
 .env
-env/** */
-venv/** */
+env/**
+venv/**
 gen_favicon.py
 crossofthemessiah/scripts/**/*
 crossofthemessiah/scripts/cross_of_the_messiah_qr.png
 crossofthemessiah/scripts/cross_of_the_messiah_qr_portfolio.png
 crossofthemessiah/scripts/qr_code_gen.py
+anchoredtimesministry2027/.env
+anchoredtimesministry2027/env/**
+config.js
+anchoredtimesministry2027/static/config.js
+anchoredtimesministry2027/static/ai_chat_script.js
+anchoredtimesministry2027/__pycache__/**
+anchoredtimesministry2027/__pycache__
+anchoredtimesministry2027/api.py
+anchoredtimesministry2027/requirements.txt
+anchoredtimesministry2027/LICENSE
+anchoredtimesministry2027/README.md
