@@ -1,0 +1,306 @@
+/* Basic Reset & Body Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a; /* Dark background */
+    color: #e0e0e0; /* Light text */
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #2a2a2a; /* Slightly lighter dark container */
+    border: 1px solid #444;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    overflow: hidden; /* Contain children */
+}
+
+/* Header */
+header {
+    background-color: #003366; /* Dark blue header */
+    color: #ffffff;
+    padding: 15px 20px;
+    border-bottom: 1px solid #0055aa;
+}
+
+header h1 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.status-panel {
+    text-align: center;
+    font-size: 1.1em;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: inline-block; /* Fit content */
+    border: 1px solid #004488;
+}
+
+.status-panel span:first-child {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* Status Indicator Colors */
+#ai-status {
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.status-idle { background-color: #ffa500; color: #333; } /* Orange */
+.status-online { background-color: #32cd32; color: #fff; } /* Lime Green */
+.status-processing { background-color: #1e90ff; color: #fff; } /* Dodger Blue */
+.status-error { background-color: #dc143c; color: #fff; } /* Crimson */
+
+/* Main Content Area */
+main {
+    padding: 20px;
+}
+
+main section {
+    margin-bottom: 25px;
+    background-color: #333; /* Darker section background */
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #444;
+}
+
+main h2 {
+    color: #00aaff; /* Light blue heading */
+    border-bottom: 1px solid #0077cc;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+/* Output Log */
+#output-log {
+    background-color: #111; /* Very dark background for log */
+    color: #00ff00; /* Green terminal text */
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.95em;
+    height: 200px;
+    overflow-y: auto; /* Enable scrolling */
+    white-space: pre-wrap; /* Wrap long lines */
+    word-wrap: break-word;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #333;
+}
+
+/* Interaction Area */
+.controls {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px; /* Spacing between buttons */
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+}
+
+button {
+    background-color: #0055aa; /* Blue buttons */
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease;
+    border: 1px solid #0077cc;
+}
+
+button:hover {
+    background-color: #0077cc; /* Lighter blue on hover */
+}
+
+button:active {
+    background-color: #003366; /* Darker blue when clicked */
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center; /* Align items vertically */
+}
+
+.input-group label {
+    font-weight: bold;
+    color: #ccc;
+}
+
+#user-input {
+    flex-grow: 1; /* Take available space */
+    padding: 8px 10px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #444;
+    color: #e0e0e0;
+    font-size: 1em;
+}
+
+#user-input:focus {
+    outline: none;
+    border-color: #00aaff;
+    box-shadow: 0 0 5px rgba(0, 170, 255, 0.5);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 0.9em;
+    color: #aaa;
+    background-color: #222; /* Slightly different dark for footer */
+    border-top: 1px solid #444;
+}
+
+/* Add or modify these styles in css/style.css for an IDE look */
+
+/* --- Sidebar Overhaul --- */
+.sidebar {
+    width: 250px; 
+    background-color: #252526; /* Dark background (VS Code-like) */
+    color: #cccccc; /* Light grey text */
+    border-right: 1px solid #333333; /* Darker border */
+    box-sizing: border-box; 
+    display: flex;
+    flex-direction: column; 
+    height: 100vh; 
+    position: sticky; 
+    top: 0;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; /* Monospace font common in IDEs */
+}
+
+.sidebar h2 {
+    margin: 0;
+    padding: 10px 15px; /* Adjust padding */
+    font-size: 0.9em; /* Smaller header */
+    font-weight: normal; /* Less prominent header */
+    background-color: #333333; /* Slightly different background for header */
+    color: #dddddd;
+    border-bottom: 1px solid #444444; /* Separator */
+    text-align: left; /* Align left */
+}
+
+/* --- File Upload Area --- */
+.file-upload-area {
+    padding: 10px 15px; /* Consistent padding */
+    border-bottom: 1px solid #333333; /* Separator */
+    text-align: left; /* Align left */
+    margin-bottom: 0; /* Remove default margin */
+}
+
+.file-upload-label {
+    display: inline-block; /* Keep as block */
+    padding: 5px 10px; /* Smaller padding */
+    background-color: #0e639c; /* VS Code blue */
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-weight: normal; /* Normal weight */
+    font-size: 0.85em; /* Smaller font size */
+    border: 1px solid #1f7fcd; /* Border */
+    box-shadow: none; /* Remove previous shadow */
+    width: auto; /* Don't force width */
+    margin: 0; /* Remove auto margins */
+}
+
+.file-upload-label:hover {
+    background-color: #1f7fcd; /* Lighter blue on hover */
+    transform: none; /* Remove previous transform */
+    box-shadow: none; /* Ensure no shadow */
+}
+
+.file-upload-label:active {
+     transform: none; 
+     box-shadow: none; 
+}
+
+/* --- File List Styling --- */
+#file-list {
+    list-style: none;
+    padding: 5px 0; /* Padding top/bottom */
+    margin: 0;
+    overflow-y: auto; 
+    flex-grow: 1; 
+}
+
+#file-list li {
+    padding: 4px 15px; /* Padding left/right for indentation */
+    font-size: 0.85em; /* Match button font size */
+    border-bottom: none; /* Remove previous dotted border */
+    word-break: break-all; 
+    cursor: default; /* Default cursor for file items */
+    transition: background-color 0.15s ease; /* Hover transition */
+    color: #cccccc; /* Ensure text color */
+}
+
+#file-list li:hover {
+    background-color: #2a2d2e; /* Subtle hover background */
+    color: #ffffff; /* Brighter text on hover */
+}
+
+/* Optional: Style for when no files are selected */
+#file-list li.no-files-message { /* Add a class in JS if needed */
+     font-style: italic;
+     color: #777777; 
+     cursor: default;
+}
+#file-list li.no-files-message:hover {
+    background-color: transparent; /* Don't highlight the 'no files' message */
+    color: #777777;
+}
+
+/* --- Adjust Main Content if needed --- */
+.main-content {
+    flex-grow: 1; 
+    padding: 20px; 
+    overflow-y: auto; 
+    /* background-color: #1e1e1e; /* Optional: Dark theme for main area too */
+    /* color: #d4d4d4; /* Optional: Light text for main area */
+}
+
+/* Optional: Adjust container if you make main content dark */
+/*
+.container {
+   margin: 0 auto; 
+}
+*/
+
+/* Ensure other elements are visible on dark background if main area is themed */
+/*
+h1, h2, label, span, p {
+     color: #d4d4d4; 
+}
+
+button {
+    background-color: #0e639c;
+    color: white;
+    border: 1px solid #1f7fcd;
+}
+button:hover {
+    background-color: #1f7fcd;
+}
+input[type="text"] {
+    background-color: #3c3c3c;
+    color: #cccccc;
+    border: 1px solid #555555;
+}
+pre {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    border: 1px solid #333;
+}
+*/
