@@ -18,6 +18,24 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 
+    <!-- MathJax Configuration -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['\\(', '\\)']], // Define inline math delimiters
+          displayMath: [['\\[', '\\]']]  // Define display math delimiters
+        },
+        svg: {
+          fontCache: 'global' // Use SVG output with global font cache
+        }
+      };
+  </script>
+  <!-- Load MathJax -->
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+
     <!--External Style Sheets-->
 
     <style>
@@ -31,8 +49,8 @@
         body {
             font-family: 'Lato', sans-serif; /* Modern sans-serif font */
             line-height: 1.6;
-            background-color: #8196ac; /* Light grey background */
-            color: #333; /* Default text color */
+            background-color: #1b1c25; /* Dracula background */
+            color: #54a286; /* Dracula default text */
             display: flex; /* Enable flexbox for centering */
             justify-content: center; /* Center horizontally */
             align-items: center; /* Center vertically */
@@ -42,7 +60,7 @@
 
         /* Content Container */
         .container {
-            background-color: #c8d4e0; /* White background for content */
+            background-color: #35374b; /* Dracula pre/code background for contrast */
             padding: 2em 3em; /* Padding inside the container */
             border-radius: 8px; /* Rounded corners */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
@@ -53,7 +71,7 @@
 
         /* Footer Container */
         .footer-container {
-            background-color: #c8d4e0; /* White background for content */
+            background-color: #35374b; /* Dracula pre/code background for contrast */
             padding: 2em 3em; /* Padding inside the container */
             border-radius: 8px; /* Rounded corners */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
@@ -61,15 +79,24 @@
 
         /* Heading Style */
         h1 {
-            color: #2c3e50; /* Darker blue-grey heading color */
+            color: #c6d6d2; /* Dracula heading color */
             margin-bottom: 0.75em; /* Space below heading */
             font-weight: 700; /* Bolder font weight */
         }
 
         /* Paragraph Style */
         p {
-            color: #555;
+            color: #a4b8a9;
             margin-bottom: 1.5em; /* Space below paragraph */
+        }
+
+        /* General Link Style */
+        a {
+            color: hsl(62, 72%, 66%); /* Dracula link blue */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
 
         /* Button Container */
@@ -82,8 +109,8 @@
         /* Button Styling */
         .button-link {
             display: inline-block; /* Treat links as block-level elements for styling */
-            background-color: #3498db; /* Primary button color (blue) */
-            color: #ffffff; /* White text */
+            background-color: hsl(222, 35%, 41%); /* Dracula link blue */
+            color: #83ff60; /* Keep white text for contrast */
             padding: 0.8em 1.5em; /* Padding inside button */
             text-decoration: none; /* Remove underline */
             border-radius: 5px; /* Slightly rounded corners */
@@ -94,8 +121,8 @@
 
         .button-link:hover,
         .button-link:focus { /* Add focus state for accessibility */
-            background-color: #2980b9; /* Darker blue on hover/focus */
-            color: #ffffff;
+            background-color: hsl(277, 42%, 45%); /* Darker Dracula link blue */
+            color: #d8f84a; /* Keep white text */
             transform: translateY(-2px); /* Slight lift effect */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
             outline: none; /* Remove default focus outline if desired */
@@ -123,6 +150,14 @@
         .footer-grid-item {
           text-align: center;
         }
+        /* Ensure icons use the link color */
+        .footer-grid-item a i {
+            color: hsl(219, 42%, 55%); /* Dracula link blue */
+        }
+        .footer-grid-item a:hover i {
+            /* Optional: define hover color for icons if needed, often inherit works fine */
+            /* color: darken(hsl(223, 42%, 55%), 10%); */ /* Example */
+        }
 
         .image-gallery {
             margin-top: 2em; /* Space above the images */
@@ -146,6 +181,15 @@
             .image-gallery img {
                 max-width: 100px; /* Smaller images on smaller screens */
             }
+        }
+
+        /* Horizontal Rule Style */
+        hr {
+            height: 1px; /* Thinner line */
+            padding: 0;
+            margin: 24px 0;
+            background-color: #385c59; /* Dracula HR color */
+            border: 0;
         }
 
     </style>
@@ -177,7 +221,12 @@
             <a href="crossofthemessiah/" class="button-link">Music Portfolio</a>
             <!-- Link to the Macias Wedding Website page -->
             <a href="macias-wedding/" class="button-link">Macias Wedding Website</a>
+            <!-- Link to the Orthogonal Prompt Engineering page -->
+            <a href="https://github.com/cmathgit/bible-chatgpt-prompts" class="button-link">Orthogonal Prompt Engineering</a>
         </div>
+        <hr>
+        <p>Read these papers and dive deeper into the theory and application of Orthogonal Prompt Engineering:<br><small><a href="https://github.com/cmathgit/bible-chatgpt-prompts/blob/main/Orthogonality%20and%20High-Dimensional%20Vector%20Spaces%20in%20Generative%20AI%20Music%20Creation.pdf">Orthogonality and High-Dimensional Vector Spaces in Generative AI Music Creation</a><br><a href="https://github.com/cmathgit/bible-chatgpt-prompts/blob/main/Orthogonality%20and%20High-Dimensional%20Vector%20Spaces%20in%20Generative%20AI%20Music%20Creation.pdf">Use Case - Creating a Song with Targeted Emotional and Stylistic Nuance</a></small></p>
+    
   
 <footer class="footer-container">
   <p>Find me on social media.</p>
