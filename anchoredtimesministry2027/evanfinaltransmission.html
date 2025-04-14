@@ -96,6 +96,24 @@
              font-style: italic;
              color: #777;
          }
+        /* Added CSS for TTS button */
+        .tts-button {
+            background: none;
+            border: none;
+            font-size: 1.2em; /* Adjust size as needed */
+            cursor: pointer;
+            padding: 0 5px;
+            vertical-align: middle; /* Align with text if needed */
+            transition: opacity 0.2s ease-in-out;
+            margin-left: 5px; /* Add some space */
+        }
+        .tts-button:hover {
+            opacity: 0.7;
+        }
+        .tts-button:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body>
@@ -108,7 +126,8 @@
             Your browser does not support the audio element.
         </audio>-->
 
-        <iframe width="300" height="150" src="https://drive.google.com/file/d/1Pc2hoSnKHCIpY-zIq0Ao2zQe-SdhSevr/preview?usp=sharing"></iframe>
+        <!--<iframe width="300" height="150" src="https://drive.google.com/file/d/1Pc2hoSnKHCIpY-zIq0Ao2zQe-SdhSevr/preview?usp=sharing"></iframe>-->
+        <a href="https://drive.google.com/file/d/1Pc2hoSnKHCIpY-zIq0Ao2zQe-SdhSevr/preview?usp=sharing" target="_blank"><button class="tts-button" aria-label="Play prayer text aloud">🔊</button></a>
 
         <!-- Section 1: Final Sermon -->
         <section id="final-sermon">
