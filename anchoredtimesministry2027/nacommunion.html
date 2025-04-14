@@ -106,6 +106,25 @@
             margin-top: 20px;
             background-color: #fff;
         }
+        /* Added CSS for TTS button */
+        .tts-button {
+            background: none;
+            border: none;
+            font-size: 1.2em; /* Adjust size as needed */
+            cursor: pointer;
+            padding: 0 5px;
+            vertical-align: middle; /* Align with text if needed */
+            transition: opacity 0.2s ease-in-out;
+            margin-left: 5px; /* Add some space */
+        }
+        .tts-button:hover {
+            opacity: 0.7;
+        }
+        .tts-button:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        /* End Added CSS */
     </style>
 </head>
 <body>
@@ -119,7 +138,7 @@
         <article>
             <p>Greetings, beloved reader. In these times, many seek ways to honor the Lord's commandments while navigating personal health considerations or convictions regarding alcohol. The use of non-alcoholic (NA) red wine presents a viable option for observing the sacred ordinance of the Lord's Supper, a practice central to our Baptist faith and mandated by our Savior. As we approach this topic, let us do so with reverence, grounded in the Holy Scriptures and guided by sound theological principles as articulated in the <a href="https://bfm.sbc.net/bfm2000/" target="_blank" class="ebs-link">Baptist Faith & Message 2000.</a></p>
 
-            <p>The Lord’s Supper is one of the two ordinances instituted by Christ himself, a symbolic act of obedience whereby members of His church, through partaking of the bread and the fruit of the vine, memorialize the death of the Redeemer and anticipate His second coming (<a href="https://bfm.sbc.net/bfm2000/#vii" target="_blank" class="ebs-link">BF&M 2000, Article VII</a>). The essence lies in the remembrance and proclamation of Christ's sacrifice. As the Apostle Paul instructs, referencing the Lord's own words:</p>
+            <p>The Lord's Supper is one of the two ordinances instituted by Christ himself, a symbolic act of obedience whereby members of His church, through partaking of the bread and the fruit of the vine, memorialize the death of the Redeemer and anticipate His second coming (<a href="https://bfm.sbc.net/bfm2000/#vii" target="_blank" class="ebs-link">BF&M 2000, Article VII</a>). The essence lies in the remembrance and proclamation of Christ's sacrifice. As the Apostle Paul instructs, referencing the Lord's own words:</p>
             <blockquote>
                 "For I have received of the Lord that which also I delivered unto you, That the Lord Jesus the same night in which he was betrayed took bread: And when he had given thanks, he brake it, and said, Take, eat: this is my body, which is broken for you: this do in remembrance of me. After the same manner also he took the cup, when he had supped, saying, This cup is the new testament in my blood: this do ye, as oft as ye drink it, in remembrance of me. For as often as ye eat this bread, and drink this cup, ye do shew the Lord's death till he come." (<span class="scripture-ref"><a href="https://www.biblegateway.com/passage/?search=1+Corinthians+11%3A23-26&version=KJV" target="_blank" class="ebs-link">1 Corinthians 11:23-26, KJV</a></span>)
             </blockquote>
@@ -172,9 +191,10 @@
                 </li>
                 <li>
                     <strong>Consecration through Prayer:</strong> Before partaking, dedicate a moment for focused prayer, acknowledging the elements as symbols representing the profound sacrifice of our Lord Jesus Christ. A suggested prayer:
-                    <blockquote>
+                    <blockquote id="consecration-prayer-text">
                         "Heavenly Father, we approach this table in obedience and remembrance. We thank Thee for the body of Thy Son, Jesus Christ, broken for our transgressions, and for His precious blood, shed for the remission of our sins and the establishment of the New Covenant. As we partake of this cup, representing His blood, may it deepen our gratitude for Thy immeasurable love and grace, and strengthen our commitment to walk in faithfulness. Sanctify these elements to this holy use, we pray in Jesus' name. Amen."
                     </blockquote>
+                    <button class="tts-button" data-target="consecration-prayer-text" aria-label="Play prayer text aloud">🔊</button>
                 </li>
             </ol>
 
@@ -248,9 +268,10 @@
                     <li>Consider the victory secured in Christ, encompassing spiritual redemption, sanctification, and the strength He provides for godly living, including discipline in physical health and stewardship.</li>
                 </ul>
                 <p><strong>Step 3: Prayer of Thanksgiving and Consecration</strong></p>
-                <blockquote>
+                <blockquote id="individual-prayer-text">
                     "Lord Jesus, I come before Thee with profound gratitude for Thy ultimate sacrifice. I thank Thee for Thy body, broken that I might be made whole. I thank Thee for Thy precious blood, shed to cleanse me from all unrighteousness and to seal the New Covenant. As I partake of these elements, I do so not merely as ritual, but in heartfelt remembrance of Thy suffering, death, and resurrection. I claim the healing, forgiveness, and victory purchased for me at Calvary, applying it to every aspect of my spirit, soul, and body. Strengthen me by Thy Spirit to walk worthy of this calling. Amen."
                 </blockquote>
+                <button class="tts-button" data-target="individual-prayer-text" aria-label="Play prayer text aloud">🔊</button>
                 <p><strong>Step 4: Partake</strong></p>
                 <ul>
                     <li>Consume the bread, consciously remembering His body given for you.</li>
@@ -283,9 +304,10 @@
                     <li>For what specific blessings are we thankful to God today?</li>
                 </ul>
                 <p><strong>Step 3: Family Prayer (Led or prayed collectively):</strong></p>
-                <blockquote>
+                <blockquote id="family-prayer-text">
                     "Dear Lord Jesus, we thank Thee as a family for Thy incredible love demonstrated through Thy sacrifice. We remember Thy body broken and Thy blood shed for us. Please help us to love each other as Thou hast loved us, to live lives that honour Thee in body and spirit, and to walk closely with Thee every day. Unite our hearts in Thy truth. Amen."
                 </blockquote>
+                <button class="tts-button" data-target="family-prayer-text" aria-label="Play family prayer text aloud">🔊</button>
                 <p><strong>Step 4: Partake Together:</strong></p>
                 <ul>
                     <li>Each family member partakes of the bread and the cup.</li>
@@ -346,6 +368,97 @@
         <p>Guidance offered in the Year of our Lord 2027, grounded in the Holy Bible (KJV) and consistent with the Baptist Faith & Message 2000.</p>
         <p><em>Disclaimer: Technical examples provided are illustrative and intended for advanced audiences familiar with software development concepts and technologies (SQL, JSON, Batch, Bash, Python, PHP, JavaScript, Node.js, React, REST APIs, Git, Docker, etc.). Their inclusion serves to demonstrate potential applications of technology in ministry organization, not as core theological content.</em></p>
     </footer>
+
+    <!-- Added JavaScript for Text-to-Speech -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ttsButtons = document.querySelectorAll('.tts-button');
+
+            // Check if the browser supports the Web Speech API
+            if ('speechSynthesis' in window) {
+                const synth = window.speechSynthesis;
+                let currentUtterance = null; // To manage stopping speech
+
+                ttsButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const targetId = button.getAttribute('data-target');
+                        const targetElement = document.getElementById(targetId);
+
+                        if (targetElement) {
+                            const textToSpeak = targetElement.textContent || targetElement.innerText;
+
+                            // If speaking and the same button is clicked, stop speech
+                            if (synth.speaking && currentUtterance && currentUtterance.text === textToSpeak) {
+                                synth.cancel();
+                                return; // Exit after stopping
+                            }
+
+                            // If speaking something else, stop it before starting new
+                            if (synth.speaking) {
+                                synth.cancel();
+                            }
+
+                            // Create and configure the utterance
+                            const utterance = new SpeechSynthesisUtterance(textToSpeak.trim());
+                            utterance.lang = 'en-US'; // Set language for better voice selection
+                            utterance.rate = 0.9;     // Adjust rate (0.1 to 10, default 1)
+                            utterance.pitch = 1;      // Adjust pitch (0 to 2, default 1)
+                            currentUtterance = utterance; // Store the current utterance
+
+                            // Event handlers for the utterance
+                            utterance.onstart = () => {
+                                // Visually indicate speaking and disable button
+                                button.disabled = true;
+                                button.textContent = '...' // Indicate activity
+                                console.log('Speech started for:', targetId);
+                            };
+
+                            utterance.onend = () => {
+                                // Restore button state when speech finishes
+                                button.disabled = false;
+                                button.textContent = '🔊'; // Restore icon
+                                currentUtterance = null;
+                                console.log('Speech finished for:', targetId);
+                            };
+
+                            utterance.onerror = (event) => {
+                                // Restore button state and log error
+                                button.disabled = false;
+                                button.textContent = '🔊'; // Restore icon
+                                currentUtterance = null;
+                                console.error('SpeechSynthesisUtterance.onerror', event);
+                                alert(`Sorry, an error occurred during speech synthesis: ${event.error}`);
+                            };
+
+                            // Speak the text
+                            synth.speak(utterance);
+
+                        } else {
+                            console.error('TTS target element not found:', targetId);
+                            alert('Could not find the text to read.');
+                        }
+                    });
+                });
+
+                // Optional: Clean up synthesis queue on page unload
+                window.addEventListener('beforeunload', () => {
+                    if (synth.speaking) {
+                        synth.cancel();
+                    }
+                });
+
+            } else {
+                // Hide buttons if API is not supported
+                console.warn('Text-to-Speech API not supported in this browser.');
+                ttsButtons.forEach(button => {
+                    button.style.display = 'none'; // Hide the button
+                });
+                // Optionally, inform the user
+                // alert('Text-to-Speech is not supported by your browser.');
+            }
+        });
+    </script>
+    <!-- End Added JavaScript -->
 
 </body>
 </html>
