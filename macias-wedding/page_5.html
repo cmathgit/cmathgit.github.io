@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Wedding Photo Album</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<link rel="stylesheet" href="css/w3_v4.css">  for working offline -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!--<link rel="stylesheet" href="css/google_api_raleway.css"> for working offline -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<!--<link rel="stylesheet" href="css/fa_all.css"> for working offline -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+<!--<link rel="stylesheet" href="css/styles.css">-->
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+.w3-quarter img{margin-bottom: -6px; cursor: pointer}
+.w3-third img{margin-bottom: -6px; cursor: pointer}
+.w3-half img{margin-bottom: -6px; cursor: pointer}
+.w3-quarter img:hover{opacity: 0.6; transition: 0.3s}
+.w3-third img:hover{opacity: 0.6; transition: 0.3s}
+.w3-half img:hover{opacity: 0.6; transition: 0.3s}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-bar-block w3-black w3-animate-right w3-top w3-text-light-grey w3-large" style="z-index:3;width:250px;font-weight:bold;display:none;right:0;" id="mySidebar">
+  <a href="javascript:void()" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-32">CLOSE</a> 
+  <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">PHOTOS</a> 
+  <a href="./#about" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">ABOUT</a> 
+ <!-- <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">CONTACT</a> -->
+  <a href="invite.html" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">INVITE</a>
+  <a href="video_links.html" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">VIDEOS</a>
+  <a href="./#slide" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">SLIDESHOW</a>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-white w3-large w3-padding-12">
+  <span class="w3-left w3-padding">Tahia &amp; Cruz Macias Wedding Photo Album: choose any photo to expand.</span>
+  <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-content" style="max-width:1600px;margin-top:83px">		
+    <!-- Photo grid 2-->
+  <div class="w3-row w3-grayscale-min" id="panel6">
+   <div class="w3-third w3-mobile">
+   
+		<!-- dim: 1024 x 768 -->
+		<!--<img src="images/IMG954503.jpg" style="width:100%" onclick="onClick(this)" alt="You May Kiss your Bride">-->
+		<img src="https://1drv.ms/i/c/351e429395ffd928/IQTVVGEiQCP5S4IcydZ164VtAafnUGSHAfbeB7W3K3099Ug" style="width:100%" onclick="onClick(this)" alt="You May Kiss your Bride">
+		<!--<img src="images/IMG954504.jpg" style="width:100%" onclick="onClick(this)" alt="You May Kiss your Bride">-->
+		<img src="https://1drv.ms/i/c/351e429395ffd928/IQR3JH-K4NQ8QK1llITCepTHAZ75KHg7sm9pIqsRkuxSbXw" style="width:100%" onclick="onClick(this)" alt="You May Kiss your Bride">
+		<!--<img src="images/IMG954505.jpg" style="width:100%" onclick="onClick(this)" alt="I Do">-->
+		<img src="https://1drv.ms/i/c/351e429395ffd928/IQQxzKaBYHxjRZM3Lx7r83B7AZUQk3nzO_WbigQwHz9VHNQ" style="width:100%" onclick="onClick(this)" alt="I Do">
+	
+	</div>
+	
+    <div class="w3-third w3-mobile">
+	
+		<!-- dim: 1024 x 768 -->
+		<!--<img src="images/IMG954509.jpg" style="width:100%" onclick="onClick(this)" alt="Mr. &amp; Mrs. Macias">-->
+		<img src="https://1drv.ms/i/c/351e429395ffd928/IQRa4KHIkjB-Ro7-R_lYgtlGAeK-u4yfDNAHWl7KriqSzMU" style="width:100%" onclick="onClick(this)" alt="Mr. &amp; Mrs. Macias">
+		<!--<img src="images/IMG954523.jpg" style="width:100%" onclick="onClick(this)" alt="Cut the Cake">	-->
+		<img src="https://1drv.ms/i/c/351e429395ffd928/IQTNoex5XssLR62pdwJ6EfIsAd4vuqH49CuRNVLI4pYAHqU" style="width:100%" onclick="onClick(this)" alt="Cut the Cake">	
+		<!--<img src="images/IMG954532.jpg" style="width:100%" onclick="onClick(this)" alt="Feed the Bride">-->
+		<img src="https://1drv.ms/i/c/351e429395ffd928/IQRFOzyE1uUKT7Do8zXMBlFYAQ5VAapHX92c5uvFdYqAv2w" style="width:100%" onclick="onClick(this)" alt="Feed the Bride">
+		
+    </div>		
+		
+    <div class="w3-third w3-mobile">
+	
+		<!-- dim: 1024 x 768 -->
+		<!--<img src="images/IMG954540.jpg" style="width:100%" onclick="onClick(this)" alt="The Bridal Party Eats">-->
+		<img src="https://1drv.ms/i/c/351e429395ffd928/IQS_Ud8Cvc44Q401sTOIWWZZATYiBbTk_WlyN1IeX9xCxuY" style="width:100%" onclick="onClick(this)" alt="The Bridal Party Eats">
+		<!--<img src="images/IMG954542.jpg" style="width:100%" onclick="onClick(this)" alt="The Bridal Party Eats">-->
+		<img src="https://1drv.ms/i/c/351e429395ffd928/IQSXfwcOHcg9TZklOCgeTZvuAZHBD6-7JgeB93RnYVVrfFY" style="width:100%" onclick="onClick(this)" alt="The Bridal Party Eats">
+		<!--<img src="images/IMG954547.jpg" style="width:100%" onclick="onClick(this)" alt="The Bridal Party Eats">		-->
+		<img src="https://1drv.ms/i/c/351e429395ffd928/IQRuaup00kIhR5Qvgbwsv1b4Ae7vEHGuPj6OD3_B38ZcRTA" style="width:100%" onclick="onClick(this)" alt="The Bridal Party Eats">
+		
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="w3-center w3-padding-32">
+    <div class="w3-bar" id="pagi">
+      <a href="page_4.html#pagi" class="w3-bar-item w3-button w3-round w3-hover-black">«</a>
+      <a href="page_1.html" class="w3-bar-item w3-button w3-round w3-hover-black">Page 1</a>
+      <a href="page_2.html" class="w3-bar-item w3-button w3-round w3-hover-black">Page 2</a>
+      <a href="page_3.html" class="w3-bar-item w3-button w3-round w3-hover-black">Page 3</a>
+      <a href="page_4.html" class="w3-bar-item w3-button w3-round w3-hover-black">Page 4</a>
+	  <a class="w3-bar-item w3-button w3-round w3-text-white w3-dark-grey">Page 5</a>
+	  <a href="page_6.html" class="w3-bar-item w3-button w3-round w3-hover-black">Page 6</a>
+	  <a href="page_7.html" class="w3-bar-item w3-button w3-round w3-hover-black">Page 7</a>
+	  <a href="page_8.html" class="w3-bar-item w3-button w3-round w3-hover-black">Page 8</a>
+	  <a href="page_9.html" class="w3-bar-item w3-button w3-round w3-hover-black">Page 9</a>
+	  <a href="page_10.html" class="w3-bar-item w3-button w3-round w3-hover-black">Page 10</a>
+	  <a href="page_11.html" class="w3-bar-item w3-button w3-round w3-hover-black">Page 11</a>
+      <a href="page_6.html#pagi" class="w3-bar-item w3-button w3-round w3-hover-black">»</a>
+    </div>
+  </div>
+  
+  <!-- Modal for full size images on click-->
+  <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+    <span class="w3-button w3-black w3-xlarge w3-display-topright">×</span>
+    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+      <img id="img01" class="w3-image">
+      <p id="caption"></p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-32 w3-grey">  
+    <div class="w3-row-padding">
+      <div class="w3-half">
+        <h3>Tips</h3>
+        <p>Choose any photo to expand. Right-Click or Hold the image and select "Save As" to download to your device.</p>      
+		
+		<!-- Visit Site Home Page -->
+		<button class="w3-button w3-light w3-text-dark-grey w3-padding-small w3-section ">
+			<a href='./'> 
+				<i class="fa fa-home fa-fw w3-small"></i><p class="w3-small">Home Page</p>
+			</a>
+		</button>	
+      </div>
+    
+      <div class="w3-half" id="other">
+        <h3>Other Web-Pages</h3>
+        <ul class="w3-ul">
+          <li class="w3-padding-16 w3-hover-light">
+            <!-- Macias Wedding Invite Page -->
+			<button class="w3-button w3-hover-light w3-padding-small w3-section w3-text-black">
+				<a href='invite.html'> 
+					<!--<img src="images/flowers5.jpg" class="w3-left w3-margin-right" style="width:50px">-->
+					<img src="https://1drv.ms/i/c/351e429395ffd928/IQS8iXy1Yz_zQKEyRq6JKGhlAXIqG_8rTdvd743u88DvC3E" class="w3-left w3-margin-right" style="width:50px">
+					<span class="w3-large"> <i class="fa fa-heart w3-small"></i> Wedding Invite</span>
+				</a>
+			</button>
+          </li>
+		  <li class="w3-padding-16 w3-hover-light">
+			<!-- Macias Wedding Videos Page -->
+			<button class="w3-button w3-hover-light w3-padding-small w3-section w3-text-black">
+				<a href='video_links.html'> 
+					<!--<img src="images/wedding_location3.jpg" class="w3-left w3-margin-right" style="width:50px">-->
+					<img src="https://1drv.ms/i/c/351e429395ffd928/IQSUlxYNxsluSZr378VasiYSATLd1IP2GpaeS274n2D2xic" class="w3-left w3-margin-right" style="width:50px">
+					<span class="w3-large"> <i class="fa fa-play w3-small"></i> Wedding Videos</span>
+				</a>
+			</button>
+		  </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+
+<!-- End page content -->
+</div>
+
+ <!-- Load external JavaScript -->
+<script src="javascript/sidebar.js"></script>
+
+</body>
+</html>

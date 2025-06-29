@@ -1,0 +1,48 @@
+# more media
+*.pdf
+*.mp4
+*.mp3
+*.wav
+*.avi
+*.mkv
+*.flv
+*.wmv
+*.mov
+*.flac
+*.flp
+*.png
+*.jpg
+*.jpeg
+*.gif
+.cursorignore
+.env
+env/**
+venv/**
+gen_favicon.py
+crossofthemessiah/scripts/**/*
+crossofthemessiah/scripts/cross_of_the_messiah_qr.png
+crossofthemessiah/scripts/cross_of_the_messiah_qr_portfolio.png
+crossofthemessiah/scripts/qr_code_gen.py
+anchoredtimesministry2027/.env
+anchoredtimesministry2027/env/**
+config.js
+anchoredtimesministry2027/static/config.js
+anchoredtimesministry2027/static/ai_chat_script.js
+anchoredtimesministry2027/__pycache__/**
+anchoredtimesministry2027/__pycache__
+anchoredtimesministry2027/api.py
+anchoredtimesministry2027/requirements.txt
+anchoredtimesministry2027/LICENSE
+anchoredtimesministry2027/README.md
+anchoredtimesministry2027/Gemini API Configuration.txt
+anchoredtimesministry2027/evanfinalsermon.mp3
+anchoredtimesministry2027/About EVANs Roles Radio Edit.mp3
+anchoredtimesministry2027/EVAN Final Transmission Radio Edit.mp3
+anchoredtimesministry2027/EVAN Theological Discourse Radio Edit.mp3
+anchoredtimesministry2027/EVAN Theoloigcal Treatise Radio Edit.mp3
+!examples/boid/boidstory.mp3
+!examples/boid/incandescent house.mp3
+!examples/boid/image_2025-04-11_04-15-13.png
+!examples/boid/image_2025-04-11_03-58-24.png
+!macias-baby-shower-2025/watercolor-blue.png
+

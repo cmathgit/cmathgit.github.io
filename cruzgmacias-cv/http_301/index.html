@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HTTP Status 301</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--To redirect immediately, set this parameter to “0”, i.e., set content="0";-->
+<meta http-equiv="refresh" content="7; url='https://cmathgit.github.io/'" /> <!--replace url with redirect url-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  /*background-image: url('mailbox_ks.jpg');*/
+  background-image: url('https://1drv.ms/i/c/351e429395ffd928/IQS-PCVJtahtSLYrIY_Ks1itAXiE6BuEJRVF0MWmCge5Dhc?width=1024');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+</style>
+</head>
+<body>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-topleft w3-padding-large w3-xlarge">HTTP Status 301</div>
+  <div class="w3-display-middle">
+    <h1 class="w3-jumbo w3-animate-top">Don't worry! We have moved to a new location. :)</h1>
+    <hr class="w3-border-white" style="margin:auto;width:40%">
+    <p class="w3-large w3-center">You will be redirected to the new site domain in <div class="w3-center" id="countdown"></div></p>
+	<!--replace url with redirect url-->
+	<button class="w3-button w3-light w3-padding-small w3-section">
+		<a href='https://cmathgit.github.io/'><i class="fa fa-home"> Click here</i> to be redirected now.</a>
+	</button>
+  </div>
+  <div class="w3-display-bottomleft w3-padding-large">
+    Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a> and <a href="https://fontawesome.com/" target="_blank">fontawesome.css</a>
+  </div>
+</div>
+<!-- Load external JavaScript -->
+<script src="countdown.js"></script>
+</body>
+</html>

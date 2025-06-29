@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the GitHub Page of Cruz Macias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon Placeholder (Optional) -->
+    <link rel="icon" href="github_pro_favicon.ico" type="image/x-icon">
+
+    <!--W3.CSS--> 
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		
+		<!--Font Awesome Free ICONS 6.1.1 by @fontawesome - https://fontawesome.com-->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+
+    <!-- MathJax Configuration -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['\\(', '\\)']], // Define inline math delimiters
+          displayMath: [['\\[', '\\]']]  // Define display math delimiters
+        },
+        svg: {
+          fontCache: 'global' // Use SVG output with global font cache
+        }
+      };
+  </script>
+  <!-- Load MathJax -->
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+
+    <!--External Style Sheets-->
+
+    <style>
+        /* Basic Reset and Body Styling */
+        * {
+            box-sizing: border-box; /* Makes layout math easier */
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif; /* Modern sans-serif font */
+            line-height: 1.6;
+            background-color: #1b1c25; /* Dracula background */
+            color: #54a286; /* Dracula default text */
+            display: flex; /* Enable flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            padding: 1em; /* Add padding for smaller screens */
+        }
+
+        /* Content Container */
+        .container {
+            background-color: #35374b; /* Dracula pre/code background for contrast */
+            padding: 2em 3em; /* Padding inside the container */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            text-align: center; /* Center text within container */
+            max-width: 600px; /* Limit width on larger screens */
+            width: 100%; /* Ensure it takes full width on smaller screens */
+        }
+
+        /* Footer Container */
+        .footer-container {
+            background-color: #35374b; /* Dracula pre/code background for contrast */
+            padding: 2em 3em; /* Padding inside the container */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        /* Heading Style */
+        h1 {
+            color: #c6d6d2; /* Dracula heading color */
+            margin-bottom: 0.75em; /* Space below heading */
+            font-weight: 700; /* Bolder font weight */
+        }
+
+        /* Paragraph Style */
+        p {
+            color: #a4b8a9;
+            margin-bottom: 1.5em; /* Space below paragraph */
+        }
+
+        /* General Link Style */
+        a {
+            color: hsl(62, 72%, 66%); /* Dracula link blue */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Button Container */
+        .button-container {
+            display: flex; /* Use flexbox for button layout */
+            flex-direction: column; /* Stack buttons vertically by default */
+            gap: 1em; /* Space between buttons */
+        }
+
+        /* Button Styling */
+        .button-link {
+            display: inline-block; /* Treat links as block-level elements for styling */
+            background-color: hsl(222, 35%, 41%); /* Dracula link blue */
+            color: #83ff60; /* Keep white text for contrast */
+            padding: 0.8em 1.5em; /* Padding inside button */
+            text-decoration: none; /* Remove underline */
+            border-radius: 5px; /* Slightly rounded corners */
+            font-weight: 700; /* Bolder text */
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        .button-link:hover,
+        .button-link:focus { /* Add focus state for accessibility */
+            background-color: hsl(277, 42%, 45%); /* Darker Dracula link blue */
+            color: #d8f84a; /* Keep white text */
+            transform: translateY(-2px); /* Slight lift effect */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+            outline: none; /* Remove default focus outline if desired */
+        }
+
+        /* Responsive Design - Adjust button layout for wider screens */
+        @media (min-width: 500px) {
+            .button-container {
+                flex-direction: row; /* Arrange buttons horizontally */
+                justify-content: center; /* Center buttons horizontally */
+                flex-wrap: wrap; /* Allow buttons to wrap if needed */
+            }
+        }
+
+        .footer-grid-container {
+          display: grid;
+          grid-template-columns: auto auto auto auto;
+          justify-content: center;
+          gap: 10px 15px; /* 10px gap between rows, 15px between columns */
+          /* Optional: Align items within their grid cell (e.g., center them) */
+          align-items: center; /* Vertically center items in their cell */
+          justify-items: center; /* Horizontally center items in their cell */
+        }
+
+        .footer-grid-item {
+          text-align: center;
+        }
+        /* Ensure icons use the link color */
+        .footer-grid-item a i {
+            color: hsl(219, 42%, 55%); /* Dracula link blue */
+        }
+        .footer-grid-item a:hover i {
+            /* Optional: define hover color for icons if needed, often inherit works fine */
+            /* color: darken(hsl(223, 42%, 55%), 10%); */ /* Example */
+        }
+
+        .image-gallery {
+            margin-top: 2em; /* Space above the images */
+            display: flex; /* Arrange images in a row */
+            justify-content: space-around; /* Space them out */
+            align-items: center; /* Align vertically */
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+            gap: 1em; /* Space between images if they wrap */
+        }
+
+        .image-gallery img {
+            max-width: 150px; /* Limit image width */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 5px; /* Optional: rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+            object-fit: cover; /* Ensures images fill the space nicely if dimensions vary */
+        }
+
+        /* Responsive adjustments for images if needed */
+        @media (max-width: 600px) {
+            .image-gallery img {
+                max-width: 100px; /* Smaller images on smaller screens */
+            }
+        }
+
+        /* Horizontal Rule Style */
+        hr {
+            height: 1px; /* Thinner line */
+            padding: 0;
+            margin: 24px 0;
+            background-color: #385c59; /* Dracula HR color */
+            border: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Welcome to the GitHub Site of Cruz Macias</h1>
+
+        <!-- Add image container here -->
+        <div class="image-gallery">
+          <img src="https://1drv.ms/i/c/351e429395ffd928/IQSgpqTaj2pLQaNvmiYqJAGbAYepoLAOwJkJm7wnB2WBlCo" alt="Description of photo 1">
+          <img src="https://1drv.ms/i/c/351e429395ffd928/IQRk-UYX8eTOTrUsL0zgL_15AVAajL3wiPvkrnIgv0tjH3U" alt="Description of photo 2">
+          <img src="https://1drv.ms/i/c/351e429395ffd928/IQTD0BrNt8xkS7x3afHYYCX_AYw0CSdn5FZ73QkFnqXVvy0" alt="Description of photo 3">
+        </div>
+
+        <p>
+            Please visit my other pages:
+        </p>
+
+        <div class="button-container">
+            <!-- GitHub Page -->
+            <a href="https://github.com/cmathgit" class="button-link">GitHub Page</a>
+            <!-- Link to the Anchored Times Ministry blog page -->
+            <a href="anchoredtimesministry2027/" class="button-link">Anchored Times Ministry</a>
+            <!-- Link to the Personal Curriculum Vitae page -->
+            <a href="cruzgmacias-cv/" class="button-link">Personal CV</a>
+            <!-- Link to the Music Portfolio page -->
+            <a href="crossofthemessiah/" class="button-link">Music Portfolio</a>
+            <!-- Link to the Macias Wedding Website page -->
+            <a href="macias-wedding/" class="button-link">Macias Wedding Website</a>
+            <!-- Link to the Orthogonal Prompt Engineering page -->
+            <a href="https://github.com/cmathgit/bible-chatgpt-prompts" class="button-link">Orthogonal Prompt Engineering</a>
+			<!-- Link to 25K+ Suno Prompts for Free-->
+            <a href="https://github.com/cmathgit/bible-chatgpt-prompts/blob/main/suno_prompts.csv" class="button-link">25k+ Suno Prompts FOR FREE!!!</a>
+            <!-- Link to the Boids page -->
+            <a href="https://cmathgit.github.io/examples/boid/" class="button-link">Boids</a>
+            <!-- Link to the KJV Lookup page -->
+            <a href="https://cmathgit.github.io/examples/kjvlookup/" class="button-link">KJV Lookup</a>
+        </div>
+        <hr>
+        <p>Read these papers and dive deeper into the theory and application of Orthogonal Prompt Engineering:<br><small><a href="https://github.com/cmathgit/bible-chatgpt-prompts/blob/main/Orthogonality%20and%20High-Dimensional%20Vector%20Spaces%20in%20Generative%20AI%20Music%20Creation.pdf">Orthogonality and High-Dimensional Vector Spaces in Generative AI Music Creation</a><br><a href="https://github.com/cmathgit/bible-chatgpt-prompts/blob/main/Orthogonality%20and%20High-Dimensional%20Vector%20Spaces%20in%20Generative%20AI%20Music%20Creation.pdf">Use Case - Creating a Song with Targeted Emotional and Stylistic Nuance</a></small></p>
+    
+  
+<footer class="footer-container">
+  <p>Find me on social media.</p>
+  <div class="footer-grid-container">
+    <div class="footer-grid-item">
+      <a href='https://my.indeed.com/p/cruzm-yb949w5'>
+        <i class="fa fa-info w3-small w3-hover-opacity"></i>
+      </a>
+    </div>
+    <div class="footer-grid-item">
+      <a href='https://www.linkedin.com/in/cruz-macias-9b4519145'>
+        <i class="fa-brands fa-linkedin w3-small w3-hover-opacity"></i>
+      </a>
+    </div>
+     <div class="footer-grid-item">
+      <a href='https://youtube.com/@cruzmacias3257'>
+        <i class="fa-brands fa-youtube w3-small w3-hover-opacity"></i>
+      </a>
+    </div>
+    <div class="footer-grid-item">
+      <a href='https://www.facebook.com/cruz.macias.56232'>
+        <i class="fa-brands fa-facebook-f w3-small w3-hover-opacity"></i>
+      </a>
+    </div>
+    <div class="footer-grid-item">
+      <a href='https://github.com/cmathgit'>
+        <i class="fa-brands fa-github w3-small w3-hover-opacity"></i>
+      </a>
+    </div>
+    <div class="footer-grid-item">
+     <a href='https://ollama.com/cmathllm'>
+       <i class="fa-solid fa-horse w3-small w3-hover-opacity"></i>
+     </a>
+   </div>
+   <div class="footer-grid-item">
+     <a href='https://huggingface.co/cmathhug'>
+       <i class="fa-solid fa-face-smile w3-small w3-hover-opacity"></i>
+     </a>
+   </div>
+   <div class="footer-grid-item">
+     <a href='https://www.bandmix.com/cmetalvocalist'>
+       <i class="fa-solid fa-microphone w3-small w3-hover-opacity"></i>
+     </a>
+   </div>
+   <div class="footer-grid-item">
+     <a href='https://soundcloud.com/crossofthemessiah'>
+       <i class="fa-brands fa-soundcloud w3-small w3-hover-opacity"></i>
+     </a>
+   </div>
+   <div class="footer-grid-item">
+     <a href='https://www.deviantart.com/cmathdraw'>
+       <i class="fa-brands fa-deviantart w3-small w3-hover-opacity"></i>
+     </a>
+   </div>
+    <div class="footer-grid-item">
+      <a href=''>
+        <i class="fa-brands fa-discord w3-small w3-hover-opacity"></i>
+      </a>
+    </div>
+  </div>
+ <hr>
+ <p>Disclaimer(s):<br>Content Disclaimer and Limitation of Liability<a href="https://docs.google.com/document/d/1q4zYgmg0Aoo5_5znIlJDfmD7coEDaDh5KLCaxHiKQOI/edit?usp=drivesdk" class="w3-bar-item w3-button w3-padding-small w3-hover-white"><i class="fa-brands fa-google w3-small"></i></a><a href="https://1drv.ms/w/c/351e429395ffd928/EWMpWeIQ1TZJur8K0Gp-cwMBCtlPKglm-wANIRLWecGy5g?e=O7QC6N" class="w3-bar-item w3-button w3-padding-small w3-hover-white"><i class="fa-brands fa-microsoft w3-small"></i></a><br>
+   <!--Content Disclaimer and Limitation of Liability Statement-->
+   <small><italic>Content Disclaimer and Limitation of Liability: The content published on this channel/platform, including but not limited to videos, posts, captions, audio, visuals, and written text, may contain material generated, in whole or in part, using artificial intelligence (AI) technologies. This includes but is not limited to generative text, synthetic images, voice simulation, video synthesis, music composition, lyrics, and other algorithmically produced or enhanced media. While reasonable efforts are made to review, moderate, and curate content prior to its publication, the use of AI systems inherently involves the possibility of generating material that may be inaccurate, offensive, inappropriate, obscene, vulgar, or otherwise objectionable. The creator(s), owner(s), and operator(s) of this channel/page do not guarantee the accuracy, completeness, reliability, or appropriateness of any content generated or published. By accessing or consuming this content, you acknowledge and accept the following: 1. No Warranties: All content is provided "as is" without warranties of any kind, express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, and non-infringement. 2. No Liability for AI Output: The creator(s) disclaim any and all liability arising from or related to content that may be generated by AI tools or platforms, including any harm, offense, or damages that may result. 3. Viewer Discretion Advised: Due to the experimental and unpredictable nature of AI-generated media, viewer and reader discretion is strongly advised. Some content may not be suitable for all audiences. 4. No Endorsement: The appearance of any names, individuals, likenesses, or organizations in AI-generated content is purely coincidental and does not imply any affiliation, endorsement, or approval unless explicitly stated. 5. Limitation of Damages: In no event shall the creator(s), owner(s), or any affiliated party be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of your access to, use of, or reliance on the content. This disclaimer is subject to updates and modifications without prior notice. Continued access or use of the content constitutes acceptance of these terms.</italic></small></p><p>Statement of Copyright Protection<a href="https://docs.google.com/document/d/1F8WUkStTyV0ZcsjluN9WtvUm29hRzqNtZ7GcNX76acA/edit?usp=sharing" class="w3-bar-item w3-button w3-padding-small w3-hover-white"><i class="fa-brands fa-google w3-small"></i></a><a href="https://1drv.ms/w/c/351e429395ffd928/EZGNUfx73lxMr7hjtTtP-r8BHmmyJou95yUiOCcZBggJtg?e=mKv9xN" class="w3-bar-item w3-button w3-padding-small w3-hover-white"><i class="fa-brands fa-microsoft w3-small"></i></a><br>
+   <!--Statement of Copyright Protection-->
+   <small><italic>Statement of Copyright Protection for Music by Cruz Macias. 1. Copyright Protection Statement for music that is 100% human authored. © 2025 by Cruz Macias. All rights reserved. This musical work is 100% authored, created, and composed exclusively by human effort, without the use of artificial intelligence, machine-generated content, or automated tools. Unauthorized duplication, distribution, broadcasting, public performance, adaptation, sampling, or use in derivative works is strictly prohibited unless expressly authorized in writing by the copyright holder. For licensing inquiries or permissions, please contact: Cruz Macias at crossofthemessiah@outlook.com 2. Copyright Protection Disclaimer for music authored using AI/LLM assisted tools. Ownership and commercial use rights are retained for any songs generated by myself using Suno during active subscription, even after cancelling. Proof of ownership is available upon request. For more information, please reference Suno Knowledge Base Articles at <a href="https://help.suno.com/en/articles/2421505">Suno</a> Introduction: The intersection of AI-generated music and copyright law presents complex questions about ownership, protection, and creative rights. As AI tools like Suno become increasingly popular among musicians, understanding the legal implications of different workflows becomes essential for artists seeking to protect their creative works. According to guidelines provided by the U.S. Copyright Office, copyright protection extends to original creative expressions authored by humans, even if artificial intelligence partially contributes to the work, that is, “Copyright protects the original expression in a work created by a human author, even if the work also includes AI-generated material”. However, music or other creative works produced predominantly by AI without substantial human direction or creative input are considered part of the public domain. Such AI-created materials are free for anyone to use without legal restriction and cannot claim copyright protection. Central to this distinction is the concept of "meaningful human authorship," emphasizing that minimal human involvement does not automatically establish authorship. Ultimately, determining whether human contributions to AI-generated works meet the threshold of meaningful authorship will be evaluated individually by Copyright Examiners. Scenario 1: Re-recording AI/LLM-Generated Instrumentation. Question: What if the vocalist re-records the instrumentation himself or uses VSTs to replicate the instrumentation? When a musician re-records instrumentation that was originally AI-generated, they create a new sound recording that contains human performance elements. If the re-recording process involves significant creative arrangements or transformations of the original AI composition, there may be a stronger case for copyright protection as a derivative work with meaningful human authorship. Key Points: i. The new recording (performance/production) gains copyright. The new sound recording (the specific performance and production) becomes eligible for Copyright Protection. ii. Original AI-composed melody/harmony remains ineligible without substantial creative alteration. The underlying musical composition (melody, harmony, chord progressions) are still considered to be AI-generated and potentially ineligible for copyright protection. iii. Significant arrangement or reinterpretation strengthens human authorship claims. Simply executing or reproducing an AI composition without substantial creative changes wouldn't qualify as original authorship. Scenario 2: Human Vocals over AI/LLM Instrumentals Question: What if the vocalist records the vocals himself and over dubs that onto the Suno generated instrumentals? This hybrid approach creates a clearer division of copyrightable elements: The lyrics are human authored, and the AI generates a melody, the human is the author of the lyrics but the AI is considered the author of that melody. Copyright can be claimed over the vocal contributions but not the underlying AI-generated instrumental track. Key Points: i. Human-written lyrics and vocal performance are copyrightable. The human-performed vocals (including both the lyrical composition and the vocal performance) qualify for copyright protection as an original human creation. ii. AI-generated instrumentals remain unprotected. The AI-generated instrumental backing remains ineligible for copyright protection. iii. Overall work is classified as "AI-assisted," clearly separating human and AI elements. The overall work is considered "AI-assisted" rather than purely AI-generated. Scenario 3: Using Personal Samples and Re-recording Question: What if the vocalist/musician uploads to Suno sample recordings of himself singing/playing and writes his own lyrics to have Suno copy the likeness of and re records all of the music himself using actual instruments of VSTs within a DAW? This workflow represents a more substantial level of human involvement that strengthens the case for copyright protection: This approach more clearly positions AI as a creative assistant rather than the primary creator. When the remixes include "sufficient original authorship especially including such things as beats, sounds and other elements," the work becomes eligible to be registered as both an original musical composition and performance. This level of human involvement and original creative expression qualifies for copyright protection, even though AI tools were involved in the compositional process. Key Points: i. Significant human contribution (original samples, lyrics, full re-recording) supports copyright eligibility: Providing original human-created samples to guide the AI. ii. AI acts as an assistive creative tool, not primary author: Contributing original lyrics (human-authored textual content). iii. Extensive human involvement enhances copyright protection: Completely re-recording all musical elements with personal interpretation. Scenario 4: Using Public Domain Lyrics. Question: What if the vocalist/musician uploads to Suno sample recordings of himself singing/playing and used lyrics taken from the Public Domain, say, KJV Bible, to have Suno copy the likeness of and re records all of the music himself using actual instruments of VSTs within a DAW? Using public domain lyrics (such as Bible verses) instead of original lyrics doesn't significantly change the copyright analysis from Scenario 3. As with Scenario 3, completely re-recording the music using real instruments or VSTs with original creative interpretations provides the strongest basis for copyright protection in this hybrid human-AI creative process. The public domain status of the lyrics means: 1. There are no copyright restrictions on using these texts. 2. The public domain lyrics themselves are not eligible for copyright protection. 3. The original musical setting of those lyrics if it contains sufficient human authorship are eligible for Copyright Claim. The strength of the copyright claim derives primarily from: 1. Original input samples. 2. Creative choices in the re-recording process. 3. The musical setting created for the public domain lyrics. Key Points: i. Public domain lyrics remain unprotected and free to use. ii. Human-authored original music and performance are copyrightable. iii. Original samples and creative interpretation strengthen copyright. Conclusion: Copyright protection in AI-assisted music increases with substantial human creative input. Musicians should maximize their original contributions, clearly positioning the AI or LLM as an assistive, rather than primary, creator. The copyright status of AI-assisted musical works exists on a spectrum, with protection increasing alongside meaningful human creative contribution. Current copyright law continues to prioritize human creativity, even as technology evolves.For musicians working with AI tools like Suno, the key considerations for establishing copyright protection include:1. The extent of original human creative input throughout the process.2. Whether the AI is functioning as a tool/assistant or the primary creator.3. The degree to which the final work contains original human expression.Musicians seeking the strongest copyright protection while using AI tools should maximize their creative contributions throughout the process, from conceptualization through final execution, while positioning AI as an assistive tool rather than the primary creative force. As this area of law continues to evolve, musicians should stay informed about changing legal interpretations and copyright office guidance regarding AI-assisted creative works.</italic></small></p>
+   <hr>
+   Powered by <a href="https://github.com/cmathgit">GitHub</a>
+  </footer>
+
+</div>
+
+</body>
+</html>

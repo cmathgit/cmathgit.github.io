@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>CIS118 Site</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Font Awesome Icons (keeping existing links) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+    <!-- Google Fonts (keeping Montserrat) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+
+    <!-- Custom Styles -->
+    <style>
+        /* Apply Montserrat font globally */
+        body {
+            font-family: "Montserrat", sans-serif;
+        }
+
+        /* Custom tooltip styles (consider using Bootstrap's tooltips for better integration) */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black; /* Style as needed */
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 300px; /* Adjusted width */
+            background-color: #555; /* Darker background */
+            color: #fff; /* White text */
+            text-align: center;
+            border-radius: 6px; /* Rounded corners */
+            padding: 5px 10px; /* Padding */
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position above the element */
+            left: 50%;
+            margin-left: -150px; /* Center the tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+         /* Arrow for the tooltip */
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%; /* At the bottom of the tooltip */
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Style for lab images */
+        .lab-image {
+            max-width: 100%; /* Ensure images are responsive */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 1rem; /* Add some space below image */
+        }
+
+        /* Center text within lab cards */
+        .lab-card a {
+             text-decoration: none; /* Remove underline from links */
+             color: inherit; /* Inherit text color */
+        }
+        .lab-card p {
+            margin-top: 0.5rem;
+        }
+
+        /* Style for the bottom right button */
+        .bottom-right-button {
+            position: fixed; /* Position fixed relative to viewport */
+            bottom: 15px;
+            right: 15px;
+            z-index: 1030; /* Ensure it's above most content */
+        }
+
+        .bottom-right-button .btn {
+            display: flex; /* Align icon and text */
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem; /* Adjust padding */
+        }
+
+        .bottom-right-button .btn i {
+            font-size: 1.5rem; /* Larger icon */
+            margin-bottom: 0.25rem; /* Space between icon and text */
+        }
+         .bottom-right-button .btn p {
+            margin: 0; /* Remove default paragraph margin */
+            font-size: 0.75rem; /* Smaller text */
+            line-height: 1;
+         }
+    </style>
+</head>
+<body>
+    <!-- Main Content Container -->
+    <div class="container mt-4"> <!-- Added margin-top -->
+        <h1 class="mb-4 text-center">CIS 118 Course Site</h1> <!-- Centered heading with margin-bottom -->
+        <h2 class="mb-4 text-secondary text-center">Course Labs</h2> <!-- Centered subheading -->
+
+        <!-- Lab Links Row -->
+        <div class="row text-center">
+            <!-- Lab 1 -->
+            <div class="col-md-4 mb-4 lab-card"> <!-- Added margin-bottom -->
+                <!--Check that this link is not broken-->
+                <a href="https://cmathgit.github.io/cis-118-labs/rescue-bootstrap/" class="d-block p-3 border rounded shadow-sm h-100 text-decoration-none text-dark">
+                    <img src="https://1drv.ms/i/c/351e429395ffd928/IQSbkeDSDy1OTJXX-SfkXEn3AbOsY1Cy1ux-_t1kLiEZvZI" alt="Lab 1 Rescue Site" class="lab-image" style="max-width:50%; height:auto;"/> <!-- Adjusted max-width -->
+                    <p class="fw-bold">Lab 1 - Rescue Site</p>
+                </a>
+            </div>
+            <!-- Lab 2 -->
+            <div class="col-md-4 mb-4 lab-card"> <!-- Added margin-bottom -->
+                 <!--Check that this link is not broken-->
+                <a href="https://cmathgit.github.io/cis-118-labs/music-bootstrap/" class="d-block p-3 border rounded shadow-sm h-100 text-decoration-none text-dark">
+                    <img src="https://1drv.ms/i/c/351e429395ffd928/IQQEIrOOONUqR6ENvTktSQCXAWqXK6FU1IDbWkFfALX8r2Q" alt="Lab 2 Music Site" class="lab-image" style="max-width:50%; height:auto;"/> <!-- Adjusted max-width -->
+                    <p class="fw-bold">Lab 2 - Music Site</p>
+                </a>
+            </div>
+            <!-- Lab 3 -->
+            <div class="col-md-4 mb-4 lab-card"> <!-- Added margin-bottom -->
+                 <!--Check that this link is not broken-->
+		         <!-- <a href="https://cruzgmacias-cv.w3spaces.com/cis-118-labs/fitness-bootstrap/" class="d-block p-3 border rounded shadow-sm h-100 text-decoration-none text-dark"><img src="./fitness-bootstrap/images/forward-fitness-logo.png" style="max-width:50%; height:auto;" alt="fitness-cover"><p>Lab 3 - Fitness Site</p></a> -->
+                 <a href="https://cmathgit.github.io/cis-118-labs/fitness-bootstrap/" class="d-block p-3 border rounded shadow-sm h-100 text-decoration-none text-dark">
+                    <img src="https://1drv.ms/i/c/351e429395ffd928/IQSMPlH47J7UQL-ROQzIR7fOAfVJPFW524FiOczvWs9HejY" alt="Lab 3 Fitness Site" class="lab-image" style="max-width:50%; height:auto;"/> <!-- Adjusted max-width -->
+                    <p class="fw-bold">Lab 3 - Fitness Site</p>
+                </a>
+            </div>
+        </div><!-- End Row -->
+    </div><!-- End Container -->
+
+    <!-- Bottom Right Home Button -->
+	<div class="bottom-right-button">
+		<a href='https://cmathgit.github.io/' class="btn btn-light shadow-sm border" title="Visit Personal Web Page"> <!-- Bootstrap button classes -->
+			<i class="fa fa-home"></i> <!-- Font Awesome home icon -->
+            <p>Home Page</p> <!-- Simplified text -->
+		</a>
+	</div>
+
+    <!-- Bootstrap 5 JS Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <!-- Optional: Initialize Bootstrap Tooltips if you decide to use them -->
+    <!--
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+    -->
+</body>
+</html>
