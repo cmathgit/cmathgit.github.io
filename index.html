@@ -168,12 +168,19 @@
             gap: 1em; /* Space between images if they wrap */
         }
 
-        .image-gallery img {
-            max-width: 150px; /* Limit image width */
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 5px; /* Optional: rounded corners */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
-            object-fit: cover; /* Ensures images fill the space nicely if dimensions vary */
+        .image-gallery img, .portfolio-links img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .portfolio-links img {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         /* Responsive adjustments for images if needed */
@@ -182,6 +189,46 @@
                 max-width: 100px; /* Smaller images on smaller screens */
             }
         }
+
+        .image-gallery figure, .portfolio-links figure {
+            margin: 0; /* Reset default figure margin */
+        }
+
+        .image-gallery figcaption, .portfolio-links figcaption {
+            margin-top: 0.5em;
+            font-size: 0.9em;
+            color: #a4b8a9;
+            text-align: center;
+        }
+
+        .portfolio-links {
+            margin-top: 2em;
+            margin-bottom: 2em;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1em;
+        }
+
+        .portfolio-links img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .portfolio-links a:hover img {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .portfolio-links a:hover {
+            text-decoration: none;
+        }
+
 
         /* Horizontal Rule Style */
         hr {
@@ -199,16 +246,29 @@
     <div class="container">
         <h1>Welcome to the GitHub Site of Cruz Macias</h1>
 
-        <!-- Add image container here -->
-        <div class="image-gallery">
-          <img src="https://1drv.ms/i/c/351e429395ffd928/IQSgpqTaj2pLQaNvmiYqJAGbAYepoLAOwJkJm7wnB2WBlCo" alt="Description of photo 1">
-          <img src="https://1drv.ms/i/c/351e429395ffd928/IQRk-UYX8eTOTrUsL0zgL_15AVAajL3wiPvkrnIgv0tjH3U" alt="Description of photo 2">
-          <img src="https://1drv.ms/i/c/351e429395ffd928/IQTD0BrNt8xkS7x3afHYYCX_AYw0CSdn5FZ73QkFnqXVvy0" alt="Description of photo 3">
+        <!-- Portfolio Links -->
+        <div class="portfolio-links">
+            <a href="cruzgmacias-cv/">
+                <figure>
+                    <img src="https://1drv.ms/i/c/351e429395ffd928/UQQo2f-Vk0IeIIA15SgAAAAAANvwVbdlYEQB9Xw" alt="Link to Curriculum Vitae">
+                    <figcaption>Curriculum Vitae</figcaption>
+                </figure>
+            </a>
+            <a href="crossofthemessiah/">
+                <figure>
+                    <img src="https://1drv.ms/i/c/351e429395ffd928/IQRorKU-6b0qRZkRMmSbYQUiAbVKuRqkQljDaEc9SZ9IAOo" alt="Link to Music Portfolio">
+                    <figcaption>Music Portfolio</figcaption>
+                </figure>
+            </a>
+            <a href="https://github.com/cmathgit">
+                <figure>
+                    <img src="https://1drv.ms/i/c/351e429395ffd928/IQSgpqTaj2pLQaNvmiYqJAGbAYepoLAOwJkJm7wnB2WBlCo" alt="My 1st Methuselah">
+                    <figcaption>GitHub</figcaption>
+                </figure>
+            </a>
         </div>
 
-        <p>
-            Please visit my other pages:
-        </p>
+        <p>Please visit my other pages:</p>
 
         <div class="button-container">
             <!-- GitHub Page -->
@@ -232,6 +292,19 @@
         </div>
         <hr>
         <p>Read these papers and dive deeper into the theory and application of Orthogonal Prompt Engineering:<br><small><a href="https://github.com/cmathgit/bible-chatgpt-prompts/blob/main/Orthogonality%20and%20High-Dimensional%20Vector%20Spaces%20in%20Generative%20AI%20Music%20Creation.pdf">Orthogonality and High-Dimensional Vector Spaces in Generative AI Music Creation</a><br><a href="https://github.com/cmathgit/bible-chatgpt-prompts/blob/main/Orthogonality%20and%20High-Dimensional%20Vector%20Spaces%20in%20Generative%20AI%20Music%20Creation.pdf">Use Case - Creating a Song with Targeted Emotional and Stylistic Nuance</a></small></p>
+
+        <!-- Fun Image Gallery -->
+        <p>Motivational Tutoring Poster</p>
+        <div class="image-gallery">
+            <figure>
+                <img src="https://1drv.ms/i/c/351e429395ffd928/IQRk-UYX8eTOTrUsL0zgL_15AVAajL3wiPvkrnIgv0tjH3U" alt="F.A.I.L Original">
+                <figcaption>Original Poster</figcaption>
+            </figure>
+            <figure>
+                <img src="https://1drv.ms/i/c/351e429395ffd928/IQTD0BrNt8xkS7x3afHYYCX_AYw0CSdn5FZ73QkFnqXVvy0" alt="F.A.I.L Ghibli Restyle">
+                <figcaption>ChatGPT Ghibli Restyle</figcaption>
+            </figure>
+        </div>
     
   
 <footer class="footer-container">
@@ -285,6 +358,11 @@
    <div class="footer-grid-item">
      <a href='https://www.deviantart.com/cmathdraw'>
        <i class="fa-brands fa-deviantart w3-small w3-hover-opacity"></i>
+     </a>
+   </div>
+   <div class="footer-grid-item">
+     <a href='https://suno.com/@crossofthemessiah'>
+       <i class="fa-solid fa-brain w3-small w3-hover-opacity"></i>
      </a>
    </div>
     <div class="footer-grid-item">
