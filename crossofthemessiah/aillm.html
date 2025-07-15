@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Musician Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Font Awesome Free ICONS 6.1.1 by @fontawesome - https://fontawesome.com-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+
+<!--External Style Sheets-->
+<!--<link rel="stylesheet" href="css/styles.css">-->
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 720px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: #222;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 120px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+</style>
+</head>
+<body class="w3-black">
+
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <!-- Avatar image in top left corner -->
+  
+  <!--Check that this link is not broken-->
+  <img src="https://1drv.ms/i/c/351e429395ffd928/IQRPQ-1zIBvlRbY8BECVTKs7AfPAIRosc9NwYtJRUhGAvbU" style="width:100%">
+  <!--<img src="images/portrait.jpg" style="width:100%">-->
+
+  <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  <a href="index.html#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>ABOUT</p>
+  </a>
+  <a href="featured.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-star w3-xxlarge"></i>
+    <p>FEATURED</p>
+  </a>
+  <a href="photoalbum.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-camera w3-xxlarge"></i>
+    <p>PHOTOS</p>
+  </a>
+  <a href="aillm.html" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa-solid fa-brain w3-xxlarge"></i>
+    <p>AILLM</p>
+  </a>
+  <!--<a href="#testimonies" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-camera w3-xxlarge"></i>
+    <p>TESTIMONIES</p>
+  </a>-->
+  <a href="index.html#music" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-music w3-xxlarge"></i>
+    <p>MUSIC</p>
+  </a>
+  <a href="index.html#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>CONTACT</p>
+  </a>
+  <a href="index.html#posts" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-star w3-xxlarge"></i>
+    <p>SOCIAL MEDIA</p>
+  </a>
+   <a href="https://cmathgit.github.io/cruzgmacias-cv/" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-briefcase w3-xxlarge"></i>
+    <p>CV</p>
+  </a>
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<!--<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+	<div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+	  <a href="index.html" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+	  <a href="index.html#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+	  <a href="featured.html" class="w3-bar-item w3-button" style="width:25% !important">FEATURED</a>
+	  <a href="photoalbum.html" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
+	  <a href="aillm.html" class="w3-bar-item w3-button" style="width:25% !important">AILLM</a>
+	  <a href="index.html#music" class="w3-bar-item w3-button" style="width:25% !important">MUSIC</a>
+	  <a href="index.html#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+	  <a href="index.html#posts" class="w3-bar-item w3-button" style="width:25% !important">SOCIAL MEDIA</a>
+	  <a href="https://cmathgit.github.io/cruzgmacias-cv/" class="w3-bar-item w3-button" style="width:25% !important">CV</a>
+	</div>
+  </div>-->
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+    <h3 class="w3-text-light-grey">AILLM Art, Music, and Animation</h3>
+    <h4 class="w3-text-light-grey">Ownership and commercial use rights is retained for any songs created during active subscription, even after cancelling. Proof of ownership is available upon request. For more information, please reference Suno KB at <a href="https://help.suno.com/en/articles/2421505">https://help.suno.com/en/articles/2421505</a></h4>
+    <h4 class="w3-text-light-grey">Statement of Copyright Protection for Music by Cruz Macias<br><a href="https://docs.google.com/document/d/1F8WUkStTyV0ZcsjluN9WtvUm29hRzqNtZ7GcNX76acA/edit?usp=sharing" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-google w3-medium"></i></a><a href="https://1drv.ms/w/c/351e429395ffd928/IQSRjVH8e95cTK-4Y7U7T_q_ARnyoG88a5U_oB3gubTujb8" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-microsoft w3-medium"></i></a></h4>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/HRg15yzxXsI?si=lHc4RKJwoIvILjSm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/myNL5J7gXPY?si=0DnCqbteDfcBDlmp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/oi6yrqDV9Mk?si=egpllvcq62RHDN2J" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/PqzfGzqIhOo?si=DnvdvJZk7a6ZuCO1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/RzR4qCCqk50?si=jfqTIotUZkkZPJ6d" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/LgVs2A8PZTA?si=TLL4nSpOBnrP5c3K" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/xfmoSuTb6FA?si=CfOUGLupNrIowtHw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/syfzZEeABW0?si=nICQjE3FtxToAGbc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/CT8Z7qiir8A?si=IjQGMg3onnhkMDFd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/UunIGbVijRg?si=gh3VjWs8XJYo2gI9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/0qsr1NHlLz8?si=_4wqEZP5TAc1w9Fp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/JmwETUiGZW8?si=pThkQMdo9Kdd8PqF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/WsEmRlxzlXU?si=1ZP3FdD1Azwvs2lD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/z_847ktsoqc?si=foaa3wU5ESGEU-hA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/hcIa8hCXYdI?si=0HbKFgF6sV446BWK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/_XA25RiDNOg?si=AQW0EM72VgsVYD1M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/e390UE-sC28?si=_u-ns6W7inWy1MAw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/Z473ggvnIWg?si=l3sH6UmaUccAsZEs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/Ok1OPwr0MgA?si=4PUGhwU5riV7J4vQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/Lz7o22n7pcY?si=QOyLGAzLpH_eYZx9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/AGx9eQRd0tg?si=mO9_w7jvYER53Ca2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/34QvzTQ0_fg?si=0FRS5_aKuyqTWlh5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    
+    <!--AI Music-->
+    <div id="aiadaptations">
+    <h3 class="w3-text-light-grey">AI Adaptations of My Music</h3>
+    <h4 class="w3-text-light-grey">Ownership and commercial use rights is retained for any songs created during active subscription, even after cancelling. Proof of ownership is available upon request. For more information, please reference Suno KB at <a href="https://help.suno.com/en/articles/2421505">https://help.suno.com/en/articles/2421505</a></h4>
+    <a href="https://youtube.com/playlist?list=PLuggBNq5l-Iv0_G8xtGkgeLFQCyx4XgM5&si=AKcxXxv-K-5PXaPz" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-youtube w3-medium"></i></a><a href="https://suno.com/playlist/94c4a91e-6feb-4ea1-9c0f-1d56d1096986" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-solid fa-brain w3-medium"></i></a>
+    <!--AI Adaptation of Lungs Collapse by Angel [Post-Hardcore] [AI Version]-->
+    <h3 class="w3-text-light-grey">The original recording of the song shown here was not composed using AI tools. This recording, lyrics, and composition are solely of human authorship.</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/J-1-qBBkQvA?si=1TxnLIsyWAsynHEl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <h3 class="w3-text-light-grey">The song shown here was generated using Suno AI. Lyrics only taken from the song Until my Lungs Collapse by the band Angel from their 2007 ep Our Tragic Ending.</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/XPJpa60uaN4?si=9VbKUlR9msCoo8gQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <!--AI Adaptation of Chains by Angel [Post-Hardcore] [AI Music]-->
+    <h3 class="w3-text-light-grey">The original recording of the song shown here was not composed using AI tools. This recording, lyrics, and composition are solely of human authorship.</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/oDnAHpB-z0M?si=S9BsIbTse4a2CWCn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <h3 class="w3-text-light-grey">The song shown here was generated using Suno AI. Lyrics taken from the song Chains by the band Angel from their 2021 single.</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/_8YiUHW9OS8?si=4LWne5IfDY0__Ex3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <!--AI Adaptation of Liquid Above; Solid Beneath Demo Track by Angel [Ver. 1] [Gen. 6:4] [Hardcore]-->
+    <h3 class="w3-text-light-grey">The original recording of the song shown here was not composed using AI tools. This recording, lyrics, and composition are solely of human authorship.</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/bhUL8ExvDQY?si=s6QI2bd_UpdRtzQu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <h3 class="w3-text-light-grey">The song shown here was generated using Suno AI. Lyrics only taken from the song Liquid Above; Solid Beneath by the band Angel from their 2022 demo. This demo was never recorded in studio. Lyrics inspired by Genesis 6:4 of the King James Version bible.</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/ukFt_seY_Tc?si=3-9NPxlRr8EfjHkz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <!--AI Adaptation Using Lyrics Written for the 5_5 Vocalist Tryout [Version 5] [AI Music]-->
+    <h3 class="w3-text-light-grey">The original recording of the AI generated songs shown here was not composed using AI tools. The lyrics are solely of human authorship. The original song is unavailable at this time. The songs shown here were generated using Suno AI. Lyrics only taken from a demo track that I recorded vocals to when trying out for a band in 2023. </h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/8olV1WfL5Fc?si=HAhSjXWydXTaELIG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/ws9EaraqapA?si=H2Fe30_CJIeRb6jX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/1tSd-Kg4kJM?si=o7qfCQ8VTNk8u4Gx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <!--AI Adaptation of Song idea 7 On the Rationality of Fairness [Version 1] [Working Title]-->
+    <h3 class="w3-text-light-grey">The original recording of the song shown here was not composed using AI tools. This recording, lyrics, and composition are solely of human authorship:<br>[Working Title] Key of Amaj 4/4 Allegro (120-140 bpm)<br>Chord progressions:<br>1. Amaj/Dmaj/Emaj<br>2. A-B-C#-Amajx3/Dmaj/Emaj<br>Melodies:<br>1. A-E-D-C#-A-C#<br>2. A-E-D-C#-A-C#-D-C#-A</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/tQU3bRS759s?si=6u5UnZnsztsmMrit" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <h3 class="w3-text-light-grey">The song shown here was generated using Suno AI. Lyrics only taken from the Song idea 7 On the Rationality of Fairness [Working Title] written by yours truly. Lyrics inspired by Romans 8:6, Exodus 3:14, John 8:58, and Rene Descartes "Cogito Ergo Sum".</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/vIL7D5Pa0B8?si=KOFZdsiOa8ZuhRYJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/H5gEDHCcniY?si=xGix1hyIy1e_AFR1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <!--From 2012 to 2024 Human and AI Adaptations of Musical Ideas Recorded on the BOSS RC-30 Loop Station-->
+    <h3 class="w3-text-light-grey">Here is a song compiled of samples of vocal percussion beats recorded in 2012 using the BOSS RC-30 Loop Station. These samples are solely of human authorship. The only tools used to produce this audio are my voice and the loop station. The vocals, vocal percussion, and video effects are solely of human authorship. These two samples are loops I created back in 2012 using the BOSS RC-30 Loop Station. The song title is Creepin Through the Darkness.</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/opL9LBqt_jo?si=tuGGM64NvZiIC-hH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <h3 class="w3-text-light-grey">Here is the 2024 adaptation of this song, Creepin Through the Darkness, using the same musical ideas from 2012 produced in FL Studio with entirely new vocal samples and VST instruments. The melody is F# / E / Eb / Db. This audio is also solely of human authorship. The vocals, bass guitar [Flex Plugin - Deep Purple Fingered], piano [Flex Plugin - Rhodes Lite], drum hits [Alex Blanco and Johnny De-ath Dark Dub For CM Single Drum hits bank 2] and video effects are solely of human authorship. Music produced in FL Studio 21 Producer Edition.</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/C_FKn3bHpRk?si=pzSTwqrLMfJddsAl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <h3 class="w3-text-light-grey">Creepin Through the Darkness 2024 Remix Clip 1 [AI Adaptation Full Song] [BOSS RC-30 Loop Station]. The first 74 seconds of this track is an original production created without any AI components (see original video below) of the 2024 adaptation of the song, Creepin Through the Darkness, two looped samples of vocal percussion recorded back in 2012 using the BOSS RC-30 Loop Station, using those same musical ideas from 2012 produced in FL Studio with entirely new vocal samples and VST instruments. The melody is F# / E / Eb / Db. This audio is solely of human authorship. This 73 second clip was produced using FL Studio. This recording was used to generate the complete AI adaptation at 01:14.</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/gzKE7tjvF1A?si=Tr5U2ClmZG7hHZsW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <h3 class="w3-text-light-grey">Creepin Through the Darkness 2024 Remix Clip 2 [AI Adaptation Full Song] [BOSS RC-30 Loop Station]. The first 73 seconds of this track is an original production created without any AI components (see original video above) of the 2024 adaptation of the song, Creepin Through the Darkness, two looped samples of vocal percussion recorded back in 2012 using the BOSS RC-30 Loop Station, using those same musical ideas from 2012 produced in FL Studio with entirely new vocal samples and VST instruments. The melody is F# / E / Eb / Db. This audio is solely of human authorship. This 73 second clip is my own human voice recorded using FL Studio. This recording was used to generate the complete AI adaptation at 01:13</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/gUxPvMx-MPE?si=ZtcNLhtdMGj5oJpE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <h3 class="w3-text-light-grey">From 2012 to 2024 Human and AI Adaptations of Musical Ideas Recorded on the BOSS RC-30 Loop Station. Please see description in top right corner during each video segment. At 00:01 is a song compiled of samples of vocal percussion beats recorded in 2012 using the BOSS RC-30 Loop Station. These samples are solely of human authorship. The only tools used to produce the first 90 seconds of audio in this video are my voice and the loop station. The song title is Creepin Through the Darkness. At 04:07 and 08:06 are clips from the 2024 human adaptation of this song, Creepin Through the Darkness, using the same musical ideas from 2012 produced in FL Studio with entirely new vocal samples and VST instruments. The melody is F# / E / Eb / Db. This audio is also solely of human authorship. At 01:27 is the result of an experiment using SUNO AI's upload feature for the first group of samples, and at 05:22 and 09:20 is the result of an experiment using SUNO AI's upload feature for the second group of samples.</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/eChVfp5u48k?si=R7eerXsOr0a9XRNa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <h3 class="w3-text-light-grey">Here are a couple more AI Adaptations of Creepin Through the Darkness.</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/SsnoQr5J62Q?si=ZRbjV8teuEYS1ilR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/Y8CPDUFJdAg?si=kbBLt__TzsOtPDKg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>	
+    <h3 class="w3-text-light-grey">Using AI to extend my musical vision, this vocal demo, “O Ye of Little Faith,” combines my original compositions and performances with AI enhancements. The first 120 seconds are solely of human authorship. Special thanks to my wife for inspiring lyrics based on Matthew 8:26, "And he saith unto them, Why are ye fearful, O ye of little faith? Then he arose, and rebuked the winds and the sea; and there was a great calm." — Matthew 8:26, KJV (Public Domain) Vocals and guitar (acoustic/electric) performed by Cruz Macias, with production in FL Studio. All compositions are based on my original recordings, complemented by AI-assisted instrumental layers.</h3>
+    <iframe width="238" height="238" src="https://www.youtube.com/embed/KgiI6bmagGs?si=MVbybz9xWb0PijmC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div class="w3-row-padding" style="margin:0 -16px">
+    <!--Sketches w AI-->
+      <div class="w3-third" id="aisketches">
+        <h3 class="w3-text-light-grey">Sketches with AI</h3>
+        <!-- Due to a bug, Google Embed Photo Feature down.-->
+        <!--<h3 class="w3-text-light-grey"><img src="images/self-portrait-photo-2020.jpg" style="width:100%"> Self-Protrait Photograph</h3>-->
+        <h3 class="w3-text-light-grey"><img src="https://1drv.ms/i/c/351e429395ffd928/IQS_NxcfvPCRQ5w9mmlikIK9AQrYswL5a04MnMeIUulxk0s" style="width:55%"> Self-Protrait Photograph</h3>
+        <!--<h3 class="w3-text-light-grey"><img src="https://drive.google.com/uc?export=view&id=1YhdtN2EQ6_7asqAAF0u8hsDa2GM1oZU9" style="width:100%"> Self-Protrait Photograph</h3>-->
+        <!--<h3 class="w3-text-light-grey"><img src="https://drive.google.com/uc?export=view&id=1FuavTUrDBM9Sr0KMsoa300QEkH2HAch-" style="width:100%"> AI Anime Interpretation <small>(image credit upon request)</small></h3>-->
+        <h3 class="w3-text-light-grey"><img src="https://1drv.ms/i/c/351e429395ffd928/IQTebFpQng7OR4v3mKlvlYF9AR84iUUJZvCj7xW-0cbFEsg?width=640&height=640" style="width:55%"> AI Anime Interpretation <small>(image credit upon request)</small></h3>
+        <h3 class="w3-text-light-grey"><img src="https://1drv.ms/i/c/351e429395ffd928/IQSgv0Gu59SzT7qQZdb2g8DtASKJIidc_JzQn5YKi41bUzc" style="width:55%"> Hand Drawn Sketch of AI Image</h3>
+      </div>
+    </div>
+</div>
+
+ <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge" id="contact">
+	<hr>
+   <p class="w3-text-light-grey">Contact Cruz on social media.</p>
+    <a href='https://www.facebook.com/cruz.macias.56232'><i class="fa-brands fa-facebook-f w3-hover-opacity"></i></a>
+    <a href='https://www.instagram.com/crossofthemessiah'><i class="fa-brands fa-instagram w3-hover-opacity"></i></a>
+    <!--<i class="fa-brands fa-linkedin w3-hover-opacity"></i>-->
+	<!--<a href=''><i class="fa-brands fa-linkedin w3-large w3-hover-opacity"></i></a>-->
+	<a href='https://youtube.com/@cruzmacias3257'><i class="fa-brands fa-youtube w3-hover-opacity"></i></a>
+	<a href='https://soundcloud.com/crossofthemessiah'><i class="fa-brands fa-soundcloud w3-hover-opacity"></i></a>
+	<a href='https://www.bandmix.com/cmetalvocalist'><i class="fa-solid fa-microphone w3-hover-opacity"></i></a>
+	<a href='https://github.com/cmathgit'><i class="fa-brands fa-github w3-large w3-hover-opacity"></i></a>
+	<a href=''><i class="fa-brands fa-discord w3-large w3-hover-opacity"></i></a>
+	<a href='https://www.deviantart.com/cmathdraw'><i class="fa-brands fa-deviantart w3-large w3-hover-opacity"></i></a>
+	<hr>
+	<p class="w3-text-light-grey">Listen to Screamer.exe (Ambient Folk Metal ensemble)</p>
+	<a href='https://youtube.com/playlist?list=PLf7Ql7AUTrnDfQM7u26tC52Gc4TYiaRsN'><i class="fa-brands fa-youtube w3-hover-opacity"></i></a>
+	<hr>
+	<p class="w3-text-light-grey">Listen to AILLM Music</p>
+	<a href='https://youtube.com/@aigospelmusic'><i class="fa-brands fa-youtube w3-hover-opacity"></i></a>
+	<a href='https://suno.com/@crossofthemessiah'><i class="fa-solid fa-brain w3-hover-opacity"></i></a>
+	<hr>
+	<p class="w3-text-light-grey">Statement of Copyright Protection<a href="https://docs.google.com/document/d/1F8WUkStTyV0ZcsjluN9WtvUm29hRzqNtZ7GcNX76acA/edit?usp=sharing" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-google w3-medium"></i></a><a href="https://1drv.ms/w/c/351e429395ffd928/EZGNUfx73lxMr7hjtTtP-r8BHmmyJou95yUiOCcZBggJtg?e=mKv9xN" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-microsoft w3-medium"></i></a><br>Content Disclaimer and Limitation of Liability<a href="https://docs.google.com/document/d/1q4zYgmg0Aoo5_5znIlJDfmD7coEDaDh5KLCaxHiKQOI/edit?usp=drivesdk" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-google w3-medium"></i></a><a href="https://1drv.ms/w/c/351e429395ffd928/EWMpWeIQ1TZJur8K0Gp-cwMBCtlPKglm-wANIRLWecGy5g?e=O7QC6N" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-microsoft w3-medium"></i></a></p>
+	<hr>
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3schools</a></p>
+	<p>Powered by <a href="https://github.com/cmathgit" target="_blank">GitHub</a></p>
+  <!-- End footer -->
+  </footer>
+	
+<!-- END PAGE CONTENT -->
+</div>
+
+</body>
+</html>

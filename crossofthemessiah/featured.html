@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Musician Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Font Awesome Free ICONS 6.1.1 by @fontawesome - https://fontawesome.com-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+
+<!--External Style Sheets-->
+<!--<link rel="stylesheet" href="css/styles.css">-->
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 720px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: #222;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 120px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+</style>
+</head>
+<body class="w3-black">
+
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <!-- Avatar image in top left corner -->
+  
+  <!--Check that this link is not broken-->
+  <img src="https://1drv.ms/i/c/351e429395ffd928/IQRPQ-1zIBvlRbY8BECVTKs7AfPAIRosc9NwYtJRUhGAvbU" style="width:100%">
+  <!--<img src="images/portrait.jpg" style="width:100%">-->
+
+  <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  <a href="index.html#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>ABOUT</p>
+  </a>
+  <a href="featured.html" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-star w3-xxlarge"></i>
+    <p>FEATURED</p>
+  </a>
+  <a href="photoalbum.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-camera w3-xxlarge"></i>
+    <p>PHOTOS</p>
+  </a>
+  <a href="aillm.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa-solid fa-brain w3-xxlarge"></i>
+    <p>AILLM</p>
+  </a>
+  <!--<a href="#testimonies" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-camera w3-xxlarge"></i>
+    <p>TESTIMONIES</p>
+  </a>-->
+  <a href="index.html#music" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-music w3-xxlarge"></i>
+    <p>MUSIC</p>
+  </a>
+  <a href="index.html#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>CONTACT</p>
+  </a>
+  <a href="index.html#posts" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-star w3-xxlarge"></i>
+    <p>SOCIAL MEDIA</p>
+  </a>
+   <a href="https://cmathgit.github.io/cruzgmacias-cv/" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-briefcase w3-xxlarge"></i>
+    <p>CV</p>
+  </a>
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<!--<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+	<div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+	  <a href="index.html" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+	  <a href="index.html#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+	  <a href="featured.html" class="w3-bar-item w3-button" style="width:25% !important">FEATURED</a>
+	  <a href="photoalbum.html" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
+	  <a href="aillm.html" class="w3-bar-item w3-button" style="width:25% !important">AILLM</a>
+	  <a href="index.html#music" class="w3-bar-item w3-button" style="width:25% !important">MUSIC</a>
+	  <a href="index.html#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+	  <a href="index.html#posts" class="w3-bar-item w3-button" style="width:25% !important">SOCIAL MEDIA</a>
+	  <a href="https://cmathgit.github.io/cruzgmacias-cv/" class="w3-bar-item w3-button" style="width:25% !important">CV</a>
+	</div>
+  </div>-->
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+
+  <div id="featured">
+  	<h2>Featured Songs</h2>
+	<div class="w3-third">
+		<!--Adaptation of Chain Breaker OMV-->
+	<p>Adaptation of Chain Breaker OMV</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/FlwcH5uu7ZI?si=hkLyxPNZQRl8RrmR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--My my YHWH (out of the dark and into light)-->
+	<p>My my YHWH (out of the dark and into light)</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/p2c7ZIs4CPM?si=yzr69qbVk0gJR0yc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--I Will Run to My Rock OMV-->
+	<p>I Will Run to My Rock OMV</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/leAJS33QOLg?si=ktubyuQijvh_YfCZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Circuit of the Ecliptic Bloodmoon Eclipse-->
+	<p>Circuit of the Ecliptic Bloodmoon Eclipse</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/zabrxOJolew?si=iBKtl6hyXAv-a4wS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Circuit of the Ecliptic (Instrumental)-->
+	<p>Circuit of the Ecliptic (Instrumental)</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/xtrcmY0PMnY?si=tOweObhHhmozqRT4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--Shepherd's Path Improv 240821 [Psalm 23:1]-->
+	<p>Shepherd's Path  [Psalm 23:1]</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/RhxKhuxUn1Y?si=WsjzM0EvLmvm_Zf7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Bonus Track: O Ye of Little Faith - Vocal Demo (AI Extended)-->
+	<p>O Ye of Little Faith (AI Extended)</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/KgiI6bmagGs?si=OzjA87ApuesMWAEa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Improv 240904 [Liquid Drum n Bass]-->
+	<p>Improv [Liquid Drum n Bass]</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/yKjLCR6Rnuo?si=WtA1EsQLnwgSfa-v" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Improv 240903 [Isaiah 48:17] [Liquid Drum n Bass]-->
+	<p>Improv 240903 [Isaiah 48:17]</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/gE5Obt4HlHE?si=8OO9oERkchPiwr12" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Improv 241006 [BOSS RC-30 Loop Station]-->
+	<p>Improv [BOSS RC-30]</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/zyvPPbV0_hc?si=jcjoB-NIVJpiLXZd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Angel Chains Music Video-->
+	<p>Angel Chains Music Video</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/oDnAHpB-z0M?si=8WxEQNsbfIZQ3P2H" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--Bebé No Llores-->
+	<p>Bebé No Llores</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/0X100ID09Xg?si=dXBgavKUGWhC5UyT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Multi-Instrumental Improv-->
+	<p>Multi-Instrumental Improv</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/krbCNnJ3y1s?si=I2Y523RV_Tb7Qnh7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Crying in the Appalachain Wilderness-->
+	<p>Crying in the Appalachain Wilderness</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/_XA25RiDNOg?si=AQW0EM72VgsVYD1M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
+	<div class="w3-third">
+	<!--Visitations OMV-->
+	<p>Visitations OMV</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/PqzfGzqIhOo?si=xxsThHpWpomc5ltM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--1 John 4 | Spiritual Warfare | Angel Wrangler | OMV-->
+	<p>Angel Wrangler | OMV</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/hcmlOQEuI68?si=Ae_-p5NsVPGxAl85" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--CM Club Narco Mix-->
+	<p>CM Club Narco Mix</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/sKx4dYI5mDw?si=ubeByUJzqqRqA-hS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--June 2025 Strawberry Moon Deep House Timelapse-->
+	<p>June 2025 Strawberry Moon Deep House Timelapse</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/FC7bmRcNKWw?si=0V1geTQI5h9si7mc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--1 John 4 | Spiritual Warfare | Angel Wrangler | Lyric Video-->
+	<p>Angel Wrangler | Lyric Video</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/z_847ktsoqc?si=aAQMzdwE9ZlTxeGs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Angel Chains Lyric Video-->
+	<p>Angel Chains Lyric Video</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/jsL7CE4dKc4?si=McgpSoK_YGzPPnuN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--Angel Our Tragic Ending EP Track 3-->
+	<p>Angel Our Tragic Ending EP Track 3</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/g5RvI03kYIM?si=Pj-TZFZ-Ya-CScHm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--Angel Our Tragic Ending EP Track 4-->
+	<p>Angel Our Tragic Ending EP Track 4</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/J-1-qBBkQvA?si=9cecxM0wfq2zQgKK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--2010 Angel Concert-->
+	<p>2010 Angel Concert</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/gb2yi69-rJY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--<iframe width="424" height="238" src="https://www.youtube.com/embed/CT8Z7qiir8A?si=IjQGMg3onnhkMDFd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+	<!--Enter Sand Slash Instrumental 210 bpm-->
+	<p>Enter Sand Slash Instrumental</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/guKjdvgkMVo?si=IkD4Ku3dEsTZiN8y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--Alive by Design Single-->
+	<p>Alive by Design Single</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/_XH6okpkXjk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--Perdonen a los Desesperados Classical Adaptation-->
+	<p>Perdonen a los Desesperados</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/vIdCmmvwL2M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--Surfacing Lyric Video-->
+	<p>Surfacing Lyric Video</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/rpAdZnOatqY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--Heavy House Hop Live Demo-->
+	<p>Heavy House Hop Live Demo</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/a7dPvEGEMMU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
+	<div class="w3-third">
+	<!--Also Before Kings | Psalm 119-->
+	<p>Also Before Kings | Psalm 119</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/Z473ggvnIWg?si=OSt_vXyMq8_9SDLK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Daniel 7 Bible Reading-->
+	<p>Daniel 7 Bible Reading</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/EHCZA1cVeoc?si=18-cwJYKiiajZfaZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--Ingratitude, the Motivation-->
+	<p>Ingratitude, the Motivation</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/n6vitjxkBpI?si=8XnQYLIgiglffsQ-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--The Lord's Supper Radio Edit AILLM Extended-->
+	<p>The Lord's Supper Radio Edit AILLM Extended</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/Ok1OPwr0MgA?si=B9oqFLKRfv7ggLId" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Ballad of a Mathematician-->
+	<p>Ballad of a Mathematician</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/e390UE-sC28?si=pvFSvYh-Vts7CKwo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--My Valentine Mi Amor Amar Bhalobasha-->
+	<p>My Valentine Mi Amor Amar Bhalobasha</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/iclB9vXXaWU?si=2fm_A8XdwHjdsNZk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Bible Reading John 1:1-28-->
+	<p>Bible Reading John 1:1-28</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/LYYmVa3SO28?si=CeEGFegj6FbrbT8R" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Victory In Jesus Calvary Baptist Church-->
+	<p>Victory In Jesus Calvary Baptist Church</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/aBXZP6_qWdQ?si=19BtMn2536xv4gIR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Be Thou My Vision Calvary Baptist Church-->
+	<p>Be Thou My Vision Calvary Baptist Church</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/ZNx0ZRJJ8IQ?si=Bq1ayks2NyFfS2Lz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Improvisational Acoustic Guitar Melody in F# Minor - 6/1/2024-->
+	<p>Improvisational Acoustic Guitar Melody in F# Minor - 6/1/2024</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/0BvbTjFlwFw?si=Dt0dDK1_lzYVKBoL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Liquid Morning Mix 24611124 [Old School House] [EDM]-->
+	<p>Liquid Morning Mix 24611124 [Old School House] [EDM]</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/eA5vQhZYQNk?si=z7FqKXqMKyhw5meH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--The Remedy-->
+	<p>The Remedy</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/7ZU6bgRhFvw?si=6k_W1zzNvcUAlD3E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Echoes of Earth [Vocal improvisation over AI Instrumental]-->
+	<p>Echoes of Earth [Vocal improvisation over AI Instrumental]</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/m62-i4euuq8?si=QBTO19dfhjYwzkC9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<!--Seek First Harmonica Adaptation-->
+	<p>Seek First Harmonica Adaptation</p>
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/_jCqY8POEmo?si=0l77-4c6TPbN8afb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
+  </div>
+  
+    <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge" id="contact">
+	<hr>
+   <p class="w3-text-light-grey">Contact Cruz on social media.</p>
+    <a href='https://www.facebook.com/cruz.macias.56232'><i class="fa-brands fa-facebook-f w3-hover-opacity"></i></a>
+    <a href='https://www.instagram.com/crossofthemessiah'><i class="fa-brands fa-instagram w3-hover-opacity"></i></a>
+    <!--<i class="fa-brands fa-linkedin w3-hover-opacity"></i>-->
+	<!--<a href=''><i class="fa-brands fa-linkedin w3-large w3-hover-opacity"></i></a>-->
+	<a href='https://youtube.com/@cruzmacias3257'><i class="fa-brands fa-youtube w3-hover-opacity"></i></a>
+	<a href='https://soundcloud.com/crossofthemessiah'><i class="fa-brands fa-soundcloud w3-hover-opacity"></i></a>
+	<a href='https://www.bandmix.com/cmetalvocalist'><i class="fa-solid fa-microphone w3-hover-opacity"></i></a>
+	<a href='https://github.com/cmathgit'><i class="fa-brands fa-github w3-large w3-hover-opacity"></i></a>
+	<a href=''><i class="fa-brands fa-discord w3-large w3-hover-opacity"></i></a>
+	<a href='https://www.deviantart.com/cmathdraw'><i class="fa-brands fa-deviantart w3-large w3-hover-opacity"></i></a>
+	<hr>
+	<p class="w3-text-light-grey">Listen to Screamer.exe (Ambient Folk Metal ensemble)</p>
+	<a href='https://youtube.com/playlist?list=PLf7Ql7AUTrnDfQM7u26tC52Gc4TYiaRsN'><i class="fa-brands fa-youtube w3-hover-opacity"></i></a>
+	<hr>
+	<p class="w3-text-light-grey">Listen to AILLM Music</p>
+	<a href='https://youtube.com/@aigospelmusic'><i class="fa-brands fa-youtube w3-hover-opacity"></i></a>
+	<a href='https://suno.com/@crossofthemessiah'><i class="fa-solid fa-brain w3-hover-opacity"></i></a>
+	<hr>
+	<p class="w3-text-light-grey">Statement of Copyright Protection<a href="https://docs.google.com/document/d/1F8WUkStTyV0ZcsjluN9WtvUm29hRzqNtZ7GcNX76acA/edit?usp=sharing" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-google w3-medium"></i></a><a href="https://1drv.ms/w/c/351e429395ffd928/EZGNUfx73lxMr7hjtTtP-r8BHmmyJou95yUiOCcZBggJtg?e=mKv9xN" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-microsoft w3-medium"></i></a><br>Content Disclaimer and Limitation of Liability<a href="https://docs.google.com/document/d/1q4zYgmg0Aoo5_5znIlJDfmD7coEDaDh5KLCaxHiKQOI/edit?usp=drivesdk" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-google w3-medium"></i></a><a href="https://1drv.ms/w/c/351e429395ffd928/EWMpWeIQ1TZJur8K0Gp-cwMBCtlPKglm-wANIRLWecGy5g?e=O7QC6N" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-microsoft w3-medium"></i></a></p>
+	<hr>
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3schools</a></p>
+	<p>Powered by <a href="https://github.com/cmathgit" target="_blank">GitHub</a></p>
+  <!-- End footer -->
+  </footer>
+	
+<!-- END PAGE CONTENT -->
+</div>
+
+</body>
+</html>

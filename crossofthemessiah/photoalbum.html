@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Musician Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Font Awesome Free ICONS 6.1.1 by @fontawesome - https://fontawesome.com-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+
+<!--External Style Sheets-->
+<!--<link rel="stylesheet" href="css/styles.css">-->
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 720px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: #222;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 120px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+</style>
+</head>
+<body class="w3-black">
+
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <!-- Avatar image in top left corner -->
+  
+  <!--Check that this link is not broken-->
+  <img src="https://1drv.ms/i/c/351e429395ffd928/IQRPQ-1zIBvlRbY8BECVTKs7AfPAIRosc9NwYtJRUhGAvbU" style="width:100%">
+  <!--<img src="images/portrait.jpg" style="width:100%">-->
+
+  <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  <a href="index.html#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>ABOUT</p>
+  </a>
+  <a href="featured.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-star w3-xxlarge"></i>
+    <p>FEATURED</p>
+  </a>
+  <a href="photoalbum.html" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-camera w3-xxlarge"></i>
+    <p>PHOTOS</p>
+  </a>
+  <a href="aillm.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa-solid fa-brain w3-xxlarge"></i>
+    <p>AILLM</p>
+  </a>
+  <!--<a href="#testimonies" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-camera w3-xxlarge"></i>
+    <p>TESTIMONIES</p>
+  </a>-->
+  <a href="index.html#music" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-music w3-xxlarge"></i>
+    <p>MUSIC</p>
+  </a>
+  <a href="index.html#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>CONTACT</p>
+  </a>
+  <a href="index.html#posts" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-star w3-xxlarge"></i>
+    <p>SOCIAL MEDIA</p>
+  </a>
+   <a href="https://cmathgit.github.io/cruzgmacias-cv/" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-briefcase w3-xxlarge"></i>
+    <p>CV</p>
+  </a>
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<!--<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+	<div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+	  <a href="index.html" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+	  <a href="index.html#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+	  <a href="featured.html" class="w3-bar-item w3-button" style="width:25% !important">FEATURED</a>
+	  <a href="photoalbum.html" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
+	  <a href="aillm.html" class="w3-bar-item w3-button" style="width:25% !important">AILLM</a>
+	  <a href="index.html#music" class="w3-bar-item w3-button" style="width:25% !important">MUSIC</a>
+	  <a href="index.html#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+	  <a href="index.html#posts" class="w3-bar-item w3-button" style="width:25% !important">SOCIAL MEDIA</a>
+	  <a href="https://cmathgit.github.io/cruzgmacias-cv/" class="w3-bar-item w3-button" style="width:25% !important">CV</a>
+	</div>
+  </div>-->
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+    <!-- Grid for photos -->
+	<div class="w3-padding-64 w3-content" id="sketches">
+    <h2 class="w3-text-light-grey">Sketches and Photographs</h2>
+	<h4 class="w3-text-light-grey">Due to a bug, Google's photo embedding Feature is disabled. To view the images in full size, please right-click the image and select "Open image in a new tab".</h4>
+	<h3>View a Catalog of my Artwork <a href="https://drive.google.com/drive/folders/1tDTRq-m46wLF8WEpApxl9wGyOSVyU3_F?usp=drive_link">here</a> or visit my <a href="https://www.deviantart.com/cmathdraw">DeviantArt Profile</a>. Some of the drawings were accepted into the <a href="https://kish.edu/student-life/student-involvement/arts-culture-events/gallery/collection/drawing.php">Kishwaukee College Art Gallery's 2011 Student Art Exhibition</a>.<br>This <a href="https://drive.google.com/file/d/1GVcf949XxdRvbNr3gCLY-wdNJCULsbxz/view?usp=sharing">self-portrait ink drawing</a> specifically was accepted into the 2011 Student Art Exhibition. This photo is kind of blurry, but I am in the process of reaching out to the college about getting a better copy of it.</h3><img src="https://1drv.ms/i/c/351e429395ffd928/IQREpLvTLH6ZQZYiQ9m944AuAUlkWPidfqNOIsJ3_SZEmUU" style="width:55%">
+	<img src="https://1drv.ms/i/c/351e429395ffd928/IQSlk_3ZZXx-TpgPlcGYxgMgAb8hJJSSPdHvj1OkrhL9DxI" style="width:55%"/>
+	<img src="https://1drv.ms/i/c/351e429395ffd928/IQQyWSOepJK5TJpTqinUnoM5AYZnvnbQIrgE6mYj8uetzrI" style="width:55%">
+	<img src="https://1drv.ms/i/c/351e429395ffd928/IQR5F67VpvoWSI8uOXxXZFgNAbPetcb-RMoJBMGN_OpzRag" style="width:55%">
+	<img src="https://1drv.ms/i/c/351e429395ffd928/IQRcXsJoKqnPQqpbGZDQzDDlAcbn1DkIZCbYf79rLBJQRDU" style="width:55%">
+	<img src="https://1drv.ms/i/c/351e429395ffd928/IQTe96Gmxf4JT6CND2_K6YZZARrVyPh9FMT8uo_GK1-aZog" style="width:55%">
+	<img src="https://1drv.ms/i/c/351e429395ffd928/IQQiqaGKD9PAQrwFw1MteZgWAQ81a3gW-yKkti2SgU4W6ts" style="width:55%">
+	<img src="https://1drv.ms/i/c/351e429395ffd928/IQRqp_AmXm11TL3OY_zEwa6UAb_cruillY_zb1w1ymdiPdM" style="width:55%">
+	<img src="https://1drv.ms/i/c/351e429395ffd928/IQR-753GdDCuRaX1gGEfJKgUAVKD2Fj4ZIAoDhLFr3RknGw" style="width:55%">
+	<img src="https://1drv.ms/i/c/351e429395ffd928/IQShmheomQRqQpCUjb8Ko09OASsL4B2H68UXT0sJu9QxdA4" style="width:55%">
+	<img src="https://1drv.ms/i/c/351e429395ffd928/IQRbWn4WiWJBQZkalQXl04c8AewFuaDixiRLu_igTNjBNOg" style="width:55%">
+    <hr style="width:200px" class="w3-opacity">
+	 <div class="w3-row-padding" style="margin:0 -16px" id="celestial">
+	 <!--Celestial Photos-->
+	    <h3 class="w3-text-light-grey">Photographed Celestial Events</h3>
+		<div class="w3-half">
+		<!--Total Solar Eclipse April 2024-->
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/sLhbmAZ96Ds?si=1Icv9nT2S_BIAxbe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><br><a href="https://drive.google.com/drive/folders/1DHCAJ18jLP8yi0lr2srXwFSY6us3rbXu" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-google w3-medium"></i></a><a href="https://youtube.com/playlist?list=PLf7Ql7AUTrnDa-c9AjqTzccHUlqZrCHMR&feature=shared" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-youtube w3-medium"></i></a>
+		</div>
+		<div class="w3-half">
+		<!--Total Lunar Eclipse March 2025-->
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/ktP5hBKWpm0?si=QA4Lx_jX3jIHyWQB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><iframe width="238" height="238" src="https://www.youtube.com/embed/zabrxOJolew?si=CtdCyRldv99q3lVK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><a href="https://drive.google.com/drive/folders/1y8OE72MTp9XVqO8zcqexWmT3sp5ofAqg?usp=sharing" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-google w3-medium"></i></a><a href="https://www.youtube.com/shorts/ShQjNvMNNjc" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-youtube w3-medium"></i></a>
+		</div>
+		<!--Total Solar Eclipse 2024-->
+		<!--<h3 class="w3-text-light-grey">Total Solar Eclipse April 2024<img src="images/TSE_240408_Totality_001.jpg" style="width:100%"></h3>
+		<h3 class="w3-text-light-grey">Total Solar Eclipse April 2024<img src="images/TSE_240408_Totality_005.jpg" style="width:100%"></h3>
+		<h3 class="w3-text-light-grey">Total Solar Eclipse April 2024<img src="images/20240408_142936.jpg" style="width:100%"></h3>
+		<h3 class="w3-text-light-grey">Total Solar Eclipse April 2024<img src="images/TSE_240408_Partial_2_001_smile.jpg" style="width:100%"></h3>-->
+		<!--Check that this link is not broken-->
+		<h3 class="w3-text-light-grey">Total Solar Eclipse April 2024<img src="https://1drv.ms/i/c/351e429395ffd928/IQS4xq1NjMc3TLUFz6ZB8zTgARrBTWSTL23lRQmkdJPsKCI" style="width:55%"></h3>
+		<h3 class="w3-text-light-grey">Total Solar Eclipse April 2024<img src="https://1drv.ms/i/c/351e429395ffd928/IQSSvnmGSNgtQ7biW5D5c92FAbaHD315UJKw2E7bLHEBRMw" style="width:55%"></h3>
+		<h3 class="w3-text-light-grey">Total Solar Eclipse April 2024<img src="https://1drv.ms/i/c/351e429395ffd928/IQTsbSYl18U0TI0tneBt-aK8ARJdSwjS8m_NFM3gQtUzYnM" style="width:55%"></h3>
+		<h3 class="w3-text-light-grey">Total Solar Eclipse April 2024<img src="https://1drv.ms/i/c/351e429395ffd928/IQT1blUhdsxaS6UfM2FUcRuDAZLvosl1MCrpI935eldPwFo" style="width:55%"></h3>
+		<h3 class="w3-text-light-grey">Total Lunar Eclipse March 2025<img src="https://1drv.ms/i/c/351e429395ffd928/IQRyZpIggfSYT6knTXJbByjTAWcCiS__pRFcA4ewKNLWmpU" style="width:55%"></h3>
+		<h3 class="w3-text-light-grey">Total Lunar Eclipse March 2025<img src="https://1drv.ms/i/c/351e429395ffd928/IQTXYSSXzEcySrMFel45NUhvAX1o0CDRM7BO7w4unP3Si2c" style="width:55%"></h3>
+		<h3 class="w3-text-light-grey">Total Lunar Eclipse March 2025<img src="https://1drv.ms/i/c/351e429395ffd928/IQTLW0oZTrfAT7uv8bocY3I0Ae95De8FPwrGic9w9UYuGI0" style="width:55%"></h3>
+		<!--Partial Lunar Eclipse Nov 2021-->
+		<!-- Due to a bug, Google Embed Photo Feature down.-->
+		<!--<h3 class="w3-text-light-grey"><img src="https://drive.google.com/uc?export=view&id=1gw2TC9V6AeSVo-4gtc9vRJZ2fJ-h9-Bt" style="width:100%"> Lunar Eclipse Nov 2021</h3>-->
+		<!--<h3 class="w3-text-light-grey">Lunar Eclipse Nov 2021<img src="images/lunar_eclipse_nov_2021_pro.jpg" style="width:100%"></h3>
+		<h3 class="w3-text-light-grey">Partial Lunar Eclipse Nov 2021<img src="images/partial_lunar_eclipse_nov_2021_pro.jpg" style="width:100%"></h3>-->
+		<!--check that this link is not broken-->
+		<h3 class="w3-text-light-grey">Lunar Eclipse Nov 2021<img src="https://1drv.ms/i/c/351e429395ffd928/IQRSkuC0W1lATb_-eZOppsYDAZZEhJynZmp61jqUyozSD-c" style="width:55%"></h3>
+		<h3 class="w3-text-light-grey">Partial Lunar Eclipse Nov 2021<img src="https://1drv.ms/i/c/351e429395ffd928/IQTaD9pco3dhT7OOiQRaGOToARBmAS0fB5vBLVPw4NujL_s" style="width:55%"></h3>
+		<!--Total Solar Eclipse Aug 2017 Crescent Shadows-->
+		<!--<h3 class="w3-text-light-grey"><img src="images/solar_eclipse_aug_2027_pro.jpg" style="width:100%"> Total Solar Eclipse Aug 2017 Crescent Shadows</h3>-->
+		<h3 class="w3-text-light-grey">Total Solar Eclipse Aug 2017 Crescent Shadows<img src="https://1drv.ms/i/c/351e429395ffd928/IQRxz1DShUjHQZ8E64_kgWzQAYrIod4YN8gsU_NCcp9V6zg" style="width:55%"></h3>
+		<!--Milky Way Kansas Tallgrass Prairie 2021-->
+		<!--Milky Way Kansas Tallgrass Prairie 2021</h3>-->
+		<!--<h3 class="w3-text-light-grey">Milky Way Kansas Tallgrass Prairie 2021<img src="images/Milky_Way_Kansas_2_pro.jpg" style="width:100%"></h3>-->
+		<h3 class="w3-text-light-grey">Milky Way Kansas Tallgrass Prairie 2021<img src="https://1drv.ms/i/c/351e429395ffd928/IQQcFlXXa8oGTaWXy4vzz7H_AR5qNqRnYkal2nqbdxMywf8" style="width:55%"></h3>
+		<!--Crepuscular Rays Kansas Tallgrass Prairie 2021-->
+		<!-- Due to a bug, Google Embed Photo Feature down.-->
+		<h3 class="w3-text-light-grey"><img src="https://1drv.ms/i/c/351e429395ffd928/IQRxnvg32tt5S6G0f6ce4LvsAbZJZ6t-rJCHEkTfkh2bEkk" style="width:55%"> Crepuscular Rays Kansas Tallgrass Prairie 2021: Facing East</h3>
+		<!--Crepuscular Rays Kansas Tallgrass Prairie 2021-->
+		<!-- Due to a bug, Google Embed Photo Feature down.-->
+		<h3 class="w3-text-light-grey"><img src="https://1drv.ms/i/c/351e429395ffd928/IQRzyTzF6zO1TLHZmRWrxmnZAYMx-raOU8vzuCgfQSNjCdw" style="width:55%"> Crepuscular Rays Kansas Tallgrass Prairie 2021: Facing West</h3>
+		<!--Solar Terminator Tallgrass Prairie 2021-->
+		<!-- Due to a bug, Google Embed Photo Feature down.-->
+		<h3 class="w3-text-light-grey"><img src="https://1drv.ms/i/c/351e429395ffd928/IQRFqEQnpbFORIcDGQN5_obOAc38PEiYxcOr48kfQ6M6CXk" style="width:55%"> Solar Terminator Tallgrass Prairie 2021</h3>
+	 </div>
+	 <div class="w3-row-padding" style="margin:0 -16px" id="mvstills">
+		<!--Music Video Captures-->
+		   <h3 class="w3-text-light-grey">Music Video Stills</h3>
+		   <!-- Due to a bug, Google Embed Photo Feature down.-->
+		   <!--<img src="https://drive.google.com/uc?export=view&id=17F-wWOlyu0NBBgu3NWIaclqMpmqSIdnw" style="width:100%">-->
+		   <!--<img src="https://drive.google.com/uc?export=view&id=126NgV5FQL0i9Dte-zhCXiDSVG5ZWNhQO" style="width:100%">-->
+		   <!--<img src="https://drive.google.com/uc?export=view&id=1hFBww8ufodTtNMcjAnVaJeHlEYnVxZTh" style="width:100%">-->
+		   <!--<img src="https://drive.google.com/uc?export=view&id=1WCM9RnWlpWxThufq7AdpHaGqD1QDsHNA" style="width:100%">-->
+   
+		   <!--Check that this link is not broken-->
+		   <img src="https://1drv.ms/i/c/351e429395ffd928/IQRzYALCL9UWT4tM0M7wmEmTAdsKpyeydYGLW-2YFN7tuyo" style="width:55%">
+		   <img src="https://1drv.ms/i/c/351e429395ffd928/IQRWyLb-9F_CTIz_GUq4YdK1AWumCpzjqALt88y9u4jOevg" style="width:55%">
+		   <img src="https://1drv.ms/i/c/351e429395ffd928/IQRTa8TIp72JQZoNl8WzRVsiASLq-LvmkbNscdhhooAUznY" style="width:55%">
+		   <img src="https://1drv.ms/i/c/351e429395ffd928/IQTAUKLvyjGPQbY18qeeh00FAZsbSWibFo0DvjdI3F3ORCc" style="width:55%">
+		   <img src="https://1drv.ms/i/c/351e429395ffd928/IQT282A2lF4HSZqDDlwZ4wsIAVJw2nXnPzSrJ95mcJuwdtA" style="width:55%">
+		   <img src="https://1drv.ms/i/c/351e429395ffd928/IQTjmU-FSX6DQYvYZBqk15f6ASmUybEvdwVGabmDxRNm_4o" style="width:55%">
+		   <img src="https://1drv.ms/i/c/351e429395ffd928/IQTul8FZ-O2sR7DB_qlVBi1JAYdbRqTPlP2vzwOXiM-t0ns" style="width:55%">
+		   <img src="https://1drv.ms/i/c/351e429395ffd928/IQQ_1JtUaKmVSpZLv107KyOsAS_Ll1ZRcU4orPilEAA4LDE" style="width:55%">
+		   <img src="https://1drv.ms/i/c/351e429395ffd928/IQSOR4QBhHphQLovwLLeuPFGAZDfroD5cT0HqkdEnInn0_E" style="width:55%">
+		</div>
+	 <div class="w3-row-padding" style="margin:0 -16px">
+	   <!--Angel Photos 2007 Taste of Chaos Tour-->
+	   <div class="w3-third">
+	    <h3 class="w3-text-light-grey"> <a href="https://www.concertarchives.org/concerts/taste-of-chaos-2007-38ed28dd-b91f-4b75-9bad-5ce5e463593c">2007 Rockstar<br>Taste of Chaos Tour<br>The Rave/Eagles Club Milwaukee, WI</a></h3>
+		<!-- Due to a bug, Google Embed Photo Feature down.-->
+        <img src="https://1drv.ms/i/c/351e429395ffd928/IQRlMsITOEjkQIDnkwewmgeiAUIB6QlDLXpO0g9iKW9QzK4" style="width:55%"><br>
+        <img src="https://1drv.ms/i/c/351e429395ffd928/IQRvL1ZBycuLTKeksuRdfw_JAXDh4g5k9Zz5vr8U7pis6KE" style="width:55%"><br>
+        <img src="https://1drv.ms/i/c/351e429395ffd928/IQTrJ77obNrcQKv54ibfioxmAR0j62DmFtRcTtLWKJOOXs4" style="width:55%"><br>
+		
+        <!--<img src="https://drive.google.com/uc?export=view&id=1e5R-xeJAAR5Zs6yLmUGfY8G2MvEwD3Lu" style="width:100%">-->
+		
+		<!-- Due to a bug, Google Embed Photo Feature down.-->
+        <img src="https://1drv.ms/i/c/351e429395ffd928/IQRP_5-ORfn6TrfYnw2QJT9JAQvBUpbAhB0KGp6v9nfvC-c" style="width:55%">
+		
+       </div>
+	   <!--Angel Photos 2010 Final Angel Show-->
+	   <div class="w3-third">
+	    <h3 class="w3-text-light-grey">Final Angel Show 2010</h3>
+		<!-- Due to a bug, Google Embed Photo Feature down.-->
+        <img src="https://1drv.ms/i/c/351e429395ffd928/IQS4KNr0L79YQ4zGEU0_opyDASKgqZcNeABICyOkeRqZ6Zc" style="width:55%"><br>
+        <img src="https://1drv.ms/i/c/351e429395ffd928/IQSkWxCjH0nPR5AV9yjfSXgxAZjIuRuUT3-m4aJGNpaswVs" style="width:55%"><br>
+        <img src="https://1drv.ms/i/c/351e429395ffd928/IQSVnjOLzNAGQrc8O56VW0sFAcFx70iZFTqke4FaGq0leJc" style="width:55%">
+		<img src="https://1drv.ms/i/c/351e429395ffd928/IQSeeXFLCiYDQIGv4D8hj0xLATDQRJNZEqRNEt8PmzZnn_0" style="width:55%">
+       </div>
+	 </div>
+    <!-- End photo grid -->
+     </div>
+</div>
+
+ <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge" id="contact">
+	<hr>
+   <p class="w3-text-light-grey">Contact Cruz on social media.</p>
+    <a href='https://www.facebook.com/cruz.macias.56232'><i class="fa-brands fa-facebook-f w3-hover-opacity"></i></a>
+    <a href='https://www.instagram.com/crossofthemessiah'><i class="fa-brands fa-instagram w3-hover-opacity"></i></a>
+    <!--<i class="fa-brands fa-linkedin w3-hover-opacity"></i>-->
+	<!--<a href=''><i class="fa-brands fa-linkedin w3-large w3-hover-opacity"></i></a>-->
+	<a href='https://youtube.com/@cruzmacias3257'><i class="fa-brands fa-youtube w3-hover-opacity"></i></a>
+	<a href='https://soundcloud.com/crossofthemessiah'><i class="fa-brands fa-soundcloud w3-hover-opacity"></i></a>
+	<a href='https://www.bandmix.com/cmetalvocalist'><i class="fa-solid fa-microphone w3-hover-opacity"></i></a>
+	<a href='https://github.com/cmathgit'><i class="fa-brands fa-github w3-large w3-hover-opacity"></i></a>
+	<a href=''><i class="fa-brands fa-discord w3-large w3-hover-opacity"></i></a>
+	<a href='https://www.deviantart.com/cmathdraw'><i class="fa-brands fa-deviantart w3-large w3-hover-opacity"></i></a>
+	<hr>
+	<p class="w3-text-light-grey">Listen to Screamer.exe (Ambient Folk Metal ensemble)</p>
+	<a href='https://youtube.com/playlist?list=PLf7Ql7AUTrnDfQM7u26tC52Gc4TYiaRsN'><i class="fa-brands fa-youtube w3-hover-opacity"></i></a>
+	<hr>
+	<p class="w3-text-light-grey">Listen to AILLM Music</p>
+	<a href='https://youtube.com/@aigospelmusic'><i class="fa-brands fa-youtube w3-hover-opacity"></i></a>
+	<a href='https://suno.com/@crossofthemessiah'><i class="fa-solid fa-brain w3-hover-opacity"></i></a>
+	<hr>
+	<p class="w3-text-light-grey">Statement of Copyright Protection<a href="https://docs.google.com/document/d/1F8WUkStTyV0ZcsjluN9WtvUm29hRzqNtZ7GcNX76acA/edit?usp=sharing" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-google w3-medium"></i></a><a href="https://1drv.ms/w/c/351e429395ffd928/EZGNUfx73lxMr7hjtTtP-r8BHmmyJou95yUiOCcZBggJtg?e=mKv9xN" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-microsoft w3-medium"></i></a><br>Content Disclaimer and Limitation of Liability<a href="https://docs.google.com/document/d/1q4zYgmg0Aoo5_5znIlJDfmD7coEDaDh5KLCaxHiKQOI/edit?usp=drivesdk" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-google w3-medium"></i></a><a href="https://1drv.ms/w/c/351e429395ffd928/EWMpWeIQ1TZJur8K0Gp-cwMBCtlPKglm-wANIRLWecGy5g?e=O7QC6N" class="w3-bar-item w3-button w3-padding-large w3-hover-white"><i class="fa-brands fa-microsoft w3-medium"></i></a></p>
+	<hr>
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3schools</a></p>
+	<p>Powered by <a href="https://github.com/cmathgit" target="_blank">GitHub</a></p>
+  <!-- End footer -->
+  </footer>
+	
+<!-- END PAGE CONTENT -->
+</div>
+
+</body>
+</html>
