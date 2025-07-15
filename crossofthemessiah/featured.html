@@ -37,7 +37,46 @@
   visibility: visible;
 }
 
-body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+body, h1,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+
+h2 {
+            width: 100%;
+            max-width: 1200px;
+            text-align: left;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+/* Container for the video grid */
+.video-gallery {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(238px, 1fr));
+	gap: 20px;
+	width: 100%;
+	max-width: 1000px;
+	}
+
+/* Wrapper to maintain aspect ratio */
+.video-container {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 aspect ratio */
+	height: 0;
+	overflow: hidden;
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	}
+
+.video-container iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 0; /* Remove default iframe border */
+	}
+
 .w3-row-padding img {margin-bottom: 12px}
 /* Set the width of the sidebar to 120px */
 .w3-sidebar {width: 120px;background: #222;}
@@ -116,144 +155,816 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
-
+<h1>YouTube Video Gallery</h1>
   <div id="featured">
   	<h2>Featured Songs</h2>
-	<div class="w3-third">
-		<!--Adaptation of Chain Breaker OMV-->
-	<p>Adaptation of Chain Breaker OMV</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/FlwcH5uu7ZI?si=hkLyxPNZQRl8RrmR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<div class="video-gallery">
+	<!--Adaptation of Chain Breaker OMV-->
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/FlwcH5uu7ZI?si=hkLyxPNZQRl8RrmR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
 	<!--My my YHWH (out of the dark and into light)-->
-	<p>My my YHWH (out of the dark and into light)</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/p2c7ZIs4CPM?si=yzr69qbVk0gJR0yc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/p2c7ZIs4CPM?si=yzr69qbVk0gJR0yc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--I Will Run to My Rock OMV-->
-	<p>I Will Run to My Rock OMV</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/leAJS33QOLg?si=ktubyuQijvh_YfCZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/leAJS33QOLg?si=ktubyuQijvh_YfCZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Circuit of the Ecliptic Bloodmoon Eclipse-->
-	<p>Circuit of the Ecliptic Bloodmoon Eclipse</p>
+	<div class="video-container">
 	<iframe width="238" height="238" src="https://www.youtube.com/embed/zabrxOJolew?si=iBKtl6hyXAv-a4wS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Circuit of the Ecliptic (Instrumental)-->
-	<p>Circuit of the Ecliptic (Instrumental)</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/xtrcmY0PMnY?si=tOweObhHhmozqRT4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/xtrcmY0PMnY?si=tOweObhHhmozqRT4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
 	<!--Shepherd's Path Improv 240821 [Psalm 23:1]-->
-	<p>Shepherd's Path  [Psalm 23:1]</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/RhxKhuxUn1Y?si=WsjzM0EvLmvm_Zf7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/RhxKhuxUn1Y?si=WsjzM0EvLmvm_Zf7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Bonus Track: O Ye of Little Faith - Vocal Demo (AI Extended)-->
-	<p>O Ye of Little Faith (AI Extended)</p>
+	<div class="video-container">
 	<iframe width="238" height="238" src="https://www.youtube.com/embed/KgiI6bmagGs?si=OzjA87ApuesMWAEa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Improv 240904 [Liquid Drum n Bass]-->
-	<p>Improv [Liquid Drum n Bass]</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/yKjLCR6Rnuo?si=WtA1EsQLnwgSfa-v" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/yKjLCR6Rnuo?si=WtA1EsQLnwgSfa-v" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Improv 240903 [Isaiah 48:17] [Liquid Drum n Bass]-->
-	<p>Improv 240903 [Isaiah 48:17]</p>
+	<div class="video-container">
 	<iframe width="238" height="238" src="https://www.youtube.com/embed/gE5Obt4HlHE?si=8OO9oERkchPiwr12" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Improv 241006 [BOSS RC-30 Loop Station]-->
-	<p>Improv [BOSS RC-30]</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/zyvPPbV0_hc?si=jcjoB-NIVJpiLXZd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/zyvPPbV0_hc?si=jcjoB-NIVJpiLXZd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Angel Chains Music Video-->
-	<p>Angel Chains Music Video</p>
+	<div class="video-container">
 	<iframe width="238" height="238" src="https://www.youtube.com/embed/oDnAHpB-z0M?si=8WxEQNsbfIZQ3P2H" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
 	<!--Bebé No Llores-->
-	<p>Bebé No Llores</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/0X100ID09Xg?si=dXBgavKUGWhC5UyT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/0X100ID09Xg?si=dXBgavKUGWhC5UyT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Multi-Instrumental Improv-->
-	<p>Multi-Instrumental Improv</p>
+	<div class="video-container">
 	<iframe width="238" height="238" src="https://www.youtube.com/embed/krbCNnJ3y1s?si=I2Y523RV_Tb7Qnh7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Crying in the Appalachain Wilderness-->
-	<p>Crying in the Appalachain Wilderness</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/_XA25RiDNOg?si=AQW0EM72VgsVYD1M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/_XA25RiDNOg?si=AQW0EM72VgsVYD1M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 	</div>
-	<div class="w3-third">
 	<!--Visitations OMV-->
-	<p>Visitations OMV</p>
+	<div class="video-container">
 	<iframe width="238" height="238" src="https://www.youtube.com/embed/PqzfGzqIhOo?si=xxsThHpWpomc5ltM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-	<!--1 John 4 | Spiritual Warfare | Angel Wrangler | OMV-->
-	<p>Angel Wrangler | OMV</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/hcmlOQEuI68?si=Ae_-p5NsVPGxAl85" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-	<!--CM Club Narco Mix-->
-	<p>CM Club Narco Mix</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/sKx4dYI5mDw?si=ubeByUJzqqRqA-hS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-	<!--June 2025 Strawberry Moon Deep House Timelapse-->
-	<p>June 2025 Strawberry Moon Deep House Timelapse</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/FC7bmRcNKWw?si=0V1geTQI5h9si7mc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-	<!--1 John 4 | Spiritual Warfare | Angel Wrangler | Lyric Video-->
-	<p>Angel Wrangler | Lyric Video</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/z_847ktsoqc?si=aAQMzdwE9ZlTxeGs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-	<!--Angel Chains Lyric Video-->
-	<p>Angel Chains Lyric Video</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/jsL7CE4dKc4?si=McgpSoK_YGzPPnuN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-	<!--Angel Our Tragic Ending EP Track 3-->
-	<p>Angel Our Tragic Ending EP Track 3</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/g5RvI03kYIM?si=Pj-TZFZ-Ya-CScHm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-	<!--Angel Our Tragic Ending EP Track 4-->
-	<p>Angel Our Tragic Ending EP Track 4</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/J-1-qBBkQvA?si=9cecxM0wfq2zQgKK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-	<!--2010 Angel Concert-->
-	<p>2010 Angel Concert</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/gb2yi69-rJY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-	<!--<iframe width="424" height="238" src="https://www.youtube.com/embed/CT8Z7qiir8A?si=IjQGMg3onnhkMDFd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
-	<!--Enter Sand Slash Instrumental 210 bpm-->
-	<p>Enter Sand Slash Instrumental</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/guKjdvgkMVo?si=IkD4Ku3dEsTZiN8y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-	<!--Alive by Design Single-->
-	<p>Alive by Design Single</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/_XH6okpkXjk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-	<!--Perdonen a los Desesperados Classical Adaptation-->
-	<p>Perdonen a los Desesperados</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/vIdCmmvwL2M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-	<!--Surfacing Lyric Video-->
-	<p>Surfacing Lyric Video</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/rpAdZnOatqY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-	<!--Heavy House Hop Live Demo-->
-	<p>Heavy House Hop Live Demo</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/a7dPvEGEMMU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 	</div>
-	<div class="w3-third">
+	<!--1 John 4 | Spiritual Warfare | Angel Wrangler | OMV-->
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/hcmlOQEuI68?si=Ae_-p5NsVPGxAl85" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
+	<!--CM Club Narco Mix-->
+	<div class="video-container">
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/sKx4dYI5mDw?si=ubeByUJzqqRqA-hS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
+	<!--June 2025 Strawberry Moon Deep House Timelapse-->
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/FC7bmRcNKWw?si=0V1geTQI5h9si7mc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
+	<!--1 John 4 | Spiritual Warfare | Angel Wrangler | Lyric Video-->
+	<div class="video-container">
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/z_847ktsoqc?si=aAQMzdwE9ZlTxeGs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
+	<!--Angel Chains Lyric Video-->
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/jsL7CE4dKc4?si=McgpSoK_YGzPPnuN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
+	<!--Angel Our Tragic Ending EP Track 3-->
+	<div class="video-container">
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/g5RvI03kYIM?si=Pj-TZFZ-Ya-CScHm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
+	<!--Angel Our Tragic Ending EP Track 4-->
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/J-1-qBBkQvA?si=9cecxM0wfq2zQgKK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
+	<!--2010 Angel Concert-->
+	<div class="video-container">
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/gb2yi69-rJY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
+	<!--Enter Sand Slash Instrumental 210 bpm-->
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/guKjdvgkMVo?si=IkD4Ku3dEsTZiN8y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
+	<!--Alive by Design Single-->
+	<div class="video-container">
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/_XH6okpkXjk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
+	<!--Perdonen a los Desesperados Classical Adaptation-->
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/vIdCmmvwL2M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
+	<!--Surfacing Lyric Video-->
+	<div class="video-container">
+	<iframe width="238" height="238" src="https://www.youtube.com/embed/rpAdZnOatqY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
+	<!--Heavy House Hop Live Demo-->
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/a7dPvEGEMMU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
 	<!--Also Before Kings | Psalm 119-->
-	<p>Also Before Kings | Psalm 119</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/Z473ggvnIWg?si=OSt_vXyMq8_9SDLK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/Z473ggvnIWg?si=OSt_vXyMq8_9SDLK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Daniel 7 Bible Reading-->
-	<p>Daniel 7 Bible Reading</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/EHCZA1cVeoc?si=18-cwJYKiiajZfaZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/EHCZA1cVeoc?si=18-cwJYKiiajZfaZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	</div>
 	<!--Ingratitude, the Motivation-->
-	<p>Ingratitude, the Motivation</p>
+	<div class="video-container">
 	<iframe width="238" height="238" src="https://www.youtube.com/embed/n6vitjxkBpI?si=8XnQYLIgiglffsQ-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--The Lord's Supper Radio Edit AILLM Extended-->
-	<p>The Lord's Supper Radio Edit AILLM Extended</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/Ok1OPwr0MgA?si=B9oqFLKRfv7ggLId" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/Ok1OPwr0MgA?si=B9oqFLKRfv7ggLId" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Ballad of a Mathematician-->
-	<p>Ballad of a Mathematician</p>
+	<div class="video-container">
 	<iframe width="238" height="238" src="https://www.youtube.com/embed/e390UE-sC28?si=pvFSvYh-Vts7CKwo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--My Valentine Mi Amor Amar Bhalobasha-->
-	<p>My Valentine Mi Amor Amar Bhalobasha</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/iclB9vXXaWU?si=2fm_A8XdwHjdsNZk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/iclB9vXXaWU?si=2fm_A8XdwHjdsNZk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Bible Reading John 1:1-28-->
-	<p>Bible Reading John 1:1-28</p>
+	<div class="video-container">
 	<iframe width="238" height="238" src="https://www.youtube.com/embed/LYYmVa3SO28?si=CeEGFegj6FbrbT8R" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Victory In Jesus Calvary Baptist Church-->
-	<p>Victory In Jesus Calvary Baptist Church</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/aBXZP6_qWdQ?si=19BtMn2536xv4gIR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/aBXZP6_qWdQ?si=19BtMn2536xv4gIR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Be Thou My Vision Calvary Baptist Church-->
-	<p>Be Thou My Vision Calvary Baptist Church</p>
+	<div class="video-container">
 	<iframe width="238" height="238" src="https://www.youtube.com/embed/ZNx0ZRJJ8IQ?si=Bq1ayks2NyFfS2Lz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Improvisational Acoustic Guitar Melody in F# Minor - 6/1/2024-->
-	<p>Improvisational Acoustic Guitar Melody in F# Minor - 6/1/2024</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/0BvbTjFlwFw?si=Dt0dDK1_lzYVKBoL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/0BvbTjFlwFw?si=Dt0dDK1_lzYVKBoL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Liquid Morning Mix 24611124 [Old School House] [EDM]-->
-	<p>Liquid Morning Mix 24611124 [Old School House] [EDM]</p>
+	<div class="video-container">
 	<iframe width="238" height="238" src="https://www.youtube.com/embed/eA5vQhZYQNk?si=z7FqKXqMKyhw5meH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--The Remedy-->
-	<p>The Remedy</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/7ZU6bgRhFvw?si=6k_W1zzNvcUAlD3E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/7ZU6bgRhFvw?si=6k_W1zzNvcUAlD3E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Echoes of Earth [Vocal improvisation over AI Instrumental]-->
-	<p>Echoes of Earth [Vocal improvisation over AI Instrumental]</p>
+	<div class="video-container">
 	<iframe width="238" height="238" src="https://www.youtube.com/embed/m62-i4euuq8?si=QBTO19dfhjYwzkC9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	</div>
 	<!--Seek First Harmonica Adaptation-->
-	<p>Seek First Harmonica Adaptation</p>
-	<iframe width="238" height="238" src="https://www.youtube.com/embed/_jCqY8POEmo?si=0l77-4c6TPbN8afb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<div class="video-container">
+		<iframe width="238" height="238" src="https://www.youtube.com/embed/_jCqY8POEmo?si=0l77-4c6TPbN8afb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 	</div>
   </div>
-  
+  <h2>Original Compositions</h2>
+  <div class="video-gallery">
+	  <!--Angel's Until My Lungs Collapse (Acoustic Reprise)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/hjbGQPn_3eQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Angel Until My Lungs Collapse Slideshow 1-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/62zXc6oiolM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--My Valentine Mi Amor Amar Bhalobasha | English, Spanish, & Bangla | Acoustic, Harmonica, & Cajon-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/iclB9vXXaWU" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--The Remedy Live Lyric Video | 1 Peter 2:24 & Isaiah 53:5 | Guitar, Cajon, Harmonica, & Vocals-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/7ZU6bgRhFvw" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Perdonen a los Desesperados EDM Reprise an Original by Cruz Macias-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/rqSGu36FrY0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Waiting - an original by Cruz Macias-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/VyM8h_qco30" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Alive by Design Instrumental Shorty-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/yAO1VDqtgVg" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Perdonen a los Desesperados (an original by Cruz Macias)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/SsKvddYyC04" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Acoustic Adaptation of House of the Rising Sun by Lead Belly-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/-mLTuViQYH0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+  </div>
+
+  <h2>Covers and Adaptations</h2>
+  <div class="video-gallery">
+	  <!--Que Naciste Para Morir: An Adaptation of Blind Willie McTell's You Was Born to Die (1933)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/_vN_nGmOEes" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Escucha a Tu Corazón an acoustic adaptation of DHT's Listen to Your Heart-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/x2W7i5NFQvI" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--1 John 4 | Spiritual Warfare | Angel Wrangler | OMV-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/hcmlOQEuI68" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Acoustic Adaptation of Josh Baldwin's Let the Redeemed by Cruz Macias-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/YM39cMlx42w" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Revelation Song Adaptation with turn around by Cruz Macias feat. Peter Cinko on Viola (Mastered)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/dbuaq7n7jcU" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Also Before Kings | Psalm 119:42-48 | Cover | D Ionian | Adagio-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/Z473ggvnIWg" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Perdonen a los Desesperados (Classical Adaptation)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/vIdCmmvwL2M" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Acoustic Adaptation of Seek First w Harmonica-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/_jCqY8POEmo" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Perdonen a los Desesperados (HipHop Adaptation)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/dvIGtmVmZpo" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Acoustic Adaptation of Face to Face-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/zwZk8FLvxoE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Hello World Poem Adaptation-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/LfiJwJbjMrs" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Adaptation of Let the Redeemed with Harmonica and turn around by Cruz Macias-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/q9Guj97ld_0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Acoustic Adaptation of Rivers & Robots' Forevermore by Cruz Macias-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/W_JGEIP64rk" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--A Riddle Absurd: Ballad of a Mathematician | Lyric Video-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/e390UE-sC28" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--God Rest Ye Merry Gentlemen by Cruz Macias (Acoustic Adaptation)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/ydCkJl6r7h0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Acoustic Adaptation of All Sons and Daugters' Great Are You Lord by Cruz Macias-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/u6UmRJ9gAJM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Victory in Jesus - Baptist Hymnal Acoustic Adaptation-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/8zh6kLNxENE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Acoustic Adaptation of Josh Baldwin's Stand in Your Love-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/xj8JU9yNJOo" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--My my YHWH (Out of the Dark and Into Light) | Neil Young Adaptation-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/p2c7ZIs4CPM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Adaptation of Jason Mraz's I'm Yours-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/W50tvKxI8UY" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Let the Redeemed by Josh Baldwin (Piano Adaptation)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/5l9c-_sQW3c" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Victory in Jesus / Thank You Lord Acoustic Adaptation-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/8wjDdVEY1YE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Ill Fly Away Good Friday Acoustic Adaptation 20240329-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/fOj8lnyfC0w" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Chain Breaker Acoustic Adaptation Key Gmaj w Harmonica [Live]-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/fOL1uMRIkA4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Adaptation of "Chain Breaker" OMV | Zach Williams Tribute by Cruz Macias-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/FlwcH5uu7ZI" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Circuit of the Ecliptic (Instrumental) - Negative Filter Solar Eclipse Oct. 14, 2023-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/xtrcmY0PMnY" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Acoustic Adaptation of Josh Baldwin's Let the Redeemed in the Key of A-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/PwxU_AWYG6I" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Acoustic Adaptation of CCR's Fortunate Son w/ Harmonica-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/XMT-VSASrnE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Adaptation of Afroman's Because I Got High-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/Mr5_zCg2Uwo" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Adaptation of The Rolling Stones Dead Flowers-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/WXRXtq34y4o" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Acoustic Adaptation of Into the Black by Niel Young-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/V2YZD06lvmA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Adaptation of Open the Eyes of my Heart by Peter Cinko-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/3hUSNRgm9KM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Acoustic Adaptation of Into the Black Short-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/0QJ8anjm-j8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Adaptation of Rock of Ages feat Peter Cinko-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/x_S-ZbPtZ9M" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Happy Anniversary to My Wife - Revelation Song Acoustic Adaptation w Harmonica 20230212-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/dUhwH2gjprA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+  </div>
+
+  <h2>Worship Auditions</h2>
+  <div class="video-gallery">
+	  <!--Worship Audition Spring 2022 (Piano)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/CH-evnZwUNc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Worship Audition Spring 2022 (Acoustic Guitar, Harmonica, Vocals, & Vocal Percussion)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/m2tNoxCIiSg" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Worship Audition Spring 2022 (Acoustic Guitar)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/TLUgea3jl2Q" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Worship Audition Spring 2022 (Bass Guitar)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/qX1FbSTo1DE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Worship Audition Spring 2022 (Electric Guitar)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/OIDE5sGUhX4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Worship Audition Spring 2022 (Piano & Vocals)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/DsBQILO1og4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+  </div>
+
+  <h2>Demos</h2>
+  <div class="video-gallery">
+	  <!--Alive by Design Demo feat. Peter Cinko-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/z7r8I_PCssk" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Drum Prog Demo 1-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/jw9EUgN-m7g" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Heavy House Hop Live Demo-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/a7dPvEGEMMU" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Metal Demo 1 Live Home Studio-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/lSGmjcPqmEY" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+  </div>
+
+  <h2>Mixes</h2>
+  <div class="video-gallery">
+	  <!--CM Club Narco Mix-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/sKx4dYI5mDw" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Dominula Village House Mix (strobe moon)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/w0bOkC6EZXo" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Creepin Through the Darkness 2024 Remix [BOSS RC-30 Loop Station]-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/C_FKn3bHpRk" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Liquid Morning Mix 24611124 [Old School House] [EDM]-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/eA5vQhZYQNk" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+  </div>
+
+  <h2>Improvisations</h2>
+  <div class="video-gallery">
+	  <!--Improv_20220202-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/IajG9slpPCs" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Bebé No Llores | Baby Don't Cry | Hopeless Ideal | Volume 0A | Improv-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/0X100ID09Xg" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--🔥 Live Acoustic Multi-Instrumental Improv | 2/1/25 | Take-2 | Guitar, Cajon, Harmonica & FL Studio 🎶-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/krbCNnJ3y1s" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improv 241006 [BOSS RC-30 Loop Station]-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/zyvPPbV0_hc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improv 240904 [Liquid Drum n Bass X Burning Jazz]-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/yKjLCR6Rnuo" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--20220725_improv (Key of Emaj Economical Picking)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/MQuIzehVTE4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improv 240903 [Isaiah 48:17] [Liquid Drum n Bass X Burning Jazz]-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/gE5Obt4HlHE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improv. 202012_1-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/Zc_6_NGfmzA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Shepherd's Path Improv 240821 [Psalm 23:1]-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/RhxKhuxUn1Y" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improv_202210202-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/yHS16QWFcaY" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improv_20210215-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/hV-qKYjfn_0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Live Improvisation On the Rationality of Fairness [Working Title] [2022]-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/tQU3bRS759s" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improvisational Acoustic Guitar Melody in F# Minor - 6/1/2024-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/0BvbTjFlwFw" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Late Night Improvisational Piano [C Ionian (Major)] 6/4/2024-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/Om0mriTOF8A" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--improv_20210323-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/YeVb1sOlETI" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improv 2454 Take 2 [Galatians 5] [E Dorian (Minor)] Music Studio Streaming [Proof of Concept]-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/sY9ZL0I5O5Q" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Loop Game Improv. 20210413 (Short Version)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/C9EJnP8GhWI" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Fun Improv. with C Major Scale-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/p-CjjXJkris" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Fun Improv. with E Major Scale-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/9bnSv-09Jmc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Late Night Improv. 20210512-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/-eeul9m3wbI" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improv 20231019 - Acoustic Guitar (Open D Tuning)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/kSz7rTFkaI0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improv_20210601-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/xAdSVntkDtc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improv_20210603-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/PXwqv8SvYVU" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--So IN Kayaking: Riders on the Storm Improvisation-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/3BSU1GP6EmY" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improv_20210603_2-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/hLF7do5y1r4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improv_20210920-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/B90yFCOhkX4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--improv_20211211_short-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/D8pMHlbqCtM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improvisation 12/29/2021-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/NgCj8oMdw1c" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Improvising with D Major 7th 12/30/2021-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/8LX1yxCk1tE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+  </div>
+
+  <h2>Bible Readings</h2>
+  <div class="video-gallery">
+	  <!--Daniel 7:2-14 Improvisational Bible Reading KJV 20220221-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/EHCZA1cVeoc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Assembly of the Righteous: A Reading of Psalm 1-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/QOXknn9nJdY" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Bible Reading John 1:1-28-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/LYYmVa3SO28" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--nthDim Bible Reading - John 1:1-28 KJV HD-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/LbKA_t5IoRM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Eph. 4 Bible Reading by Nick Decker at Red River Gorge KY w Amazing Grace by Peter Cinko-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/y2CZf5wyRIE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+  </div>
+
+  <h2>Wedding Performances</h2>
+  <div class="video-gallery">
+	  <!--My Wedding Vow to You Tahia, a Song of Worship with turn around by Cruz Macias-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/6-WkyzY7aKk" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+  </div>
+
+  <h2>Miscellaneous</h2>
+  <div class="video-gallery">
+	  <!--June 2025 Strawberry Moon Deep House Timelapse-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/FC7bmRcNKWw" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Open Mic Worship  (Great Are You Lord Cover by Cruz Macias) Sept. 16 2019-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/PXDpXaAuAKA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--I Will Run to My Rock OMV-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/leAJS33QOLg" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--The Lord's Supper Radio Edit AILLM Extended-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/Ok1OPwr0MgA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Angel BITFZITB  Slideshow 2-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/hUwTtuarWTs" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Ingratitude, the Motivation | Disordered Loves | Romans 1:21 KJV-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/n6vitjxkBpI" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Visitations OMV-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/PqzfGzqIhOo" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Crying in the Appalachian Wilderness | John 1:23 [HAOMV]-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/_XA25RiDNOg" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--The Kinks Part II-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/N9nuVdEuUCA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Circuit of the Ecliptic Bloodmoon Eclipse | Pi 31425 [4K OMV]-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/zabrxOJolew" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Live at Hemingway's Zen Garden Open-Mic-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/7AkS4WL8yY4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Jim Jones at Botany Bay Acoustic-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/hQ4NgUPc_vM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Be Thou My Vision 8th Century Irish Hymn-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/JpkH7fjwiXE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Reckless Love by Cory Asbury-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/v7FU5Dk8f-0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Acoustic Guitar Audition for Cornerstone Church SI (ver. 1)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/u_GDi7vpuAk" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Father of Us All With Vocals [2024 Version]-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/fG4sASdSLtY" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Isaiah 65:24,25 & 66:1-3 (Living Bible - Paraphrased)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/pEsnKD4ea7c" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--315 Augusta Avenue (A Cruz Macias Original)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/sypbvURKj98" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Victory In Jesus-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/aBXZP6_qWdQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--"Be Thou My Vision"-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/ZNx0ZRJJ8IQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Angel - Chains (Official Music Video) | 2023 Release-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/oDnAHpB-z0M" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Enter Sand Slash Instrumental 210 bpm-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/guKjdvgkMVo" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Surfacing Lyric Video 2023-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/rpAdZnOatqY" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Tahia You're so Cool with Vocal Percussion-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/0iu7BxF3624" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--2010 Final Angel Concert-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/gb2yi69-rJY" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Verse 1 and Chorus A Cappella of Victory in Jesus at Cave Amphitheater in Kingdom Come State Park-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/rxS1feRnLhI" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--He Who Controls Cannot Let Go: The Gravy Train Derails-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/gEMtupK4pNs" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Alive by Design Single 2022-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/_XH6okpkXjk" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+
+	  <!--Angel - Chains Single 2021 (Lyric Video)-->
+	  <div class="video-container">
+		  <iframe src="https://www.youtube.com/embed/jsL7CE4dKc4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	  </div>
+  </div>
+  </div>
     <!-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge" id="contact">
 	<hr>
