@@ -1,6 +1,6 @@
 # README for main index.html
 
-This is the main index.html file for my GitHub Pages site.
+This is the main index.html file for my GitHub Pages site
 
 It includes links to the following pages:
 
