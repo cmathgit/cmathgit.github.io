@@ -67,19 +67,6 @@
     .references li {
         margin-bottom: 8px;
     }
-	/* PDF area */
-    .pdf-wrap { margin-top: 20px; }
-    .pdf-frame { width: 100%; height: 70vh; border: none; border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,.15); }
-    /* On very short mobile viewports, ensure useful height */
-    @media (max-height: 600px) { .pdf-frame { height: 80vh; } }
-    .story, .references {
-      background-color: rgba(255,255,255,.6);
-      padding: 15px; border-radius: 10px; margin-top: 20px;
-    }
-    .references ul { list-style: none; padding: 0; }
-    .references li { margin-bottom: 8px; }
-    .pdf-fallback { text-align: center; margin-top: 10px; font-size: .95rem; }
-    .pdf-fallback a { color: #1a0dab; text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -103,25 +90,7 @@
         <p>Choosing an American name might have removed this unique opportunity for witness. My own name, Cruz, spoke to me as an adult—chosen by my mother, it became a silent testimony from her even after her passing. I believe Pobitro’s name will be the same—a voice calling him to the power of the Cross.</p>
     </div>
     <h3>Primary Lexicon Reference</h3>
-        <!--
-      Why this works on mobile:
-      Many mobile browsers either block or download PDFs when used directly in <iframe src="*.pdf">.
-      Using the PDF.js viewer provides an HTML-based renderer that embeds reliably inside an iframe.
-
-      IMPORTANT: Replace ABSOLUTE_PDF_URL below with the absolute, publicly accessible URL of your PDF
-      (for GitHub Pages, that will look like: https://<user>.github.io/<repo>/sanskrit-lexicon-mw0-p611-pavitra.pdf)
-    -->
-    <div class="pdf-wrap" id="pdf-wrap">
-      <iframe
-        class="pdf-frame"
-        title="Sanskrit Lexicon – pavitra (PDF)"
-        src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/web/viewer.html?file=https://github.com/cmathgit/cmathgit.github.io/blob/bd0dbb3082fee1194034c9d594eb3a4319a4708a/macias-baby-shower-2025/sanskrit-lexicon-mw0-p611-pavitra.pdf#zoom=page-fit"
-        allowfullscreen
-        loading="lazy"
-      ></iframe>
-      <p class="pdf-fallback">
-        If the viewer does not load, <a id="pdf-direct" href="#" rel="noopener" target="_blank">open the PDF directly</a>.
-      </p>
+    <iframe src="../sanskrit-lexicon-mw0-p611-pavitra.pdf" frameborder="0" scrolling="no"></iframe>
     <div class="references">
         <h3>References</h3>
         <ul>
