@@ -67,13 +67,34 @@
     .references li {
         margin-bottom: 8px;
     }
+    .tooltip {
+        position: relative;
+    display: inline-block;
+        border-bottom: 1px dotted black;
+    }
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+    }
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
 </style>
 </head>
 <body>
 <header>
-    <img src="PobitroEtymology-OriginalFamilyPortrait.png" alt="Pobitro Etymology" style="max-width: 100%; height: auto;">
+    <img src="PobitroEtymology-OriginalFamilyPortrait_v2.png" alt="Pobitro Etymology" style="max-width: 100%; height: auto;">
     <h1>Pobitro Macias</h1>
-    <h2>পবিত্র (pobitro) – Holy Cross of the Messiah</h2>
+    <div class="tooltip"><h2>পবিত্র (pobitro) - Holy Gift of God</h2><span class="tooltiptext">Holy Cross of the Messiah</span></div>
     <button class="pronounce-button" onclick="document.getElementById('audio').play()">🔊 Pronounce Name</button>
     <audio id="audio" src="LL-Q9610_(ben)-Titodutta-পবিত্র.wav"></audio>
 </header>
