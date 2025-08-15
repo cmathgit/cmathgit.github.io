@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Académico Español para Teoría Musical — App de una sola página</title>
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --panel: #111520;
+      --panel-2: #0f172a;
+      --text: #e6edf3;
+      --muted: #9fb3c8;
+      --accent: #7dd3fc;
+      --accent-2: #a78bfa;
+      --good: #22c55e;
+      --warn: #f59e0b;
+      --bad: #ef4444;
+      --border: #263041;
+    }
+    [data-theme="light"]{
+      --bg: #f7fafc; --panel:#ffffff; --panel-2:#f1f5f9; --text:#0b1220; --muted:#465a6c; --accent:#0369a1; --accent-2:#6d28d9; --border:#e2e8f0;
+    }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg); color: var(--text); line-height: 1.45;
+    }
+    header { position: sticky; top:0; z-index: 20; backdrop-filter: saturate(180%) blur(6px); background: color-mix(in oklab, var(--bg) 75%, transparent); border-bottom:1px solid var(--border); }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 16px; }
+    h1{ font-size: clamp(1.2rem, 2vw + 1rem, 2rem); margin: 0 0 6px; }
+    .sub{ color: var(--muted); font-size: 0.95rem; }
+    nav.tabs { display:flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    nav.tabs button{ appearance:none; border:1px solid var(--border); background: var(--panel); color: var(--text); padding: 10px 12px; border-radius: 10px; cursor:pointer; font-weight:600; }
+    nav.tabs button.active{ outline:2px solid var(--accent); background: color-mix(in oklab, var(--panel) 70%, var(--panel-2)); }
+    main{ max-width:1200px; margin: 0 auto; padding: 16px; display:grid; grid-template-columns: 1fr; gap: 16px; }
+    section.panel{ background: var(--panel); border:1px solid var(--border); border-radius: 14px; padding: 16px; }
+    .grid{ display:grid; gap:12px; }
+    .grid.two{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (max-width:920px){ .grid.two,.grid.three{ grid-template-columns: 1fr; } }
+    label{ font-weight:600; }
+    input[type="text"], input[type="number"], select, textarea {
+      width: 100%; padding: 10px 12px; background: var(--panel-2); color:var(--text); border:1px solid var(--border); border-radius:10px;
+    }
+    textarea{ min-height: 140px; }
+    .btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:10px; border:1px solid var(--border); background: var(--panel-2); color:var(--text); cursor:pointer; font-weight:600; }
+    .btn.primary{ background: var(--accent-2); border-color: transparent; color: white; }
+    .btn.ghost{ background: transparent; }
+    .btn.good{ background: var(--good); color: #051b11; border-color: transparent; }
+    .btn.warn{ background: var(--warn); color: #1d1301; border-color: transparent; }
+    .btn.bad{ background: var(--bad); color: #1e0404; border-color: transparent; }
+    .chips{ display:flex; flex-wrap:wrap; gap:6px; }
+    .chip{ padding:6px 8px; border:1px solid var(--border); border-radius:999px; font-size: 0.85rem; color: var(--muted); }
+    .muted{ color: var(--muted); }
+    .kpi{ font-weight:800; font-size: 1.25rem; }
+    .card{ background: var(--panel-2); border:1px solid var(--border); border-radius: 12px; padding: 12px; }
+    .flashcard{ display:flex; flex-direction:column; gap:8px; align-items:stretch; justify-content:center; min-height: 180px; cursor:pointer; }
+    .flashcard .term{ font-size: 1.15rem; font-weight:800; }
+    .flashcard .def{ color: var(--muted); }
+    .list{ display:grid; gap:8px; max-height: 480px; overflow:auto; padding-right: 6px; }
+    .row{ display:grid; grid-template-columns: 1fr auto; align-items:center; gap:6px; border-bottom:1px dashed var(--border); padding:6px 0; }
+    .row:last-child{ border-bottom:none; }
+    .kbd{ border:1px solid var(--border); padding:2px 6px; border-radius:6px; background: var(--panel-2); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .small{ font-size: 0.9rem; }
+    details summary{ cursor:pointer; }
+    .hidden{ display:none !important; }
+    .ok{ color: var(--good); }
+    .warnc{ color: var(--warn); }
+    .badc{ color: var(--bad); }
+    footer{ text-align:center; color: var(--muted); padding:30px 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Español Académico para Teoría Musical y Cancionística</h1>
+      <div class="sub">Aplicación autosuficiente para practicar léxico especializado, discurso académico, y producción oral y escrita en español sobre teoría musical y composición de canciones.</div>
+      <nav class="tabs" aria-label="Secciones">
+        <button class="active" data-section="curriculum">Currículo</button>
+        <button data-section="glossario">Glosario + Tarjetas</button>
+        <button data-section="quiz">Cuestionarios</button>
+        <button data-section="hablar">Hablar / Escuchar</button>
+        <button data-section="escribir">Escritura Académica</button>
+        <button data-section="herramientas">Herramientas Musicales</button>
+        <button data-section="ajustes">Ajustes</button>
+        <button data-section="acerca">Acerca de</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- CURRÍCULO -->
+    <section id="curriculum" class="panel">
+      <h2>Itinerario de Alto Nivel (C1–C2)</h2>
+      <p class="muted">Para un angloparlante con alta comprensión auditiva. Seleccione un módulo, active el modo de inmersión si desea interfaz completamente en español, y avance con actividades graduadas.</p>
+      <div class="grid three">
+        <div class="card">
+          <h3>1) Léxico y Definiciones</h3>
+          <ul>
+            <li>Terminología nuclear de <em>teoría musical</em>: funciones tonales, modos, cadencias, conducción de voces.</li>
+            <li>Retórica de la <em>cancionística</em>: métrica, rima, prosodia, imágenes poéticas.</li>
+            <li>Estilo académico: conectores, atenuación, nominalización.</li>
+          </ul>
+          <div class="chips"><span class="chip">Glosario</span><span class="chip">Tarjetas SRS</span><span class="chip">Lectura guiada</span></div>
+        </div>
+        <div class="card">
+          <h3>2) Producción Oral</h3>
+          <ul>
+            <li>Exposiciones breves sobre análisis armónico y formal.</li>
+            <li>Defensa oral de decisiones de composición y letras.</li>
+            <li>Feedback automático por cobertura léxica y fluidez.</li>
+          </ul>
+          <div class="chips"><span class="chip">TTS</span><span class="chip">ASR</span><span class="chip">Rubrica</span></div>
+        </div>
+        <div class="card">
+          <h3>3) Escritura Académica</h3>
+          <ul>
+            <li>Reseñas de obras, informes de análisis, memorias de proceso.</li>
+            <li>Plantillas de párrafo: tesis, desarrollo, evidencia sonora.</li>
+            <li>Métrica de estilo: densidad léxica, variación de conectores.</li>
+          </ul>
+          <div class="chips"><span class="chip">Editor</span><span class="chip">Métricas</span><span class="chip">Plantillas</span></div>
+        </div>
+      </div>
+      <details class="card">
+        <summary><strong>Objetivos de competencia</strong></summary>
+        <ul>
+          <li>Explicar con precisión <em>intercambio modal</em>, <em>enlace de voces</em>, <em>armonía extendida</em>, <em>métrica y rima</em> en español estándar culto.</li>
+          <li>Presentar y defender un análisis formal con terminología adecuada y organización discursiva clara.</li>
+          <li>Redactar textos académicos (100–600 palabras) con cohesión, recursos de atenuación y citas técnicas sin calcos innecesarios del inglés.</li>
+        </ul>
+      </details>
+    </section>
+
+    <!-- GLOSARIO + TARJETAS -->
+    <section id="glossario" class="panel hidden">
+      <div class="grid two">
+        <div>
+          <h2>Glosario Especializado</h2>
+          <div class="grid two">
+            <div>
+              <label for="search">Buscar término</label>
+              <input id="search" type="text" placeholder="p. ej., cadencia, dórico, prosodia" />
+            </div>
+            <div>
+              <label for="filterCat">Categoría</label>
+              <select id="filterCat"></select>
+            </div>
+          </div>
+          <div class="list" id="glossaryList" aria-live="polite"></div>
+        </div>
+        <div>
+          <h2>Tarjetas con repetición espaciada</h2>
+          <p class="muted small">Atajos: <span class="kbd">1</span> De nuevo · <span class="kbd">2</span> Bien · <span class="kbd">3</span> Fácil · <span class="kbd">F</span> Voltear</p>
+          <div class="card flashcard" id="flashcard" tabindex="0" role="button" aria-label="Tarjeta de estudio">
+            <div class="term" id="fcTerm">Seleccione tarjetas desde el glosario (icono ➕) o cargue todas.</div>
+            <div class="def" id="fcDef"></div>
+            <div class="muted small" id="fcExtra"></div>
+          </div>
+          <div class="chips" style="margin-top:8px">
+            <button class="btn" onclick="loadAllToSRS()">Cargar todas</button>
+            <button class="btn ghost" onclick="resetSRS()">Reiniciar progreso</button>
+            <span class="chip"><span id="srsCount">0</span> tarjetas</span>
+            <span class="chip">Caja <span id="boxIdx">–</span></span>
+          </div>
+          <div class="chips" style="margin-top:8px">
+            <button class="btn bad" onclick="grade(0)">1 De nuevo</button>
+            <button class="btn warn" onclick="grade(1)">2 Bien</button>
+            <button class="btn good" onclick="grade(2)">3 Fácil</button>
+            <button class="btn" onclick="toggleFlip()">Voltear (F)</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUESTIONARIOS -->
+    <section id="quiz" class="panel hidden">
+      <h2>Cuestionarios Generativos</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Configurar</h3>
+          <div class="grid two">
+            <div>
+              <label for="quizType">Tipo</label>
+              <select id="quizType">
+                <option value="es_en">ES → EN (definición en inglés)</option>
+                <option value="en_es">EN → ES (definición en español)</option>
+                <option value="cloze">Cloze (rellenar huecos)</option>
+              </select>
+            </div>
+            <div>
+              <label for="quizLen">Ítems</label>
+              <input id="quizLen" type="number" value="10" min="5" max="30" />
+            </div>
+          </div>
+          <div class="chips" style="margin-top:8px">
+            <button class="btn primary" onclick="startQuiz()">Iniciar</button>
+            <button class="btn ghost" onclick="stopQuiz()">Terminar</button>
+            <span class="chip">Puntuación: <span id="quizScore">0</span></span>
+          </div>
+        </div>
+        <div class="card" id="quizArea">
+          <div class="muted">Configure el cuestionario y presione <em>Iniciar</em>.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HABLAR / ESCUCHAR -->
+    <section id="hablar" class="panel hidden">
+      <h2>Práctica Oral (TTS + Reconocimiento de voz)</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Prompt</h3>
+          <p id="speakPrompt" class="muted">Pulse «Nuevo prompt» para generar un tema.</p>
+          <div class="chips">
+            <button class="btn" onclick="newSpeakingPrompt()">Nuevo prompt</button>
+            <button class="btn" onclick="speakText(document.getElementById('speakPrompt').innerText)">Leer en voz alta</button>
+            <button class="btn primary" onclick="startASR()">Grabar respuesta</button>
+            <button class="btn ghost" onclick="stopASR()">Detener</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Resultado</h3>
+          <div><strong>Transcripción:</strong></div>
+          <div id="asrOut" class="muted" style="min-height: 70px; white-space: pre-wrap;"></div>
+          <div class="chips" style="margin-top:8px">
+            <span class="chip">Cobertura léxica: <span id="lexCov">0%</span></span>
+            <span class="chip">Extensión: <span id="lenW">0</span> palabras</span>
+            <span class="chip">Fluidez (aprox.): <span id="flu">0</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <details>
+          <summary><strong>Rubrica orientativa</strong></summary>
+          <ul>
+            <li><strong>Cobertura léxica</strong>: aparición de 5–8 términos clave del prompt.</li>
+            <li><strong>Fluidez</strong>: tasa de palabras/segundo y continuidad (heurística local).</li>
+            <li><strong>Precisión</strong>: uso correcto de conectores, modo subjuntivo en hipótesis, registro académico.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <!-- ESCRITURA -->
+    <section id="escribir" class="panel hidden">
+      <h2>Escritura Académica sobre Música</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Generar encargo</h3>
+          <div class="grid two">
+            <div>
+              <label for="wType">Género</label>
+              <select id="wType">
+                <option value="informe">Informe de análisis armónico/formal</option>
+                <option value="reseña">Reseña crítica de obra</option>
+                <option value="memoria">Memoria de proceso de composición</option>
+                <option value="ensayo">Ensayo argumentativo breve</option>
+              </select>
+            </div>
+            <div>
+              <label for="wLen">Longitud objetivo (palabras)</label>
+              <input id="wLen" type="number" value="250" min="100" max="800" />
+            </div>
+          </div>
+          <button class="btn" style="margin-top:8px" onclick="newWritingPrompt()">Nuevo encargo</button>
+          <p class="muted" id="wPrompt">Seleccione un género y pulse «Nuevo encargo».</p>
+        </div>
+        <div class="card">
+          <h3>Editor</h3>
+          <textarea id="wText" placeholder="Escriba aquí…"></textarea>
+          <div class="chips" style="margin-top:8px">
+            <button class="btn primary" onclick="analyzeWriting()">Analizar</button>
+            <button class="btn" onclick="copyOut('wText')">Copiar</button>
+            <button class="btn ghost" onclick="downloadText()">Descargar .txt</button>
+          </div>
+          <div id="wReport" class="muted" style="margin-top:8px; white-space: pre-wrap;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Estilo académico: conectores útiles</h3>
+        <div id="connectors" class="chips"></div>
+      </div>
+    </section>
+
+    <!-- HERRAMIENTAS MUSICALES -->
+    <section id="herramientas" class="panel hidden">
+      <h2>Herramientas de apoyo musical</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Mapa funcional (numerales romanos → nombres de acordes)</h3>
+          <div class="grid two">
+            <div>
+              <label for="keySel">Tonalidad</label>
+              <select id="keySel"></select>
+            </div>
+            <div>
+              <label for="modeSel">Modo</label>
+              <select id="modeSel"><option value="M">Mayor</option><option value="m">Menor</option></select>
+            </div>
+          </div>
+          <div class="list" id="romanList"></div>
+        </div>
+        <div class="card">
+          <h3>Contador aproximado de sílabas (poesía española)</h3>
+          <textarea id="syllIn" placeholder="Pegue un verso o estrofa…"></textarea>
+          <div class="chips" style="margin-top:8px">
+            <button class="btn" onclick="countSyllables()">Contar</button>
+          </div>
+          <div id="syllOut" class="muted" style="white-space: pre-wrap; margin-top:8px"></div>
+          <p class="small muted">Nota: cálculo aproximado sin reglas completas de sinalefa y acentos finales; ajuste manual si es necesario.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AJUSTES -->
+    <section id="ajustes" class="panel hidden">
+      <h2>Ajustes</h2>
+      <div class="grid three">
+        <div class="card">
+          <h3>Interfaz</h3>
+          <div class="chips">
+            <button class="btn" onclick="toggleTheme()">Alternar tema</button>
+            <button class="btn" onclick="toggleImmersion()">Modo inmersión: <span id="immState">OFF</span></button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Voz de síntesis (TTS)</h3>
+          <div class="grid two">
+            <div>
+              <label for="voiceSel">Voz</label>
+              <select id="voiceSel"></select>
+            </div>
+            <div>
+              <label for="rateSel">Velocidad</label>
+              <input id="rateSel" type="number" min="0.5" max="1.5" step="0.1" value="0.95" />
+            </div>
+          </div>
+          <div class="chips" style="margin-top:8px">
+            <button class="btn" onclick="testVoice()">Probar</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Datos</h3>
+          <div class="chips">
+            <button class="btn" onclick="exportState()">Exportar progreso</button>
+            <input type="file" id="stateFile" accept="application/json" />
+            <button class="btn" onclick="importState()">Importar</button>
+            <button class="btn bad" onclick="hardReset()">Borrar todo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACERCA DE -->
+    <section id="acerca" class="panel hidden">
+      <h2>Acerca de esta app</h2>
+      <p>Aplicación estática de una sola página (sin librerías externas) diseñada para apoyar el aprendizaje de español académico aplicado a teoría musical y composición de canciones. Incluye glosario especializado, SRS, cuestionarios generativos, práctica oral con TTS/ASR del navegador, herramientas para análisis armónico y poética, y utilidades para escritura.</p>
+      <p class="muted small">Privacidad: todos los datos se guardan en <code>localStorage</code> del navegador. La síntesis y el reconocimiento de voz dependen del motor del propio navegador/sistema.</p>
+    </section>
+
+    <footer>
+      <div>© 2025 — Uso educativo. Autor: «App autónoma de español académico para música»</div>
+      <div class="small">Powered by GPT-5</div>
+    </footer>
+  </main>
+
+  <script>
+    /**********************
+     * Datos iniciales
+     **********************/
+    const CATEGORIES = {
+      "Teoría": "Teoría musical",
+      "Armonía": "Armonía y función",
+      "Ritmo": "Ritmo y métrica",
+      "Forma": "Forma y análisis",
+      "Poética": "Poética y letra",
+      "Estilo": "Estilo académico"
+    };
+
+    const GLOSSARY = [
+      // === Teoría
+      {cat:"Teoría", term:"modo jónico", def_es:"Modo mayor natural (escala mayor).", def_en:"Ionian mode (major scale).", ex:"En el modo jónico, el grado I es la tónica y el VII suele actuar como sensible."},
+      {cat:"Teoría", term:"modo dórico", def_es:"Modo menor con sexto grado mayor.", def_en:"Minor mode with raised 6th.", ex:"El dórico favorece melodías con color antiguo y estabilidad modal."},
+      {cat:"Teoría", term:"modo frigio", def_es:"Modo menor con segundo grado bemol.", def_en:"Minor mode with flat 2.", ex:"El frigio intensifica el color de tensión inicial por el ♭2 respecto a la tónica."},
+      {cat:"Teoría", term:"modo lidio", def_es:"Modo mayor con cuarto grado aumentado.", def_en:"Major mode with raised 4.", ex:"El #4 del lidio sugiere flotación y ausencia de atracción a la subdominante."},
+      {cat:"Teoría", term:"modo mixolidio", def_es:"Modo mayor con séptimo grado menor.", def_en:"Major mode with flat 7.", ex:"En el mixolidio, la dominante carece de sensible, creando cadencias más abiertas."},
+      {cat:"Teoría", term:"modo eólico", def_es:"Modo menor natural.", def_en:"Aeolian mode (natural minor).", ex:"El eólico es frecuente en cancionística por su melancolía natural."},
+      {cat:"Teoría", term:"modo locrio", def_es:"Modo con quinta disminuida; inestable para tónica.", def_en:"Mode with diminished 5th; unstable for tonic.", ex:"El locrio rara vez se emplea como centro tonal prolongado."},
+      // === Armonía
+      {cat:"Armonía", term:"función tonal", def_es:"Rol de un acorde respecto al centro: tónica, subdominante, dominante.", def_en:"Chord role relative to tonic: tonic, subdominant, dominant.", ex:"El ii7 funciona como subdominante preparatoria."},
+      {cat:"Armonía", term:"enlace de voces", def_es:"Movimiento controlado de cada voz entre acordes.", def_en:"Voice-leading between chords.", ex:"Evite quintas/octavas paralelas en textura a cuatro voces."},
+      {cat:"Armonía", term:"intercambio modal", def_es:"Préstamo de acordes de un modo paralelo.", def_en:"Modal interchange: borrowing chords from a parallel mode.", ex:"En Do mayor, ♭VI y iv provienen del modo eólico paralelo."},
+      {cat:"Armonía", term:"cadencia auténtica", def_es:"Progresión dominante→tónica (V–I o V7–I).", def_en:"Authentic cadence V–I.", ex:"La cadencia auténtica perfecta exige I en posición fundamental y soprano en la tónica."},
+      {cat:"Armonía", term:"semicadencia", def_es:"Pausa en V (dominante).", def_en:"Half cadence ending on V.", ex:"La semicadencia suspende la frase creando expectativa."},
+      {cat:"Armonía", term:"cadencia plagal", def_es:"Subdominante→tónica (IV–I).", def_en:"Plagal cadence IV–I.", ex:"En repertorio coral, IV–I sugiere cierre suave y afirmativo."},
+      {cat:"Armonía", term:"acorde de séptima de dominante", def_es:"Acorde V7 con tritono interno que resuelve a I.", def_en:"Dominant seventh chord V7.", ex:"El tritono 3–7 resuelve por grado conjunto a 1–3 de la tónica."},
+      {cat:"Armonía", term:"acorde semidisminuido", def_es:"Tríada disminuida con séptima menor (ø7).", def_en:"Half-diminished seventh chord (ø7).", ex:"El iiø7 en menor funciona a menudo como subdominante pre-dominante."},
+      {cat:"Armonía", term:"nota de paso", def_es:"Nota no acorde entre dos notas de acorde por grado conjunto.", def_en:"Passing tone.", ex:"La soprano emplea una nota de paso ascendente entre 1 y 3."},
+      {cat:"Armonía", term:"retardo", def_es:"Prolongación de una nota que crea disonancia al entrar el acorde siguiente y resuelve por grado conjunto.", def_en:"Suspension.", ex:"El 4–3 sobre V resuelve descendiendo a la tercera del acorde."},
+      {cat:"Armonía", term:"anticipación", def_es:"Nota que se adelanta al acorde siguiente.", def_en:"Anticipation.", ex:"Una anticipación de la tónica prepara el cierre cadencial."},
+      {cat:"Armonía", term:"armonía extendida", def_es:"Acordes con tensiones 9, 11, 13.", def_en:"Extended harmony (9ths, 11ths, 13ths).", ex:"Una tónica maj9 añade brillo sin cambiar la función."},
+      {cat:"Armonía", term:"sostenido y bemol", def_es:"Alteraciones ♯ y ♭ que elevan o bajan un semitono.", def_en:"Accidentals sharp/flat raise or lower by a semitone.", ex:"El ♭2 frigio define el color modal."},
+      // === Ritmo
+      {cat:"Ritmo", term:"compás", def_es:"Unidad métrica que agrupa pulsos fuertes y débiles.", def_en:"Meter grouping of strong/weak beats.", ex:"4/4 organiza dos acentos internos (1 y 3)."},
+      {cat:"Ritmo", term:"síncopa", def_es:"Énfasis en parte débil del pulso.", def_en:"Syncopation.", ex:"La síncopa disloca la acentuación regular del compás."},
+      {cat:"Ritmo", term:"contratiempo", def_es:"Ataque en el tiempo débil con silencio en el fuerte.", def_en:"Off-beat accent.", ex:"El contratiempo refuerza la sensación de impulso."},
+      {cat:"Ritmo", term:"hemiolia", def_es:"Superposición 3:2 en un contexto binario/ternario.", def_en:"3:2 cross‑rhythm (hemiola).", ex:"La hemiolia reinterpreta acentos al final de frases."},
+      {cat:"Ritmo", term:"polirritmia", def_es:"Coexistencia de patrones con subdivisiones distintas.", def_en:"Polyrhythm.", ex:"Patrón 3 contra 4 en capas instrumentales."},
+      // === Forma
+      {cat:"Forma", term:"forma binaria", def_es:"Estructura en dos secciones contrastantes (A–B).", def_en:"Binary form (A–B).", ex:"La danza barroca usa con frecuencia forma binaria con repetición."},
+      {cat:"Forma", term:"forma ternaria", def_es:"Estructura A–B–A.", def_en:"Ternary form (A–B–A).", ex:"El regreso de A confirma la unidad formal."},
+      {cat:"Forma", term:"puente", def_es:"Sección de transición que conecta materiales o módulos.", def_en:"Bridge/transition section.", ex:"El puente modula a la dominante antes del retorno."},
+      {cat:"Forma", term:"coda", def_es:"Sección final de refuerzo o conclusión.", def_en:"Coda.", ex:"La coda reafirma la tónica tras la cadencia final."},
+      // === Poética y letra
+      {cat:"Poética", term:"prosodia", def_es:"Ajuste entre acento musical y acento lingüístico.", def_en:"Prosody: alignment of musical and linguistic stress.", ex:"La prosodia adecuada evita acentos musicales sobre sílabas átonas."},
+      {cat:"Poética", term:"métrica (versificación)", def_es:"Conteo de sílabas por verso según reglas del español.", def_en:"Spanish versification metrics.", ex:"El octosílabo es común en canción narrativa."},
+      {cat:"Poética", term:"rima asonante", def_es:"Coincidencia de vocales desde la última vocal acentuada.", def_en:"Assonant rhyme.", ex:"Canto/llano presentan asonancia en 'a‑o'."},
+      {cat:"Poética", term:"rima consonante", def_es:"Coincidencia de consonantes y vocales desde la última tónica.", def_en:"Consonant rhyme.", ex:"Canto/anto riman en consonante perfecta."},
+      {cat:"Poética", term:"sinalefa", def_es:"Unión en una sílaba métrica de vocal final e inicial entre palabras contiguas.", def_en:"Synalepha: merging adjacent vowels across words.", ex:"'De_otra' suele contarse como una sílaba por sinalefa."},
+      {cat:"Poética", term:"licencia poética", def_es:"Alteración deliberada de reglas métricas por efecto expresivo.", def_en:"Poetic license.", ex:"La diéresis separa diptongo para ajustar métrica."},
+      {cat:"Poética", term:"imágenes (imaginería)", def_es:"Lenguaje sensorial/metafórico que evoca percepciones.", def_en:"Imagery.", ex:"La metáfora del 'mar de quinta justa' intensifica el motivo."},
+      // === Estilo académico
+      {cat:"Estilo", term:"atenuación (hedging)", def_es:"Estrategias para moderar afirmaciones y evitar categóricos excesivos.", def_en:"Hedging to moderate claims.", ex:"'Los datos sugieren que…' en lugar de 'Demuestra que…'"},
+      {cat:"Estilo", term:"discursivos (marcadores)", def_es:"Conectores que articulan la progresión textual.", def_en:"Discourse markers.", ex:"'Por consiguiente', 'en cambio', 'a fin de cuentas'."},
+      {cat:"Estilo", term:"nominalización", def_es:"Conversión de verbos/adjetivos en sustantivos para densidad léxica.", def_en:"Nominalization for denser academic style.", ex:"'La modulación a Mi' frente a 'Modula a Mi'."},
+      {cat:"Estilo", term:"registro culto", def_es:"Uso de léxico técnico y sintaxis formal.", def_en:"Formal register.", ex:"Evitar coloquialismos: 'pegar' → 'concordar', 'rollo' → 'carácter'."},
+      {cat:"Estilo", term:"paráfrasis", def_es:"Reformulación fiel con estructura alternativa.", def_en:"Paraphrase.", ex:"Reescribir evitando calcos directos del inglés."},
+      {cat:"Estilo", term:"cita técnica", def_es:"Referencia a compases, motivos, grados y ejemplos sonoros.", def_en:"Technical citation to bars, motives, degrees.", ex:"'Véase c. 12–16: prolongación de IV por 6–4.'"}
+    ];
+
+    const CONNECTORS = {
+      Organizadores: ["En primer lugar", "A continuación", "Por último", "En síntesis"],
+      Causa: ["debido a", "a causa de", "puesto que", "dado que"],
+      Consecuencia: ["por consiguiente", "por lo tanto", "en consecuencia"],
+      Contraste: ["sin embargo", "no obstante", "en cambio", "aunque"],
+      Ejemplificación: ["por ejemplo", "en particular", "como se observa en"],
+      Atenuación: ["es plausible que", "cabría pensar que", "los datos sugieren que"],
+      Finalidad: ["con el fin de", "a fin de", "para que (subj.)"],
+      Adición: ["además", "igualmente", "de igual modo"]
+    };
+
+    const SPEAK_PROMPTS = [
+      {topic:"función tonal", keys:["tónica","dominante","subdominante","cadencia","pre-dominante"], text:"Explique la diferencia entre función de tónica, subdominante y dominante en una frase de ocho compases, e indique cómo seleccionaría acordes de pre‑dominante antes de la cadencia."},
+      {topic:"intercambio modal", keys:["paralelo","♭VI","iv","color","prestado"], text:"Defina intercambio modal y proponga dos ejemplos en Do mayor que incorporen ♭VI e iv, justificando el efecto expresivo."},
+      {topic:"conducción de voces", keys:["movimiento conjunto","tritono","resolución","paralelas","línea"], text:"Describa tres principios de conducción de voces a cuatro partes y analice cómo resuelve el tritono en V7 hacia I."},
+      {topic:"poética y rima", keys:["asonante","consonante","acento","octosílabo","sinalefa"], text:"Compare rima asonante y consonante e indique cómo cuidaría la prosodia en un verso octosílabo con sinalefa."},
+      {topic:"modulación", keys:["pivote","diatónico","dominante secundaria","cadencia","preparación"], text:"Explique un procedimiento de modulación por acorde pivote hacia la dominante y discuta la preparación cadencial."}
+    ];
+
+    const WRITING_PROMPTS = {
+      informe: [
+        "Analice la forma y la armonía de una pieza de 16–32 compases compuesta por usted. Describa funciones, cadencias y posibles intercambios modales empleados.",
+        "Redacte un informe sobre la textura y la conducción de voces en un coral a cuatro partes que usted haya escrito, con referencias a compases y voces específicas."
+      ],
+      reseña: [
+        "Escriba una reseña crítica de una obra contemporánea destacando su organización formal y tratamiento tímbrico. Emplee conectores de contraste y atenuación.",
+        "Evalúe la eficacia de la poética y la prosodia en una canción de su autoría sin citar texto ajeno; describa imágenes, métrica y rima."
+      ],
+      memoria: [
+        "Elabore una memoria de proceso de una canción: objetivos expresivos, decisiones armónicas, y revisión de borradores con criterios académicos.",
+        "Describa cómo iteró sobre métricas y rimas para mejorar la inteligibilidad sin sacrificar musicalidad, justificando cambios."
+      ],
+      ensayo: [
+        "Defienda o cuestione la utilidad del intercambio modal como recurso principal en música popular académica, con ejemplos propios.",
+        "Sustente la tesis de que la prosodia condiciona la armonía en música con texto, apoyándose en análisis originales."
+      ]
+    };
+
+    // Keys and scalic spellings (both solfege and letter names)
+    const KEY_MAP = {
+      "Do": ["Do","Re","Mi","Fa","Sol","La","Si"],
+      "Do#": ["Do#","Re#","Mi#","Fa#","Sol#","La#","Si#"],
+      "Re♭": ["Re♭","Mi♭","Fa","Sol♭","La♭","Si♭","Do"],
+      "Re": ["Re","Mi","Fa#","Sol","La","Si","Do#"],
+      "Mi♭": ["Mi♭","Fa","Sol","La♭","Si♭","Do","Re"],
+      "Mi": ["Mi","Fa#","Sol#","La","Si","Do#","Re#"],
+      "Fa": ["Fa","Sol","La","Si♭","Do","Re","Mi"],
+      "Fa#": ["Fa#","Sol#","La#","Si","Do#","Re#","Mi#"],
+      "Sol": ["Sol","La","Si","Do","Re","Mi","Fa#"],
+      "La♭": ["La♭","Si♭","Do","Re♭","Mi♭","Fa","Sol"],
+      "La": ["La","Si","Do#","Re","Mi","Fa#","Sol#"],
+      "Si♭": ["Si♭","Do","Re","Mi♭","Fa","Sol","La"],
+      "Si": ["Si","Do#","Re#","Mi","Fa#","Sol#","La#"]
+    };
+
+    const DEG_FUN = [
+      {deg:"I", fun:"tónica"}, {deg:"ii", fun:"subdominante"}, {deg:"iii", fun:"tónica"}, {deg:"IV", fun:"subdominante"}, {deg:"V", fun:"dominante"}, {deg:"vi", fun:"tónica"}, {deg:"vii°", fun:"dominante"}
+    ];
+
+    /**********************
+     * Estado y utilidades
+     **********************/
+    const el = id => document.getElementById(id);
+    const qs = (sel, ctx=document) => ctx.querySelector(sel);
+    const qsa = (sel, ctx=document) => [...ctx.querySelectorAll(sel)];
+
+    const STATE = {
+      immersion: false,
+      theme: 'dark',
+      srs: { boxes: [[],[],[],[],[]], current: null, flipped:false },
+      quiz: { running: false, score:0, idx:0, items:[] },
+      asr: { rec:null, listening:false, t0:null },
+      tts: { voice:null, rate:0.95 },
+    };
+
+    function save(){ localStorage.setItem('aesmt_state', JSON.stringify(STATE)); }
+    function load(){ const s = localStorage.getItem('aesmt_state'); if(s){ try{ const o=JSON.parse(s); Object.assign(STATE, o); }catch(e){} } }
+
+    function showSection(id){ qsa('nav.tabs button').forEach(b=>{ b.classList.toggle('active', b.dataset.section===id); }); qsa('main section.panel').forEach(s=>{ s.classList.toggle('hidden', s.id!==id); }) }
+
+    qsa('nav.tabs button').forEach(b=> b.addEventListener('click', ()=> showSection(b.dataset.section)) );
+
+    function toggleTheme(){ const cur = document.documentElement.getAttribute('data-theme'); document.documentElement.setAttribute('data-theme', cur==='light'? 'dark':'light'); STATE.theme = (cur==='light'? 'dark':'light'); save(); }
+    function applyTheme(){ document.documentElement.setAttribute('data-theme', STATE.theme==='light'? 'light':'dark'); }
+
+    function toggleImmersion(){ STATE.immersion = !STATE.immersion; el('immState').textContent = STATE.immersion? 'ON':'OFF'; save(); }
+
+    function copyOut(id){ const t = el(id); t.select(); document.execCommand('copy'); }
+
+    function downloadText(){ const blob = new Blob([el('wText').value], {type:'text/plain'}); const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='texto-espanol-musica.txt'; a.click(); }
+
+    function exportState(){ const blob = new Blob([JSON.stringify(STATE, null, 2)], {type:'application/json'}); const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='progreso-espanol-musica.json'; a.click(); }
+    function importState(){ const f = el('stateFile').files[0]; if(!f) return alert('Seleccione un archivo .json'); const r=new FileReader(); r.onload=()=>{ try{ const o=JSON.parse(r.result); Object.assign(STATE, o); save(); alert('Progreso importado.'); renderAll(); }catch(e){ alert('Archivo no válido.'); } }; r.readAsText(f); }
+    function hardReset(){ if(confirm('Esto borrará todo el progreso. ¿Continuar?')){ localStorage.removeItem('aesmt_state'); location.reload(); } }
+
+    /**********************
+     * Glosario + SRS
+     **********************/
+    function initGlossary(){
+      const sel = el('filterCat'); sel.innerHTML = '<option value="">Todas</option>' + Object.entries(CATEGORIES).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');
+      el('search').addEventListener('input', renderGlossary);
+      sel.addEventListener('change', renderGlossary);
+      renderGlossary();
+    }
+
+    function renderGlossary(){
+      const q = el('search').value.trim().toLowerCase();
+      const cat = el('filterCat').value;
+      const list = el('glossaryList');
+      list.innerHTML = '';
+      let items = GLOSSARY.filter(g => (!cat || g.cat===cat) && (!q || [g.term,g.def_es,g.def_en,g.ex].join(' ').toLowerCase().includes(q)));
+      if(items.length===0){ list.innerHTML = '<div class="muted">Sin resultados.</div>'; return; }
+      for(const g of items){
+        const row = document.createElement('div'); row.className='row';
+        const left = document.createElement('div');
+        left.innerHTML = `<strong>${g.term}</strong> <span class="chip">${CATEGORIES[g.cat]}</span><div class="small muted">${g.def_es}</div>`;
+        const right = document.createElement('div');
+        const btn = document.createElement('button'); btn.className='btn'; btn.textContent='➕ a tarjetas'; btn.onclick = ()=> addToSRS(g);
+        right.appendChild(btn);
+        row.appendChild(left); row.appendChild(right);
+        list.appendChild(row);
+      }
+    }
+
+    function addToSRS(g){
+      // Avoid duplicates across boxes
+      const all = STATE.srs.boxes.flat();
+      if(!all.find(x => x.term===g.term)){
+        STATE.srs.boxes[0].push({...g});
+        save();
+        updateSRSCount();
+        if(!STATE.srs.current) nextCard();
+      }
+    }
+
+    function loadAllToSRS(){
+      GLOSSARY.forEach(addToSRS);
+    }
+
+    function resetSRS(){ STATE.srs = { boxes:[[],[],[],[],[]], current:null, flipped:false }; save(); updateSRSCount(); el('fcTerm').textContent='Seleccione tarjetas desde el glosario (icono ➕) o cargue todas.'; el('fcDef').textContent=''; el('fcExtra').textContent=''; el('boxIdx').textContent='–'; }
+
+    function updateSRSCount(){ el('srsCount').textContent = STATE.srs.boxes.reduce((a,b)=>a+b.length,0); }
+
+    function nextCard(){
+      // find lowest non-empty box
+      for(let i=0;i<STATE.srs.boxes.length;i++){
+        if(STATE.srs.boxes[i].length>0){
+          const c = STATE.srs.boxes[i][0];
+          STATE.srs.current = {box:i, idx:0, card:c};
+          STATE.srs.flipped = false;
+          renderCard();
+          return;
+        }
+      }
+      STATE.srs.current = null; el('fcTerm').textContent='No hay tarjetas cargadas.'; el('fcDef').textContent=''; el('fcExtra').textContent=''; el('boxIdx').textContent='–';
+    }
+
+    function renderCard(){ const {card,box} = STATE.srs.current; el('fcTerm').textContent = card.term; el('fcDef').textContent = STATE.srs.flipped? card.def_es : '(pulse Voltear o F)'; el('fcExtra').textContent = STATE.srs.flipped? `EN: ${card.def_en}\nEj.: ${card.ex}`: ''; el('boxIdx').textContent = (box+1); }
+    function toggleFlip(){ if(!STATE.srs.current) return; STATE.srs.flipped = !STATE.srs.flipped; renderCard(); }
+
+    function grade(g){
+      if(!STATE.srs.current) return;
+      const {box, idx, card} = STATE.srs.current;
+      // remove from current box
+      STATE.srs.boxes[box].splice(idx,1);
+      let nb = box;
+      if(g===0) nb = 0; // Again → Box 1
+      else if(g===1) nb = Math.min(STATE.srs.boxes.length-1, box+1);
+      else if(g===2) nb = Math.min(STATE.srs.boxes.length-1, box+2);
+      STATE.srs.boxes[nb].push(card);
+      save();
+      updateSRSCount();
+      nextCard();
+    }
+
+    document.addEventListener('keydown', (e)=>{
+      if(qs('#glossario').classList.contains('hidden')) return;
+      if(!STATE.srs.current) return;
+      if(e.key==='f' || e.key==='F') toggleFlip();
+      if(e.key==='1') grade(0);
+      if(e.key==='2') grade(1);
+      if(e.key==='3') grade(2);
+    });
+
+    el('flashcard').addEventListener('click', toggleFlip);
+
+    /**********************
+     * Quiz
+     **********************/
+    function startQuiz(){
+      const type = el('quizType').value; const n = Math.max(5, Math.min(30, parseInt(el('quizLen').value)||10));
+      const pool = [...GLOSSARY];
+      const items = [];
+      for(let i=0;i<n;i++){
+        const g = pool[Math.floor(Math.random()*pool.length)];
+        const options = new Set([g.term]);
+        while(options.size<4){ const d = pool[Math.floor(Math.random()*pool.length)].term; options.add(d); }
+        const opts = [...options].sort(()=>Math.random()-0.5);
+        items.push({g, opts, type});
+      }
+      STATE.quiz = { running:true, score:0, idx:0, items };
+      el('quizScore').textContent = 0;
+      renderQuiz();
+    }
+    function stopQuiz(){ STATE.quiz.running=false; el('quizArea').innerHTML = '<div class="muted">Cuestionario finalizado.</div>'; }
+
+    function renderQuiz(){
+      const qa = el('quizArea');
+      const Q = STATE.quiz;
+      if(!Q.running){ qa.innerHTML = '<div class="muted">Configure el cuestionario y presione Iniciar.</div>'; return; }
+      const {g, opts, type} = Q.items[Q.idx];
+      let stem = '', answers = [];
+      if(type==='es_en'){
+        stem = `<strong>${g.term}</strong><div class="muted">Seleccione la mejor definición en inglés.</div>`;
+        answers = opts.map(o=>{ const gg = GLOSSARY.find(x=>x.term===o); return {label: gg.def_en, val: o}; });
+      } else if(type==='en_es'){
+        stem = `<strong>${g.def_en}</strong><div class="muted">Seleccione el término en español.</div>`;
+        answers = opts.map(o=>({label:o, val:o}));
+      } else { // cloze
+        const s = g.ex.replace(/\b(\w{4,})\b/, '_____');
+        stem = `<strong>${s}</strong><div class="muted">¿Qué palabra técnica falta? (respuesta libre)</div>`;
+        answers = null;
+      }
+      let html = `<div class="small muted">Ítem ${Q.idx+1} de ${Q.items.length}</div><div style="margin:6px 0 12px">${stem}</div>`;
+      if(answers){
+        html += '<div class="grid">' + answers.map((a,i)=>`<button class="btn" onclick="answer(${i})" data-val="${a.val}">${a.label}</button>`).join('') + '</div>';
+      }else{
+        html += '<input id="clozeIn" type="text" placeholder="Escriba término…" /> <button class="btn" onclick="answerCloze()">Responder</button>';
+      }
+      qa.innerHTML = html;
+    }
+
+    function answer(i){
+      const Q = STATE.quiz; const cur = Q.items[Q.idx]; const val = qsa('#quizArea button')[i].dataset.val; const ok = (val===cur.g.term);
+      if(ok) Q.score += 1; el('quizScore').textContent = Q.score;
+      feedback(ok);
+      nextQ();
+    }
+    function answerCloze(){ const Q=STATE.quiz; const cur=Q.items[Q.idx]; const val = el('clozeIn').value.trim().toLowerCase(); const ok = cur.g.term.toLowerCase().includes(val) && val.length>=3; if(ok) Q.score+=1; el('quizScore').textContent=Q.score; feedback(ok); nextQ(); }
+    function feedback(ok){ const qa=el('quizArea'); const msg = ok? '<span class="ok">Correcto</span>' : '<span class="badc">Incorrecto</span>'; const div=document.createElement('div'); div.className='muted'; div.innerHTML = msg; qa.appendChild(div); }
+    function nextQ(){ const Q=STATE.quiz; Q.idx += 1; if(Q.idx>=Q.items.length){ Q.running=false; el('quizArea').innerHTML = `<div class="kpi">Puntuación final: ${Q.score}/${Q.items.length}</div>`; } else { setTimeout(renderQuiz, 300); } }
+
+    /**********************
+     * Hablar / Escuchar (TTS + ASR)
+     **********************/
+    function newSpeakingPrompt(){ const p = SPEAK_PROMPTS[Math.floor(Math.random()*SPEAK_PROMPTS.length)]; el('speakPrompt').textContent = p.text; el('lexCov').textContent='0%'; el('lenW').textContent='0'; el('flu').textContent='0'; speakText(p.text); }
+
+    function speakText(t){ try{ const u = new SpeechSynthesisUtterance(t); const v = getVoice(); u.voice = v; u.rate = STATE.tts.rate || 0.95; u.lang = (v && v.lang) || 'es-ES'; speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){ alert('TTS no disponible en este navegador.'); } }
+
+    function populateVoices(){ const sel=el('voiceSel'); const voices = speechSynthesis.getVoices().filter(v=>/^es(-|$)/i.test(v.lang)); sel.innerHTML = voices.map((v,i)=>`<option value="${i}">${v.name} — ${v.lang}</option>`).join(''); if(voices.length){ sel.selectedIndex = 0; STATE.tts.voice = voices[0].name; } }
+    function getVoice(){ const voices = speechSynthesis.getVoices().filter(v=>/^es(-|$)/i.test(v.lang)); const sel=el('voiceSel'); const idx = sel.selectedIndex>=0? sel.selectedIndex:0; return voices[idx] || voices[0]; }
+    function testVoice(){ speakText('Prueba de síntesis en español para teoría musical.'); }
+
+     /**********************
+      * Hablar / Escuchar (ASR)
+      **********************/
+     function normText(s){
+       try{
+         return (s||'').toLowerCase()
+           .normalize('NFD').replace(/\p{Diacritic}/gu,'')
+           .replace(/[^\p{L}\s]/gu,'').replace(/\s+/g,' ').trim();
+       }catch(e){
+         return (s||'').toLowerCase().replace(/[^a-z\s]/g,'').replace(/\s+/g,' ').trim();
+       }
+     }
+
+     function currentPrompt(){
+       const txt = el('speakPrompt').innerText.trim();
+       return SPEAK_PROMPTS.find(p=>p.text===txt) || null;
+     }
+
+     function startASR(){
+       const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+       if(!SR) return alert('Reconocimiento de voz no disponible en este navegador.');
+       if(STATE.asr.listening) return;
+       const rec = new SR();
+       rec.lang = 'es-ES';
+       rec.interimResults = true;
+       rec.continuous = true;
+       STATE.asr.rec = rec;
+       STATE.asr.listening = true;
+       STATE.asr.t0 = Date.now();
+       el('asrOut').textContent = '';
+
+       rec.onresult = (e)=>{
+         const txt = Array.from(e.results).map(r=>r[0].transcript).join(' ');
+         el('asrOut').textContent = txt;
+
+         const w = txt.trim().split(/\s+/).filter(Boolean).length;
+         el('lenW').textContent = w;
+
+         const dt = (Date.now() - STATE.asr.t0)/1000;
+         el('flu').textContent = dt>0 ? (w/Math.max(dt,1)).toFixed(2) : '0';
+
+         const P = currentPrompt();
+         if(P && Array.isArray(P.keys) && P.keys.length){
+           const base = normText(txt);
+           const hits = P.keys.filter(k => base.includes(normText(k))).length;
+           const cov = Math.round(100 * hits / P.keys.length);
+           el('lexCov').textContent = `${cov}%`;
+         }
+       };
+       rec.onend = ()=>{ STATE.asr.listening=false; };
+       try{ rec.start(); }catch(e){ STATE.asr.listening=false; }
+     }
+
+     function stopASR(){
+       try{ STATE.asr.rec && STATE.asr.rec.stop(); }catch(e){}
+       STATE.asr.listening = false;
+     }
+
+     /**********************
+      * Escritura
+      **********************/
+     function newWritingPrompt(){
+       const t = el('wType').value;
+       const pool = WRITING_PROMPTS[t] || [];
+       const pick = pool[Math.floor(Math.random()*pool.length)] || 'Describa brevemente un aspecto de su análisis.';
+       el('wPrompt').textContent = `${pick} (≈${el('wLen').value} palabras)`;
+     }
+
+     function analyzeWriting(){
+       const text = el('wText').value || '';
+       const tokens = text.trim().split(/\s+/).filter(Boolean);
+       const len = tokens.length;
+
+       const long = tokens.filter(w => (w.replace(/[^\p{L}]/gu,'').length>=6));
+       const density = len ? Math.round(100*long.length/len) : 0;
+
+       const allConns = Object.values(CONNECTORS).flat();
+       const used = new Set(allConns.filter(c => text.toLowerCase().includes(c.toLowerCase())));
+       const report = [
+         `Palabras: ${len}`,
+         `Densidad léxica (≈ ≥6 letras): ${density}%`,
+         `Conectores usados: ${used.size} de ${allConns.length}`,
+         `Ejemplos: ${[...used].slice(0,10).join(', ') || '—'}`
+       ].join('\n');
+
+       el('wReport').textContent = report;
+     }
+
+     /**********************
+      * Conectores (chips)
+      **********************/
+     function renderConnectorsChips(){
+       const c = el('connectors'); c.innerHTML = '';
+       Object.entries(CONNECTORS).forEach(([cat, arr])=>{
+         arr.forEach(txt=>{
+           const span = document.createElement('span');
+           span.className = 'chip';
+           span.title = cat;
+           span.textContent = txt;
+           c.appendChild(span);
+         });
+       });
+     }
+
+     /**********************
+      * Mapa funcional (Romanos → Acordes)
+      **********************/
+     function fillKeySelect(){
+       const sel = el('keySel');
+       sel.innerHTML = Object.keys(KEY_MAP).map(k=>`<option value="${k}">${k}</option>`).join('');
+       if(!sel.value) sel.value = 'Do';
+     }
+
+     function buildScale(tonic, mode){
+       // Mayor: usar mapeo directo; Menor: modo eólico relativo (vi del mayor)
+       if(mode==='M') return KEY_MAP[tonic] || KEY_MAP['Do'];
+       // Encontrar mayor cuyo VI sea la tónica seleccionada
+       const entry = Object.entries(KEY_MAP).find(([K, scale])=> scale[5]===tonic);
+       const base = entry ? entry[1] : (KEY_MAP[tonic] || KEY_MAP['Do']);
+       return [base[5], base[6], base[0], base[1], base[2], base[3], base[4]]; // eólico
+     }
+
+     const QUAL_MAJ = ['', 'm', 'm', '', '', 'm', '°'];            // I ii iii IV V vi vii°
+     const QUAL_MIN = ['m', '°', '', 'm', 'm', '', ''];             // i ii° III iv v VI VII
+     const ROM_MAJ  = ['I','ii','iii','IV','V','vi','vii°'];
+     const ROM_MIN  = ['i','ii°','III','iv','v','VI','VII'];
+
+     function renderRomanList(){
+       const key = el('keySel').value;
+       const mode = el('modeSel').value; // 'M' | 'm'
+       const scale = buildScale(key, mode);
+       const list = el('romanList'); list.innerHTML = '';
+
+       const romans = (mode==='M') ? ROM_MAJ : ROM_MIN;
+       const quals  = (mode==='M') ? QUAL_MAJ : QUAL_MIN;
+
+       for(let i=0;i<7;i++){
+         const chord = scale[i] + (quals[i] ? ` ${quals[i]}` : '');
+         const row = document.createElement('div'); row.className='row';
+         row.innerHTML = `<div><strong>${romans[i]}</strong> — ${chord}</div><div class="muted small">${DEG_FUN[i].fun}</div>`;
+         list.appendChild(row);
+       }
+     }
+
+     el('keySel').addEventListener('change', renderRomanList);
+     el('modeSel').addEventListener('change', renderRomanList);
+
+     /**********************
+      * Sílaba (poesía)
+      **********************/
+     function countSyllables(){
+       const text = (el('syllIn').value || '').trim();
+       if(!text){ el('syllOut').textContent = '—'; return; }
+       const lines = text.split(/\r?\n/);
+       const out = lines.map(line=>{
+         let s = line.toLowerCase().trim();
+         // Sinalefa simple: eliminar espacios entre vocales
+         s = s.replace(/([aeiouáéíóúü])\s+(?=[aeiouáéíóúüh])/g, '$1');
+         const groups = s.match(/[aeiouáéíóúü]+/g) || [];
+         return `${line}\n→ ${groups.length} sílabas`;
+       }).join('\n\n');
+       el('syllOut').textContent = out;
+     }
+
+     /**********************
+      * Render/Init
+      **********************/
+     function renderAll(){
+       applyTheme();
+       initGlossary();
+       updateSRSCount();
+       renderConnectorsChips();
+       fillKeySelect();
+       renderRomanList();
+       populateVoices();
+       el('immState').textContent = STATE.immersion ? 'ON' : 'OFF';
+     }
+
+     // Bind non-inline events that need state syncing
+     el('rateSel').addEventListener('change', e=>{ STATE.tts.rate = Number(e.target.value)||0.95; save(); });
+     el('voiceSel').addEventListener('change', ()=>{ const v = getVoice(); STATE.tts.voice = v?.name || null; save(); });
+
+     // Voices availability is async
+     if('speechSynthesis' in window){
+       try{ speechSynthesis.onvoiceschanged = ()=> populateVoices(); }catch(e){}
+     }
+
+     // Boot
+     (function init(){
+       load();
+       renderAll();
+     })();
+   </script>
+ </body>
+</html>

@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Academic Spanish Trainer — Computer Science & Mathematics (Single File)</title>
+<meta name="description" content="Single‑file offline app to practice Academic Spanish for Computer Science and Mathematics: lexicon, phrases, dialogue role‑play, flashcards with spaced repetition, shadowing with speech recognition, and quizzes." />
+<style>
+  :root{
+    --bg: #0f1221;
+    --panel: #171a2c;
+    --panel-2: #1e2240;
+    --text: #e6e8f2;
+    --muted: #a7adcf;
+    --accent: #8bc0ff;
+    --accent-2: #b38bff;
+    --success: #8affc1;
+    --danger: #ff8ba1;
+    --warning: #ffd38b;
+    --shadow: 0 10px 30px rgba(0,0,0,.35);
+  }
+  [data-theme="light"]{
+    --bg:#f6f7fb; --panel:#ffffff; --panel-2:#eef1ff; --text:#171a2c; --muted:#444b6e; --accent:#0b6bcb; --accent-2:#7b2cff; --success:#0a8f5b; --danger:#b3002d; --warning:#a05b00;
+  }
+  html,body{height:100%}
+  body{margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji"; background:var(--bg); color:var(--text);}
+  .app{display:grid; grid-template-columns: 280px 1fr; min-height:100vh}
+  aside{background:var(--panel); border-right:1px solid rgba(255,255,255,.06); padding:18px 14px; position:sticky; top:0; height:100vh; overflow:auto}
+  main{padding:24px;}
+  h1{font-size:1.6rem; margin:0 0 8px; letter-spacing:.4px}
+  .sub{color:var(--muted); font-size:.95rem; margin-bottom:18px}
+  .nav{display:flex; flex-direction:column; gap:8px}
+  .nav button{display:flex; align-items:center; gap:10px; width:100%; background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.08); padding:10px 12px; border-radius:14px; cursor:pointer; text-align:left}
+  .nav button:hover{border-color:var(--accent)}
+  .nav button.active{outline:2px solid var(--accent); background:linear-gradient( to right, rgba(139,192,255,.15), rgba(179,139,255,.08) )}
+  .tag{font-size:.75rem; padding:2px 8px; border-radius:999px; background:var(--panel-2); color:var(--muted)}
+  .toolbar{display:flex; gap:10px; align-items:center; margin:8px 0 18px}
+  .toolbar .group{display:flex; gap:8px; align-items:center; background:var(--panel); padding:8px 10px; border-radius:14px; border:1px solid rgba(255,255,255,.08)}
+  .btn{background:var(--panel); color:var(--text); border:1px solid rgba(255,255,255,.12); padding:10px 12px; border-radius:12px; cursor:pointer}
+  .btn:disabled{opacity:.55; cursor:not-allowed}
+  .btn.primary{background:linear-gradient(135deg, var(--accent), var(--accent-2)); color:#fff; border:none}
+  .btn.ghost{background:transparent}
+  .btn.warn{background:var(--panel); border-color:var(--warning); color:var(--warning)}
+  .btn.danger{background:var(--panel); border-color:var(--danger); color:var(--danger)}
+  .grid{display:grid; gap:16px}
+  .grid.cols-2{grid-template-columns: repeat(2, minmax(0,1fr))}
+  .grid.cols-3{grid-template-columns: repeat(3, minmax(0,1fr))}
+  @media (max-width: 1100px){ .app{grid-template-columns: 1fr} aside{position:relative; height:auto} .grid.cols-2,.grid.cols-3{grid-template-columns:1fr} }
+  .card{background:var(--panel); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:18px; box-shadow: var(--shadow)}
+  .card h2{margin:0 0 8px}
+  .muted{color:var(--muted)}
+  input, select, textarea{background:var(--panel); color:var(--text); border:1px solid rgba(255,255,255,.12); padding:10px 12px; border-radius:12px; width:100%}
+  textarea{min-height:120px}
+  table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:14px}
+  th,td{padding:10px 12px; border-bottom:1px solid rgba(255,255,255,.07)}
+  th{background:var(--panel-2); text-align:left}
+  tr:hover td{background:rgba(255,255,255,.03)}
+  .kbd{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:.85rem; padding:2px 7px; border-radius:6px; border:1px solid rgba(255,255,255,.2)}
+  .pill{display:inline-flex; gap:8px; align-items:center; background:var(--panel-2); color:var(--text); padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.08)}
+  .hl{background:linear-gradient(transparent 60%, rgba(139,192,255,.35) 0)}
+  .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+  .flex{display:flex; gap:10px; align-items:center}
+  .stretch{align-items:stretch}
+  .hidden{display:none !important}
+  .right{justify-content:flex-end}
+  .progress{height:10px; background: rgba(255,255,255,.08); border-radius:999px; overflow:hidden}
+  .progress > div{height:100%; background:linear-gradient(90deg, var(--accent), var(--accent-2)); width:0%}
+  .small{font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="app" id="app" data-theme="dark">
+  <aside>
+    <h1>Academic Spanish</h1>
+    <div class="sub">Computer Science & Mathematics — single‑file trainer</div>
+    <div class="flex" style="justify-content:space-between; margin:10px 0 16px">
+      <span class="pill" title="Theme"><span>Theme</span>
+        <select id="themeSelect" aria-label="Theme selector">
+          <option value="dark" selected>Dark</option>
+          <option value="light">Light</option>
+        </select>
+      </span>
+      <span class="pill"><span>Voice</span>
+        <select id="voiceSelect" aria-label="Spanish voice"></select>
+      </span>
+    </div>
+    <nav class="nav" id="nav">
+      <button data-view="dashboard" class="active" aria-current="page">🏠 Dashboard</button>
+      <button data-view="lexicon">📚 Lexicon</button>
+      <button data-view="flashcards">🧠 Flashcards (SRS)</button>
+      <button data-view="phrases">🧩 Academic Phrases</button>
+      <button data-view="dialogues">🎙️ Role‑play & Shadowing</button>
+      <button data-view="quiz">📝 Quizzes</button>
+      <button data-view="writing">✍️ Writing Lab</button>
+      <button data-view="grammar">⚖️ Register & Grammar</button>
+      <button data-view="tools">🛠️ Tools</button>
+      <button data-view="settings">⚙️ Settings & Data</button>
+    </nav>
+    <div class="sub" style="margin-top:16px">
+      <div class="small">Shortcuts: <span class="kbd">/</span> search • <span class="kbd">Space</span> flip card • <span class="kbd">1–4</span> rate</div>
+    </div>
+  </aside>
+  <main>
+    <!-- DASHBOARD -->
+    <section id="view-dashboard" class="view">
+      <div class="grid cols-2">
+        <div class="card">
+          <h2>Welcome</h2>
+          <p>This single‑file app targets <span class="hl">Academic Spanish</span> for Computer Science and Mathematics. It works offline and stores progress locally. Use Text‑to‑Speech for native‑like models and Speech Recognition for pronunciation feedback.</p>
+          <div class="toolbar">
+            <div class="group">
+              <button class="btn" id="ttsTest">🔊 TTS</button>
+              <button class="btn" id="sttTest">🎤 STT</button>
+            </div>
+            <button class="btn primary" data-view-jump="flashcards">Start Flashcards</button>
+            <button class="btn" data-view-jump="dialogues">Practice Speaking</button>
+          </div>
+          <div class="progress" title="Overall SRS completion"><div id="overallProgress"></div></div>
+        </div>
+        <div class="card">
+          <h2>Today’s Focus</h2>
+          <ol>
+            <li>Shadow a dialogue about <em>complejidad algorítmica</em>.</li>
+            <li>Write a 6‑sentence abstract using the <em>registro académico</em>.</li>
+            <li>Review 15 flashcards from the Lexicon.</li>
+          </ol>
+          <p class="muted small">Tip: Prefer impersonal forms (<em>se demuestra</em>, <em>se propone</em>) and nominalizations (<em>optimización</em>, <em>regularización</em>).</p>
+        </div>
+      </div>
+      <div class="grid cols-3" style="margin-top:16px">
+        <div class="card">
+          <h3>Stats</h3>
+          <table>
+            <tr><th>Deck</th><th>New</th><th>Learning</th><th>Review</th></tr>
+            <tbody id="statsBody"></tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3>Recent Mistakes</h3>
+          <ul id="mistakesList" class="small" style="line-height:1.6"></ul>
+        </div>
+        <div class="card">
+          <h3>Mini Drill</h3>
+          <div class="flex stretch">
+            <select id="miniDrillCategory"></select>
+            <button class="btn" id="miniDrillBtn">Generate</button>
+            <button class="btn" id="miniDrillSpeak">🔊</button>
+          </div>
+          <div id="miniDrillOutput" style="margin-top:8px"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEXICON -->
+    <section id="view-lexicon" class="view hidden">
+      <div class="toolbar">
+        <input id="lexSearch" placeholder="Search English or Spanish… (try: complejidad, eigenvector)" aria-label="Search lexicon"/>
+        <select id="lexFilter"></select>
+        <button class="btn" id="lexExport">Export CSV</button>
+      </div>
+      <table aria-label="Technical lexicon table">
+        <thead><tr><th>Spanish</th><th>English</th><th>Field</th><th>Definition (ES)</th><th>Example (ES)</th><th>Add ➕</th></tr></thead>
+        <tbody id="lexTable"></tbody>
+      </table>
+    </section>
+
+    <!-- FLASHCARDS -->
+    <section id="view-flashcards" class="view hidden">
+      <div class="grid cols-2">
+        <div class="card" id="cardBox">
+          <div class="flex" style="justify-content:space-between; align-items:center">
+            <h2>Flashcards — SRS</h2>
+            <div class="pill"><span id="dueCount">0</span> due</div>
+          </div>
+          <div id="card" class="card" style="min-height:180px; display:flex; align-items:center; justify-content:center; font-size:1.7rem; font-weight:600; background:var(--panel-2)">—</div>
+          <div id="cardBack" class="card hidden" style="min-height:120px; background:rgba(255,255,255,.04)">
+            <div id="cardBackContent"></div>
+          </div>
+          <div class="toolbar">
+            <button class="btn" id="flipBtn" title="Space">Flip</button>
+            <button class="btn" id="speakBtn">🔊 Speak</button>
+            <div class="group">
+              <button class="btn" data-grade="1" title="Again (1)">1 Again</button>
+              <button class="btn" data-grade="2" title="Hard (2)">2 Hard</button>
+              <button class="btn" data-grade="3" title="Good (3)">3 Good</button>
+              <button class="btn" data-grade="4" title="Easy (4)">4 Easy</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Decks</h3>
+          <div id="deckList"></div>
+          <h3 style="margin-top:14px">Add your own</h3>
+          <div class="grid">
+            <input id="addEs" placeholder="Spanish" />
+            <input id="addEn" placeholder="English" />
+            <select id="addCat"></select>
+            <textarea id="addDef" placeholder="Definition (ES)"></textarea>
+            <textarea id="addEx" placeholder="Example sentence (ES)"></textarea>
+            <button class="btn" id="addBtn">Add to Deck</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHRASES -->
+    <section id="view-phrases" class="view hidden">
+      <div class="grid cols-2">
+        <div class="card">
+          <h2>Academic Connectors & Templates</h2>
+          <div class="toolbar">
+            <select id="phraseFilter"></select>
+            <button class="btn" id="phraseSpeak">🔊 Read</button>
+          </div>
+          <ul id="phraseList" class="small" style="line-height:1.7"></ul>
+        </div>
+        <div class="card">
+          <h2>Sentence Builder</h2>
+          <div class="grid">
+            <select id="builderOpening"></select>
+            <select id="builderVerb"></select>
+            <select id="builderNoun"></select>
+            <input id="builderTopic" placeholder="Topic (e.g., complejidad de grafos)" />
+            <button class="btn" id="builderMake">Compose</button>
+            <div id="builderOut" class="mono" style="white-space:pre-wrap"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIALOGUES & SHADOWING -->
+    <section id="view-dialogues" class="view hidden">
+      <div class="grid cols-2">
+        <div class="card">
+          <h2>Role‑play Scenarios</h2>
+          <div class="grid">
+            <select id="dialogueSelect"></select>
+            <div class="toolbar">
+              <button class="btn" id="dialoguePlay">🔊 Play</button>
+              <button class="btn" id="dialogueShadow">🎤 Shadow</button>
+              <button class="btn" id="dialogueStop">⏹ Stop</button>
+            </div>
+            <div id="dialogueText" class="small" style="white-space:pre-wrap"></div>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Pronunciation Feedback</h2>
+          <p class="small muted">Record a target sentence and compare to your production. Works best in a secure context (https) and Chromium‑based browsers.</p>
+          <div class="grid">
+            <textarea id="shadowTarget" placeholder="Paste or select a Spanish sentence…"></textarea>
+            <div class="flex">
+              <button class="btn" id="shadowSpeak">🔊 Model</button>
+              <button class="btn" id="shadowStart">🎙️ Start</button>
+              <button class="btn" id="shadowStop">⏹ Stop</button>
+            </div>
+            <div><strong>ASR Text:</strong> <span id="shadowASR" class="mono"></span></div>
+            <div><strong>Similarity:</strong> <span id="shadowSim" class="pill">—</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZZES -->
+    <section id="view-quiz" class="view hidden">
+      <div class="grid cols-2">
+        <div class="card">
+          <h2>Multiple Choice</h2>
+          <div class="grid">
+            <select id="quizMode">
+              <option value="es2en">Spanish → English</option>
+              <option value="en2es">English → Spanish</option>
+              <option value="cloze">Cloze (fill in the blank)</option>
+            </select>
+            <button class="btn" id="quizNext">Next</button>
+            <div id="quizQ" class="mono" style="white-space:pre-wrap"></div>
+            <div id="quizChoices" class="grid"></div>
+            <div id="quizResult" class="small"></div>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Cloze Generator</h2>
+          <textarea id="clozeInput" placeholder="Paste Spanish text. Words matching the pattern will be blanked."></textarea>
+          <div class="flex">
+            <input id="clozeRegex" placeholder="Regex (e.g., (ción|mente)$)" />
+            <button class="btn" id="clozeMake">Make Cloze</button>
+          </div>
+          <div id="clozeOut" class="mono" style="white-space:pre-wrap"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WRITING LAB -->
+    <section id="view-writing" class="view hidden">
+      <div class="grid cols-2">
+        <div class="card">
+          <h2>Abstract Template</h2>
+          <p class="small muted">Use academic register; avoid first‑person singular. Nominalize verbs when possible.</p>
+          <textarea id="abstractBox" placeholder="Escriba aquí su resumen (120–180 palabras)…"></textarea>
+          <div class="flex right">
+            <button class="btn" id="abstractScaffold">Insert Scaffold</button>
+            <button class="btn" id="abstractSpeak">🔊 Read</button>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Style Checklist</h2>
+          <ul class="small" style="line-height:1.7">
+            <li>Prefer impersonal voice: <em>se propone</em>, <em>se demuestra</em>, <em>se evalúa</em>.</li>
+            <li>Use precise hedging: <em>en la medida en que</em>, <em>hasta donde conocemos</em>.</li>
+            <li>Cite definitions before theorems; define symbols upon first use.</li>
+            <li>Maintain term consistency (<em>red neuronal</em> vs <em>red de neuronas</em>).</li>
+            <li>Numbers: decimal comma in much of LATAM/Spain varies; prefer SI style contextually.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTER & GRAMMAR -->
+    <section id="view-grammar" class="view hidden">
+      <div class="grid cols-2">
+        <div class="card">
+          <h2>Register Patterns</h2>
+          <table>
+            <tr><th>Function</th><th>Spanish Pattern</th><th>Example</th></tr>
+            <tbody id="registerTable"></tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h2>Morphology Helper</h2>
+          <div class="grid">
+            <input id="morphInput" placeholder="English base (optimization, regularize, computational)…" />
+            <button class="btn" id="morphMake">Suggest Spanish Cognate</button>
+            <div id="morphOut" class="mono"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOLS -->
+    <section id="view-tools" class="view hidden">
+      <div class="grid cols-2">
+        <div class="card">
+          <h2>Search</h2>
+          <input id="globalSearch" placeholder="Global search (Press /)…" />
+          <div id="globalResults" class="small" style="white-space:pre-wrap; margin-top:8px"></div>
+        </div>
+        <div class="card">
+          <h2>Export / Import</h2>
+          <div class="grid">
+            <button class="btn" id="exportData">Export Progress (JSON)</button>
+            <input type="file" id="importFile" accept="application/json" />
+            <button class="btn" id="importBtn">Import</button>
+          </div>
+          <p class="small muted">All data is stored locally via <span class="mono">localStorage</span>. Export regularly for backup.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="view-settings" class="view hidden">
+      <div class="grid cols-2">
+        <div class="card">
+          <h2>Speech</h2>
+          <div class="grid">
+            <label>Rate <input type="range" id="rate" min="0.8" max="1.4" step="0.05" value="1"/></label>
+            <label>Pitch <input type="range" id="pitch" min="0.8" max="1.2" step="0.05" value="1"/></label>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Reset</h2>
+          <button class="btn danger" id="resetAll">Reset All Progress</button>
+        </div>
+      </div>
+    </section>
+    <footer class="wrap muted small" style="padding-bottom:40px">
+      <div class="small">Powered by GPT-5</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+// ======== DATA ======== //
+const CATEGORIES = {
+  "Algorithms": "CS — Algorithms",
+  "Systems": "CS — Systems & Architecture",
+  "PL": "CS — Programming Languages",
+  "ML": "CS — Machine Learning",
+  "DB": "CS — Databases",
+  "Networks": "CS — Networks & Security",
+  "Discrete": "Math — Discrete",
+  "LinearAlg": "Math — Linear Algebra",
+  "Calculus": "Math — Calculus",
+  "Probability": "Math — Probability/Stats",
+  "GeneralMath": "Math — General"
+};
+
+const LEXICON = [
+  // --- Computer Science ---
+  {es:"algoritmo", en:"algorithm", field:"Algorithms", def:"Procedimiento finito y bien definido para resolver un problema.", ex:"El algoritmo propuesto reduce la complejidad en comparación con el estado del arte."},
+  {es:"complejidad temporal", en:"time complexity", field:"Algorithms", def:"Recursos temporales requeridos por un algoritmo en función del tamaño de entrada.", ex:"El algoritmo de mezcla opera en O(n log n) de complejidad temporal."},
+  {es:"complejidad espacial", en:"space complexity", field:"Algorithms", def:"Memoria necesaria en función del tamaño de entrada.", ex:"El uso de memoria adicional introduce una complejidad espacial lineal."},
+  {es:"programación dinámica", en:"dynamic programming", field:"Algorithms", def:"Técnica que resuelve subproblemas y los reusa para optimizar el cálculo.", ex:"La programación dinámica permite calcular rutas óptimas en grafos acíclicos."},
+  {es:"voraz", en:"greedy (algorithm)", field:"Algorithms", def:"Estrategia que elige la mejor opción local con la esperanza de alcanzar un óptimo global.", ex:"Un enfoque voraz es suficiente para construir un árbol de expansión mínima."},
+  {es:"divide y vencerás", en:"divide and conquer", field:"Algorithms", def:"Descompone un problema en subproblemas independientes y los combina.", ex:"La ordenación rápida ilustra el paradigma de divide y vencerás."},
+  {es:"pila", en:"stack", field:"Algorithms", def:"Estructura LIFO para gestionar elementos.", ex:"La recursión profunda puede desbordar la pila."},
+  {es:"cola", en:"queue", field:"Algorithms", def:"Estructura FIFO para procesar elementos en orden de llegada.", ex:"La cola de tareas regula el tráfico de solicitudes."},
+  {es:"montículo", en:"heap", field:"Algorithms", def:"Estructura de prioridad basada en árbol.", ex:"Dijkstra usa un montículo para extraer el vértice de menor distancia."},
+  {es:"recursión", en:"recursion", field:"Algorithms", def:"Definición de una función en términos de sí misma.", ex:"La recursión requiere una condición de base para terminar."},
+  {es:"clase de complejidad P", en:"complexity class P", field:"Algorithms", def:"Problemas resolubles en tiempo polinómico por una máquina determinista.", ex:"La pertenencia a P no implica trivialidad práctica."},
+  {es:"NP‑completo", en:"NP‑complete", field:"Algorithms", def:"Problemas tan difíciles como cualquier problema en NP.", ex:"La coloración de grafos es un problema NP‑completo clásico."},
+  {es:"máquina de Turing", en:"Turing machine", field:"Algorithms", def:"Modelo formal de cómputo que manipula símbolos según reglas.", ex:"La máquina de Turing universal simula cualquier cómputo efectivo."},
+  {es:"autómata", en:"automaton", field:"Algorithms", def:"Modelo matemático de una máquina con estados.", ex:"Los autómatas finitos reconocen lenguajes regulares."},
+  {es:"API", en:"API", field:"PL", def:"Interfaz que define cómo interactúan módulos de software.", ex:"La API expone operaciones de lectura y escritura transaccionales."},
+  {es:"tipado estático", en:"static typing", field:"PL", def:"Verificación de tipos en tiempo de compilación.", ex:"El tipado estático previene clases de errores antes de ejecutar."},
+  {es:"recolección de basura", en:"garbage collection", field:"Systems", def:"Mecanismo automático de liberación de memoria no referenciada.", ex:"La recolección de basura minimiza fugas pero introduce pausas."},
+  {es:"condiciones de carrera", en:"race conditions", field:"Systems", def:"Comportamiento no determinista por acceso concurrente sin sincronización.", ex:"Los bloqueos evitan condiciones de carrera en secciones críticas."},
+  {es:"exclusión mutua", en:"mutual exclusion", field:"Systems", def:"Propiedad que impide el acceso simultáneo a un recurso.", ex:"Se usa un cerrojo para garantizar la exclusión mutua."},
+  {es:"interbloqueo", en:"deadlock", field:"Systems", def:"Estado donde procesos esperan indefinidamente recursos entre sí.", ex:"La asignación circular puede producir interbloqueo."},
+  {es:"latencia", en:"latency", field:"Systems", def:"Tiempo de respuesta observado entre solicitud y servicio.", ex:"Reducir la latencia mejora la experiencia del usuario."},
+  {es:"ancho de banda", en:"bandwidth", field:"Networks", def:"Capacidad máxima de transmisión por unidad de tiempo.", ex:"El ancho de banda disponible limita el rendimiento de la red."},
+  {es:"cifrado", en:"encryption", field:"Networks", def:"Transformación de datos para garantizar confidencialidad.", ex:"El cifrado de extremo a extremo protege los mensajes."},
+  {es:"función hash", en:"hash function", field:"Networks", def:"Función que mapea datos a una huella de tamaño fijo.", ex:"Las funciones hash se usan para verificar integridad."},
+  {es:"base de datos relacional", en:"relational database", field:"DB", def:"Modelo que organiza datos en tablas con claves y relaciones.", ex:"La normalización reduce redundancia en bases de datos relacionales."},
+  {es:"transacción", en:"transaction", field:"DB", def:"Unidad lógica de trabajo que debe ser atómica.", ex:"Se aplican propiedades ACID a cada transacción."},
+  {es:"índice", en:"index", field:"DB", def:"Estructura auxiliar para acelerar consultas.", ex:"Un índice B‑tree mejora la búsqueda por clave."},
+  {es:"aprendizaje supervisado", en:"supervised learning", field:"ML", def:"Entrenamiento con pares entrada‑etiqueta.", ex:"El aprendizaje supervisado requiere datos anotados de calidad."},
+  {es:"sobreajuste", en:"overfitting", field:"ML", def:"Ajuste excesivo al conjunto de entrenamiento que empeora la generalización.", ex:"La regularización L2 mitiga el sobreajuste."},
+  {es:"red neuronal", en:"neural network", field:"ML", def:"Modelo compuesto por capas de unidades interconectadas.", ex:"Las redes neuronales profundas han impulsado avances en visión."},
+  {es:"descenso de gradiente", en:"gradient descent", field:"ML", def:"Algoritmo iterativo para minimizar una función de pérdida.", ex:"El descenso de gradiente estocástico actualiza por minibatches."},
+  {es:"validación cruzada", en:"cross‑validation", field:"ML", def:"Técnica de evaluación que particiona datos en pliegues.", ex:"La validación cruzada estima el error de generalización."},
+
+  // --- Mathematics ---
+  {es:"conjunto", en:"set", field:"GeneralMath", def:"Colección bien definida de elementos.", ex:"El conjunto potencia contiene todos los subconjuntos de A."},
+  {es:"función", en:"function", field:"GeneralMath", def:"Relación que asigna a cada elemento del dominio un único elemento del codominio.", ex:"Una función inyectiva puede no ser sobreyectiva."},
+  {es:"inyectivo", en:"injective", field:"GeneralMath", def:"Cada valor del codominio es imagen de a lo sumo un elemento del dominio.", ex:"Si f es inyectiva, entonces f(x)=f(y) implica x=y."},
+  {es:"sobreyectivo", en:"surjective", field:"GeneralMath", def:"Todo elemento del codominio es imagen de algún elemento del dominio.", ex:"Una función constante no es sobreyectiva salvo casos triviales."},
+  {es:"biyectivo", en:"bijective", field:"GeneralMath", def:"Función que es inyectiva y sobreyectiva.", ex:"Una biyección tiene inversa bien definida."},
+  {es:"demostración por contradicción", en:"proof by contradiction", field:"Discrete", def:"Prueba que asume la negación y deriva un absurdo.", ex:"Se demuestra la infinitud de los primos por contradicción."},
+  {es:"inducción matemática", en:"mathematical induction", field:"Discrete", def:"Método de prueba para enunciados indexados por los naturales.", ex:"La inducción fuerte es útil para recursiones."},
+  {es:"grafo", en:"graph", field:"Discrete", def:"Par (V,E) con vértices y aristas.", ex:"Un grafo bipartito no contiene ciclos impares."},
+  {es:"matriz", en:"matrix", field:"LinearAlg", def:"Arreglo rectangular de números o elementos.", ex:"La multiplicación de matrices no conmute en general."},
+  {es:"autovalor", en:"eigenvalue", field:"LinearAlg", def:"λ tal que existe un vector no nulo con Av=λv.", ex:"Los autovalores determinan la estabilidad del sistema."},
+  {es:"autovector", en:"eigenvector", field:"LinearAlg", def:"Vector asociado a un autovalor.", ex:"Los autovectores forman una base si la matriz es diagonalizable."},
+  {es:"determinante", en:"determinant", field:"LinearAlg", def:"Escalar que describe propiedades volumétricas y de invertibilidad.", ex:"Si el determinante es cero, la matriz no es invertible."},
+  {es:"rango", en:"rank", field:"LinearAlg", def:"Dimensión de la imagen de una transformación lineal.", ex:"El teorema rango‑nulidad relaciona rango y núcleo."},
+  {es:"núcleo", en:"kernel (null space)", field:"LinearAlg", def:"Conjunto de vectores que mapea a cero.", ex:"El núcleo no trivial implica no inyectividad."},
+  {es:"norma", en:"norm", field:"LinearAlg", def:"Función que asigna a cada vector su longitud generalizada.", ex:"La norma euclidiana se deriva del producto interno."},
+  {es:"producto interno", en:"inner product", field:"LinearAlg", def:"Forma bilineal (o sesquilineal) positiva definida.", ex:"La ortogonalidad se define mediante el producto interno."},
+  {es:"base", en:"basis", field:"LinearAlg", def:"Conjunto de vectores linealmente independientes que generan el espacio.", ex:"La base canónica de R^n es (e1,…,en)."},
+  {es:"independencia lineal", en:"linear independence", field:"LinearAlg", def:"Ningún vector se expresa como combinación lineal de los demás.", ex:"Las columnas de una matriz invertible son linealmente independientes."},
+  {es:"derivada", en:"derivative", field:"Calculus", def:"Límite del cociente incremental si existe.", ex:"La derivada caracteriza la tasa de cambio instantánea."},
+  {es:"integral", en:"integral", field:"Calculus", def:"Acumulación de cantidades; área bajo la curva.", ex:"La integral definida se calcula por el teorema fundamental del cálculo."},
+  {es:"continuidad", en:"continuity", field:"Calculus", def:"Pequeños cambios en la entrada producen pequeños cambios en la salida.", ex:"Funciones continuas en [a,b] alcanzan máximo y mínimo."},
+  {es:"variable aleatoria", en:"random variable", field:"Probability", def:"Función definida sobre un espacio de probabilidad que toma valores numéricos.", ex:"Una V.A. de Bernoulli toma valores 0 o 1."},
+  {es:"esperanza", en:"expectation (mean)", field:"Probability", def:"Valor promedio ponderado por probabilidades.", ex:"La esperanza linealiza sumas de variables independientes."},
+  {es:"varianza", en:"variance", field:"Probability", def:"Medida de dispersión respecto de la media.", ex:"La varianza se reduce con más datos independientes."},
+  {es:"desviación estándar", en:"standard deviation", field:"Probability", def:"Raíz cuadrada de la varianza.", ex:"La desviación estándar expresa la escala de la variabilidad."},
+  {es:"ley de los grandes números", en:"law of large numbers", field:"Probability", def:"La media muestral converge (en probabilidad) a la esperanza.", ex:"El estimador se vuelve consistente por la ley de los grandes números."},
+  {es:"teorema central del límite", en:"central limit theorem", field:"Probability", def:"La suma normalizada de V.A. independientes converge en distribución a una normal.", ex:"El TCL justifica aproximaciones gaussianas."},
+];
+
+// Phrases & templates
+const PHRASES = {
+  "Conectores": [
+    "en primer lugar", "en segundo lugar", "finalmente", "por consiguiente", "por lo tanto", "en consecuencia", "sin embargo", "no obstante", "por otro lado", "además", "es decir", "en otras palabras", "en particular", "en general", "por ejemplo", "de hecho", "por el contrario", "a pesar de", "aunque", "si bien", "debido a", "dado que", "hasta donde conocemos", "en la medida en que"
+  ],
+  "Formulaciones académicas": [
+    "En este trabajo se propone un método para …", 
+    "Se demuestra que el algoritmo alcanza complejidad O(n log n).",
+    "Bajo supuestos estándar, el estimador resulta consistente.",
+    "La contribución principal radica en …",
+    "Los resultados empíricos respaldan la hipótesis de …",
+    "Se formaliza el problema como una optimización convexa.",
+    "Sea G un grafo finito; entonces …",
+    "A continuación se establece el siguiente lema …",
+    "Como corolario inmediato, obtenemos …",
+    "La evidencia sugiere una mejora estadísticamente significativa."
+  ],
+  "Cláusulas útiles": [
+    "desde la perspectiva de la complejidad computacional",
+    "en el contexto de aprendizaje supervisado",
+    "a fin de evaluar la robustez del modelo",
+    "con el objetivo de minimizar el error de generalización",
+    "en ausencia de supuestos adicionales",
+    "bajo condiciones de regularidad",
+    "en términos de estabilidad numérica",
+    "desde un punto de vista geométrico"
+  ]
+};
+
+// Register patterns
+const REGISTER = [
+  {fn:"Definir", pattern:"Se define …", ex:"Se define la norma ∥x∥ como la raíz cuadrada del producto interno."},
+  {fn:"Establecer", pattern:"Se demuestra / se prueba …", ex:"Se demuestra que la serie converge absolutamente."},
+  {fn:"Hedging", pattern:"Hasta donde conocemos, …", ex:"Hasta donde conocemos, no existe una cota más ajustada."},
+  {fn:"Impersonal", pattern:"Es de interés … / Conviene señalar …", ex:"Es de interés analizar la sensibilidad del algoritmo."},
+  {fn:"Nominalización", pattern:"-ción / -miento / -idad", ex:"regularización, aproximación, convergencia, estabilidad."},
+  {fn:"Pasiva refleja", pattern:"se + verbo", ex:"Se obtiene una mejora del 12% en precisión."}
+];
+
+// Dialogues
+const DIALOGUES = {
+  "Presentación de artículo (Algoritmos)": [
+    "Ponente: En este trabajo se propone un algoritmo subcuadrático para ordenación parcial.",
+    "Asistente: ¿Podría precisar la hipótesis sobre la distribución de entradas?",
+    "Ponente: Bajo entradas adversarias, la cota promedio no se mantiene.",
+    "Asistente: ¿La estructura de datos requiere memoria adicional?",
+    "Ponente: Sí, un montículo binomial reduce la latencia de extracción."],
+  "Defensa de tesis (Álgebra Lineal)": [
+    "Doctorando: Se demuestra que la matriz A es diagonalizable bajo el criterio de autovalores simples.",
+    "Jurado: ¿Cómo caracteriza el núcleo de A−λI?",
+    "Doctorando: El subespacio propio coincide con el núcleo de A−λI.",
+    "Jurado: Explique el impacto del condicionamiento en la estimación.",
+    "Doctorando: Un número de condición elevado amplifica el error de redondeo."],
+  "Reunión de proyecto (Aprendizaje Automático)": [
+    "Líder: El objetivo es minimizar la pérdida con regularización L2.",
+    "Ingeniera: La validación cruzada sugiere sobreajuste en profundidad 10.",
+    "Líder: Probemos parada temprana y reducción de tasa de aprendizaje.",
+    "Ingeniera: Se observaron mejoras en AUC pero no en F1.",
+    "Líder: Ajustemos el umbral de decisión según la curva de precisión‑recobrado."]
+};
+
+// ======== STATE & UTIL ======== //
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+const state = {
+  settings: { theme: 'dark', rate: 1, pitch: 1, voiceURI: '' },
+  srs: { // Leitner boxes: 1..5
+    cards: {}, // key -> {box, next, history:[], stats:{seen, correct}}
+    order: []  // list of keys (indexes into LEXICON and custom)
+  },
+  custom: [], // user‑added lexicon entries
+  mistakes: [],
+};
+
+function save(){ localStorage.setItem('acad_es_app_v1', JSON.stringify(state)); }
+function load(){ const s = localStorage.getItem('acad_es_app_v1'); if(s){ try{Object.assign(state, JSON.parse(s));}catch(e){} } }
+
+function uid(){ return Math.random().toString(36).slice(2,10); }
+function today(){ return new Date().toISOString().slice(0,10); }
+
+// Build initial SRS order if empty
+function initSRS(){
+  if(state.srs.order.length === 0){
+    const base = LEXICON.map((_,i)=>`L${i}`);
+    state.srs.order = base; // custom added later as C{uid}
+    base.forEach(k=>{ state.srs.cards[k] = {box:1, next: today(), history:[], stats:{seen:0, correct:0}}; });
+  }
+}
+
+// ======== TTS & STT ======== //
+let voices = [];
+function loadVoices(){
+  voices = speechSynthesis.getVoices();
+  const esVoices = voices.filter(v=>/^es(-|_|$)/i.test(v.lang));
+  const sel = $('#voiceSelect'); sel.innerHTML = '';
+  esVoices.forEach(v=>{ const opt = document.createElement('option'); opt.value = v.voiceURI; opt.textContent = `${v.name} (${v.lang})`; sel.appendChild(opt); });
+  if(esVoices.length){
+    const preferred = esVoices.find(v=>/Mex|US|ES|AR|CO/.test(v.name)) || esVoices[0];
+    sel.value = state.settings.voiceURI || preferred.voiceURI;
+    state.settings.voiceURI = sel.value;
+    save();
+  }
+}
+if('speechSynthesis' in window){ speechSynthesis.onvoiceschanged = loadVoices; setTimeout(loadVoices, 200); }
+
+function speak(text, {lang='es-ES'}={}){
+  if(!('speechSynthesis' in window)) return alert('Speech Synthesis not supported in this browser.');
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = lang;
+  u.rate = state.settings.rate; u.pitch = state.settings.pitch;
+  const v = voices.find(v=>v.voiceURI===state.settings.voiceURI) || voices.find(v=>/^es/.test(v.lang));
+  if(v) u.voice = v;
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
+}
+
+let recognizer = null; let recognizing = false;
+function initASR(){
+  const R = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!R){ return null; }
+  const rec = new R(); rec.lang = 'es-ES'; rec.interimResults = false; rec.maxAlternatives = 1; return rec;
+}
+
+// Word‑level similarity (1 − normalized edit distance)
+function similarity(a,b){
+  const A = a.trim().toLowerCase().split(/\s+/), B = b.trim().toLowerCase().split(/\s+/);
+  const m=A.length,n=B.length; const dp=Array.from({length:m+1},()=>Array(n+1).fill(0));
+  for(let i=0;i<=m;i++) dp[i][0]=i; for(let j=0;j<=n;j++) dp[0][j]=j;
+  for(let i=1;i<=m;i++) for(let j=1;j<=n;j++){
+    const cost = A[i-1]===B[j-1]?0:1; dp[i][j]=Math.min(dp[i-1][j]+1, dp[i][j-1]+1, dp[i-1][j-1]+cost);
+  }
+  const dist = dp[m][n]; const base = Math.max(1, Math.max(m,n)); return 1 - dist/base;
+}
+
+// ======== UI WIRING ======== //
+function show(view){ $$('.nav button').forEach(b=>b.classList.toggle('active', b.dataset.view===view)); $$('.view').forEach(v=>v.classList.add('hidden')); $(`#view-${view}`).classList.remove('hidden'); }
+$('#nav').addEventListener('click', (e)=>{ const b=e.target.closest('button'); if(!b) return; show(b.dataset.view); });
+$$('[data-view-jump]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.viewJump)));
+$('#themeSelect').addEventListener('change', e=>{ $('#app').dataset.theme = e.target.value; state.settings.theme=e.target.value; save(); });
+
+// Dashboard bits
+function refreshStats(){
+  const tbody = $('#statsBody'); tbody.innerHTML='';
+  const byCat = {};
+  [...LEXICON, ...state.custom].forEach((item, idx)=>{
+    const key = idx < LEXICON.length ? `L${idx}` : `C${state.custom[idx-LEXICON.length].id}`;
+    const cat = item.field; byCat[cat]=byCat[cat]||{new:0,learn:0,rev:0};
+    const c = state.srs.cards[key] || {box:1,next:today()};
+    const due = c.next <= today();
+    if(c.box<=2 && due) byCat[cat].learn++; else if(!due) byCat[cat].new++; else byCat[cat].rev++;
+  });
+  Object.keys(byCat).forEach(cat=>{
+    const tr=document.createElement('tr'); const d=byCat[cat];
+    tr.innerHTML=`<td>${CATEGORIES[cat]||cat}</td><td>${d.new}</td><td>${d.learn}</td><td>${d.rev}</td>`; tbody.appendChild(tr);
+  });
+  const total = state.srs.order.length; const learned = Object.values(state.srs.cards).filter(c=>c.box>=4).length; const pct = Math.round((learned/Math.max(1,total))*100);
+  $('#overallProgress').style.width = pct+'%';
+}
+
+// Mini drill
+$('#miniDrillBtn').addEventListener('click', ()=>{
+  const cat = $('#miniDrillCategory').value; const pool = allItems().filter(x=>!cat||x.field===cat);
+  const pick = pool[Math.floor(Math.random()*pool.length)];
+  $('#miniDrillOutput').textContent = `${pick.es} — ${pick.def}\nEjemplo: ${pick.ex}`;
+});
+$('#miniDrillSpeak').addEventListener('click', ()=>{ const t=$('#miniDrillOutput').textContent; if(t) speak(t); });
+
+// Lexicon table
+function allItems(){ return [...LEXICON, ...state.custom]; }
+function renderLexicon(){
+  const tbody=$('#lexTable'); tbody.innerHTML='';
+  const q=$('#lexSearch').value.trim().toLowerCase();
+  const filter=$('#lexFilter').value;
+  allItems().forEach((item, idx)=>{
+    if(q){ const hay=(item.es+item.en+item.def+item.ex).toLowerCase(); if(!hay.includes(q)) return; }
+    if(filter && item.field!==filter) return;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><strong>${item.es}</strong></td><td>${item.en}</td><td><span class="tag">${CATEGORIES[item.field]||item.field}</span></td><td class="small">${item.def}</td><td class="small">${item.ex}</td><td><button class="btn" data-add-key="${idx<LEXICON.length?`L${idx}`:`C${state.custom[idx-LEXICON.length].id}`}">Add</button></td>`;
+    tbody.appendChild(tr);
+  });
+}
+$('#lexSearch').addEventListener('input', renderLexicon);
+$('#lexFilter').addEventListener('change', renderLexicon);
+$('#lexExport').addEventListener('click', ()=>{
+  const rows = [['Spanish','English','Field','Definition','Example']].concat(allItems().map(x=>[x.es,x.en,x.field,x.def,x.ex]));
+  const csv = rows.map(r=>r.map(v=>`"${(v+"").replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'lexicon.csv'; a.click();
+  URL.revokeObjectURL(url);
+});
+
+$('#view-lexicon').addEventListener('click', (e)=>{
+  const btn = e.target.closest('button[data-add-key]');
+  if(!btn) return;
+  addToDeck(btn.dataset.addKey);
+});
+
+function addToDeck(key){
+  if(!state.srs.order.includes(key)) state.srs.order.push(key);
+  if(!state.srs.cards[key]) state.srs.cards[key] = {box:1, next: today(), history:[], stats:{seen:0, correct:0}};
+  save(); updateDueCount();
+}
+
+// ======== FLASHCARDS (SRS) ======== //
+let currentKey = null; let backShown = false;
+
+function allKeys(){ return state.srs.order.slice(); }
+function keyToItem(key){
+  if(key.startsWith('L')){ const i = parseInt(key.slice(1)); return LEXICON[i]; }
+  if(key.startsWith('C')){
+    const id = key.slice(1);
+    const idx = state.custom.findIndex(x=>String(x.id)===id);
+    return state.custom[idx];
+  }
+  return null;
+}
+function addDays(dateStr, days){
+  const d = new Date(dateStr || today()); d.setDate(d.getDate() + days); return d.toISOString().slice(0,10);
+}
+function schedule(box, grade){
+  // grade: 1 Again, 2 Hard, 3 Good, 4 Easy
+  const table = {1:1, 2:2, 3:4, 4:7, 5:15};
+  let nb = box;
+  if(grade===1) nb = 1;
+  else if(grade===2) nb = Math.max(1, box);
+  else if(grade===3) nb = Math.min(5, box+1);
+  else if(grade===4) nb = Math.min(5, box+2);
+  const interval = table[nb] || 1;
+  return {box: nb, interval};
+}
+function dueKeys(){
+  const t = today();
+  return allKeys().filter(k=> (state.srs.cards[k]?.next || t) <= t);
+}
+function nextCard(){
+  const dk = dueKeys();
+  const pool = dk.length? dk : allKeys();
+  currentKey = pool[0] || null;
+  backShown = false;
+  renderCard();
+}
+function renderCard(){
+  const due = dueKeys().length;
+  $('#dueCount').textContent = String(due);
+  if(!currentKey){
+    $('#card').textContent = '(No cards in deck)';
+    $('#cardBack').classList.add('hidden'); $('#cardBackContent').textContent = '';
+    return;
+  }
+  const it = keyToItem(currentKey);
+  $('#card').textContent = it.es;
+  const back = `<div><strong>${it.en}</strong></div><div class="small">${it.def||''}</div><div class="small">Ej.: ${it.ex||''}</div>`;
+  $('#cardBackContent').innerHTML = back;
+  $('#cardBack').classList.toggle('hidden', !backShown);
+}
+function updateDueCount(){ $('#dueCount').textContent = String(dueKeys().length); }
+
+$('#flipBtn').addEventListener('click', ()=>{ backShown=!backShown; renderCard(); });
+$('#speakBtn').addEventListener('click', ()=>{ const it = currentKey? keyToItem(currentKey): null; if(it) speak(`${it.es}. ${it.def||''}`); });
+$('#cardBox').addEventListener('click', (e)=>{
+  const b = e.target.closest('button[data-grade]'); if(!b || !currentKey) return;
+  const g = parseInt(b.dataset.grade);
+  const rec = state.srs.cards[currentKey] || {box:1, next: today(), history:[], stats:{seen:0, correct:0}};
+  const sch = schedule(rec.box, g);
+  rec.box = sch.box; rec.next = addDays(today(), sch.interval);
+  rec.history.push({d: today(), g}); rec.stats.seen++; if(g>=3) rec.stats.correct++;
+  state.srs.cards[currentKey] = rec; save();
+  nextCard(); refreshStats();
+});
+
+document.addEventListener('keydown', (e)=>{
+  const activeView = !$('#view-flashcards').classList.contains('hidden');
+  const tag = (document.activeElement?.tagName||'').toLowerCase();
+  if(!activeView) return;
+  if(tag==='input' || tag==='textarea') return;
+  if(e.key===' ') { e.preventDefault(); backShown=!backShown; renderCard(); }
+  if(['1','2','3','4'].includes(e.key)){
+    const btn = $(`#cardBox button[data-grade="${e.key}"]`); if(btn){ btn.click(); }
+  }
+});
+
+// Custom add
+function fillAddCat(){
+  const sel = $('#addCat');
+  sel.innerHTML = Object.keys(CATEGORIES).map(k=>`<option value="${k}">${CATEGORIES[k]}</option>`).join('');
+}
+$('#addBtn').addEventListener('click', ()=>{
+  const es=$('#addEs').value.trim(), en=$('#addEn').value.trim(), field=$('#addCat').value;
+  const def=$('#addDef').value.trim(), ex=$('#addEx').value.trim();
+  if(!es || !en){ alert('Provide Spanish and English.'); return; }
+  const id = uid();
+  state.custom.push({id, es, en, field, def, ex});
+  const key = `C${id}`;
+  state.srs.order.push(key);
+  state.srs.cards[key] = {box:1, next: today(), history:[], stats:{seen:0, correct:0}};
+  save(); $('#addEs').value=''; $('#addEn').value=''; $('#addDef').value=''; $('#addEx').value='';
+  renderLexicon(); renderDeckList(); updateDueCount();
+});
+
+// Deck list (per field counts)
+function renderDeckList(){
+  const cont = $('#deckList'); cont.innerHTML='';
+  const counts = {};
+  allItems().forEach((it)=>{ counts[it.field] = counts[it.field]||{total:0, inSRS:0}; counts[it.field].total++; });
+  state.srs.order.forEach(k=>{ const it = keyToItem(k); if(it){ counts[it.field].inSRS++; } });
+  Object.keys(counts).forEach(cat=>{
+    const row = document.createElement('div'); row.className='flex'; row.style.justifyContent='space-between';
+    row.innerHTML = `<div><span class="tag">${CATEGORIES[cat]||cat}</span> <span class="small muted">${counts[cat].inSRS}/${counts[cat].total}</span></div>
+    <button class="btn" data-load-cat="${cat}">Load all</button>`;
+    cont.appendChild(row);
+  });
+}
+$('#deckList').addEventListener('click', (e)=>{
+  const b = e.target.closest('button[data-load-cat]'); if(!b) return;
+  const cat = b.dataset.loadCat;
+  allItems().forEach((it, idx)=>{
+    if(it.field===cat){
+      const key = (idx<LEXICON.length)? `L${idx}` : `C${state.custom[idx-LEXICON.length].id}`;
+      addToDeck(key);
+    }
+  });
+  renderDeckList();
+});
+
+// ======== PHRASES ======== //
+function fillPhraseFilter(){
+  const sel = $('#phraseFilter'); sel.innerHTML = Object.keys(PHRASES).map(k=>`<option value="${k}">${k}</option>`).join('');
+}
+function renderPhraseList(){
+  const sel = $('#phraseFilter').value; const list = $('#phraseList'); list.innerHTML='';
+  (PHRASES[sel]||[]).forEach(txt=>{ const li=document.createElement('li'); li.textContent = txt; list.appendChild(li); });
+}
+$('#phraseFilter').addEventListener('change', renderPhraseList);
+$('#phraseSpeak').addEventListener('click', ()=>{
+  const items = Array.from($('#phraseList').children).slice(0,8).map(li=>li.textContent);
+  if(items.length) speak(items.join('. ') + '.');
+});
+
+// Sentence builder
+const BUILDER = {
+  openings: ["En este trabajo", "Desde la perspectiva de la complejidad", "A nivel teórico", "En términos formales"],
+  verbs: ["se propone", "se demuestra", "se analiza", "se evalúa", "se modela"],
+  nouns: ["un algoritmo", "un modelo", "una demostración", "un esquema", "un procedimiento"]
+};
+function fillBuilder(){
+  $('#builderOpening').innerHTML = BUILDER.openings.map(x=>`<option>${x}</option>`).join('');
+  $('#builderVerb').innerHTML = BUILDER.verbs.map(x=>`<option>${x}</option>`).join('');
+  $('#builderNoun').innerHTML = BUILDER.nouns.map(x=>`<option>${x}</option>`).join('');
+}
+$('#builderMake').addEventListener('click', ()=>{
+  const o=$('#builderOpening').value, v=$('#builderVerb').value, n=$('#builderNoun').value, t=$('#builderTopic').value.trim();
+  $('#builderOut').textContent = `${o}, ${v} ${n} para ${t||'un problema representativo'}.`;
+});
+
+// ======== DIALOGUES & SHADOWING ======== //
+function fillDialogues(){
+  const sel = $('#dialogueSelect'); sel.innerHTML = Object.keys(DIALOGUES).map(k=>`<option>${k}</option>`).join('');
+  renderDialogue();
+}
+function renderDialogue(){
+  const k = $('#dialogueSelect').value; const arr = DIALOGUES[k]||[];
+  $('#dialogueText').textContent = arr.join('\n');
+  $('#shadowTarget').value = arr[0] || '';
+}
+$('#dialogueSelect').addEventListener('change', renderDialogue);
+$('#dialoguePlay').addEventListener('click', ()=>{
+  const t = $('#dialogueText').textContent; if(t) speak(t);
+});
+$('#dialogueShadow').addEventListener('click', ()=>{
+  const k = $('#dialogueSelect').value; const arr = DIALOGUES[k]||[]; const s = arr[Math.floor(Math.random()*arr.length)]||''; $('#shadowTarget').value = s; speak(s);
+});
+$('#shadowSpeak').addEventListener('click', ()=>{ const t=$('#shadowTarget').value.trim(); if(t) speak(t); });
+
+$('#shadowStart').addEventListener('click', ()=>{
+  if(recognizing) return;
+  recognizer = recognizer || initASR();
+  if(!recognizer) return alert('Speech Recognition not supported.');
+  recognizing = true;
+  $('#shadowASR').textContent = '';
+  recognizer.onresult = (e)=>{
+    const txt = Array.from(e.results).map(r=>r[0].transcript).join(' ');
+    $('#shadowASR').textContent = txt;
+    const tgt = $('#shadowTarget').value.trim() || '';
+    const s = Math.round(similarity(txt, tgt)*100);
+    $('#shadowSim').textContent = `${s}%`;
+  };
+  recognizer.onend = ()=>{ recognizing=false; };
+  try{ recognizer.start(); }catch(e){ recognizing=false; }
+});
+$('#shadowStop').addEventListener('click', ()=>{ try{ recognizer && recognizer.stop(); }catch(e){} });
+
+// ======== QUIZ ======== //
+function randInt(n){ return Math.floor(Math.random()*n); }
+function genMC(){
+  const mode = $('#quizMode').value;
+  const pool = allItems();
+  const pick = pool[randInt(pool.length)];
+  let stem='', choices=[], answerIdx=0;
+  if(mode==='es2en'){
+    stem = `Spanish → English\n${pick.es}`;
+    const opts = new Set([pick.en]);
+    while(opts.size<4){ opts.add(pool[randInt(pool.length)].en); }
+    choices = Array.from(opts); answerIdx = choices.indexOf(pick.en);
+  }else if(mode==='en2es'){
+    stem = `English → Spanish\n${pick.en}`;
+    const opts = new Set([pick.es]);
+    while(opts.size<4){ opts.add(pool[randInt(pool.length)].es); }
+    choices = Array.from(opts); answerIdx = choices.indexOf(pick.es);
+  }else{
+    // Cloze from example/definition: blank a 4+ letter word
+    const src = (pick.ex || pick.def || pick.es).split(/\s+/);
+    const idx = src.findIndex(w=>w.replace(/[^\p{L}]/gu,'').length>=4);
+    if(idx>=0){ src[idx] = '_____'; }
+    stem = `Cloze\n${src.join(' ')}`;
+    const opts = new Set([pick.es]);
+    while(opts.size<4){ opts.add(pool[randInt(pool.length)].es); }
+    choices = Array.from(opts); answerIdx = choices.indexOf(pick.es);
+  }
+  $('#quizQ').textContent = stem;
+  const wrap = $('#quizChoices'); wrap.innerHTML='';
+  choices.forEach((c,i)=>{ const b=document.createElement('button'); b.className='btn'; b.textContent=c; b.dataset.correct = (i===answerIdx?'1':'0'); wrap.appendChild(b); });
+  $('#quizResult').textContent = '';
+}
+$('#quizNext').addEventListener('click', genMC);
+$('#quizChoices').addEventListener('click', (e)=>{
+  const b=e.target.closest('button.btn'); if(!b) return;
+  const ok = b.dataset.correct==='1';
+  $('#quizResult').textContent = ok? 'Correcto ✓' : 'Incorrecto ✗';
+});
+
+// Cloze generator (free text)
+$('#clozeMake').addEventListener('click', ()=>{
+  const txt = $('#clozeInput').value||'';
+  let pat = $('#clozeRegex').value||'(ción|mente)$';
+  let re;
+  try{ re = new RegExp(pat, 'giu'); }catch(e){ alert('Invalid regex.'); return; }
+  const out = txt.replace(/\b[\p{L}]+\b/gu, w=> re.test(w)? '_____': w);
+  $('#clozeOut').textContent = out;
+});
+
+// ======== WRITING LAB ======== //
+$('#abstractScaffold').addEventListener('click', ()=>{
+  const t = [
+    'Se propone un enfoque para …',
+    'El marco teórico se fundamenta en …',
+    'Metodológicamente, se …',
+    'Los resultados indican …',
+    'Desde el punto de vista computacional, …',
+    'En síntesis, …'
+  ].join(' ');
+  $('#abstractBox').value = t;
+});
+$('#abstractSpeak').addEventListener('click', ()=>{ const t=$('#abstractBox').value.trim(); if(t) speak(t); });
+
+// ======== REGISTER & MORPHOLOGY ======== //
+function renderRegister(){
+  const tb = $('#registerTable'); tb.innerHTML='';
+  REGISTER.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML = `<td>${r.fn}</td><td class="mono">${r.pattern}</td><td class="small">${r.ex}</td>`;
+    tb.appendChild(tr);
+  });
+}
+function morphSuggest(s){
+  const x = (s||'').trim().toLowerCase();
+  if(!x) return '';
+  const rules = [
+    [/ization$/, 'ización'], [/isation$/, 'ización'],
+    [/ize$/, 'izar'], [/ise$/, 'izar'],
+    [/tion$/, 'ción'], [/sion$/, 'sión'],
+    [/ity$/, 'idad'], [/ous$/, 'oso'], [/al$/, 'al'],
+    [/ive$/, 'ivo'], [/ence$/, 'encia'], [/ance$/, 'ancia'],
+    [/ment$/, 'miento']
+  ];
+  for(const [re, rep] of rules){ if(re.test(x)) return x.replace(re, rep); }
+  return x
+    .replace(/^regularize$/, 'regularizar')
+    .replace(/^optimize$/, 'optimizar')
+    .replace(/^stabilize$/, 'estabilizar')
+    .replace(/y$/, 'ia');
+}
+$('#morphMake').addEventListener('click', ()=>{
+  const base = $('#morphInput').value||'';
+  const out = morphSuggest(base);
+  $('#morphOut').textContent = out ? `Sugerencia: ${out}` : '—';
+});
+
+// ======== TOOLS: SEARCH / DATA ======== //
+function renderFilters(){
+  const lexSel = $('#lexFilter'); lexSel.innerHTML = '<option value="">All</option>' + Object.keys(CATEGORIES).map(k=>`<option value="${k}">${CATEGORIES[k]}</option>`).join('');
+  const md = $('#miniDrillCategory'); md.innerHTML = '<option value="">Any</option>' + Object.keys(CATEGORIES).map(k=>`<option value="${k}">${CATEGORIES[k]}</option>`).join('');
+}
+$('#globalSearch').addEventListener('input', ()=>{
+  const q = $('#globalSearch').value.trim().toLowerCase();
+  const res = [];
+  if(q){
+    allItems().forEach(it=>{
+      const hay = (it.es+' '+it.en+' '+(it.def||'')+' '+(it.ex||'')).toLowerCase();
+      if(hay.includes(q)) res.push(`• ${it.es} — ${it.en}`);
+    });
+    Object.entries(PHRASES).forEach(([k,arr])=>{
+      arr.forEach(p=>{ if(p.toLowerCase().includes(q)) res.push(`• [${k}] ${p}`); });
+    });
+    Object.entries(DIALOGUES).forEach(([k,arr])=>{
+      arr.forEach(d=>{ if(d.toLowerCase().includes(q)) res.push(`• [${k}] ${d}`); });
+    });
+  }
+  $('#globalResults').textContent = res.join('\n') || '(no results)';
+});
+
+// Export/Import
+$('#exportData').addEventListener('click', ()=>{
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url; a.download='academic-spanish-cs-math.json'; a.click(); URL.revokeObjectURL(url);
+});
+$('#importBtn').addEventListener('click', ()=>{
+  const f = $('#importFile').files[0]; if(!f) return alert('Choose a file.');
+  const r = new FileReader(); r.onload = ()=>{
+    try{
+      const obj = JSON.parse(r.result);
+      Object.assign(state, obj);
+      save(); location.reload();
+    }catch(e){ alert('Invalid JSON'); }
+  }; r.readAsText(f);
+});
+
+// ======== SETTINGS / DASHBOARD TESTS ======== //
+$('#rate').addEventListener('input', e=>{ state.settings.rate = parseFloat(e.target.value)||1; save(); });
+$('#pitch').addEventListener('input', e=>{ state.settings.pitch = parseFloat(e.target.value)||1; save(); });
+$('#resetAll').addEventListener('click', ()=>{ if(confirm('Reset all progress?')){ localStorage.removeItem('acad_es_app_v1'); location.reload(); }});
+$('#voiceSelect').addEventListener('change', e=>{ state.settings.voiceURI = e.target.value||''; save(); });
+
+$('#ttsTest').addEventListener('click', ()=> speak('Prueba de síntesis de voz en español para informática y matemáticas.'));
+$('#sttTest').addEventListener('click', ()=>{
+  recognizer = recognizer || initASR();
+  if(!recognizer) return alert('ASR no disponible.');
+  recognizer.onresult = (e)=>{ const txt = Array.from(e.results).map(r=>r[0].transcript).join(' '); alert('ASR: ' + txt); };
+  try{ recognizer.start(); }catch(e){}
+});
+
+// ======== INIT ======== //
+function init(){
+  load();
+  $('#app').dataset.theme = state.settings.theme || 'dark';
+  $('#themeSelect').value = state.settings.theme || 'dark';
+  initSRS();
+  fillAddCat();
+  renderFilters();
+  renderLexicon();
+  renderDeckList();
+  fillPhraseFilter(); renderPhraseList();
+  fillBuilder();
+  fillDialogues(); renderDialogue();
+  renderRegister();
+  updateDueCount();
+  refreshStats();
+  nextCard();
+  // Global keyboard shortcut: / to search
+  document.addEventListener('keydown', (e)=>{
+    const tag = (document.activeElement?.tagName||'').toLowerCase();
+    if(tag==='input' || tag==='textarea') return;
+    if(e.key==='/'){ e.preventDefault(); show('tools'); $('#globalSearch').focus(); }
+  });
+}
+if('speechSynthesis' in window){ try{ speechSynthesis.onvoiceschanged = ()=>{ loadVoices(); }; setTimeout(loadVoices, 200); }catch(e){} }
+init();
+</script>
+</body>
+</html>

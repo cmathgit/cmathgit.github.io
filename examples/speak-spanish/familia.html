@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Habla Con La Familia — MX Spanish Coach</title>
+<style>
+  :root{
+    --bg:#0f1220; --surface:#161a2b; --card:#1d233a; --muted:#778; --text:#e8ecff; --accent:#6ee7ff; --accent2:#8b5cf6; --good:#22c55e; --warn:#f59e0b; --bad:#ef4444;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0; background:linear-gradient(180deg, #0b0e1a, #12172a); color:var(--text); font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"}
+  header{position:sticky; top:0; z-index:10; backdrop-filter: blur(8px); background:rgba(15,18,32,.7); border-bottom:1px solid #22273a}
+  .wrap{max-width:1100px; margin:0 auto; padding:18px}
+  h1{margin:0; font-size: clamp(20px,2.4vw,28px); letter-spacing:.2px}
+  .tagline{color:var(--muted); font-size:.95rem}
+  nav{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+  nav button{background:var(--surface); border:1px solid #20263d; color:var(--text); padding:10px 12px; border-radius:12px; cursor:pointer}
+  nav button.active{background:linear-gradient(135deg,var(--accent2),var(--accent)); color:#081018; font-weight:700; border-color:transparent}
+  main{max-width:1100px; margin:18px auto; padding:0 18px 44px}
+  section{display:none; background:var(--card); border:1px solid #22273a; border-radius:16px; padding:16px; box-shadow:0 6px 30px rgba(0,0,0,.25)}
+  section.active{display:block}
+  .row{display:grid; grid-template-columns:1fr; gap:12px}
+  @media (min-width:860px){ .row{grid-template-columns:1.2fr .8fr} }
+  .card{background:var(--surface); border:1px solid #22273a; border-radius:14px; padding:14px}
+  .controls{display:flex; flex-wrap:wrap; gap:8px}
+  .controls button, .controls select, .controls input[type="number"], .controls input[type="text"], .controls input[type="file"]{background:#0f1324; border:1px solid #2b3350; color:var(--text); padding:10px 12px; border-radius:12px}
+  .controls button.primary{background:linear-gradient(135deg,var(--accent2),var(--accent)); color:#081018; border:none; font-weight:700}
+  .controls button.good{background:linear-gradient(135deg,#34d399,#22d3ee); color:#081018; border:none; font-weight:700}
+  .controls button.warn{background:linear-gradient(135deg,#f59e0b,#f43f5e); color:#081018; border:none; font-weight:700}
+  .pill{display:inline-flex; align-items:center; gap:6px; background:#0e1324; border:1px solid #2b3350; color:#aab; padding:6px 10px; border-radius:999px; font-size:.85rem}
+  .muted{color:var(--muted)}
+  .es{font-size:1.8rem; letter-spacing:.2px}
+  .en{font-size:1.05rem; color:#aab}
+  .score{font-weight:800}
+  .progress{height:10px; background:#0e1222; border:1px solid #2b3350; border-radius:999px; overflow:hidden}
+  .progress > div{height:100%; background:linear-gradient(90deg,var(--accent2),var(--accent)); width:0%}
+  details{background:rgba(255,255,255,.03); border:1px dashed #334; padding:10px 12px; border-radius:12px}
+  summary{cursor:pointer}
+  .kbd{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background:#0d1222; border:1px solid #2a3350; padding:1px 6px; border-radius:6px}
+  .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+  .small{font-size:.9rem}
+  .success{color:var(--good)}
+  .error{color:var(--bad)}
+  .hint{color:#cbd5ff}
+  footer{opacity:.7; font-size:.9rem; margin-top:22px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Habla Con La Familia — <span class="muted">MX Spanish Coach</span></h1>
+    <div class="tagline">Focused on Mexican Spanish, family conversations, and fluent speaking via listening, shadowing, SRS, and role‑play. Single‑file. Private. Offline‑friendly.</div>
+    <nav id="tabs"></nav>
+  </div>
+</header>
+<main>
+  <section id="deck" class="active">
+    <div class="row">
+      <div class="card">
+        <div class="pill" id="dueInfo">Loading deck…</div>
+        <div style="margin-top:10px">
+          <div class="es" id="deckEs">—</div>
+          <div class="en" id="deckEn" style="display:none">—</div>
+        </div>
+        <div class="controls" style="margin-top:12px">
+          <button id="speakBtn" title="Play audio">▶️ Escuchar</button>
+          <button id="toggleEnBtn">Mostrar traducción</button>
+          <button class="good" id="knewBtn">Lo dije bien ✓</button>
+          <button class="primary" id="hesitatedBtn">Me tardé ~</button>
+          <button class="warn" id="missedBtn">Me equivoqué ✗</button>
+        </div>
+        <div style="margin-top:12px">
+          <div class="progress"><div id="dayProgress"></div></div>
+          <div class="muted small" id="streakInfo">—</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="muted small">Shadowing (record & compare)</div>
+        <div class="controls" style="margin-top:6px">
+          <button id="micToggle">🎤 Enable Mic</button>
+          <button id="shadowSpeak">Speak sentence</button>
+          <button id="shadowRecord">Record me</button>
+          <button id="shadowStop">Stop</button>
+        </div>
+        <div id="shadowTarget" class="es" style="margin-top:8px">—</div>
+        <div class="mono small">You said: <span id="shadowHeard">—</span></div>
+        <div class="small">Similarity: <span class="score" id="shadowScore">—</span></div>
+        <details style="margin-top:8px"><summary>What counts as a match?</summary>
+          We compare your speech to the target (ignoring accents & punctuation) using edit distance. Aim for ≥ 85%.
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="roleplay">
+    <div class="row">
+      <div class="card">
+        <div class="controls">
+          <select id="dialogSelect"></select>
+          <button id="rpReset">Restart</button>
+          <button id="rpListen">🔊 Listen</button>
+          <button id="rpSpeak">🎤 Say it</button>
+        </div>
+        <div id="rpPanel" style="margin-top:8px"></div>
+        <div class="controls" style="margin-top:10px">
+          <input id="rpInput" type="text" placeholder="Type your response (or use mic)…" />
+          <button id="rpCheck" class="primary">Check</button>
+          <button id="rpNext" class="good">Next ▶</button>
+        </div>
+        <div id="rpFeedback" class="small"></div>
+      </div>
+      <div class="card">
+        <div class="muted small">Tips</div>
+        <ul>
+          <li>Mexico favors <b>ustedes</b> for plural “you”; <b>vosotros</b> is rarely used.</li>
+          <li>Use <i>¿Mande?</i> politely for “what?”</li>
+          <li><i>Ahorita</i> can mean now… or in a while; context matters.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="dictation">
+    <div class="card">
+      <div class="controls">
+        <button id="dictPlay">Play sentence</button>
+        <button id="dictReveal">Reveal</button>
+        <button id="dictNew">New</button>
+      </div>
+      <div id="dictPrompt" class="es" style="margin-top:8px">—</div>
+      <input id="dictInput" class="mono" style="margin-top:10px; width:100%" placeholder="Type what you hear…" />
+      <div class="small">Score: <span class="score" id="dictScore">—</span></div>
+    </div>
+  </section>
+
+  <section id="conjugator">
+    <div class="card">
+      <div class="controls">
+        <select id="verbSelect"></select>
+        <select id="tenseSelect">
+          <option value="presente">Presente (yo hablo)</option>
+          <option value="preterito">Pretérito (yo hablé)</option>
+          <option value="imperfecto">Imperfecto (yo hablaba)</option>
+        </select>
+        <button id="speakTable">🔊 Read table</button>
+      </div>
+      <div id="tableWrap" class="mono"></div>
+    </div>
+  </section>
+
+  <section id="slang">
+    <div class="row">
+      <div class="card">
+        <h3>Mexican Spanish — Colloquialisms</h3>
+        <ul id="slangList"></ul>
+      </div>
+      <div class="card">
+        <h3>Add Custom Phrase (family‑specific)</h3>
+        <div class="controls">
+          <input id="custEs" type="text" placeholder="Frase en español (MX)…" />
+          <input id="custEn" type="text" placeholder="English gloss…" />
+          <button id="addCustom" class="primary">Add to Deck</button>
+        </div>
+        <div class="small muted">Examples: “¿Vas a la <i>tiendita</i>?”, “Pásame la <i>cazuela</i>”, “No manches, ¡qué tráfico!”</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="settings">
+    <div class="row">
+      <div class="card">
+        <h3>Speech & Playback</h3>
+        <div class="controls">
+          <label>Voice: <select id="voiceSelect"></select></label>
+          <label>Rate: <input id="rate" type="number" min="0.6" max="1.4" step="0.05" value="1"/></label>
+          <label>Mic (STT): <span id="sttStatus" class="pill">not ready</span></label>
+        </div>
+        <div class="controls" style="margin-top:8px">
+          <button id="testSpeak">Test voice</button>
+          <button id="grantMic">Grant mic permission</button>
+        </div>
+        <div class="small muted">Uses the browser’s speechSynthesis (TTS) and webkitSpeechRecognition when available. Best in Chrome‑based browsers. All data stays on your device.</div>
+      </div>
+      <div class="card">
+        <h3>Deck Options</h3>
+        <div class="controls">
+          <label><input type="checkbox" id="mxOnly" checked/> Prefer Mexican items</label>
+          <label><input type="checkbox" id="hideEnglish"/> Hide English by default</label>
+          <label><input type="checkbox" id="ustedes" checked/> Use <b>ustedes</b> (MX)</label>
+        </div>
+        <div class="controls">
+          <button id="resetToday">Reset today’s counters</button>
+          <button id="hardReset" class="warn">Factory reset (deck & progress)</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="data">
+    <div class="row">
+      <div class="card">
+        <h3>Backup & Transfer</h3>
+        <div class="controls">
+          <button id="exportBtn" class="primary">Export JSON</button>
+          <input id="importFile" type="file" accept="application/json"/>
+          <button id="importBtn">Import</button>
+        </div>
+        <div id="dataInfo" class="small muted">—</div>
+      </div>
+      <div class="card">
+        <h3>About</h3>
+        <p class="small">This app emphasizes <b>massive listening</b>, <b>shadowing</b>, and <b>speaking</b> around family life in Mexican Spanish. Use it daily. Add phrases you actually hear from Dad and relatives to make it personally relevant. Everything is stored locally (no server).
+        </p>
+        <details>
+          <summary>Method (quick)</summary>
+          <ol class="small">
+            <li>Deck: Listen → Shadow → Speak → Grade (SRS).</li>
+            <li>Role‑Play: Simulate real calls & dinners, hit ≥85% keyword match.</li>
+            <li>Dictation: Type exactly what you hear (orthography muscle).</li>
+            <li>Conjugator: Drill top verbs you say all the time.</li>
+          </ol>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    Built for American learners with Mexican family. 🇲🇽❤️🇺🇸 — Single‑file; feel free to extend.
+    <div class="small">Powered by GPT-5</div>
+  </footer>
+</main>
+<script>
+// ----------------------------------------------
+// Utility helpers
+// ----------------------------------------------
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+const byId = id => document.getElementById(id);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const now = () => Date.now();
+function strip(s){
+  return s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,'').replace(/[!?¿¡.,:;\-—_/"'`]/g,'').replace(/\s+/g,' ').trim();
+}
+function levenshtein(a,b){
+  a = strip(a); b = strip(b);
+  const m=a.length, n=b.length; if(!m && !n) return 0; if(!m) return n; if(!n) return m;
+  const dp=new Array(n+1).fill(0); for(let j=0;j<=n;j++) dp[j]=j;
+  for(let i=1;i<=m;i++){
+    let prev=dp[0]; dp[0]=i;
+    for(let j=1;j<=n;j++){
+      const tmp=dp[j];
+      const cost = a[i-1]===b[j-1]?0:1;
+      dp[j]=Math.min(dp[j]+1, dp[j-1]+1, prev+cost);
+      prev=tmp;
+    }
+  }
+  return dp[n];
+}
+function similarity(a,b){
+  a=strip(a); b=strip(b); if(!a && !b) return 1; const dist=levenshtein(a,b); const denom=Math.max(a.length,b.length)||1; return 1 - dist/denom;
+}
+function rand(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+function fmtPercent(x){ return Math.round(x*100); }
+function days(ms){ return ms/86400000; }
+
+// ----------------------------------------------
+// Data: Deck (family-centric, MX flavor)
+// Each item: {id, es, en, tags:[…], ease, interval, due, reps, lapses, region}
+// ----------------------------------------------
+const defaultDeck = [
+  {id:1, es:"¿Qué onda?", en:"What's up?", tags:["greeting","slang"], region:"mx"},
+  {id:2, es:"¿Cómo amaneciste?", en:"How did you wake up?", tags:["family"], region:"mx"},
+  {id:3, es:"¿Ya comiste?", en:"Did you eat already?", tags:["home"], region:"mx"},
+  {id:4, es:"Ahorita voy, espérame tantito.", en:"I'm coming now/soon, wait a little.", tags:["time"], region:"mx"},
+  {id:5, es:"Pásame la salsa, porfa.", en:"Pass me the salsa, please.", tags:["table"], region:"mx"},
+  {id:6, es:"¿Mande? No te escuché bien.", en:"Pardon? I didn't hear you well.", tags:["polite"], region:"mx"},
+  {id:7, es:"Voy a la tiendita. ¿Quieres algo?", en:"I'm going to the corner store. Want anything?", tags:["errand"], region:"mx"},
+  {id:8, es:"No manches, estuvo pesado el tráfico.", en:"No way, traffic was rough.", tags:["slang","transport"], region:"mx"},
+  {id:9, es:"¿Vas a venir el domingo con la familia?", en:"Are you coming on Sunday with the family?", tags:["family"], region:"mx"},
+  {id:10, es:"¿Cómo te fue en el trabajo?", en:"How'd work go?", tags:["chat"], region:"mx"},
+  {id:11, es:"Hazme un favor, porfa.", en:"Do me a favor, please.", tags:["polite"], region:"mx"},
+  {id:12, es:"¿Te sirvo más?", en:"Want some more?", tags:["table"], region:"mx"},
+  {id:13, es:"Al rato te marco.", en:"I'll call you later.", tags:["phone"], region:"mx"},
+  {id:14, es:"Prende la luz, porfa.", en:"Turn on the light, please.", tags:["home"], region:"mx"},
+  {id:15, es:"¿Trajiste las tortillas?", en:"Did you bring the tortillas?", tags:["food"], region:"mx"},
+  {id:16, es:"¡Qué padre!", en:"That's awesome!", tags:["slang","reaction"], region:"mx"},
+  {id:17, es:"Se me antoja un café.", en:"I feel like having a coffee.", tags:["food"], region:"mx"},
+  {id:18, es:"¿Puedes ayudarme tantito?", en:"Can you help me a bit?", tags:["polite"], region:"mx"},
+  {id:19, es:"Te quedó muy rico.", en:"It came out delicious.", tags:["compliment","food"], region:"mx"},
+  {id:20, es:"Aguas con eso.", en:"Watch out with that.", tags:["warning","slang"], region:"mx"},
+  {id:21, es:"¿Pagaste la cuenta?", en:"Did you pay the bill?", tags:["money"], region:"mx"},
+  {id:22, es:"Me dio pena.", en:"I felt embarrassed.", tags:["feeling"], region:"mx"},
+  {id:23, es:"¿Qué vas a llevar?", en:"What are you going to take/order?", tags:["store","food"], region:"mx"},
+  {id:24, es:"Ando bien cansado.", en:"I'm really tired.", tags:["feeling"], region:"mx"},
+  {id:25, es:"Se me olvidó.", en:"I forgot.", tags:["common"], region:"mx"},
+  {id:26, es:"Ahorita vengo.", en:"I'll be right back (soon).", tags:["time"], region:"mx"},
+  {id:27, es:"Déjame te explico.", en:"Let me explain.", tags:["common"], region:"mx"},
+  {id:28, es:"Está bien caro.", en:"It's really expensive.", tags:["money"], region:"mx"},
+  {id:29, es:"¿Tienes cambio?", en:"Do you have change?", tags:["money"], region:"mx"},
+  {id:30, es:"Nos vemos al rato.", en:"See you later.", tags:["bye"], region:"mx"},
+  {id:31, es:"¿Quieres agua o refresco?", en:"Do you want water or soda?", tags:["table"], region:"mx"},
+  {id:32, es:"¿Cuánto te debo?", en:"How much do I owe you?", tags:["money"], region:"mx"},
+  {id:33, es:"Está cañón.", en:"It's tough/insane.", tags:["slang"], region:"mx"},
+  {id:34, es:"¿Traes coche?", en:"Did you drive?", tags:["transport"], region:"mx"},
+  {id:35, es:"Hay que apartar la mesa.", en:"We should reserve the table.", tags:["plan"], region:"mx"},
+  {id:36, es:"Me quedó lejos.", en:"It was out of the way.", tags:["transport"], region:"mx"},
+  {id:37, es:"Te marco llegando.", en:"I'll call you when I get there.", tags:["phone"], region:"mx"},
+  {id:38, es:"¿Quién va a manejar?", en:"Who's going to drive?", tags:["transport"], region:"mx"},
+  {id:39, es:"¿Ya bañaste al niño?", en:"Did you bathe the kid yet?", tags:["home","family"], region:"mx"},
+  {id:40, es:"Estoy al cien.", en:"I'm feeling great.", tags:["slang","feeling"], region:"mx"},
+];
+
+// Colloquialisms list
+const slangMX = [
+  {term:"¿Mande?", gloss:"Pardon? / Could you repeat?", note:"Polite MX way to say 'What?'."},
+  {term:"No manches", gloss:"No way! / Come on", note:"Surprise or disbelief, informal."},
+  {term:"¡Qué padre!", gloss:"That's awesome!", note:"Positive reaction."},
+  {term:"Güey / wey", gloss:"Dude", note:"Use cautiously; informal/very colloquial."},
+  {term:"Chamba", gloss:"Job / gig", note:"Work context."},
+  {term:"Lana", gloss:"Money", note:"Cash/slang."},
+  {term:"Platicar", gloss:"To chat", note:"Common MX synonym of 'charlar'."},
+  {term:"Aguas", gloss:"Careful / Watch out", note:"Warning someone."},
+  {term:"Tiendita", gloss:"Corner store", note:"Small neighborhood shop."},
+  {term:"Ahorita", gloss:"Right now / in a bit", note:"Time depends on context + tone."},
+];
+
+// Dialogues (role‑play). Each node has: speaker, es, en, userTurn, keywords
+const dialogues = {
+  "Llamada con Papá": [
+    {speaker:"Papá", es:"¿Qué onda, hijo? ¿Cómo te fue hoy?", en:"What's up, son? How did it go today?"},
+    {speaker:"Tú", es:"Me fue bien, gracias.", en:"It went well, thanks.", userTurn:true, keywords:["bien","gracias"]},
+    {speaker:"Papá", es:"¿Ya comiste?", en:"Did you eat already?"},
+    {speaker:"Tú", es:"Apenas voy a cenar con la familia.", en:"I'm about to have dinner with the family.", userTurn:true, keywords:["cenar","familia"]},
+    {speaker:"Papá", es:"Órale. Al rato me marcas.", en:"Alright. Call me later."},
+    {speaker:"Tú", es:"Sí, al rato te marco. Te quiero.", en:"Yes, I'll call later. Love you.", userTurn:true, keywords:["al rato","marco"]},
+  ],
+  "En la mesa": [
+    {speaker:"Tía", es:"Pásame la salsa, porfa.", en:"Pass me the salsa, please."},
+    {speaker:"Tú", es:"Claro, aquí tienes.", en:"Sure, here you go.", userTurn:true, keywords:["claro","aquí tienes"]},
+    {speaker:"Tía", es:"¿Quieres más tortillas?", en:"Want more tortillas?"},
+    {speaker:"Tú", es:"Sí, porfa. Están bien ricas.", en:"Yes, please. They're really good.", userTurn:true, keywords:["sí","ricas"]},
+  ],
+  "En la tiendita": [
+    {speaker:"Primo", es:"Voy a la tiendita. ¿Quieres algo?", en:"I'm going to the corner store. Want anything?"},
+    {speaker:"Tú", es:"Tráeme una coca y unas papitas, porfa.", en:"Bring me a Coke and some chips, please.", userTurn:true, keywords:["coca","papitas"]},
+    {speaker:"Primo", es:"Va. ¿Traes efectivo?", en:"Cool. Do you have cash?"},
+    {speaker:"Tú", es:"Sí, ahorita te doy.", en:"Yes, I'll give you some now/soon.", userTurn:true, keywords:["ahorita","doy"]},
+  ],
+};
+
+// Conjugations for top verbs (MX favored forms: ustedes)
+const verbs = {
+  ser:{
+    presente:["soy","eres","es","somos","son"],
+    preterito:["fui","fuiste","fue","fuimos","fueron"],
+    imperfecto:["era","eras","era","éramos","eran"],
+  },
+  estar:{
+    presente:["estoy","estás","está","estamos","están"],
+    preterito:["estuve","estuviste","estuvo","estuvimos","estuvieron"],
+    imperfecto:["estaba","estabas","estaba","estábamos","estaban"],
+  },
+  tener:{
+    presente:["tengo","tienes","tiene","tenemos","tienen"],
+    preterito:["tuve","tuviste","tuvo","tuvimos","tuvieron"],
+    imperfecto:["tenía","tenías","tenía","teníamos","tenían"],
+  },
+  ir:{
+    presente:["voy","vas","va","vamos","van"],
+    preterito:["fui","fuiste","fue","fuimos","fueron"],
+    imperfecto:["iba","ibas","iba","íbamos","iban"],
+  },
+  querer:{
+    presente:["quiero","quieres","quiere","queremos","quieren"],
+    preterito:["quise","quisiste","quiso","quisimos","quisieron"],
+    imperfecto:["quería","querías","quería","queríamos","querían"],
+  },
+  poder:{
+    presente:["puedo","puedes","puede","podemos","pueden"],
+    preterito:["pude","pudiste","pudo","pudimos","pudieron"],
+    imperfecto:["podía","podías","podía","podíamos","podían"],
+  },
+  hacer:{
+    presente:["hago","haces","hace","hacemos","hacen"],
+    preterito:["hice","hiciste","hizo","hicimos","hicieron"],
+    imperfecto:["hacía","hacías","hacía","hacíamos","hacían"],
+  },
+  decir:{
+    presente:["digo","dices","dice","decimos","dicen"],
+    preterito:["dije","dijiste","dijo","dijimos","dijeron"],
+    imperfecto:["decía","decías","decía","decíamos","decían"],
+  },
+  venir:{
+    presente:["vengo","vienes","viene","venimos","vienen"],
+    preterito:["vine","viniste","vino","vinimos","vinieron"],
+    imperfecto:["venía","venías","venía","veníamos","venían"],
+  },
+  poner:{
+    presente:["pongo","pones","pone","ponemos","ponen"],
+    preterito:["puse","pusiste","puso","pusimos","pusieron"],
+    imperfecto:["ponía","ponías","ponía","poníamos","ponían"],
+  },
+};
+
+// ----------------------------------------------
+// State & persistence
+// ----------------------------------------------
+const STORAGE_KEY = 'mxspanish_state_v1';
+let state = {
+  deck: [],
+  settings: {voiceUri:null, rate:1.0, mxOnly:true, hideEnglish:false, ustedes:true},
+  srs: {todayReviewed:0, streak:0, lastDay:0},
+};
+
+function load(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){ state = JSON.parse(raw); }
+  }catch(e){ console.warn('Failed to load state', e); }
+  if(!state.deck || !state.deck.length){
+    state.deck = defaultDeck.map(x=>({ ...x, ease:2.5, interval:0, due: now(), reps:0, lapses:0 }));
+  }
+  if(!state.settings) state.settings = {voiceUri:null, rate:1.0, mxOnly:true, hideEnglish:false, ustedes:true};
+  if(!state.srs) state.srs = {todayReviewed:0, streak:0, lastDay:0};
+}
+function save(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+// ----------------------------------------------
+// Tabs
+// ----------------------------------------------
+const sections = [
+  {id:'deck', label:'Deck'},
+  {id:'roleplay', label:'Role‑Play'},
+  {id:'dictation', label:'Dictation'},
+  {id:'conjugator', label:'Conjugator'},
+  {id:'slang', label:'Slang + Custom'},
+  {id:'settings', label:'Settings'},
+  {id:'data', label:'Data'},
+];
+function initTabs(){
+  const nav = byId('tabs');
+  sections.forEach((s,i)=>{
+    const b=document.createElement('button');
+    b.textContent=s.label; b.dataset.target=s.id; if(i===0) b.classList.add('active');
+    b.addEventListener('click',()=>{
+      $$('#tabs button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      $$('main section').forEach(sec=>sec.classList.toggle('active', sec.id===s.id));
+    });
+    nav.appendChild(b);
+  });
+}
+
+// ----------------------------------------------
+// Speech (TTS)
+// ----------------------------------------------
+let voices=[]; let currentVoice=null;
+function loadVoices(){ voices = speechSynthesis.getVoices(); pickVoice(); fillVoiceSelect(); }
+function pickVoice(){
+  const preferred = state.settings.voiceUri;
+  if(preferred){ currentVoice = voices.find(v=>v.voiceURI===preferred) || null; }
+  if(!currentVoice){
+    currentVoice = voices.find(v=>/es.*MX/i.test(v.lang||v.name)) ||
+                   voices.find(v=>/^es(-|_)/i.test(v.lang)) || null;
+  }
+}
+function speak(text, opt={}){
+  if(!('speechSynthesis' in window)) return alert('speechSynthesis not supported');
+  const u = new SpeechSynthesisUtterance(text);
+  u.voice = currentVoice || null;
+  u.lang = (currentVoice && currentVoice.lang) || 'es-MX';
+  u.rate = Number(state.settings.rate||1);
+  if(opt.onend) u.onend = opt.onend;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+function fillVoiceSelect(){
+  const sel = byId('voiceSelect'); sel.innerHTML='';
+  voices.filter(v=>/^es/i.test(v.lang)).forEach(v=>{
+    const o=document.createElement('option');
+    o.value=v.voiceURI; o.textContent=`${v.name} (${v.lang})`;
+    if(state.settings.voiceUri===v.voiceURI) o.selected=true;
+    sel.appendChild(o);
+  });
+}
+
+// ----------------------------------------------
+// STT (Speech Recognition)
+// ----------------------------------------------
+let rec=null; let sttReady=false; let recording=false;
+function initSTT(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){ byId('sttStatus').textContent='not supported'; return; }
+  rec = new SR();
+  rec.continuous=false; rec.interimResults=false; rec.lang='es-MX';
+  rec.onresult = e=>{
+    const transcript = Array.from(e.results).map(r=>r[0].transcript).join(' ');
+    byId('shadowHeard').textContent=transcript;
+    const tgt = byId('shadowTarget').textContent || byId('deckEs').textContent;
+    const s = similarity(transcript, tgt);
+    byId('shadowScore').textContent = `${fmtPercent(s)}%`;
+  };
+  rec.onend = ()=>{ recording=false; };
+  sttReady=true; byId('sttStatus').textContent='ready';
+}
+
+// ----------------------------------------------
+// SRS (SM‑2 like, simplified)
+// ----------------------------------------------
+function grade(card, quality){
+  // quality: 5 good, 4 hesitant, 2 miss
+  card.reps = (card.reps||0)+1;
+  if(quality<3){ card.lapses=(card.lapses||0)+1; card.interval=1; card.ease=Math.max(1.3, (card.ease||2.5)-0.2); }
+  else{
+    card.ease = Math.max(1.3, (card.ease||2.5) + (quality===5?0.05:0));
+    if(card.interval===0){ card.interval=1; }
+    else if(card.interval===1){ card.interval=3; }
+    else{ card.interval=Math.round(card.interval * (card.ease||2.5)); }
+  }
+  card.due = now() + card.interval*86400000;
+  state.srs.todayReviewed = (state.srs.todayReviewed||0)+1;
+}
+function dueCards(){
+  const mxOnly = !!state.settings.mxOnly;
+  const cards = state.deck.filter(c=> !mxOnly || c.region==='mx');
+  const due = cards.filter(c=> (c.due||0) <= now());
+  if(due.length) return due.sort((a,b)=>a.due-b.due);
+  return cards.sort((a,b)=> (a.due||0) - (b.due||0));
+}
+
+// ----------------------------------------------
+// Deck UI
+// ----------------------------------------------
+let currentCard=null;
+function updateDeckUI(){
+  const d = dueCards();
+  currentCard = d[0];
+  if(!currentCard){ byId('deckEs').textContent='(No cards)'; return; }
+  byId('deckEs').textContent=currentCard.es;
+  byId('deckEn').textContent=currentCard.en;
+  const hide = !!state.settings.hideEnglish; byId('deckEn').style.display = hide ? 'none':'block';
+  const dueCount = d.filter(c=> (c.due||0)<=now()).length;
+  byId('dueInfo').textContent = `${dueCount} due • ease ${currentCard.ease?.toFixed(2)} • interval ${currentCard.interval}d`;
+}
+
+function review(q){
+  if(!currentCard) return; grade(currentCard, q); save(); updateDeckUI(); updateProgress(); setShadowTarget(currentCard.es);
+}
+
+function updateProgress(){
+  const today = Math.floor(now()/86400000);
+  if(state.srs.lastDay!==today){ state.srs.lastDay=today; state.srs.todayReviewed=0; state.srs.streak += 1; }
+  const n = Math.min(50, state.srs.todayReviewed||0);
+  byId('dayProgress').style.width = `${Math.round(n*2)}%`;
+  byId('streakInfo').textContent = `Today: ${state.srs.todayReviewed||0} • Streak: ${state.srs.streak||0}`;
+}
+
+// ----------------------------------------------
+// Dictation
+// ----------------------------------------------
+let dictCard=null;
+function newDict(){ dictCard = rand(state.deck); byId('dictPrompt').textContent = '— — —'; byId('dictInput').value=''; byId('dictScore').textContent='—'; }
+function playDict(){ speak(dictCard.es); byId('dictPrompt').textContent = '…'; }
+function checkDict(){ const guess=byId('dictInput').value; const s=similarity(guess, dictCard.es); byId('dictScore').textContent=`${fmtPercent(s)}%`; }
+
+// ----------------------------------------------
+// Shadowing
+// ----------------------------------------------
+function setShadowTarget(text){ byId('shadowTarget').textContent=text; }
+function shadowSpeak(){ speak(byId('shadowTarget').textContent); }
+function shadowRecord(){ if(!sttReady||!rec) return alert('Speech recognition not available.'); if(recording){ rec.stop(); return; } recording=true; try{ rec.start(); }catch(e){ recording=false; console.warn(e); } }
+
+// ----------------------------------------------
+// Role‑play
+// ----------------------------------------------
+let rp = { name:null, idx:0 };
+function fillDialogSelect(){ const sel=byId('dialogSelect'); sel.innerHTML=''; Object.keys(dialogues).forEach((k,i)=>{ const o=document.createElement('option'); o.value=k; o.textContent=k; sel.appendChild(o); if(i===0) sel.value=k; }); }
+function rpLoad(name){ rp.name=name; rp.idx=0; rpRender(); }
+function rpCurrent(){ return dialogues[rp.name][rp.idx]; }
+function rpRender(){
+  const arr = dialogues[rp.name]; const idx = rp.idx; const panel=byId('rpPanel'); panel.innerHTML='';
+  arr.forEach((turn,i)=>{
+    const div=document.createElement('div'); div.className='card'; div.style.marginTop='8px';
+    const who = `<b>${turn.speaker}</b>`;
+    const text = `<div class="es">${turn.es}</div><div class="en" style="${state.settings.hideEnglish?'display:none':''}">${turn.en}</div>`;
+    div.innerHTML = `${who}${text}`;
+    if(i===idx && turn.userTurn){ div.style.borderColor = '#2dd4bf'; div.style.boxShadow = '0 0 0 2px rgba(45,212,191,.25)'; }
+    panel.appendChild(div);
+  });
+  const cur = rpCurrent(); byId('rpInput').value=''; byId('rpFeedback').textContent='';
+}
+function rpListen(){ const cur = rpCurrent(); speak(cur.es); }
+function rpCheck(){
+  const cur = rpCurrent(); if(!cur.userTurn){ byId('rpFeedback').textContent='Listen first, then Next.'; return; }
+  const txt = byId('rpInput').value.trim(); if(!txt){ byId('rpFeedback').textContent='Type something or use mic.'; return; }
+  const ok = (cur.keywords||[]).every(k=> strip(txt).includes(strip(k)) );
+  const s = similarity(txt, cur.es);
+  byId('rpFeedback').innerHTML = `Similarity ${fmtPercent(s)}%. ${ ok? '<span class="success">Keywords matched ✓</span>' : '<span class="error">Missing a keyword</span>' }`;
+}
+function rpNext(){ const arr=dialogues[rp.name]; rp.idx = Math.min(arr.length-1, rp.idx+1); rpRender(); }
+
+// ----------------------------------------------
+// Conjugator UI
+// ----------------------------------------------
+const persons = ['yo','tú','él/ella/usted','nosotros','ustedes'];
+function fillVerbSelect(){ const sel=byId('verbSelect'); sel.innerHTML=''; Object.keys(verbs).forEach(v=>{ const o=document.createElement('option'); o.value=v; o.textContent=v; sel.appendChild(o); }); sel.value='tener'; buildTable(); }
+function buildTable(){
+  const v=byId('verbSelect').value; const t=byId('tenseSelect').value; const forms=verbs[v][t];
+  const rows = persons.map((p,i)=>`<tr><td>${p}</td><td>${forms[i]}</td></tr>`).join('');
+  byId('tableWrap').innerHTML = `<table class="mono" style="width:100%"><thead><tr><th>Persona</th><th>Forma</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+function speakTable(){ const v=byId('verbSelect').value; const t=byId('tenseSelect').value; const forms=verbs[v][t]; const seq = persons.map((p,i)=>`${p}: ${forms[i]}.`).join(' '); speak(`${v}, ${t}. ${seq}`); }
+
+// ----------------------------------------------
+// Slang UI
+// ----------------------------------------------
+function renderSlang(){ const ul=byId('slangList'); ul.innerHTML=''; slangMX.forEach(item=>{ const li=document.createElement('li'); li.innerHTML = `<b>${item.term}</b> — ${item.gloss} <span class="muted small">${item.note}</span>`; ul.appendChild(li); }); }
+
+// ----------------------------------------------
+// Custom phrase add
+// ----------------------------------------------
+function addCustom(){
+  const es=byId('custEs').value.trim(); const en=byId('custEn').value.trim(); if(!es||!en) return;
+  const id = Math.max(...state.deck.map(x=>x.id))+1;
+  state.deck.push({id, es, en, tags:['custom'], region:'mx', ease:2.5, interval:0, due:now(), reps:0, lapses:0});
+  byId('custEs').value=''; byId('custEn').value=''; save(); updateDeckUI(); alert('Added!');
+}
+
+// ----------------------------------------------
+// Settings
+// ----------------------------------------------
+function bindSettings(){
+  byId('voiceSelect').addEventListener('change', e=>{ state.settings.voiceUri=e.target.value; pickVoice(); save(); });
+  byId('rate').addEventListener('change', e=>{ state.settings.rate=Number(e.target.value); save(); });
+  byId('mxOnly').addEventListener('change', e=>{ state.settings.mxOnly=!!e.target.checked; save(); updateDeckUI(); });
+  byId('hideEnglish').addEventListener('change', e=>{ state.settings.hideEnglish=!!e.target.checked; save(); updateDeckUI(); rpRender(); });
+  byId('ustedes').addEventListener('change', e=>{ state.settings.ustedes=!!e.target.checked; save(); });
+  byId('resetToday').addEventListener('click', ()=>{ state.srs.todayReviewed=0; save(); updateProgress(); });
+  byId('hardReset').addEventListener('click', ()=>{ if(confirm('Erase deck & progress?')){ localStorage.removeItem(STORAGE_KEY); location.reload(); }});
+  byId('testSpeak').addEventListener('click', ()=> speak('Esta es una prueba de voz en español de México.'));
+  byId('grantMic').addEventListener('click', ()=>{ try{ navigator.mediaDevices.getUserMedia({audio:true}).then(()=>{ initSTT(); alert('Mic ready.'); }); }catch(e){ alert('Permission failed.'); }});
+}
+
+// ----------------------------------------------
+// Data import/export
+// ----------------------------------------------
+function exportJSON(){ const blob=new Blob([JSON.stringify(state,null,2)], {type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='mx-spanish-coach.json'; a.click(); URL.revokeObjectURL(url); }
+function importJSON(){ const f=byId('importFile').files[0]; if(!f) return alert('Choose a file first.'); const reader=new FileReader(); reader.onload=e=>{ try{ const obj=JSON.parse(e.target.result); if(obj && obj.deck){ state=obj; save(); location.reload(); } else { alert('Invalid file.'); } }catch(err){ alert('Parse error.'); } }; reader.readAsText(f); }
+
+// ----------------------------------------------
+// Wiring UI events
+// ----------------------------------------------
+function bindUI(){
+  byId('speakBtn').onclick = ()=> speak(byId('deckEs').textContent);
+  byId('toggleEnBtn').onclick = ()=>{ const el=byId('deckEn'); el.style.display = (el.style.display==='none')?'block':'none'; };
+  byId('knewBtn').onclick=()=>review(5);
+  byId('hesitatedBtn').onclick=()=>review(4);
+  byId('missedBtn').onclick=()=>review(2);
+  byId('dictPlay').onclick=playDict; byId('dictReveal').onclick=()=>{ byId('dictPrompt').textContent=dictCard.es; }; byId('dictNew').onclick=newDict; byId('dictInput').addEventListener('input', checkDict);
+  byId('micToggle').onclick=()=>{ if(sttReady) alert('Mic ready. Use Record.'); else initSTT(); };
+  byId('shadowSpeak').onclick=shadowSpeak; byId('shadowRecord').onclick=shadowRecord; byId('shadowStop').onclick=()=>{ try{ rec && rec.stop(); }catch(e){} };
+  byId('dialogSelect').addEventListener('change', e=> rpLoad(e.target.value));
+  byId('rpReset').onclick=()=> rpLoad(byId('dialogSelect').value);
+  byId('rpListen').onclick=rpListen; byId('rpSpeak').onclick=()=>{ const cur=rpCurrent(); speak(cur.es); };
+  byId('rpCheck').onclick=rpCheck; byId('rpNext').onclick=rpNext;
+  byId('verbSelect').addEventListener('change', buildTable); byId('tenseSelect').addEventListener('change', buildTable); byId('speakTable').onclick=speakTable;
+  byId('addCustom').onclick=addCustom;
+  byId('exportBtn').onclick=exportJSON; byId('importBtn').onclick=importJSON;
+}
+
+// ----------------------------------------------
+// Init
+// ----------------------------------------------
+function init(){
+  initTabs(); load(); bindUI(); bindSettings(); renderSlang(); fillDialogSelect(); rpLoad(Object.keys(dialogues)[0]);
+  fillVerbSelect(); updateDeckUI(); updateProgress(); setShadowTarget(byId('deckEs').textContent); newDict();
+  if('speechSynthesis' in window){ speechSynthesis.onvoiceschanged = ()=>{ loadVoices(); }; loadVoices(); }
+  byId('dataInfo').textContent = `Deck size: ${state.deck.length} • Stored locally as ${STORAGE_KEY}`;
+}
+
+init();
+</script>
+</body>
+</html>
