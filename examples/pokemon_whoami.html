@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>POKÉ-PUNK // Personality Test</title>
+<style>
+  :root{
+    --bg:#08090c;
+    --bg2:#0c0f14;
+    --neon1:#0aff9d;
+    --neon2:#00e5ff;
+    --neon3:#ff00e6;
+    --neon4:#ffe700;
+    --ink:#e6f6ff;
+    --muted:#90a4ae55;
+    --card:#0b0f17;
+    --error:#ff5577;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    color:var(--ink); background: radial-gradient(1200px 800px at 10% 10%, #0b1230 8%, transparent 50%),
+                      radial-gradient(1000px 600px at 90% 20%, #170a2a 8%, transparent 55%),
+                      linear-gradient(180deg, var(--bg), var(--bg2));
+    overflow-y:auto;
+  }
+  /* subtle scanline */
+  body:before{content:""; position:fixed; inset:0; pointer-events:none; background: repeating-linear-gradient( to bottom, #ffffff05 0px, #ffffff05 1px, transparent 2px, transparent 3px ); mix-blend-mode: overlay; opacity:.4 }
+  /* grid */
+  .grid{position:fixed; inset:0; background:
+    linear-gradient(transparent 97%, #00f5ff15 98%),
+    linear-gradient(90deg, transparent 97%, #ff00e61a 98%);
+    background-size: 40px 40px; opacity:.25; pointer-events:none;}
+
+  .wrap{max-width:1050px; margin:40px auto; padding:0 20px 80px}
+  header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px}
+  .brand{display:flex; align-items:center; gap:14px}
+  .logo{width:44px; height:44px; border-radius:10px; background:conic-gradient(from 0deg, var(--neon1), var(--neon2), var(--neon3), var(--neon4), var(--neon1)); filter: blur(.3px) saturate(120%); position:relative}
+  .logo:after{content:"\25A3"; position:absolute; inset:0; display:grid; place-items:center; color:#000; font-weight:900; text-shadow:0 0 6px var(--neon4)}
+  h1.title{font-size: clamp(22px, 4vw, 40px); letter-spacing:.06em; margin:0; text-shadow:0 0 10px #00e5ff66, 0 0 25px #ff00e633}
+  .glitch{position:relative}
+  .glitch:after, .glitch:before{content:attr(data-text); position:absolute; left:0; top:0; clip-path: inset(0 0 0 0); opacity:.75}
+  .glitch:before{transform:translate(1px,-1px); color:var(--neon2); animation:gl1 2.5s infinite linear alternate}
+  .glitch:after{transform:translate(-1px,1px); color:var(--neon3); animation:gl2 2.2s infinite linear alternate}
+  @keyframes gl1{0%{clip-path:inset(0 0 82% 0)} 25%{clip-path:inset(0 0 20% 0)} 50%{clip-path:inset(74% 0 0 0)} 75%{clip-path:inset(30% 0 40% 0)} 100%{clip-path:inset(10% 0 60% 0)}}
+  @keyframes gl2{0%{clip-path:inset(60% 0 10% 0)} 25%{clip-path:inset(20% 0 20% 0)} 50%{clip-path:inset(0 0 74% 0)} 75%{clip-path:inset(40% 0 30% 0)} 100%{clip-path:inset(82% 0 0 0)}}
+
+  .card{background: linear-gradient(180deg, #0b0f17, #081018); border:1px solid #1c2335; border-radius:16px; box-shadow:0 0 0 1px #00e5ff22 inset, 0 10px 30px #0006; overflow:hidden}
+  .panel{padding:20px}
+  .bar{height:8px; background:#0d1220; border-radius:999px; overflow:hidden; border:1px solid #182447}
+  .bar > span{display:block; height:100%; width:0%; background: linear-gradient(90deg, var(--neon1), var(--neon2), var(--neon3)); box-shadow:0 0 12px #00e5ff7a, 0 0 20px #ff00e633; transition:width .4s ease}
+
+  .toolbar{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+  button{appearance:none; border:none; color:var(--ink); background:linear-gradient(180deg, #11182a, #0b1222); padding:12px 16px; border-radius:12px; cursor:pointer; border:1px solid #26314f; box-shadow:0 6px 14px #0008, inset 0 0 0 1px #00e5ff22; letter-spacing:.06em}
+  button:hover{box-shadow:0 0 0 1px #00e5ff66 inset, 0 10px 28px #0009}
+  button.primary{background:linear-gradient(180deg, #04242d, #03161b); border-color:#006c76; text-shadow:0 0 6px #00e5ff88}
+  button.warn{background:linear-gradient(180deg, #2b0a12, #15060a); border-color:#7a2031}
+  button:disabled{opacity:.55; cursor:not-allowed}
+
+  .intro{display:grid; gap:14px; grid-template-columns: 1fr; padding:18px}
+  .intro p{margin:.25rem 0; color:#b5c6d6}
+  .small{font-size:.9rem; color:#a7b7c7}
+
+  .q{padding:18px; border-top:1px dashed #1e2740}
+  .q h3{margin:0 0 10px; font-size:1.05rem; letter-spacing:.02em}
+  .opts{display:grid; gap:10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))}
+
+  /* cyber-radio */
+  .opt{position:relative}
+  .opt input{position:absolute; inset:-2px; opacity:0}
+  .opt label{display:flex; gap:10px; align-items:start; padding:12px 12px; border:1px solid #27304d; border-radius:12px; background:linear-gradient(180deg, #0b101b, #0a121f); cursor:pointer; min-height:56px; box-shadow:inset 0 0 0 1px #00e5ff1f}
+  .opt label:hover{box-shadow:inset 0 0 0 1px #00e5ff80}
+  .opt .dot{width:18px; height:18px; border-radius:50%; border:2px solid #2c3656; margin-top:2px; box-shadow:0 0 0 1px #00e5ff44 inset}
+  .opt input:checked + label{border-color:#00e5ff99; box-shadow:0 0 12px #00e5ff32 inset, 0 0 0 1px #00e5ff66 inset}
+  .opt input:checked + label .dot{border-color:var(--neon2); background: radial-gradient(circle at 50% 50%, var(--neon2), transparent 55%); box-shadow:0 0 14px var(--neon2)}
+  .opt .txt{color:#cfe8f6}
+
+  /* results */
+  .results{display:none; padding:18px}
+  .results.active{display:block}
+  .stack{display:grid; gap:16px}
+  .rank{display:grid; grid-template-columns: 86px 1fr; gap:14px; align-items:center; background:linear-gradient(180deg, #071018, #09121e); border:1px solid #243052; border-radius:16px; padding:14px; box-shadow:inset 0 0 0 1px #00e5ff22}
+  .rank .badge{width:86px; height:86px; border-radius:14px; display:grid; place-items:center; background: radial-gradient(60px 60px at 50% 50%, #12263f, #071018); border:1px solid #1d2846; position:relative}
+  .rank .badge:after{content:""; position:absolute; inset:-1px; border-radius:14px; box-shadow:0 0 20px #00e5ff44, 0 0 38px #ff00e633; pointer-events:none}
+  .rank.best{border-color:#39ffe04f; box-shadow:0 0 0 1px #00ffc866 inset, 0 0 60px #00ffc822}
+  .rank.best .label{font-size:1.35rem}
+  .rank.best .badge{transform:scale(1.05); box-shadow:0 0 24px #00ffc844 inset}
+  .label{font-weight:800; letter-spacing:.08em}
+  .meta{color:#9fcbe2; font-size:.95rem}
+  .tag{display:inline-block; padding:2px 8px; border:1px solid #2b3552; border-radius:999px; margin-right:8px; font-size:.75rem; color:#befaff; background:#062026}
+  .desc{color:#b6c9d8}
+
+  .scoregrid{margin-top:12px; overflow:auto}
+  table{width:100%; border-collapse:collapse; font-variant-numeric: tabular-nums}
+  th,td{border-bottom:1px dashed #203054; padding:10px 8px; text-align:left}
+  th{position:sticky; top:0; background:#0a1322}
+
+  .footer{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:14px; border-top:1px dashed #1e2740; color:#9bb0c2}
+  .linklike{color:var(--neon2); text-decoration:underline; cursor:pointer}
+
+  .hidden{display:none !important}
+
+  /* tiny burst */
+  @keyframes pulse{0%{box-shadow:0 0 0 0 #00e5ff77} 100%{box-shadow:0 0 0 14px transparent}}
+  .pulse{animation:pulse 1.2s ease-out}
+
+</style>
+</head>
+<body>
+<div class="grid" aria-hidden="true"></div>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <h1 class="title glitch" data-text="POKÉ‑PUNK // PERSONALITY TEST">POKÉ‑PUNK // PERSONALITY TEST</h1>
+    </div>
+    <div class="toolbar">
+      <button id="btnRetake" class="warn" disabled>Reset</button>
+      <button id="btnShare" title="Copy summary to clipboard">Share</button>
+      <button id="btnExport" title="Download JSON result">Export JSON</button>
+    </div>
+  </header>
+
+  <section class="card" id="app">
+    <div class="panel intro">
+      <p><strong>Theme:</strong> Neon cyberpunk diagnostics for trainers-in-the-making. Answer 10 questions. Your top three Pokémon archetypes will be computed, with emphatic highlight for the best match.</p>
+      <p class="small">Unofficial fan-made tool. No sprites or trademarks are included.</p>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" aria-label="Completion">
+        <span id="prog"></span>
+      </div>
+      <div class="toolbar" style="margin-top:12px">
+        <button id="btnStart" class="primary">Start</button>
+        <span id="status" class="small">0/10 answered</span>
+      </div>
+    </div>
+
+    <form id="quiz" class="hidden" autocomplete="off" novalidate>
+      <!-- Questions injected by JS for compactness and maintainability -->
+      <div id="qWrap"></div>
+
+      <div class="panel" style="display:flex; gap:12px; flex-wrap:wrap">
+        <button id="btnSubmit" class="primary" disabled>Compute Result</button>
+        <span id="warn" class="small" aria-live="polite"></span>
+      </div>
+    </form>
+
+    <div id="results" class="results"></div>
+
+    <div class="footer">
+      <span>Designed for a single HTML file. All logic runs locally in your browser.</span>
+      <span>Tip: Use <span class="linklike" id="toggleTable">toggle</span> to show/hide the full score table.</span>
+    </div>
+  </section>
+</div>
+
+<script>
+  // --- Data ---------------------------------------------------------------
+  const POKEMON = {
+    "Alakazam": { type:"Psychic", tagline:"Mastermind tactician", blurb:"Prefers logic, planning, and surgical decisions. Emblematic of high-speed analysis.", hue:"var(--neon2)" },
+    "Rotom": { type:"Electric/Ghost", tagline:"Tech poltergeist", blurb:"Thrives by fusing with tools and systems, turning technology into art.", hue:"var(--neon1)" },
+    "Eevee": { type:"Normal", tagline:"Adaptive wildcard", blurb:"Shifts paths with ease; values optionality, freedom, and growth.", hue:"var(--neon4)" },
+    "Lucario": { type:"Fighting/Steel", tagline:"Steadfast guardian", blurb:"Leads with honor; balanced offense/defense and team-first instincts.", hue:"#8cf5ff" },
+    "Gardevoir": { type:"Psychic/Fairy", tagline:"Empathic sentinel", blurb:"Protective and people-centered; channels harmony and trust.", hue:"#baf3ff" },
+    "Gengar": { type:"Ghost/Poison", tagline:"Chaotic charmer", blurb:"Playful edge; disrupts stale patterns with mischief and wit.", hue:"var(--neon3)" },
+    "Charizard": { type:"Fire/Flying", tagline:"Bold trailblazer", blurb:"Takes daring routes and chases big horizons with heat and drive.", hue:"#ffb86b" },
+    "Greninja": { type:"Water/Dark", tagline:"Silent strategist", blurb:"Stealth and precision; favors disciplined plans over noise.", hue:"#9fb8ff" },
+    "Meloetta": { type:"Normal/Psychic", tagline:"Virtuoso creator", blurb:"Expresses truth through sound and art; shifts between grace and power.", hue:"#ffd6ff" },
+    "Snorlax": { type:"Normal", tagline:"Calm bastion", blurb:"Wins by patience and stamina; knows when to rest and reset.", hue:"#d2f3c8" }
+  };
+
+  // 10 questions, 4 options each (A..D). Each option assigns weighted points.
+  const QUESTIONS = [
+    { id:"q1", text:"Your default approach to a hard problem?",
+      A:"Decompose logically and prove each step.",
+      B:"Experiment creatively until a pattern emerges.",
+      C:"Adapt rapidly based on feedback.",
+      D:"Trust intuition, protect what matters, iterate." },
+    { id:"q2", text:"Your natural team role is",
+      A:"Strategist mapping the plan.",
+      B:"Innovator bringing wild ideas.",
+      C:"Support who lifts others.",
+      D:"Leader keeping balance and pace." },
+    { id:"q3", text:"What energizes you most?",
+      A:"Tech, systems, automation.",
+      B:"Music, art, performance.",
+      C:"Mentoring and building community.",
+      D:"Solitude, reflection, nature." },
+    { id:"q4", text:"When stress hits, you…",
+      A:"Double down on planning.",
+      B:"Create something expressive.",
+      C:"Pivot forms until it works.",
+      D:"Slow down, outlast the storm." },
+    { id:"q5", text:"Your risk profile",
+      A:"Calculated gambles only.",
+      B:"Break the mold and disrupt.",
+      C:"Avoid risk; prefer stability.",
+      D:"Bold action—fortune favors the brave." },
+    { id:"q6", text:"Preferred environment",
+      A:"Lab, library, digital workspace.",
+      B:"Studio, stage, creative den.",
+      C:"Classroom or social hub.",
+      D:"Outdoors or a quiet dojo." },
+    { id:"q7", text:"Conflict style",
+      A:"Debate with clean logic.",
+      B:"Charm & humor to disarm.",
+      C:"Quiet precision, no wasted motion.",
+      D:"Shield others; take responsibility." },
+    { id:"q8", text:"Ultimate measure of success",
+      A:"Impact through innovation.",
+      B:"Depth of mastery and knowledge.",
+      C:"Harmony—people helped, trust earned.",
+      D:"Freedom and flexibility of path." },
+    { id:"q9", text:"Pick an aesthetic",
+      A:"Sleek techno‑noir HUD.",
+      B:"Vintage lounge / jazz club.",
+      C:"Ninja minimalism.",
+      D:"Knightly honor with sigils." },
+    { id:"q10", text:"Weekend quest",
+      A:"Build a clever automation.",
+      B:"Compose or perform.",
+      C:"Teach, volunteer, or host.",
+      D:"Hike, nap, and reset." }
+  ];
+
+  // Weighted scoring per option: [ [Pokemon, points], [Pokemon, points] ]
+  const SCORING = {
+    q1:{ A:[["Alakazam",2],["Greninja",1]], B:[["Meloetta",2],["Gengar",1]], C:[["Eevee",2],["Rotom",1]], D:[["Gardevoir",2],["Snorlax",1]] },
+    q2:{ A:[["Alakazam",2],["Greninja",1]], B:[["Rotom",2],["Meloetta",1]], C:[["Gardevoir",2],["Eevee",1]], D:[["Lucario",2],["Charizard",1]] },
+    q3:{ A:[["Rotom",2],["Alakazam",1]], B:[["Meloetta",2],["Gengar",1]], C:[["Gardevoir",2],["Lucario",1]], D:[["Snorlax",2],["Greninja",1]] },
+    q4:{ A:[["Alakazam",2],["Greninja",1]], B:[["Meloetta",2],["Gengar",1]], C:[["Eevee",2],["Rotom",1]], D:[["Snorlax",2],["Gardevoir",1]] },
+    q5:{ A:[["Greninja",2],["Alakazam",1]], B:[["Gengar",2],["Rotom",1]], C:[["Snorlax",2],["Gardevoir",1]], D:[["Charizard",2],["Lucario",1]] },
+    q6:{ A:[["Rotom",2],["Alakazam",1]], B:[["Meloetta",2],["Gengar",1]], C:[["Gardevoir",2],["Eevee",1]], D:[["Lucario",2],["Snorlax",1]] },
+    q7:{ A:[["Alakazam",2],["Greninja",1]], B:[["Gengar",2],["Meloetta",1]], C:[["Greninja",2],["Rotom",1]], D:[["Lucario",2],["Gardevoir",1]] },
+    q8:{ A:[["Rotom",2],["Charizard",1]], B:[["Alakazam",2],["Greninja",1]], C:[["Gardevoir",2],["Lucario",1]], D:[["Eevee",2],["Snorlax",1]] },
+    q9:{ A:[["Rotom",2],["Greninja",1]], B:[["Meloetta",2],["Gengar",1]], C:[["Greninja",2],["Alakazam",1]], D:[["Lucario",2],["Charizard",1]] },
+    q10:{ A:[["Rotom",2],["Alakazam",1]], B:[["Meloetta",2],["Gengar",1]], C:[["Gardevoir",2],["Eevee",1]], D:[["Snorlax",2],["Lucario",1]] }
+  };
+
+  // --- DOM helpers --------------------------------------------------------
+  const $ = (sel,root=document)=>root.querySelector(sel);
+  const $$ = (sel,root=document)=>[...root.querySelectorAll(sel)];
+
+  const prog = $('#prog');
+  const bar = $('.bar');
+  const btnStart = $('#btnStart');
+  const btnSubmit = $('#btnSubmit');
+  const btnRetake = $('#btnRetake');
+  const btnShare = $('#btnShare');
+  const btnExport = $('#btnExport');
+  const statusEl = $('#status');
+  const warnEl = $('#warn');
+  const quiz = $('#quiz');
+  const qWrap = $('#qWrap');
+  const results = $('#results');
+  const toggleTableBtn = $('#toggleTable');
+
+  // --- Render questions ---------------------------------------------------
+  function renderQuestions(){
+    const buf = [];
+    QUESTIONS.forEach((q, idx)=>{
+      buf.push(`<section class="q" data-qid="${q.id}">\n`+
+        `<h3><span class="tag">Q${idx+1}</span> ${q.text}</h3>`+
+        `<div class="opts">`+
+        ["A","B","C","D"].map(letter=>{
+          const id = `${q.id}_${letter}`;
+          const text = q[letter];
+          return `<div class="opt">\n`+
+                 `  <input type="radio" name="${q.id}" id="${id}" value="${letter}" aria-labelledby="${id}_l"/>\n`+
+                 `  <label for="${id}" id="${id}_l">\n`+
+                 `    <span class="dot" aria-hidden="true"></span>`+
+                 `    <span class="txt"><strong>${letter}.</strong> ${text}</span>`+
+                 `  </label>\n`+
+                 `</div>`
+        }).join('')+
+        `</div></section>`);
+    });
+    qWrap.innerHTML = buf.join('');
+  }
+
+  // --- Progress + validation ---------------------------------------------
+  function answeredCount(){ return QUESTIONS.reduce((n,q)=> n + (quiz[q.id]?.value ? 1 : 0), 0); }
+  function updateProgress(){
+    const n = answeredCount();
+    const pct = (n/QUESTIONS.length)*100;
+    prog.style.width = pct + '%';
+    bar.setAttribute('aria-valuenow', String(n));
+    statusEl.textContent = `${n}/${QUESTIONS.length} answered`;
+    btnSubmit.disabled = n !== QUESTIONS.length;
+    btnRetake.disabled = n===0;
+    warnEl.textContent = n !== QUESTIONS.length ? 'Please answer all items to compute your profile.' : '';
+  }
+
+  // --- Scoring ------------------------------------------------------------
+  function computeScores(){
+    // init scores
+    const scores = {}; Object.keys(POKEMON).forEach(k=>scores[k]=0);
+    const detail = []; // per-question capture
+    for(const q of QUESTIONS){
+      const letter = quiz[q.id].value; // guaranteed by validation
+      const grants = SCORING[q.id][letter];
+      const row = { question:q.id, pick:letter, grants:[] };
+      for(const [name, pts] of grants){ scores[name]+=pts; row.grants.push({name, pts}); }
+      detail.push(row);
+    }
+    // sort by score desc, then name asc for stability
+    const ranking = Object.entries(scores).sort((a,b)=> b[1]-a[1] || a[0].localeCompare(b[0]));
+    return { scores, ranking, detail };
+  }
+
+  // --- Results UI ---------------------------------------------------------
+  function makeBadgeSVG(hue){
+    // inline SVG neon emblem
+    return `<svg viewBox="0 0 120 120" width="72" height="72" role="img" aria-label="badge">\n      <defs>\n        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">\n          <stop offset="0%" stop-color="${hue}"/>\n          <stop offset="100%" stop-color="#ffffff" stop-opacity=".75"/>\n        </linearGradient>\n      </defs>\n      <g filter="url(#f)">\n        <rect x="8" y="8" width="104" height="104" rx="16" fill="none" stroke="url(#g)" stroke-width="2"/>\n        <path d="M60 18 l22 22 -22 22 -22 -22 22 -22z M60 62 l32 32 -32 8 -32 -8 32 -32z" fill="none" stroke="${hue}" stroke-width="2"/>\n      </g>\n    </svg>`;
+  }
+
+  function renderResults(model){
+    const {ranking, scores, detail} = model;
+    const top3 = ranking.slice(0,3);
+
+    const stack = document.createElement('div');
+    stack.className = 'results active panel';
+
+    const header = document.createElement('div');
+    header.style.marginBottom = '8px';
+    header.innerHTML = `<div class="tag">RESULT</div><h2 style="margin:.3rem 0 0">Your Top Pokémon Archetypes</h2><p class="small">The first result is your dominant match.</p>`;
+    stack.appendChild(header);
+
+    // Ranks
+    top3.forEach(([name, pts], i)=>{
+      const meta = POKEMON[name];
+      const card = document.createElement('div');
+      card.className = 'rank'+(i===0?' best pulse':'');
+      const pct = Math.round(100 * pts / (QUESTIONS.length*2)); // max 20 pts if always primary
+      card.innerHTML = `
+        <div class="badge">${makeBadgeSVG(meta.hue)}</div>
+        <div>
+          <div class="label">${i+1}. ${name} <span class="tag">${meta.type}</span> <span class="tag" style="border-color:#274; background:#032">Score ${pts}</span> <span class="tag" style="border-color:#243; background:#021">${pct}% of max</span></div>
+          <div class="meta">${meta.tagline}</div>
+          <div class="desc">${meta.blurb}</div>
+        </div>`;
+      stack.appendChild(card);
+    });
+
+    // Toggleable full table
+    const tbl = document.createElement('div');
+    tbl.className = 'scoregrid hidden';
+    const rows = Object.entries(scores).sort((a,b)=> b[1]-a[1] || a[0].localeCompare(b[0]));
+    tbl.innerHTML = `<table>\n      <thead><tr><th>Rank</th><th>Pokémon</th><th>Type</th><th>Score</th></tr></thead>\n      <tbody>${rows.map(([n,s],i)=>`<tr><td>${i+1}</td><td>${n}</td><td>${POKEMON[n].type}</td><td>${s}</td></tr>`).join('')}</tbody>\n    </table>`;
+    stack.appendChild(tbl);
+
+    // Detail summary for sharing/export
+    const summary = {
+      top3: top3.map(([n,s])=>({name:n, score:s, type:POKEMON[n].type})),
+      allScores: scores,
+      answers: QUESTIONS.map(q=>({ id:q.id, pick:quiz[q.id].value }))
+    };
+
+    // Replace results node
+    results.className = 'results active';
+    results.innerHTML = '';
+    results.appendChild(stack);
+
+    // Actions
+    toggleTableBtn.onclick = ()=>{ tbl.classList.toggle('hidden'); };
+    btnShare.onclick = async ()=>{
+      const text = `POKÉ‑PUNK RESULT\n1) ${summary.top3[0].name} (${summary.top3[0].score})\n2) ${summary.top3[1].name} (${summary.top3[1].score})\n3) ${summary.top3[2].name} (${summary.top3[2].score})`;
+      try{ await navigator.clipboard.writeText(text); flash(warnEl, 'Copied summary to clipboard.'); }catch(e){ flash(warnEl, 'Clipboard not available.'); }
+    };
+    btnExport.onclick = ()=>{
+      const blob = new Blob([JSON.stringify(summary,null,2)], {type:'application/json'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'poke-punk-result.json'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+    };
+  }
+
+  function flash(node, msg){ node.textContent = msg; node.classList.add('pulse'); setTimeout(()=>node.classList.remove('pulse'), 700); }
+
+  // --- Lifecycle ----------------------------------------------------------
+  btnStart.onclick = ()=>{
+    btnStart.disabled = true; quiz.classList.remove('hidden');
+    $('#app').scrollIntoView({behavior:'smooth', block:'start'});
+  };
+
+  btnRetake.onclick = ()=>{
+    quiz.reset(); updateProgress(); results.className='results'; results.innerHTML=''; btnStart.disabled=false; flash(warnEl, 'Reset complete.');
+  };
+
+  quiz.addEventListener('change', updateProgress);
+
+  btnSubmit.addonsubmit = null; // safety
+  btnSubmit.onclick = (e)=>{
+    e.preventDefault();
+    if(answeredCount()!==QUESTIONS.length){ flash(warnEl, 'Please answer all items.'); return; }
+    const model = computeScores();
+    renderResults(model);
+  };
+
+  // Initialize
+  renderQuestions();
+  updateProgress();
+</script>
+</body>
+</html>
