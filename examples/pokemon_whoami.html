@@ -3,93 +3,140 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>POKÉ-PUNK // Personality Test</title>
+<title>POKÉ‑PUNK // Personality Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#08090c;
-    --bg2:#0c0f14;
-    --neon1:#0aff9d;
-    --neon2:#00e5ff;
-    --neon3:#ff00e6;
-    --neon4:#ffe700;
-    --ink:#e6f6ff;
-    --muted:#90a4ae55;
-    --card:#0b0f17;
+    /* Core palette — Pokémon game + neon cyberpunk */
+    --bg:#07080b;        /* deep void */
+    --bg2:#0e1018;       /* panel depth */
+    --neon1:#00e5ff;     /* cyan neon */
+    --neon2:#ff2bd6;     /* magenta neon */
+    --neon3:#ffe66d;     /* electric yellow */
+    --poke-red:#ff1b2d;  /* Pokéball red */
+    --poke-white:#f2f5f8;/* Pokéball white */
+    --poke-black:#1a1c24;/* Pokéball black */
+    --ink:#e9f6ff;
+    --muted:#a7bdd6aa;
+    --card:#0a0f19;
+    --edge:#1f2945;
+    --success:#00ffb3;
     --error:#ff5577;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-    color:var(--ink); background: radial-gradient(1200px 800px at 10% 10%, #0b1230 8%, transparent 50%),
-                      radial-gradient(1000px 600px at 90% 20%, #170a2a 8%, transparent 55%),
-                      linear-gradient(180deg, var(--bg), var(--bg2));
+    margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+    color:var(--ink);
+    background:
+      radial-gradient(1100px 700px at 10% 10%, #0b1230 10%, transparent 55%),
+      radial-gradient(900px 600px at 85% 20%, #1a0830 8%, transparent 58%),
+      linear-gradient(180deg, var(--bg), var(--bg2));
     overflow-y:auto;
   }
-  /* subtle scanline */
-  body:before{content:""; position:fixed; inset:0; pointer-events:none; background: repeating-linear-gradient( to bottom, #ffffff05 0px, #ffffff05 1px, transparent 2px, transparent 3px ); mix-blend-mode: overlay; opacity:.4 }
-  /* grid */
+  /* CRT scan + grid lines for cyber look */
+  body:before{content:""; position:fixed; inset:0; pointer-events:none; background: repeating-linear-gradient( to bottom, #ffffff07 0px, #ffffff07 1px, transparent 2px, transparent 3px ); mix-blend-mode: overlay; opacity:.35 }
   .grid{position:fixed; inset:0; background:
-    linear-gradient(transparent 97%, #00f5ff15 98%),
-    linear-gradient(90deg, transparent 97%, #ff00e61a 98%);
-    background-size: 40px 40px; opacity:.25; pointer-events:none;}
+    linear-gradient(transparent 96%, #00f5ff18 97%),
+    linear-gradient(90deg, transparent 96%, #ff00e61a 97%);
+    background-size: 42px 42px; opacity:.25; pointer-events:none;}
+
+  .sprite-banner {
+    width: 100%;
+    overflow: hidden;
+    padding: 10px 0;
+    white-space: nowrap;
+    background: #00000022;
+    border-bottom: 1px solid var(--edge);
+  }
+  .sprite-banner-inner {
+    display: inline-block;
+    animation: scroll-left 60s linear infinite;
+  }
+  .sprite-banner img {
+    height: 64px;
+    width: 64px;
+    margin: 0 12px;
+    image-rendering: pixelated; /* sharp pixels */
+    filter: drop-shadow(0 0 3px var(--neon2));
+  }
+  @keyframes scroll-left {
+    from { transform: translateX(0%); }
+    to { transform: translateX(-50%); }
+  }
 
   .wrap{max-width:1050px; margin:40px auto; padding:0 20px 80px}
   header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px}
   .brand{display:flex; align-items:center; gap:14px}
-  .logo{width:44px; height:44px; border-radius:10px; background:conic-gradient(from 0deg, var(--neon1), var(--neon2), var(--neon3), var(--neon4), var(--neon1)); filter: blur(.3px) saturate(120%); position:relative}
-  .logo:after{content:"\25A3"; position:absolute; inset:0; display:grid; place-items:center; color:#000; font-weight:900; text-shadow:0 0 6px var(--neon4)}
-  h1.title{font-size: clamp(22px, 4vw, 40px); letter-spacing:.06em; margin:0; text-shadow:0 0 10px #00e5ff66, 0 0 25px #ff00e633}
+  .logo{width:48px; height:48px; position:relative; border-radius:12px;
+        background: radial-gradient(circle at 50% 35%, var(--poke-white) 38%, transparent 38%),
+                    radial-gradient(circle at 50% 64%, var(--poke-red) 38%, transparent 38%),
+                    radial-gradient(circle at 50% 50%, var(--poke-black) 12%, transparent 12%),
+                    conic-gradient(from 0deg, var(--neon1), var(--neon2), var(--neon3), var(--neon1));
+        box-shadow:0 0 14px var(--neon1), 0 0 28px #000;}
+  h1.title{font-family:"Press Start 2P", system-ui; font-size: clamp(18px, 3.3vw, 32px); letter-spacing:.06em; margin:0; color:var(--poke-white);
+           text-shadow:0 0 6px var(--neon1), 0 0 18px var(--neon2)}
   .glitch{position:relative}
   .glitch:after, .glitch:before{content:attr(data-text); position:absolute; left:0; top:0; clip-path: inset(0 0 0 0); opacity:.75}
-  .glitch:before{transform:translate(1px,-1px); color:var(--neon2); animation:gl1 2.5s infinite linear alternate}
-  .glitch:after{transform:translate(-1px,1px); color:var(--neon3); animation:gl2 2.2s infinite linear alternate}
+  .glitch:before{transform:translate(1px,-1px); color:var(--neon1); animation:gl1 2.5s infinite linear alternate}
+  .glitch:after{transform:translate(-1px,1px); color:var(--neon2); animation:gl2 2.2s infinite linear alternate}
   @keyframes gl1{0%{clip-path:inset(0 0 82% 0)} 25%{clip-path:inset(0 0 20% 0)} 50%{clip-path:inset(74% 0 0 0)} 75%{clip-path:inset(30% 0 40% 0)} 100%{clip-path:inset(10% 0 60% 0)}}
   @keyframes gl2{0%{clip-path:inset(60% 0 10% 0)} 25%{clip-path:inset(20% 0 20% 0)} 50%{clip-path:inset(0 0 74% 0)} 75%{clip-path:inset(40% 0 30% 0)} 100%{clip-path:inset(82% 0 0 0)}}
 
-  .card{background: linear-gradient(180deg, #0b0f17, #081018); border:1px solid #1c2335; border-radius:16px; box-shadow:0 0 0 1px #00e5ff22 inset, 0 10px 30px #0006; overflow:hidden}
+  /* Pokedex-like card with neon pixel edges */
+  .card{background: linear-gradient(180deg, #0a0f19, #0b1220); border:1px solid var(--edge); border-radius:18px; overflow:hidden;
+        box-shadow:0 0 0 2px #00e5ff22 inset, 0 15px 40px #0008, 0 0 28px #ff00e622}
   .panel{padding:20px}
-  .bar{height:8px; background:#0d1220; border-radius:999px; overflow:hidden; border:1px solid #182447}
-  .bar > span{display:block; height:100%; width:0%; background: linear-gradient(90deg, var(--neon1), var(--neon2), var(--neon3)); box-shadow:0 0 12px #00e5ff7a, 0 0 20px #ff00e633; transition:width .4s ease}
 
-  .toolbar{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
-  button{appearance:none; border:none; color:var(--ink); background:linear-gradient(180deg, #11182a, #0b1222); padding:12px 16px; border-radius:12px; cursor:pointer; border:1px solid #26314f; box-shadow:0 6px 14px #0008, inset 0 0 0 1px #00e5ff22; letter-spacing:.06em}
-  button:hover{box-shadow:0 0 0 1px #00e5ff66 inset, 0 10px 28px #0009}
-  button.primary{background:linear-gradient(180deg, #04242d, #03161b); border-color:#006c76; text-shadow:0 0 6px #00e5ff88}
-  button.warn{background:linear-gradient(180deg, #2b0a12, #15060a); border-color:#7a2031}
-  button:disabled{opacity:.55; cursor:not-allowed}
+  /* Poké-progress bar */
+  .bar{height:10px; background:linear-gradient(180deg,#0c1426,#0b1020); border-radius:999px; overflow:hidden; border:1px solid #162448; position:relative}
+  .bar:after{content:""; position:absolute; inset:-1px; border-radius:999px; box-shadow:0 0 16px var(--neon1) inset}
+  .bar > span{display:block; height:100%; width:0%; background: linear-gradient(90deg, var(--neon1), var(--neon2), var(--neon3)); box-shadow:0 0 12px #00e5ff7a, 0 0 20px #ff00e633; transition:width .35s ease}
 
   .intro{display:grid; gap:14px; grid-template-columns: 1fr; padding:18px}
-  .intro p{margin:.25rem 0; color:#b5c6d6}
-  .small{font-size:.9rem; color:#a7b7c7}
+  .intro p{margin:.25rem 0; color:#cfe2f8}
+  .small{font-size:.9rem; color:var(--muted)}
 
-  .q{padding:18px; border-top:1px dashed #1e2740}
-  .q h3{margin:0 0 10px; font-size:1.05rem; letter-spacing:.02em}
-  .opts{display:grid; gap:10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))}
+  /* Toolbar buttons — capsule / Pokéball accent */
+  .toolbar{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+  button{appearance:none; border:none; color:var(--poke-white); background:linear-gradient(180deg, #121a32, #0b1426); padding:12px 16px; border-radius:999px; cursor:pointer; border:2px solid #2b385e; box-shadow:0 6px 14px #0009, inset 0 0 0 2px #00e5ff1f; letter-spacing:.06em; font-family:"Press Start 2P", system-ui; font-size:12px}
+  button:hover{box-shadow:0 0 0 2px #00e5ff80 inset, 0 12px 28px #000a}
+  button.primary{background:linear-gradient(180deg, #082b2e, #031b1f); border-color:#0aa; text-shadow:0 0 6px #00e5ff88}
+  button.warn{background:linear-gradient(180deg, #3a0b14, #20060c); border-color:#b42a3c}
+  button:disabled{opacity:.55; cursor:not-allowed}
+  button::before{content:""; display:inline-block; width:14px; height:14px; margin-right:8px; border-radius:50%; background: radial-gradient(circle at 50% 40%, var(--poke-white) 45%, transparent 45%), radial-gradient(circle at 50% 60%, var(--poke-red) 45%, transparent 45%), radial-gradient(circle at 50% 50%, var(--poke-black) 16%, transparent 16%); box-shadow:0 0 6px var(--neon3)}
 
-  /* cyber-radio */
+  /* Question blocks styled like a Pokédex list */
+  .q{padding:18px; border-top:1px dashed #1e2740; position:relative}
+  .q h3{margin:0 0 10px; font-size:13px; letter-spacing:.02em; font-family:"Press Start 2P"}
+  .q h3 .tag{background:#10253a; border-color:#294b7e}
+  .opts{display:grid; gap:10px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))}
+
+  /* cyber-radio — now with pixel edges */
   .opt{position:relative}
   .opt input{position:absolute; inset:-2px; opacity:0}
-  .opt label{display:flex; gap:10px; align-items:start; padding:12px 12px; border:1px solid #27304d; border-radius:12px; background:linear-gradient(180deg, #0b101b, #0a121f); cursor:pointer; min-height:56px; box-shadow:inset 0 0 0 1px #00e5ff1f}
-  .opt label:hover{box-shadow:inset 0 0 0 1px #00e5ff80}
-  .opt .dot{width:18px; height:18px; border-radius:50%; border:2px solid #2c3656; margin-top:2px; box-shadow:0 0 0 1px #00e5ff44 inset}
-  .opt input:checked + label{border-color:#00e5ff99; box-shadow:0 0 12px #00e5ff32 inset, 0 0 0 1px #00e5ff66 inset}
-  .opt input:checked + label .dot{border-color:var(--neon2); background: radial-gradient(circle at 50% 50%, var(--neon2), transparent 55%); box-shadow:0 0 14px var(--neon2)}
-  .opt .txt{color:#cfe8f6}
+  .opt label{display:flex; gap:10px; align-items:start; padding:12px 12px; border:2px solid #27304d; border-radius:14px; background:linear-gradient(180deg, #0b101b, #091120); cursor:pointer; min-height:56px; box-shadow:inset 0 0 0 2px #00e5ff14, 0 0 0 2px #000 inset}
+  .opt label:hover{box-shadow:inset 0 0 0 2px #00e5ff80, 0 0 0 2px #000 inset}
+  .opt .dot{width:18px; height:18px; border-radius:4px; border:2px solid #2c3656; margin-top:2px; box-shadow:0 0 0 1px #00e5ff44 inset; background:#0b1222}
+  .opt input:checked + label{border-color:#00e5ff99; box-shadow:0 0 14px #00e5ff35 inset, 0 0 0 2px #00e5ff66 inset}
+  .opt input:checked + label .dot{border-color:var(--neon1); background: radial-gradient(circle at 50% 50%, var(--neon1), transparent 55%); box-shadow:0 0 14px var(--neon1)}
+  .opt .txt{color:#d7ecff}
 
   /* results */
   .results{display:none; padding:18px}
   .results.active{display:block}
   .stack{display:grid; gap:16px}
-  .rank{display:grid; grid-template-columns: 86px 1fr; gap:14px; align-items:center; background:linear-gradient(180deg, #071018, #09121e); border:1px solid #243052; border-radius:16px; padding:14px; box-shadow:inset 0 0 0 1px #00e5ff22}
-  .rank .badge{width:86px; height:86px; border-radius:14px; display:grid; place-items:center; background: radial-gradient(60px 60px at 50% 50%, #12263f, #071018); border:1px solid #1d2846; position:relative}
-  .rank .badge:after{content:""; position:absolute; inset:-1px; border-radius:14px; box-shadow:0 0 20px #00e5ff44, 0 0 38px #ff00e633; pointer-events:none}
-  .rank.best{border-color:#39ffe04f; box-shadow:0 0 0 1px #00ffc866 inset, 0 0 60px #00ffc822}
-  .rank.best .label{font-size:1.35rem}
+  .rank{display:grid; grid-template-columns: 100px 1fr; gap:14px; align-items:center; background:linear-gradient(180deg, #071018, #09121e); border:2px solid #243052; border-radius:18px; padding:14px; box-shadow:inset 0 0 0 2px #00e5ff22}
+  .rank .badge{width:100px; height:100px; border-radius:16px; display:grid; place-items:center; background: radial-gradient(80px 80px at 50% 50%, #12263f, #071018); border:2px solid #1d2846; position:relative}
+  .rank .badge:after{content:""; position:absolute; inset:-1px; border-radius:16px; box-shadow:0 0 22px #00e5ff44, 0 0 40px #ff00e633; pointer-events:none}
+  .rank.best{border-color:#39ffe04f; box-shadow:0 0 0 2px #00ffc866 inset, 0 0 60px #00ffc822}
+  .rank.best .label{font-size:1.1rem}
   .rank.best .badge{transform:scale(1.05); box-shadow:0 0 24px #00ffc844 inset}
   .label{font-weight:800; letter-spacing:.08em}
   .meta{color:#9fcbe2; font-size:.95rem}
-  .tag{display:inline-block; padding:2px 8px; border:1px solid #2b3552; border-radius:999px; margin-right:8px; font-size:.75rem; color:#befaff; background:#062026}
+  .tag{display:inline-block; padding:2px 8px; border:2px solid #2b3552; border-radius:999px; margin-right:8px; font-size:.7rem; color:#befaff; background:#0a2130}
   .desc{color:#b6c9d8}
 
   .scoregrid{margin-top:12px; overflow:auto}
@@ -98,14 +145,13 @@
   th{position:sticky; top:0; background:#0a1322}
 
   .footer{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:14px; border-top:1px dashed #1e2740; color:#9bb0c2}
-  .linklike{color:var(--neon2); text-decoration:underline; cursor:pointer}
+  .linklike{color:var(--neon1); text-decoration:underline; cursor:pointer}
 
   .hidden{display:none !important}
 
   /* tiny burst */
   @keyframes pulse{0%{box-shadow:0 0 0 0 #00e5ff77} 100%{box-shadow:0 0 0 14px transparent}}
   .pulse{animation:pulse 1.2s ease-out}
-
 </style>
 </head>
 <body>
@@ -125,8 +171,8 @@
 
   <section class="card" id="app">
     <div class="panel intro">
-      <p><strong>Theme:</strong> Neon cyberpunk diagnostics for trainers-in-the-making. Answer 10 questions. Your top three Pokémon archetypes will be computed, with emphatic highlight for the best match.</p>
-      <p class="small">Unofficial fan-made tool. No sprites or trademarks are included.</p>
+      <p><strong>Theme:</strong> Pokémon‑style interface with neon‑cyberpunk flair. Answer 10 questions. Your top three archetypes will be computed, with emphatic highlight on the best match.</p>
+      <p class="small">Fan‑made tool. No sprites or trademarks are bundled.</p>
       <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" aria-label="Completion">
         <span id="prog"></span>
       </div>
@@ -158,16 +204,16 @@
 <script>
   // --- Data ---------------------------------------------------------------
   const POKEMON = {
-    "Alakazam": { type:"Psychic", tagline:"Mastermind tactician", blurb:"Prefers logic, planning, and surgical decisions. Emblematic of high-speed analysis.", hue:"var(--neon2)" },
-    "Rotom": { type:"Electric/Ghost", tagline:"Tech poltergeist", blurb:"Thrives by fusing with tools and systems, turning technology into art.", hue:"var(--neon1)" },
-    "Eevee": { type:"Normal", tagline:"Adaptive wildcard", blurb:"Shifts paths with ease; values optionality, freedom, and growth.", hue:"var(--neon4)" },
-    "Lucario": { type:"Fighting/Steel", tagline:"Steadfast guardian", blurb:"Leads with honor; balanced offense/defense and team-first instincts.", hue:"#8cf5ff" },
-    "Gardevoir": { type:"Psychic/Fairy", tagline:"Empathic sentinel", blurb:"Protective and people-centered; channels harmony and trust.", hue:"#baf3ff" },
-    "Gengar": { type:"Ghost/Poison", tagline:"Chaotic charmer", blurb:"Playful edge; disrupts stale patterns with mischief and wit.", hue:"var(--neon3)" },
-    "Charizard": { type:"Fire/Flying", tagline:"Bold trailblazer", blurb:"Takes daring routes and chases big horizons with heat and drive.", hue:"#ffb86b" },
-    "Greninja": { type:"Water/Dark", tagline:"Silent strategist", blurb:"Stealth and precision; favors disciplined plans over noise.", hue:"#9fb8ff" },
-    "Meloetta": { type:"Normal/Psychic", tagline:"Virtuoso creator", blurb:"Expresses truth through sound and art; shifts between grace and power.", hue:"#ffd6ff" },
-    "Snorlax": { type:"Normal", tagline:"Calm bastion", blurb:"Wins by patience and stamina; knows when to rest and reset.", hue:"#d2f3c8" }
+    "Alakazam": { id: 65, type:"Psychic", tagline:"Mastermind tactician", blurb:"Prefers logic, planning, and surgical decisions. Emblematic of high-speed analysis.", hue:"var(--neon2)" },
+    "Rotom": { id: 479, type:"Electric/Ghost", tagline:"Tech poltergeist", blurb:"Thrives by fusing with tools and systems, turning technology into art.", hue:"var(--neon1)" },
+    "Eevee": { id: 133, type:"Normal", tagline:"Adaptive wildcard", blurb:"Shifts paths with ease; values optionality, freedom, and growth.", hue:"var(--neon4)" },
+    "Lucario": { id: 448, type:"Fighting/Steel", tagline:"Steadfast guardian", blurb:"Leads with honor; balanced offense/defense and team-first instincts.", hue:"#8cf5ff" },
+    "Gardevoir": { id: 282, type:"Psychic/Fairy", tagline:"Empathic sentinel", blurb:"Protective and people-centered; channels harmony and trust.", hue:"#baf3ff" },
+    "Gengar": { id: 94, type:"Ghost/Poison", tagline:"Chaotic charmer", blurb:"Playful edge; disrupts stale patterns with mischief and wit.", hue:"var(--neon3)" },
+    "Charizard": { id: 6, type:"Fire/Flying", tagline:"Bold trailblazer", blurb:"Takes daring routes and chases big horizons with heat and drive.", hue:"#ffb86b" },
+    "Greninja": { id: 658, type:"Water/Dark", tagline:"Silent strategist", blurb:"Stealth and precision; favors disciplined plans over noise.", hue:"#9fb8ff" },
+    "Meloetta": { id: 648, type:"Normal/Psychic", tagline:"Virtuoso creator", blurb:"Expresses truth through sound and art; shifts between grace and power.", hue:"#ffd6ff" },
+    "Snorlax": { id: 143, type:"Normal", tagline:"Calm bastion", blurb:"Wins by patience and stamina; knows when to rest and reset.", hue:"#d2f3c8" }
   };
 
   // 10 questions, 4 options each (A..D). Each option assigns weighted points.
@@ -310,11 +356,6 @@
   }
 
   // --- Results UI ---------------------------------------------------------
-  function makeBadgeSVG(hue){
-    // inline SVG neon emblem
-    return `<svg viewBox="0 0 120 120" width="72" height="72" role="img" aria-label="badge">\n      <defs>\n        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">\n          <stop offset="0%" stop-color="${hue}"/>\n          <stop offset="100%" stop-color="#ffffff" stop-opacity=".75"/>\n        </linearGradient>\n      </defs>\n      <g filter="url(#f)">\n        <rect x="8" y="8" width="104" height="104" rx="16" fill="none" stroke="url(#g)" stroke-width="2"/>\n        <path d="M60 18 l22 22 -22 22 -22 -22 22 -22z M60 62 l32 32 -32 8 -32 -8 32 -32z" fill="none" stroke="${hue}" stroke-width="2"/>\n      </g>\n    </svg>`;
-  }
-
   function renderResults(model){
     const {ranking, scores, detail} = model;
     const top3 = ranking.slice(0,3);
@@ -333,8 +374,11 @@
       const card = document.createElement('div');
       card.className = 'rank'+(i===0?' best pulse':'');
       const pct = Math.round(100 * pts / (QUESTIONS.length*2)); // max 20 pts if always primary
+      const spriteUrl = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/${meta.id}.png`;
       card.innerHTML = `
-        <div class="badge">${makeBadgeSVG(meta.hue)}</div>
+        <div class="badge">
+          <img src="${spriteUrl}" alt="${name}" width="96" height="96" style="image-rendering: pixelated; filter: drop-shadow(0 0 5px ${meta.hue});">
+        </div>
         <div>
           <div class="label">${i+1}. ${name} <span class="tag">${meta.type}</span> <span class="tag" style="border-color:#274; background:#032">Score ${pts}</span> <span class="tag" style="border-color:#243; background:#021">${pct}% of max</span></div>
           <div class="meta">${meta.tagline}</div>
@@ -396,9 +440,34 @@
     renderResults(model);
   };
 
+  function initSpriteBanner() {
+    const container = document.createElement('div');
+    container.className = 'sprite-banner';
+    const inner = document.createElement('div');
+    inner.className = 'sprite-banner-inner';
+    container.appendChild(inner);
+
+    const starterIds = [1, 4, 7, 152, 155, 158, 252, 255, 258, 387, 390, 393, 495, 498, 501, 650, 653, 656, 722, 725];
+    const allIds = [...starterIds, ...starterIds]; // duplicate for seamless scroll
+
+    allIds.forEach(id => {
+        const img = document.createElement('img');
+        img.src = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/${id}.png`;
+        img.alt = `starter pokemon sprite`;
+        img.width = 64;
+        img.height = 64;
+        img.loading = 'lazy';
+        inner.appendChild(img);
+    });
+
+    const wrap = $('.wrap');
+    wrap.parentNode.insertBefore(container, wrap);
+  }
+
   // Initialize
   renderQuestions();
   updateProgress();
+  initSpriteBanner();
 </script>
 </body>
 </html>
