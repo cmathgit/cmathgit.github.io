@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Cyberpunk Spaghetti Western Chess</title>
+  <style>
+    :root{
+      --bg:#0a0a0f;
+      --bg2:#12081e;
+      --neon:#00e5ff;
+      --neon2:#ff00a8;
+      --dust:#f2d6a2;
+      --wood:#3b2a1f;
+      --board-light:#1a1126;
+      --board-dark:#22112f;
+      --accent:#ffd166;
+    }
+    html,body{height:100%;margin:0;background:radial-gradient(1200px 800px at 80% -10%, rgba(255,0,168,.25), transparent 60%),
+      radial-gradient(900px 700px at 20% 110%, rgba(0,229,255,.18), transparent 55%),
+      linear-gradient(180deg,var(--bg2),var(--bg));
+      color:#d9d9e3;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;}
+    .wrap{display:grid;grid-template-rows:auto 1fr auto;min-height:100%;}
+    header{padding:.75rem 1rem;border-bottom:1px solid #1d1630;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
+    header h1{font-size:1.05rem;margin:0 0 0 .25rem;letter-spacing:.08em;text-transform:uppercase;color:#e9e9ff}
+    .panel{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+    .panel label{font-size:.8rem;opacity:.85}
+    select,button,input[type="range"]{background:#141220;border:1px solid #2b2146;color:#e9e9ff;border-radius:.6rem;padding:.4rem .6rem}
+    button{cursor:pointer;box-shadow:0 0 0 0 rgba(0,229,255,.4);transition:box-shadow .2s, transform .08s;}
+    button:hover{box-shadow:0 0 0 3px rgba(0,229,255,.15)}
+    button:active{transform:translateY(1px)}
+    main{display:grid;place-items:center;padding:1rem}
+
+    .board-shell{position:relative;max-width:92vmin;width:min(92vmin,840px);aspect-ratio:1/1;border-radius:1.2rem;padding:1rem;background:
+      linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0)),
+      radial-gradient(900px 340px at 50% 0%, rgba(255, 0, 168, .09), transparent 60%),
+      linear-gradient(45deg, #261c30, #2a1d35);
+      box-shadow:inset 0 0 0 2px #3a2c4f, inset 0 0 36px #12081e, 0 10px 50px rgba(0,0,0,.55);
+      border:1px solid #3a2c4f;
+    }
+    .frame{position:absolute;inset:-16px;pointer-events:none;border-radius:1.4rem;box-shadow:0 0 12px var(--neon) inset, 0 0 18px var(--neon2) inset}
+
+    .board{position:relative;display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr);gap:.2rem;aspect-ratio:1/1;transform-origin:50% 50%;}
+    .square{position:relative;display:grid;place-items:center;user-select:none;border-radius:.5rem;}
+    .light{background:linear-gradient(180deg, var(--board-light), #130c1c)}
+    .dark{background:linear-gradient(180deg, var(--board-dark), #170c22)}
+    .square::after{content:"";position:absolute;inset:0;border-radius:.5rem;box-shadow:inset 0 0 0 1px #2c1f42}
+
+    .piece{font-size:clamp(28px, 9.5vmin, 72px);filter:drop-shadow(0 0 6px rgba(0,229,255,.35));}
+    .white .piece{color:#f3f7ff}
+    .black .piece{color:#ffd0e9}
+
+    .coords{position:absolute;inset:0;pointer-events:none}
+    .file,.rank{position:absolute;font-size:.62rem;opacity:.75;color:#b5b0c7;text-shadow:0 0 3px rgba(0,0,0,.6)}
+    .file{bottom:-1.1rem}
+    .rank{left:-1.2rem}
+
+    .highlight{outline:2px solid var(--neon); box-shadow:0 0 16px rgba(0,229,255,.3) inset}
+    .hint{position:absolute;inset:auto auto 6% 6%;width:.65rem;height:.65rem;border-radius:50%;background:radial-gradient(circle,#9cf 10%, transparent 60%);opacity:.75}
+    .capture-hint{border:2px solid #ff8bd6;background:radial-gradient(circle, rgba(255,0,168,.6) 15%, transparent 60%);}
+
+    #fx-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .shockwave{position:absolute;border-radius:50%;border:2px solid var(--neon);mix-blend-mode:screen;animation:shock 600ms ease-out forwards}
+    @keyframes shock{from{opacity:.9;transform:scale(.2)}to{opacity:0;transform:scale(2.6)}}
+    .dust{position:absolute;width:6px;height:6px;background:var(--dust);border-radius:50%;filter:blur(0.5px);animation:dust 700ms linear forwards}
+    @keyframes dust{0%{opacity:.9;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--dx), var(--dy))}}
+    .glitch{position:absolute;inset:0;background:repeating-linear-gradient( to bottom, rgba(255,0,168,.25) 0 2px, rgba(0,229,255,.25) 2px 4px, transparent 4px 6px );animation:glitch 220ms linear 1}
+    @keyframes glitch{0%,100%{opacity:0}30%{opacity:.5}60%{opacity:.2}}
+
+    .toast{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:rgba(18,10,30,.8);border:1px solid #452b5e;color:#eae6f7;border-radius:.75rem;padding:.6rem .9rem;box-shadow:0 8px 30px rgba(0,0,0,.55);backdrop-filter:blur(6px);font-size:.9rem}
+
+    .status{display:flex;gap:1rem;flex-wrap:wrap;font-size:.9rem;opacity:.86;padding:.5rem 1rem}
+
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:1rem}
+    .modal .card{background:#171427;border:1px solid #3b2f53;border-radius:1rem;padding:1rem;min-width:240px;box-shadow:0 18px 60px rgba(0,0,0,.6)}
+    .modal h3{margin:.2rem 0 .8rem 0;font-weight:600}
+    .promo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+    .promo-btn{font-size:2rem;padding:.4rem .2rem;background:#141220;border:1px solid #2b2146;border-radius:.6rem;cursor:pointer}
+
+    footer{padding:.75rem 1rem;border-top:1px solid #1d1630;font-size:.8rem;opacity:.8}
+
+    /* Orientation flip for pass-and-play */
+    .flipped{transform:rotate(180deg)}
+    .flipped .square .piece{transform:rotate(180deg)}
+
+    /* Responsive helpers */
+    @media (max-width:680px){ header{gap:.5rem} header h1{display:none} }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><path fill="none" stroke="url(#g)" stroke-width="1.6" d="M5 25l6-6 4 4 11-11"/><circle cx="25" cy="12" r="3" fill="none" stroke="url(#g)" stroke-width="1.6"/><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00e5ff"/><stop offset="1" stop-color="#ff00a8"/></linearGradient></defs></svg>
+    <h1>Cyberpunk Spaghetti Western Chess</h1>
+    <div class="panel" style="margin-left:auto">
+      <label>Mode</label>
+      <select id="mode">
+        <option value="hvc">Human vs Computer</option>
+        <option value="pass">Local 2‑Player (Flip)</option>
+      </select>
+      <label>Side</label>
+      <select id="side">
+        <option value="w">White</option>
+        <option value="b">Black</option>
+      </select>
+      <label>Strength</label>
+      <input id="depth" type="range" min="1" max="4" step="1" value="3" />
+      <button id="new">New Game</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="board-shell">
+      <div id="fx-layer"></div>
+      <div class="frame"></div>
+      <div id="board" class="board"></div>
+    </div>
+  </main>
+
+  <div class="status" id="status"></div>
+
+  <footer>
+    Theme: neon‑noir desert, synth grit &amp; saddle leather. Pass‑and‑play flips the board after each move.
+  </footer>
+</div>
+
+<!-- Promotion modal -->
+<div class="modal" id="promo">
+  <div class="card">
+    <h3>Choose promotion</h3>
+    <div class="promo-grid">
+      <button class="promo-btn" data-p="q">♛</button>
+      <button class="promo-btn" data-p="r">♜</button>
+      <button class="promo-btn" data-p="b">♝</button>
+      <button class="promo-btn" data-p="n">♞</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/***********************************
+ * Minimal Unicode piece set
+ ***********************************/
+const GLYPH = {
+  'P':'♙','N':'♘','B':'♗','R':'♖','Q':'♕','K':'♔',
+  'p':'♟','n':'♞','b':'♝','r':'♜','q':'♛','k':'♚'
+};
+
+/***********************************
+ * 0x88 Chess Engine (rules + search)
+ * - Full legal move generation
+ * - Castling, en passant, promotion
+ * - Check/checkmate/stalemate
+ * - 50-move rule & threefold repetition
+ ***********************************/
+(function(){
+  const WHITE=0, BLACK=1; const EMPTY=0;
+  const PAWN=1, KNIGHT=2, BISHOP=3, ROOK=4, QUEEN=5, KING=6;
+  const PIECE_TO_CHAR=['', 'p','n','b','r','q','k'];
+  const CHAR_TO_PIECE={p:PAWN,n:KNIGHT,b:BISHOP,r:ROOK,q:QUEEN,k:KING};
+  const OFFS={N:[31,33,14,-14,18,-18,-31,-33],B:[15,17,-15,-17],R:[1,-1,16,-16],QK:[1,-1,16,-16,15,17,-15,-17]};
+  const A1=0,H1=7,A8=112,H8=119;
+  const FLAG={CAPTURE:1,KS:2,QS:4,EP:8,DBL:16,PROM:32};
+
+  // Piece-square tables (0x88 mirrored for black)
+  const PST = {
+    p:[
+      0,0,0,0,0,0,0,0,  5,5,5,5,5,5,5,5,  1,1,2,3,3,2,1,1,
+      0,0,0,2,2,0,0,0,  0,0,0,-2,-2,0,0,0,  1,-1,-2,0,0,-2,-1,1,
+      1,2,2,-2,-2,2,2,1,  0,0,0,0,0,0,0,0
+    ],
+    n:[
+      -5,-4,-3,-3,-3,-3,-4,-5,  -4,-2,0,0,0,0,-2,-4,  -3,0,1,1,1,1,0,-3,
+      -3,1,1,2,2,1,1,-3,  -3,0,2,2,2,2,0,-3,  -3,1,1,2,2,1,1,-3,
+      -4,-2,0,0,0,0,-2,-4,  -5,-4,-3,-3,-3,-3,-4,-5
+    ],
+    b:[
+      -2,-1,-1,-1,-1,-1,-1,-2,  -1,0,0,0,0,0,0,-1,  -1,0,1,1,1,1,0,-1,
+      -1,1,1,1,1,1,1,-1,  -1,0,1,1,1,1,0,-1,  -1,1,1,1,1,1,1,-1,
+      -1,0,0,0,0,0,0,-1,  -2,-1,-1,-1,-1,-1,-1,-2
+    ],
+    r:[
+      0,0,0,1,1,0,0,0,  0,0,0,1,1,0,0,0,  0,0,0,1,1,0,0,0,
+      1,1,1,2,2,1,1,1,  1,1,1,2,2,1,1,1,  0,0,0,1,1,0,0,0,
+      0,0,0,1,1,0,0,0,  0,0,0,0,0,0,0,0
+    ],
+    q:[
+      -2,-1,-1,-1,-1,-1,-1,-2,  -1,0,0,0,0,0,0,-1,  -1,0,1,1,1,1,0,-1,
+      -1,0,1,1,1,1,0,-1,  -1,0,1,1,1,1,0,-1,  -1,0,1,1,1,1,0,-1,
+      -1,0,0,0,0,0,0,-1,  -2,-1,-1,-1,-1,-1,-1,-2
+    ],
+    k:[
+      2,3,1,0,0,1,3,2,  2,2,0,0,0,0,2,2,  -1,-2,-2,-2,-2,-2,-2,-1,
+      -2,-3,-3,-4,-4,-3,-3,-2,  -2,-3,-3,-4,-4,-3,-3,-2,  -1,-2,-2,-2,-2,-2,-2,-1,
+      2,2,0,0,0,0,2,2,  2,3,1,0,0,1,3,2
+    ]
+  };
+  // Expand PST to 0x88 indexing
+  function pstIdx(i){ return ((7 - (i>>4))<<3) + (i & 7); }
+  const PST0 = {}; for(const k in PST){ PST0[k]=new Int16Array(128); for(let i=0;i<128;i++){ if(i&0x88){PST0[k][i]=0; continue;} PST0[k][i]=PST[k][pstIdx(i)] } }
+
+  function makeEngine(){
+    const S = {
+      board:new Int8Array(128), // sign: color bit in 4th bit (8)
+      color:WHITE,
+      castling:0b1111, // white KQ black kq
+      ep:-1,
+      half:0,
+      full:1,
+      history:[],
+      repMap:new Map(),
+    };
+    const KC={W_K:1,W_Q:2,B_K:4,B_Q:8};
+
+    function reset(){ loadFEN('start'); }
+
+    function pieceAt(i){ return S.board[i]; }
+    function colorOf(p){ return (p&8)?BLACK:WHITE; }
+    function typeOf(p){ return p & 7; }
+    function encodePiece(t,c){ return (t | (c?8:0)); }
+
+    function loadFEN(fen){
+      if(fen==='start') fen='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+      const [rows,active,castles,ep,half,full]=fen.split(' ');
+      S.board.fill(EMPTY);
+      let i=A8; for(const r of rows.split('/')){ let f=0; for(const ch of r){ if(/[1-8]/.test(ch)){ f+=parseInt(ch,10); } else { const isUpper=ch===ch.toUpperCase(); const t=CHAR_TO_PIECE[ch.toLowerCase()]; const c=isUpper?WHITE:BLACK; S.board[i+f]=encodePiece(t,c); f++; } } i+=16; }
+      S.color = (active==='w')?WHITE:BLACK;
+      S.castling = 0; if(castles.includes('K')) S.castling|=KC.W_K; if(castles.includes('Q')) S.castling|=KC.W_Q; if(castles.includes('k')) S.castling|=KC.B_K; if(castles.includes('q')) S.castling|=KC.B_Q;
+      S.ep = ep==='-'? -1 : algebraicToIndex(ep);
+      S.half = parseInt(half||'0',10); S.full = parseInt(full||'1',10);
+      S.history=[]; S.repMap.clear();
+      noteRepetition();
+    }
+
+    function generateMoves(onlyCaptures=false){
+      const moves=[]; const us=S.color; const them=us^1;
+      for(let i=0;i<128;i++) if(!(i&0x88)){
+        const p=S.board[i]; if(!p||colorOf(p)!==us) continue; const t=typeOf(p);
+        if(t===PAWN){
+          const dir = us===WHITE? -16 : 16; const startRank = us===WHITE? (6<<4) : (1<<4); const promoRank = us===WHITE? 0 : (7<<4);
+          // single push
+          const f1=i+dir; if(!(f1&0x88) && !S.board[f1]){
+            if((f1&0x70)===promoRank){ addPromotions(i,f1,0); } else { pushMove(i,f1,0); }
+            // double
+            const f2=f1+dir; if((i&0x70)===startRank && !S.board[f2]) pushMove(i,f2,FLAG.DBL);
+          }
+          // captures
+          for(const dx of [dir-1,dir+1]){ const to=i+dx; if(to&0x88) continue; if(S.board[to] && colorOf(S.board[to])===them){ if(((to&0x70)===promoRank)) addPromotions(i,to,FLAG.CAPTURE); else pushMove(i,to,FLAG.CAPTURE);} }
+          // en passant
+          if(S.ep!==-1){ for(const dx of [dir-1,dir+1]){ const to=i+dx; if(to===S.ep){ pushMove(i,to,FLAG.EP|FLAG.CAPTURE); } } }
+        } else if(t===KNIGHT){
+          for(const o of OFFS.N){ const to=i+o; if(to&0x88) continue; const q=S.board[to]; if(!q||colorOf(q)!==us^1){ if(q) pushMove(i,to,FLAG.CAPTURE); else pushMove(i,to,0); } }
+        } else if(t===BISHOP||t===ROOK||t===QUEEN){
+          const dirs = t===BISHOP?OFFS.B:(t===ROOK?OFFS.R:OFFS.QK);
+          for(const o of dirs){ let to=i+o; while(!(to&0x88)){ const q=S.board[to]; if(!q){ pushMove(i,to,0); to+=o; } else { if(colorOf(q)===them) pushMove(i,to,FLAG.CAPTURE); break; } }
+          }
+        } else if(t===KING){
+          for(const o of OFFS.QK){ const to=i+o; if(to&0x88) continue; const q=S.board[to]; if(!q||colorOf(q)===them){ if(q) pushMove(i,to,FLAG.CAPTURE); else pushMove(i,to,0); } }
