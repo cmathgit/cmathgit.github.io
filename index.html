@@ -229,6 +229,31 @@
             text-decoration: none;
         }
 
+        .figure-examples {
+            margin: 1.5em auto; /* Center container and add vertical space */
+            max-width: 450px;   /* Constrain the width */
+        }
+
+        .figure-examples figure {
+            margin: 0; /* Reset default figure margin */
+        }
+
+        .figure-examples img {
+            max-width: 100%; /* Image is responsive within the container */
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .figure-examples figcaption {
+            margin-top: 0.5em;
+            font-size: 0.9em;
+            color: #a4b8a9;
+            text-align: center;
+            font-style: italic;
+        }
 
         /* Horizontal Rule Style */
         hr {
@@ -268,6 +293,33 @@
             </a>
         </div>
         <hr>
+        <p>AI-Security Methodology</p>
+       <a href="https://openwebui.com/p/cmathopen/role-pseudonymous-prompting-protocol">Role-Pseudonymous Prompting Protocol (RPP)</a><br>
+       <a href="https://github.com/cmathgit/bible-chatgpt-prompts/blob/main/Role-Pseudonymous%20Prompting%20Protocol%20Paper.md">RPP Paper</a>
+
+      <div class="important-section" style="border: 1px solid #385c59; padding: 1.5em; background-color: #282a36; margin: 1em 0; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <h2 style="color: #c6d6d2; margin-bottom: 0.5em;">Role-Pseudonymous Prompting Protocol (RPP)</h2>
+        <p><b>Devised by Cruz Macias – An Essential AI-Security Innovation: This methodology, which I personally developed, is of paramount importance for protecting user privacy in AI interactions. RPP is an AI-Security Methodology that I devised which aims to protect the identity of the user, and it is working fantastically.</b></p>
+
+        <h3 style="color: #c6d6d2; margin-bottom: 0.5em;">Executive Summary</h3>
+        <p><b>Role-Pseudonymous Prompting Protocol (RPP) is an AI-security method that auto-converts all prompts into third-person, role-based, de-identified case descriptions, ensuring privacy, neutrality, and safe AI interaction across calls, tools, and logs.</b></p>
+
+        <div class="figure-examples">
+        Non-compliant Prompt Example:
+        <figure> 
+          <img src="https://1drv.ms/i/c/351e429395ffd928/IQSDec-jOhrbRaY_errtPw4hAZVO4xkS9PUkiyJrCTsitFQ" alt="RPP Example"> 
+          <figcaption>In this example, we see the caregiver enters a non-compliant prompt and refers to the infant as "he" or "my baby" and the prompt was auto-rewritten by the LLM applying RPP.</figcaption>
+        </figure>
+        </div>
+    
+        <h3 style="color: #c6d6d2; margin-bottom: 0.5em;">Methodology Statement</h3>
+        <p><b>The Role-Pseudonymous Prompting Protocol (RPP) is an AI-security methodology designed to safeguard user identity by enforcing de-identification at the prompt level. All inputs are automatically converted into third-person, role-based, neutral case descriptions that retain only task-relevant facts while omitting personal pronouns, identifiers, or emotional framing. This transformation ensures that language models receive prompts framed as generalizable cases rather than personal narratives, thereby reducing privacy risk, mitigating bias, and aligning with responsible AI use in sensitive domains. RPP is applied consistently across all model calls, tool interactions, and system logs, with non-compliant prompts rewritten automatically. By embedding pseudonymization directly into the interaction layer, RPP establishes a robust, domain-agnostic safeguard for secure and ethical AI deployment.</b></p>
+    
+        <h3 style="color: #c6d6d2; margin-bottom: 0.5em;">RPP Instructions</h3>
+        <pre style="background-color: #35374b; padding: 1em; border-radius: 5px; color: #a4b8a9; overflow-x: auto;"><code>Role-Pseudonymous Prompting Protocol (RPP) converts prompts into third person, role based, de-identified, neutral case descriptions with only task-relevant facts to solicit general guidance. Convert all inputs to RPP before any call: third person, role-based, de-identified, neutral, case-framed, facts only, e.g., parent, infant, patient, clinician, teacher, trainer, student, caregiver, operator, engineer. Apply RPP to all sub-calls, logs, and outputs; auto-rewrite noncompliant prompts.</code></pre>
+      </div>
+
+        <hr>
         <p>Please visit my other pages:</p>
 
         <div class="button-container">
@@ -291,9 +343,7 @@
             <a href="https://cmathgit.github.io/examples/musicpromptgenerator/" class="button-link">Suno Style of Music Prompt Generator</a>
             <!-- Link to the KJV Lookup page -->
             <a href="https://cmathgit.github.io/examples/kjvlookup/" class="button-link">KJV Lookup and Lyrics Generator</a>
-                        <!-- Link to the KJV Lookup page -->
-            <a href="https://cmathgit.github.io/examples/kjvlookup/" class="button-link">KJV Lookup and Lyrics Generator</a>
-            <!-- Link to the KJV Lookup page -->
+            <!-- Link to the LLM Game Design Arena - Chess page -->
             <a href="https://cmathgit.github.io/examples/cruzelio/chess/" class="button-link">LLM Game Design Arena - Chess</a>
             <!-- Link to the Boids page -->
             <a href="https://cmathgit.github.io/examples/boid/" class="button-link">Boids</a>
@@ -315,6 +365,8 @@
         <hr>
         <p>My favorite Agent Instructions:</p>
         <div class="button-container">
+            <a href="https://openwebui.com/p/cmathopen/role-pseudonymous-prompting-protocol" class="button-link" target="_blank" rel="noopener noreferrer">Role-Pseudonymous Prompting Protocol</a>
+
             <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-baptist-preacher" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Baptist Preacher</a>
             
             <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-worship-music-composer" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Worship Music Composer</a>

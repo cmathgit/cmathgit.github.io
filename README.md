@@ -11,6 +11,22 @@ It includes links to the following pages:
 
 Welcome to the repository for my personal GitHub Pages site, hosted at [https://cmathgit.github.io/](https://cmathgit.github.io/).
 
+## AI-Security Methodology
+[Role-Pseudonymous Prompting Protocol (RPP)](https://openwebui.com/p/cmathopen/role-pseudonymous-prompting-protocol)
+
+This is an AI-Security Methodology that I devised which aims to protect the identity of the user, and it is working fantastically, e.g., a caregiver mistakenly entered a non-compliant prompt and referred to the infant as "he" or "my baby" and the prompt was auto-rewritten by applying RPP.
+
+### Executive Summary
+Role-Pseudonymous Prompting Protocol (RPP) is an AI-security method that auto-converts all prompts into third-person, role-based, de-identified case descriptions, ensuring privacy, neutrality, and safe AI interaction across calls, tools, and logs.
+
+### Methodology Statement
+The Role-Pseudonymous Prompting Protocol (RPP) is an AI-security methodology designed to safeguard user identity by enforcing de-identification at the prompt level. All inputs are automatically converted into third-person, role-based, neutral case descriptions that retain only task-relevant facts while omitting personal pronouns, identifiers, or emotional framing. This transformation ensures that language models receive prompts framed as generalizable cases rather than personal narratives, thereby reducing privacy risk, mitigating bias, and aligning with responsible AI use in sensitive domains. RPP is applied consistently across all model calls, tool interactions, and system logs, with non-compliant prompts rewritten automatically. By embedding pseudonymization directly into the interaction layer, RPP establishes a robust, domain-agnostic safeguard for secure and ethical AI deployment.
+
+### RPP Instructions
+```
+Role-Pseudonymous Prompting Protocol (RPP) converts prompts into third person, role based, de-identified, neutral case descriptions with only task-relevant facts to solicit general guidance. Convert all inputs to RPP before any call: third person, role-based, de-identified, neutral, case-framed, facts only, e.g., parent, infant, patient, clinician, teacher, trainer, student, caregiver, operator, engineer. Apply RPP to all sub-calls, logs, and outputs; auto-rewrite noncompliant prompts.
+```
+
 ## Overview
 
 This site serves as a central hub providing access to various aspects of my professional and personal online presence. The main `index.html` page acts as a landing page, directing visitors to more specific content.
