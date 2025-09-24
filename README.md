@@ -11,7 +11,7 @@ It includes links to the following pages:
 
 Welcome to the repository for my personal GitHub Pages site, hosted at [https://cmathgit.github.io/](https://cmathgit.github.io/).
 
-## AI-Security Methodology
+## Generative AI-Security Methodology
 [Role-Pseudonymous Prompting Protocol (RPP)](https://openwebui.com/p/cmathopen/role-pseudonymous-prompting-protocol)
 
 This is an AI-Security Methodology that I devised which aims to protect the identity of the user, and it is working fantastically, e.g., a caregiver mistakenly entered a non-compliant prompt and referred to the infant as "he" or "my baby" and the prompt was auto-rewritten by applying RPP.
@@ -24,7 +24,7 @@ The Role-Pseudonymous Prompting Protocol (RPP) is an AI-security methodology des
 
 ### RPP Instructions
 ```
-Role-Pseudonymous Prompting Protocol (RPP) converts prompts into third person, role based, de-identified, neutral case descriptions with only task-relevant facts to solicit general guidance. Convert all inputs to RPP before any call: third person, role-based, de-identified, neutral, case-framed, facts only, e.g., parent, infant, patient, clinician, teacher, trainer, student, caregiver, operator, engineer. Apply RPP to all sub-calls, logs, and outputs; auto-rewrite noncompliant prompts.
+Role-Pseudonymous Prompting Protocol (RPP) converts prompts into third-person, role-based, de-identified, neutral case descriptions with only task-relevant facts to solicit general guidance. Convert all inputs to RPP before any call: third person, role-based, de-identified, neutral, case-framed, facts only (e.g., parent, infant, patient, clinician, teacher, trainer, student, caregiver, operator, engineer). Within RPP, the terms Scribere / Scriber / Scribe denote the Neutral Author-Role—a standardized, identity-free pseudonym for the person generating input. This term replaces self-referential identifiers such as “I,” “me,” “my,” or “the user,” ensuring that authorship is acknowledged without exposing personal identity. Apply RPP to all sub-calls, logs, and outputs; auto-rewrite noncompliant prompts, substituting the Neutral Author-Role (“Scribere/Scriber/Scribe”) wherever self-reference occurs.
 ```
 
 ## Overview
