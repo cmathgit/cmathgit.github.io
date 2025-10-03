@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bengali Bible Verse of the Day</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            background-color: #a98812;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<!-- Bible Gateway Web Service --> 
+<form action="https://www.biblegateway.com/quicksearch/">
+<table border="1" cellspacing="0" cellpadding="2" style="border-color: #915104;">
+<tr><th style="background-color: #bc8805; color:#fff; text-align: center; padding: 0 10px;">Bengali: পবিত্র বাইবেল Bible Verse of the Day: a modified web service from BibleGateway</th></tr>
+<tr><td style="background-color: #fff; text-align: center; padding: 0 10px;">
+<script>
+(function() {
+
+/* Keep everything in BG variable
+    augment existing variable if it exists.
+*/
+if ( !window.BG || typeof window.BG !== 'object') {
+    window.BG = {};
+}
+var BG = window.BG;
+
+BG.votdWriteCallback = function(json) {
+    var votd = json.votd;
+    var votd_html = '';
+    votd_html += '<div>' + votd.text;
+    votd_html += ' -<a href="' + votd.permalink +'">' + votd.display_ref + '</a>';
+    if (votd.audiolink) {
+      votd_html += ' <a rel="nofollow" href="' + votd.audiolink + '" title="Listen to chapter"><br>Listen to chapter. <img alt="Listen to chapter" src="https://www.biblegateway.com/assets/images/logos/bglogo_sm.gif?103106" border=0/></a>';
+    }
+    votd_html += ' <a href="' + votd.copyrightlink + '">' + votd.copyright + '</a>';
+    votd_html += 'Powered by <a rel="nofollow" href="https://www.biblegateway.com/">BibleGateway.com</a>';
+    votd_html += '</div>';
+    document.write(votd_html);
+};
+
+window.BG = BG;
+
+})();
+</script>
+<!-- 
+Submit the following query via API GET Request to the votd (verse of the day) endpoint:
+format: json (return payload in javascript object notation; use XML for Extensible Markup Language or HTML for HyperText Markup Language)
+version: NIV (bible version from which the verse is taken; use KJV for King James Version and AMP for Amplified Version)
+callback: BG.votdWriteCallback
+--> 
+<script src="https://www.biblegateway.com/votd/get/?format=json&version=289&callback=BG.votdWriteCallback"></script>
+</td></tr>
+<tr><td style="background-color: #fff; text-align: center; padding: 0 10px;">
+<div style="margin-bottom: 0;">
+Lookup a word or passage in the Bengali: পবিত্র বাইবেল Bible.
+<input style="margin:2px" type="text" name="quicksearch"/><br/>
+<input style="margin:2px" type="submit" value="Search BibleGateway.com"/><br/>
+</div>
+<a href="https://www.biblegateway.com/" title="The Bible in multiple languages, versions, and formats">
+Visit Site</a>
+<small>
+<a href="https://www.biblegateway.com/usage/form/">Include this form on your page</a><br/>
+</small>
+</td></tr>
+</table>
+</form>
+</div>
+</body>
+</html>
