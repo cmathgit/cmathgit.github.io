@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bengali Bible Verse of the Day</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            background-color: #a98812;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        .web-apps img {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .image-gallery {
+            margin-top: 2em; /* Space above the images */
+            display: flex; /* Arrange images in a row */
+            justify-content: space-around; /* Space them out */
+            align-items: center; /* Align vertically */
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+            gap: 1em; /* Space between images if they wrap */
+        }
+
+        .image-gallery img, .web-apps img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive adjustments for images if needed */
+        @media (max-width: 600px) {
+            .image-gallery img {
+                max-width: 100px; /* Smaller images on smaller screens */
+            }
+        }
+
+        .image-gallery figure, .web-apps figure {
+            margin: 0; /* Reset default figure margin */
+        }
+
+        .image-gallery figcaption, .web-apps figcaption {
+            margin-top: 0.5em;
+            font-size: 0.9em;
+            color: #a4b8a9;
+            text-align: center;
+        }
+
+        .web-apps {
+            margin-top: 2em;
+            margin-bottom: 2em;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1em;
+        }
+
+        .web-apps img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .web-apps a:hover img {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .web-apps a:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mini Apps</h1>
+        <img src="" alt="votd">
+
+        <!-- Web Apps -->
+        <div class="web-apps">
+            <a href="https://t.me/crazymachiine_bot/votd">
+                <figure>
+                    <img src="https://www.biblegateway.com/votd/get/?format=HTML&version=9" alt="votd">
+                    <figcaption>biblegateway-votd-app</figcaption>
+                </figure>
+            </a>
+            <a href="https://cmathgit.github.io/examples/kjvlookup/">
+                <figure>
+                    <img src="https://1drv.ms/i/c/351e429395ffd928/IQRPcpaNG4wPRJrlxwtbjrw1AeiY92SOPp3SjxSxxzUPSTE" alt="kjvlookup">
+                    <figcaption>kjvlookup</figcaption>
+                </figure>
+            </a>
+            <a href="https://cmathgit.github.io/examples/musicpromptgenerator/">
+                <figure>
+                    <img src="https://1drv.ms/i/c/351e429395ffd928/IQQPY0XkUVjnRqOK5F9ZKy16AWWjiopIhrc5BLQeL0Z2kk8" alt="suno-prompt-generator">
+                    <figcaption>sunoprompts</figcaption>
+                </figure>
+            </a>
+        </div>
+    </div>
+</body>
+</html> 
