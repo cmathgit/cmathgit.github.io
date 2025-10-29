@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Music Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Font Awesome Free ICONS 6.1.1 by @fontawesome - https://fontawesome.com-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+
+<!--External Style Sheets-->
+<!--<link rel="stylesheet" href="css/styles.css">-->
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 720px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: #222;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 120px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+</style>
+</head>
+<body class="w3-black">
+
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <!-- Avatar image in top left corner -->
+  <!--<img src="images/portrait.jpg" style="width:100%">-->
+  <img src="https://1drv.ms/i/c/351e429395ffd928/IQTarc5d6j35R6ev80q5gwPEAY0cmAMC4nsbRwWeisctADk" style="width:100%">
+	<a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>ABOUT</p>
+  </a>
+  <!--
+  <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-camera w3-xxlarge"></i>
+    <p>PHOTOS</p>
+  </a>
+  <a href="#music" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-music w3-xxlarge"></i>
+    <p>MUSIC</p>
+  </a>
+  -->
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>CONTACT</p>
+  </a>
+  <a href="#featured" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-star w3-xxlarge"></i>
+    <p>FEATURED</p>
+  </a>
+  <!--<a href="#posts" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-star w3-xxlarge"></i>
+    <p>SOCIAL MEDIA</p>
+  </a>-->
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+	<!--
+    <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
+    <a href="#music" class="w3-bar-item w3-button" style="width:25% !important">MUSIC</a>
+	-->
+    <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+    <a href="#featured" class="w3-bar-item w3-button" style="width:25% !important">FEATURED</a>
+    <!--<a href="#posts" class="w3-bar-item w3-button" style="width:25% !important">SOCIAL MEDIA</a>-->
+  </div>
+</div>
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+  <!-- Header/Home -->
+  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <h1 class="w3-jumbo"><span class="w3-hide-small">Music by</span> Peter Cinko</h1>
+    <p>Solo Violist and Classical Guitarist</p>
+    <!--<img src="images/portrait.jpg" alt="peter" class="w3-image" width="992" height="1108">-->
+    <img src="https://1drv.ms/i/c/351e429395ffd928/IQTarc5d6j35R6ev80q5gwPEAY0cmAMC4nsbRwWeisctADk" alt="peter" class="w3-image" width="992" height="1108">
+</header>
+  <div class="w3-content w3-justify" id="concerts">
+  	<h2>Concerts</h2>
+	<p>Watch Peter's <a target="_blank" href="https://youtu.be/Smt2rInC60k?feature=shared">latest concert here.</a> This performance took place on August 28th, 2023 at Trinity Lutheran Church in Evanston, IL. The pieces include works of Bach, Beethoven, Tarrega, Chopin, Schubert, and a few hymns.</p>
+	<!--Trinity Lutheran Church Viola and Guitar Concert-->
+	<!--<iframe width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+  </div>
+  <div class="w3-content w3-justify" id="featured">
+  	<h2>Featured</h2>
+	<!--Trinity Lutheran Church Viola and Guitar Concert-->
+	<!--<iframe width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+	<!--Peter Cinko Prelude Bach Cello Suite No 3 TLC 20220814.mp4-->
+	<!--<iframe src="" width="640" height="480" allow="autoplay"></iframe>-->
+	<!--<iframe width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+	<!--Spanish Romance-->
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/kV5Z6JtRpvo?si=zwwa7WeZE45nC2mN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--Sarabande from Bach Cello Suite 2-->
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/bNjojy4dkbQ?si=bGAOq9zjrCoqny3j" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--Bach Bourrée-->
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/i4RQPg6uUVU?si=nYA9bl1LAuCQZwC4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	<!--Bach Gigue-->
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/_jBjgHtQjsw?si=MQ9s4ys4AMaQE451" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+  <!-- About Section -->
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+    <h2 class="w3-text-light-grey">About Peter</h2>
+    <hr style="width:200px" class="w3-opacity">
+	<p>Peter began his musical journey at age six on the guitar after being inspired by his father. After taking weekly lessons at the local music school in Chicago, he began performing at school recitals, church services, and theater productions.<br><br>Peter attended Whitney Young Magnet High School in Chicago. The curriculum required all students to take one music course. Since he was already an advanced guitarist and the only guitar course available was for beginners, he decided to try out beginning orchestra. Choosing the viola proved to be a lifelong inspiration. After the first year of beginning orchestra, his talent allowed him to skip intermediate orchestra and go to advanced orchestra where he earned second chair in the initial audition. In his senior year, he was selected by audition to participate in the Illinois Music Education Association orchestra.<br><br>In high school, Peter was a member of a rock band performing original music and cover songs. In 2009, the band competed in a local battle of the bands competition, making it to the state finals that year in Springfield, IL. They performed at Skokie's Backlot Bash, the Skokie Theater, and on the Spirit of Chicago at Navy Pier.<br><br>The next step in Peter's musical journey was earning a Bachelor's Degree in music at Northern Illinois University. There he studied music theory, music history, aural skills, and performed with the philharmonic orchestra. He took weekly lessons with Anthony Devroye, violist of the nationally renowned Avalon String Quartet. He was able to attend master classes with famous violinists Hilary Hahn and Rachel Barton Pine.<br><br>After graduating from NIU, Peter performed regularly at a variety of recitals and concerts. He was a member of the Ravenswood Community Orchestra as principal viola. He was a weekly volunteer playing for residents at Friedman Place, a community for the blind. He has played wedding ceremonies for family and friends.</p>
+    <hr style="width:200px" class="w3-opacity">
+	<div class="w3-container w3-card w3-text-grey w3-black w3-margin-bottom">
+        <h2 class="w3-padding-16 w3-text-light-grey"><i class="fa-solid fa-music fa-fw w3-margin-right w3-xxlarge"></i>Performance Experience</h2>		
+		 <div class="w3-container">
+          <h5 class="w3-opacity w3-text-light-grey"><i class="fa-solid fa-landmark fa-fw w3-margin-righ w3-text-light-grey"></i><b> Principal Viola / Ravenswood Community Orchestra</b></h5>
+		  <h6 class="w3-text-grey"><i class="fa fa-building fa-fw w3-margin-right"></i>Chicago, IL </h6>
+          <h6 class="w3-text-grey"><i class="fa fa-calendar fa-fw w3-margin-right"></i> 2017 - Present</h6>
+          <p>Performed Principal Viola for various orchestral pieces.</p>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity w3-text-light-grey"><i class="fa-solid fa-church fa-fw w3-margin-right w3-text-light-grey"></i><b>Music Ministry / Trinity Lutheran Church</b></h5>
+		  <h6 class="w3-text-grey"><i class="fa fa-building fa-fw w3-margin-right"></i>Evanston, IL </h6>
+          <h6 class="w3-text-grey"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2010 - Present</h6>
+          <p>Performing music for worship service.</p><br>
+        </div>
+      </div>
+  </div>
+  
+
+
+  <!-- Contact Section -->
+  <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
+    <h2 class="w3-text-light-grey">Contact Peter</h2>
+    <hr style="width:200px" class="w3-opacity">
+
+    <div class="w3-section">
+      <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Chicagoland, US</p>
+      <!--<p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: </p>
+      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: </p>-->
+    </div><br>
+  <!-- End Contact Section -->
+  </div>
+ 
+     <!-- Grid for social media posts -->
+	<!--<div class="w3-padding-64 w3-content" id="posts">
+		<div class="w3-row-padding" style="margin:0 -16px">
+			<h3 class="w3-text-light-grey">Social Media Posts</h3>
+			<div class="w3-third">
+				<h3 class="w3-text-light-grey">Facebook Live</h3>
+        <h4 class="w3-text-light-grey">February 4th, 2024</h4>
+				<iframe src="" width="560" height="429" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+			</div>
+		</div>
+	</div>-->
+ 
+    <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge" id="social">
+   <p class="w3-text-light-grey">Find Peter on social media.</p>
+  <!--
+    <a href=''><i class="fa-brands fa-facebook-f w3-hover-opacity"></i></a>
+  -->
+	<a target="_blank"href='https://www.youtube.com/@petercinko7567/videos'><i class="fa-brands fa-youtube w3-hover-opacity"></i></a>
+  <!--
+	<a href=''><i class="fa-brands fa-soundcloud w3-hover-opacity"></i></a>
+	<a href=''><i class="fa-microphone w3-hover-opacity"></i></a>
+	<a href=''><i class="fa-brands fa-github w3-large w3-hover-opacity"></i></a>
+	<a href=''><i class="fa-brands fa-discord w3-large w3-hover-opacity"></i></a>
+	-->
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3schools</a></p>
+  <!-- End footer -->
+  </footer>
+
+<!-- END PAGE CONTENT -->
+</div>
+
+</body>
+</html>
