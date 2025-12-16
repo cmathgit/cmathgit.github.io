@@ -6,17 +6,15 @@
     <title>Game Collection Randomizer</title>
     <style>
         :root {
-            --color-primary: #00ff9d;
-            --color-primary-hover: #00e68a;
-            --color-primary-active: #00cc77;
-            --color-bg: #0a0a0a;
-            --color-surface: #1a1a1a;
-            --color-text: #00ff9d;
-            --color-text-secondary: #00cc77;
-            --color-border: #009955;
-            --color-error: #ff0033;
-            --color-neon: #00ff9d;
-            --color-neon-glow: 0 0 10px #00ff9d;
+            --color-primary: #2180818d;
+            --color-primary-hover: #1a7476;
+            --color-primary-active: #1a6473;
+            --color-bg: #fcfcf9;
+            --color-surface: #ffffff;
+            --color-text: #134252;
+            --color-text-secondary: #626c71;
+            --color-border: #5e5240;
+            --color-error: #c0152f;
         }
 
         * {
@@ -24,20 +22,16 @@
         }
 
         html {
-            font-family: 'Courier New', monospace;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-size: 14px;
             line-height: 1.5;
             color: var(--color-text);
-            background-color: var(--color-bg);
         }
 
         body {
             margin: 0;
             padding: 0;
             background-color: var(--color-bg);
-            background-image: linear-gradient(rgba(0, 255, 157, 0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0, 255, 157, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
         }
 
         .container {
@@ -49,7 +43,7 @@
         header {
             text-align: center;
             margin-bottom: 30px;
-            border-bottom: 2px solid rgba(0, 255, 157, 0.3);
+            border-bottom: 2px solid rgba(94, 82, 64, 0.15);
             padding-bottom: 20px;
         }
 
@@ -58,13 +52,11 @@
             font-size: 32px;
             font-weight: 600;
             color: var(--color-text);
-            text-shadow: var(--color-neon-glow);
         }
 
         .subtitle {
             color: var(--color-text-secondary);
             font-size: 14px;
-            text-shadow: 0 0 5px var(--color-neon);
         }
 
         .content {
@@ -75,11 +67,11 @@
 
         .filters-panel {
             background-color: var(--color-surface);
-            border: 1px solid rgba(0, 255, 157, 0.3);
+            border: 1px solid rgba(94, 82, 64, 0.15);
             border-radius: 8px;
             padding: 20px;
             height: fit-content;
-            box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
         }
 
         .filter-group {
@@ -98,7 +90,6 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--color-text);
-            text-shadow: var(--color-neon-glow);
         }
 
         .filter-options {
@@ -119,7 +110,7 @@
         }
 
         .filter-options::-webkit-scrollbar-thumb {
-            background: rgba(0, 255, 157, 0.3);
+            background: rgba(94, 82, 64, 0.2);
             border-radius: 3px;
         }
 
@@ -134,14 +125,12 @@
             height: 16px;
             cursor: pointer;
             accent-color: var(--color-primary);
-            filter: drop-shadow(0 0 5px var(--color-neon));
         }
 
         label {
             cursor: pointer;
             font-size: 13px;
             user-select: none;
-            color: var(--color-text-secondary);
         }
 
         .year-inputs {
@@ -153,30 +142,27 @@
         .year-input {
             flex: 1;
             padding: 8px 12px;
-            border: 1px solid rgba(0, 255, 157, 0.3);
+            border: 1px solid rgba(94, 82, 64, 0.2);
             border-radius: 6px;
             font-size: 13px;
             color: var(--color-text);
             background-color: var(--color-surface);
-            box-shadow: 0 0 10px rgba(0, 255, 157, 0.2);
         }
 
         .year-input:focus {
             outline: 2px solid var(--color-primary);
             outline-offset: 0;
-            box-shadow: 0 0 15px rgba(0, 255, 157, 0.4);
         }
 
         .to-label {
             font-size: 12px;
             color: var(--color-text-secondary);
             white-space: nowrap;
-            text-shadow: 0 0 5px var(--color-neon);
         }
 
         .result-panel {
             background-color: var(--color-surface);
-            border: 2px solid rgba(0, 255, 157, 0.3);
+            border: 2px solid rgba(33, 128, 141, 0.3);
             border-radius: 8px;
             padding: 30px;
             display: flex;
@@ -185,16 +171,12 @@
             justify-content: center;
             min-height: 300px;
             text-align: center;
-            box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
-            background-image: linear-gradient(rgba(0, 255, 157, 0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0, 255, 157, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
         }
 
         .result-empty {
             color: var(--color-text-secondary);
             font-size: 16px;
-            text-shadow: 0 0 5px var(--color-neon);
         }
 
         .result-game {
@@ -210,7 +192,6 @@
             color: var(--color-primary);
             margin: 0;
             word-break: break-word;
-            text-shadow: var(--color-neon-glow);
         }
 
         .game-details {
@@ -218,9 +199,8 @@
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
             padding: 20px;
-            background-color: rgba(0, 255, 157, 0.1);
+            background-color: rgba(94, 82, 64, 0.05);
             border-radius: 6px;
-            border: 1px solid rgba(0, 255, 157, 0.3);
         }
 
         .detail-item {
@@ -235,14 +215,12 @@
             letter-spacing: 0.5px;
             color: var(--color-text-secondary);
             font-weight: 600;
-            text-shadow: 0 0 5px var(--color-neon);
         }
 
         .detail-value {
             font-size: 15px;
             font-weight: 500;
             color: var(--color-text);
-            text-shadow: var(--color-neon-glow);
         }
 
         .button-group {
@@ -260,42 +238,35 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 150ms ease;
-            box-shadow: 0 0 10px rgba(0, 255, 157, 0.2);
         }
 
         .btn-primary {
             background-color: var(--color-primary);
-            color: var(--color-bg);
+            color: white;
             flex: 1;
             max-width: 300px;
-            text-shadow: var(--color-neon-glow);
         }
 
         .btn-primary:hover:not(:disabled) {
             background-color: var(--color-primary-hover);
-            box-shadow: 0 0 15px rgba(0, 255, 157, 0.4);
         }
 
         .btn-primary:active:not(:disabled) {
             background-color: var(--color-primary-active);
-            box-shadow: 0 0 20px rgba(0, 255, 157, 0.6);
         }
 
         .btn-primary:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-            box-shadow: none;
         }
 
         .btn-secondary {
-            background-color: rgba(0, 255, 157, 0.1);
+            background-color: rgba(94, 82, 64, 0.1);
             color: var(--color-text);
-            border: 1px solid rgba(0, 255, 157, 0.3);
         }
 
         .btn-secondary:hover {
-            background-color: rgba(0, 255, 157, 0.2);
-            box-shadow: 0 0 10px rgba(0, 255, 157, 0.2);
+            background-color: rgba(94, 82, 64, 0.15);
         }
 
         .match-count {
@@ -304,14 +275,12 @@
             text-align: center;
             margin-top: 16px;
             padding-top: 12px;
-            border-top: 1px solid rgba(0, 255, 157, 0.3);
-            text-shadow: 0 0 5px var(--color-neon);
+            border-top: 1px solid rgba(94, 82, 64, 0.1);
         }
 
         .loading {
             color: var(--color-text-secondary);
             font-style: italic;
-            text-shadow: 0 0 5px var(--color-neon);
         }
 
         @media (max-width: 768px) {
@@ -1295,7 +1264,7 @@
 </body>
 <footer>
     <p style="text-align: center; font-size: 0.9em; color: #666;">
-        &copy; 2025 Game Picker. Powered by Perplexity AI Labs and Mistral AI Codestral Latest Model (2508).  
+        &copy; 2025 Game Picker. Powered by Perplexity AI Labs.    
     </p>
 </footer>
 </html>
