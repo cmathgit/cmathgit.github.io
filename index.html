@@ -294,10 +294,20 @@
         </div>
         <hr>
         <h1>Recent Projects & Notable Accomplishments</h1>
+        <div class="oracle-toc" style="background-color: #282a36; padding: 1em; border-radius: 5px; margin-bottom: 2em; border-left: 5px solid hsl(62, 72%, 66%);">
+            <h3 style="color: #c6d6d2; margin-top: 0;">Quick Access</h3>
+            <ul style="list-style-type: disc; padding-left: 20px;">
+                <li style="color: white;"><a href="#capital-budget-integration" style="color: hsl(62, 72%, 66%);">Capital Budget Oracle Integration (FBDI & REST)</a></li>
+                <li style="color: white;"><a href="#invoice-order-integration" style="color: hsl(62, 72%, 66%);">Invoice Order Oracle Integration</a></li>
+                <li style="color: white;"><a href="#oci-paas-optimization" style="color: hsl(62, 72%, 66%);">Oracle Cloud Infrastructure PaaS Optimization</a></li>
+                <li style="color: white;"><a href="#asn-receiving-integration" style="color: hsl(62, 72%, 66%);">ASN Receiving Oracle Integration</a></li>
+                <li style="color: white;"><a href="#surgical-case-management" style="color: hsl(62, 72%, 66%);">Surgical Case Management & Clinical Procurement Oracle Integration</a></li>
+				<li style="color: white;"><a href="#open-webui-llm-deployment" style="color: hsl(62, 72%, 66%);">OpenWebUI LLM Integration</a></li>
+            </ul>
+        </div>
         <h2>Oracle Integration Cloud & Oracle Cloud Infrastructure Optimization</h2>
         <p>Design and support Integration solutions for Oracle Fusion Cloud Applications Suite—including Enterprise Resource Planning (ERP), Supply Chain & Manufacturing (SCM), and Human Capital Management (HCM)—via Oracle Integration Cloud (OIC). These integrations utilize various tech stacks, programming languages, connections, and tools with secure access to the organization’s ERP system and cloud databases. Technologies include: SFTP, SOAP, REST, SQLcl, ATP Databases, BI Publisher, PL/SQL, Java, and XML Schemas. Delivered multiple enterprise-grade solutions in Oracle Integration Cloud (OIC) and Oracle Cloud Infrastructure (OCI) integrating external healthcare systems with Oracle Fusion Cloud ERP. These projects showcase advanced skills in cloud-native integration, data staging, REST/SOAP APIs, and cost-efficient infrastructure management.</p>
-
-        <h3><strong>Capital Budget Integration</strong></h3>
+        <h3 id="capital-budget-integration"><strong>Capital Budget Integration</strong></h3>
         <ul>
             <li style="color: white;">Designed to process capital budget data transferred from an external Healthcare EPM system into the Oracle ERP system.</li>
             <li style="color: white;">Data received as pipe delimited files via SFTP and processing using Oracle FBDI for Project Management.</li>
@@ -336,7 +346,7 @@
             <li style="color: white;">Build a "Budget Chat" interface for executives using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/xai-models.htm">Pretrained Foundational Model xAI Grok 3</a> since it excels at enterprise use cases such as data extraction, coding, and summarizing text, and has a deep domain knowledge in finance, healthcare, law, and science. Users can ask, "Show me all capital projects over $50k in Cardiology that are pending approval," and the model translates this natural language into precise SQL queries against the ATP staging tables, returning real-time results without IT intervention.</li>
         </ul>
 
-        <h3><strong>Invoice Order Integration</strong></h3>
+        <h3 id="invoice-order-integration"><strong>Invoice Order Integration</strong></h3>
         <ul>
             <li style="color: white;">Designed to process and submit invoice order data transferred from an external Healthcare Supply Chain Management system into the Oracle ERP system.</li>
             <li style="color: white;">Data received as a zipped container via SFTP and imported using RESTful services.</li>
@@ -356,7 +366,7 @@
             <li style="color: white;">Use OCI Generative AI Embeddings to convert invoice descriptions into vectors. When a new invoice arrives with an ambiguous "Service Description," the system queries the vector database to find the most similar past invoices and automatically assigns the correct General Ledger (GL) code with 95% accuracy.</li>
         </ul>
 
-        <h3><strong>OCI PaaS Optimization Project</strong></h3>
+        <h3 id="oci-paas-optimization"><strong>OCI PaaS Optimization Project</strong></h3>
         <ul>
             <li style="color: white;">Reduced infrastructure costs by optimizing the OCI PaaS configuration for lower environments.</li>
             <li style="color: white;">Minimizing uptime of non-production components.</li>
@@ -373,7 +383,7 @@
             <li style="color: white;">Implement a predictive model using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Pretrained Foundational Model Cohere Embed 4</a> to analyze historical CPU/Memory utilization patterns. The system now proactively warms up OIC Connectivity Agents 15 minutes before predicted traffic spikes (e.g., month-end close), rather than reacting to load, balancing cost savings with performance.</li>
         </ul>
 
-        <h3><strong>ASN Receiving Integration</strong></h3>
+        <h3 id="asn-receiving-integration"><strong>ASN Receiving Integration</strong></h3>
         <ul>
             <li style="color: white;">Designed to process Advanced Shipment Notice (ASN) Receiving data from an external system into the Oracle ERP system.</li>
             <li style="color: white;">This integration ensures accurate and timely receipt of goods data into the ERP system, supporting supply chain operations.</li>
@@ -387,7 +397,7 @@
             <li style="color: white;">Develope a specialized agent using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-alibaba-models.htm">Imported Model Qwen3-14B</a> that monitors the "Receipt Advice" interface. When a quantity discrepancy occurs (e.g., ASN says 100, Dock received 90), the agent auto-drafts a formatted claim email to the vendor referencing the specific PO and ASN line, attaching the discrepancy report instantly.</li>
         </ul>
 
-        <h3><strong>Surgical Case Management & Clinical Procurement Integration</strong></h3>
+        <h3 id="surgical-case-management"><strong>Surgical Case Management & Clinical Procurement Integration</strong></h3>
         <ul>
             <li style="color: white;">Designed to process and synchronize requisition data from the External EMR System platform into Oracle ERP and extract item master and PO return data from ERP to External EMR System.</li>
             <li style="color: white;">Requisition files received via SFTP, staged in ATP tables, enriched with ERP item and pricing data, and submitted to ERP for PO creation using REST APIs or FBDI.</li>
@@ -404,7 +414,7 @@
             <li style="color: white;">A <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Cohere Command R+ 08-2024</a> powered agent scans every outgoing Purchase Order against the "Contract Price" file from the EMR. If the ERP price exceeds the contracted rate, the agent holds the PO and highlights the specific clause in the contract PDF that guarantees the lower price, empowering procurement to enforce vendor compliance.</li>
         </ul>	
 
-        <h2>OpenWebUI Deployment & Local Language Model Integration</h2>
+        <h2 id="open-webui-llm-deployment">OpenWebUI Deployment & Local LLM Integration</h2>
         <p>Maintaining and expanding the OpenWebUI platform for Generative AI web integration, locally hosted small language models (SLMs) and cloud-based large language models (LLMs) via a unified architecture. See my preferred DIY Language Model-Stack(s) below which include RAG/Embedding models, web search tools, OCR, and reranking models. Key components include:</p>
         <ul>
 		    <li style="color: white;"><strong>Tools</strong>: Integrated various tools, filters, and functions: <a href="https://console.groq.com/docs/tool-use/built-in-tools/wolfram-alpha">Groq Compound Systems Wolfram Alpha integration</a> filtering (inject compound_custom parameters into the request payload), <a href="https://products.wolframalpha.com/llm-api/documentation">Wolfram Alpha LLM API<a> tool call, KJV Bible verse retrieval using <a href="https://github.com/aruljohn/Bible-kjv">Bible-kjv JSON library</a>, and Verse of the Day for any Bible translation/version using <a href="https://www.biblegateway.com/votd/get/?format=JSON&version=9">BibleGateway Web-Service</a></li>
