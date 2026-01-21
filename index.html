@@ -293,6 +293,134 @@
             </a>
         </div>
         <hr>
+        <h1>Recent Projects & Notable Accomplishments</h1>
+        <h2>Oracle Integration Cloud & Oracle Cloud Infrastructure Optimization</h2>
+        <p>Design and support Integration solutions for Oracle Fusion Cloud Applications Suite—including Enterprise Resource Planning (ERP), Supply Chain & Manufacturing (SCM), and Human Capital Management (HCM)—via Oracle Integration Cloud (OIC). These integrations utilize various tech stacks, programming languages, connections, and tools with secure access to the organization’s ERP system and cloud databases. Technologies include: SFTP, SOAP, REST, SQLcl, ATP Databases, BI Publisher, PL/SQL, Java, and XML Schemas. Delivered multiple enterprise-grade solutions in Oracle Integration Cloud (OIC) and Oracle Cloud Infrastructure (OCI) integrating external healthcare systems with Oracle Fusion Cloud ERP. These projects showcase advanced skills in cloud-native integration, data staging, REST/SOAP APIs, and cost-efficient infrastructure management.</p>
+
+        <h3><strong>Capital Budget Integration</strong></h3>
+        <ul>
+            <li style="color: white;">Designed to process capital budget data transferred from an external Healthcare EPM system into the Oracle ERP system.</li>
+            <li style="color: white;">Data received as pipe delimited files via SFTP and processing using Oracle FBDI for Project Management.</li>
+            <li style="color: white;">Data staged using ATP newly created and uniquely tailored database tables, enriched via SOAP requests to the ERP, and formatted into an FBDI template of control files for the Import Projects and Project Budgets ESS jobs in Oracle Fusion Project Control.</li>
+            <li style="color: white;">Ingested budget data via SFTP, staged in ATP, enriched through ERP SOAP services, and submitted using FBDI templates for Oracle Project and Project Budget ESS jobs.</li>
+            <li style="color: white;">Implemented CREATE/UPDATE/DELETE logic per Oracle standards.</li>
+            <li style="color: white;">Retrieve, validate, and archive extract files and handle duplicate and no file errors via SFTP, ATP Database, and Oracle Integration Cloud (OIC) orchestrations</li>
+            <li style="color: white;">Implement Fault Handling and Error Recovery for SFTP, ATP Databases Connections, REST APIs, and SOAP Services.</li>
+            <li style="color: white;">Stage and validate Project, Task, and Budget records into ATP tables.</li>
+            <li style="color: white;">Enrich Project records with additional data by designing BI Publisher Reports to retrieve Project Manager EIN using provided AD Usernames via SOAP Services which is required for Import Projects File-Based Data Import (FBDI) in Oracle Fusion Project Management.</li>
+            <li style="color: white;">Enrich Project records with additional data by designing BI Publisher Reports to retrieve Department Names using provided org code and cost center via SOAP Services which is required for Import Projects File-Based Data Import (FBDI) in Oracle Fusion Project Management.</li>
+            <li style="color: white;">Handle Version Control for existing Project Budgets and Project Tasks.</li>
+            <li style="color: white;">Handle Middleware Errors due to invalid Project Manager AD Username or invalid Department Codes, invalid datatype formatting, and null values.</li>
+            <li style="color: white;">Using staged data, Prepare and Curate FBDI Control Files according to XLSM Templates for ESS Jobs Import Projects and Import Project Budgets in Oracle Fusion Project Management.</li>
+            <li style="color: white;">Prepare and Curate ESS Job Definitions for Oracle Fusion Project Management.</li>
+            <li style="color: white;">Package and Submit FBDI Control Files to Oracle Fusion via SOAP Services.</li>
+            <li style="color: white;">Monitor and Manage ESS Jobs via SOAP Services. Implement wait and retry logic for ESS Jobs. Confirm job completion and status.</li>
+            <li style="color: white;">Prepare and curate Middleware Error Reports and delivered Cloud Error Reports for both Import Projects and Import Project Budgets ESS Jobs.</li>
+            <li style="color: white;">Package and archive error reports and integration results.</li>
+            <li style="color: white;">Trigger notification via email of integration completion results and or errors</li>
+        </ul>
+
+        <h4><strong>REST API Upgrade</strong>: Modernized Capital Budget Integration: FBDI to REST Migration</h4>
+        <ul>
+            <li style="color: white;"><strong>Architecture & Design</strong>: Re-architected the legacy file-based (FBDI) integration to a real-time, API-first solution using Oracle Integration Cloud (OIC) and Oracle ATP to process capital budget data from an external Healthcare EPM system.</li>
+            <li style="color: white;"><strong>Data Ingestion & Staging</strong>: Developed OIC orchestrations to ingest pipe-delimited data via SFTP, parsing and staging records into uniquely tailored ATP database tables for validation and enrichment.</li>
+            <li style="color: white;"><strong>REST API Implementation</strong>: Replaced batch CSV processing with dynamic JSON payload construction, leveraging the Projects (/projects) REST endpoint to manage project headers and the Project Budgets (/projectBudgets) endpoint to push financial plans.</li>
+            <li style="color: white;"><strong>Logic & Orchestration</strong>: Implemented logic to distinguish between new and existing records, dynamically executing POST (Create) or PATCH (Update) requests against the Fusion endpoints, replacing the need for separate Create/Update/Delete FBDI control files.</li>
+            <li style="color: white;"><strong>Outcome</strong>: Achieved immediate transaction feedback and validation by moving from asynchronous import jobs to synchronous REST API calls, significantly reducing error resolution time for the Project Control team.</li>
+        </ul>
+
+        <h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI Implementation</a></h4>
+        <ul>
+            <li style="color: white;">When budget line items are "Rejected" by Oracle ERP due to insufficient funds, a <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/meta-models.htm">Pretrained Foundational Model Meta Llama 3.1 70B</a> model analyzes the rejection error and the original project proposal. It then auto-generates a "Budget Adjustment Request" email for the project manager, explaining exactly how much to reduce or reallocate to meet the cap, streamlining the approval loop.</li>
+            <li style="color: white;">Before creating a new Capital Project in ERP, the system uses <a href="https://docs.oracle.com/en/database/oracle/oracle-database/26/nfcoa/vector-data-type.html">Oracle AI Vector Search</a> to compare the incoming project description against 5 years of historical projects. It alerts Finance if a duplicate or highly similar project already exists (e.g., "MRI Machine Upgrade 2024" vs. "Radiology Equipment Refresh"), preventing double-booking of capital funds.</li>
+            <li style="color: white;">Build a "Budget Chat" interface for executives using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/xai-models.htm">Pretrained Foundational Model xAI Grok 3</a> since it excels at enterprise use cases such as data extraction, coding, and summarizing text, and has a deep domain knowledge in finance, healthcare, law, and science. Users can ask, "Show me all capital projects over $50k in Cardiology that are pending approval," and the model translates this natural language into precise SQL queries against the ATP staging tables, returning real-time results without IT intervention.</li>
+        </ul>
+
+        <h3><strong>Invoice Order Integration</strong></h3>
+        <ul>
+            <li style="color: white;">Designed to process and submit invoice order data transferred from an external Healthcare Supply Chain Management system into the Oracle ERP system.</li>
+            <li style="color: white;">Data received as a zipped container via SFTP and imported using RESTful services.</li>
+            <li style="color: white;">The container includes PDF attachments and a schema file listing filenames and associated invoice numbers.</li>
+            <li style="color: white;">The integration parses the schema file to retrieve invoice metadata, stages it in ATP database tables, and uses it to retrieve invoice IDs from ERP.</li>
+            <li style="color: white;">The REST API endpoint for Oracle Fusion Cloud Financials requires the invoice ID for POST requests (see Create an attachment for an invoice).</li>
+            <li style="color: white;">The integration constructs the POST request dynamically, specifying the invoice object and attachment filename stored in ephemeral memory.</li>
+            <li style="color: white;">PDF attachments are included in the JSON payload in base64 format. Global and local fault/error handling is implemented.</li>
+            <li style="color: white;">Parsed zipped payloads from the external Healthcare Supply Chain Management system containing PDFs and schema files.</li>
+            <li style="color: white;">Staged metadata in ATP, resolved invoice IDs via ERP REST APIs, and submitted attachment POST requests with dynamic payload construction and robust fault handling.</li>
+        </ul>
+
+        <h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI Implementation</a></h4>
+        <ul>
+            <li style="color: white;">Implement a document understanding pipeline that uses <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Pretrained Foundational Model Cohere Command R</a> to perform OCR and semantic extraction on non-standard invoice PDFs that fail initial schema parsing, automatically identifying fields like "Total Amount," "Vendor Name," and "Invoice Date" to reduce manual exception handling.</li>
+            <li style="color: white;">Utilize a fine-tuned <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-meta-models.htm">Imported Model Llama-4-Maverick-17B-128E-Instruct-FP8</a> model to analyze extracted invoice line items against historical pricing data stored in ATP. The model flags "hallucinated" or mismatched prices (e.g., a 500% variance in surgical supply costs) before the invoice is posted to Oracle ERP Financials, adding a layer of fraud detection.</li>
+            <li style="color: white;">Use OCI Generative AI Embeddings to convert invoice descriptions into vectors. When a new invoice arrives with an ambiguous "Service Description," the system queries the vector database to find the most similar past invoices and automatically assigns the correct General Ledger (GL) code with 95% accuracy.</li>
+        </ul>
+
+        <h3><strong>OCI PaaS Optimization Project</strong></h3>
+        <ul>
+            <li style="color: white;">Reduced infrastructure costs by optimizing the OCI PaaS configuration for lower environments.</li>
+            <li style="color: white;">Minimizing uptime of non-production components.</li>
+            <li style="color: white;">Reducing the number of active OIC Connectivity Agents in Test environments.</li>
+            <li style="color: white;">Automating shutdown/startup schedules for OIC and ATP instances during off-hours.</li>
+            <li style="color: white;">Maintaining DR environments in standby mode, activating only for production backups or disaster recovery events.</li>
+            <li style="color: white;">These efforts significantly lowered compute costs while maintaining operational readiness.</li>
+        </ul>
+
+        <h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI Implementation</a></h4>
+        <ul>
+            <li style="color: white;">Integrate an OCI DevOps pipeline where <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/openai-gpt-oss-120b.htm">Imported Model GPT-OSS 120B</a> analyzes Terraform state files and suggests resource rightsizing opportunities (e.g., "Downgrade Block Volume from High Performance to Balanced") based on usage logs, automatically generating Pull Requests for approval.</li>
+            <li style="color: white;">Deploy a <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/google-models.htm">Pretrained Foundational Model Gemini-2.5-Pro</a> powered agent to digest massive OCI Audit Logs during off-hours. Instead of just shutting down instances, the agent generates a "Daily Cost & Usage Report" that summarizes why specific compute instances spun up (e.g., "Auto-scaling triggered by 2 AM backup job"), providing granular visibility into cost drivers.</li>
+            <li style="color: white;">Implement a predictive model using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Pretrained Foundational Model Cohere Embed 4</a> to analyze historical CPU/Memory utilization patterns. The system now proactively warms up OIC Connectivity Agents 15 minutes before predicted traffic spikes (e.g., month-end close), rather than reacting to load, balancing cost savings with performance.</li>
+        </ul>
+
+        <h3><strong>ASN Receiving Integration</strong></h3>
+        <ul>
+            <li style="color: white;">Designed to process Advanced Shipment Notice (ASN) Receiving data from an external system into the Oracle ERP system.</li>
+            <li style="color: white;">This integration ensures accurate and timely receipt of goods data into the ERP system, supporting supply chain operations.</li>
+            <li style="color: white;">Streamlined Advanced Shipment Notice data flow from external systems into Oracle ERP, enhancing supply chain visibility and operational accuracy.</li>
+        </ul>
+
+        <h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI Implementation</a></h4>
+        <ul>
+            <li style="color: white;">Integrate <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/google-models.htm">Pretrained Foundational Model Gemini-2.5-Flash</a> to cross-reference incoming ASN vendor locations with real-time global news feeds. If an ASN originates from a region with active disruptions (e.g., "Port Strike in LA" or "Severe Weather in Texas"), the system tags the receipt as "High Risk for Delay" in Oracle ERP, enabling proactive inventory planning.</li>
+            <li style="color: white;">When incoming ASNs use vendor-specific part numbers that don't perfectly match Oracle Item Masters, <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Pretrained Foundational Model Cohere Rerank 3.5</a> takes the vendor's description and ranks the top 5 most likely internal Item IDs. This allows the integration to auto-correct minor naming discrepancies (e.g., "Srgcl Mask" vs. "Mask, Surgical") without human review.</li>
+            <li style="color: white;">Develope a specialized agent using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-alibaba-models.htm">Imported Model Qwen3-14B</a> that monitors the "Receipt Advice" interface. When a quantity discrepancy occurs (e.g., ASN says 100, Dock received 90), the agent auto-drafts a formatted claim email to the vendor referencing the specific PO and ASN line, attaching the discrepancy report instantly.</li>
+        </ul>
+
+        <h3><strong>Surgical Case Management & Clinical Procurement Integration</strong></h3>
+        <ul>
+            <li style="color: white;">Designed to process and synchronize requisition data from the External EMR System platform into Oracle ERP and extract item master and PO return data from ERP to External EMR System.</li>
+            <li style="color: white;">Requisition files received via SFTP, staged in ATP tables, enriched with ERP item and pricing data, and submitted to ERP for PO creation using REST APIs or FBDI.</li>
+            <li style="color: white;">Item master and PO return files extracted from ERP using BI Publisher and Fusion Cloud ERP SCM tables, formatted as pipe-delimited CSV, and delivered to External EMR System for contract compliance and reconciliation.</li>
+            <li style="color: white;">Implemented automated scheduling for hourly and nightly processes, SOC 2 security standards, and robust fault handling for all integrations.</li>
+            <li style="color: white;">Staged inbound requisition data in ATP, enriched with ERP references, and synchronized outbound item master and PO lifecycle data between ERP and External EMR System.</li>
+            <li style="color: white;">Worked cohesively with case schedule, case usage, and contract price data managed by EMR and other source systems within the External EMR System platform to ensure complete surgical case and procurement workflows.</li>
+        </ul>
+
+        <h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI Implementation</a></h4>
+        <ul>
+            <li style="color: white;">Utilize <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-meta-models.htm">Pretrained Foundational Model Meta Llama 3 70B</a> to analyze surgeon preference cards against actual usage data from the EMR. The model identifies items that are consistently opened but unused (waste) and suggests specific quantity reductions to the "Standard Order" set, directly reducing clinical procurement costs.</li>
+            <li style="color: white;">When a specific surgical item is backordered in Oracle ERP, the system uses <a href="https://docs.oracle.com/en/database/oracle/oracle-database/26/nfcoa/vector-data-type.html">Oracle AI Vector Search</a> to identify clinically equivalent substitutes based on product specifications (material, size, usage class). It pushes these "Approved Alternates" back to the EMR so surgeons can swap items immediately without delaying procedures.</li>
+            <li style="color: white;">A <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Cohere Command R+ 08-2024</a> powered agent scans every outgoing Purchase Order against the "Contract Price" file from the EMR. If the ERP price exceeds the contracted rate, the agent holds the PO and highlights the specific clause in the contract PDF that guarantees the lower price, empowering procurement to enforce vendor compliance.</li>
+        </ul>	
+
+        <h2>OpenWebUI Deployment & Local Language Model Integration</h2>
+        <p>Maintaining and expanding the OpenWebUI platform for Generative AI web integration, locally hosted small language models (SLMs) and cloud-based large language models (LLMs) via a unified architecture. See my preferred DIY Language Model-Stack(s) below which include RAG/Embedding models, web search tools, OCR, and reranking models. Key components include:</p>
+        <ul>
+		    <li style="color: white;"><strong>Tools</strong>: Integrated various tools, filters, and functions: <a href="https://console.groq.com/docs/tool-use/built-in-tools/wolfram-alpha">Groq Compound Systems Wolfram Alpha integration</a> filtering (inject compound_custom parameters into the request payload), <a href="https://products.wolframalpha.com/llm-api/documentation">Wolfram Alpha LLM API<a> tool call, KJV Bible verse retrieval using <a href="https://github.com/aruljohn/Bible-kjv">Bible-kjv JSON library</a>, and Verse of the Day for any Bible translation/version using <a href="https://www.biblegateway.com/votd/get/?format=JSON&version=9">BibleGateway Web-Service</a></li>
+            <li style="color: white;"><strong>Models</strong>: Integrated diverse models (e.g., GLM, Mistral, Perplexity, GGUF) and tools (llama.cpp, Ollama, LMStudio, LangChain) with custom middleware.</li>
+            <li style="color: white;"><strong>Stack</strong>: Python (FastAPI, REST), cURL, WebSocket streaming, async/await, Docker, and Python venv/uv.</li>
+            <li style="color: white;"><strong>Features</strong>: Retrieval-augmented generation (RAG), embedding, reranking pipelines, Model Context Protocol (MCP) servers, multi-agent systems, and privacy-preserving protocols like Role-Pseudonymous Prompting (RPP).</li>
+            <li style="color: white;"><strong>Hardware Preferences</strong>:
+                <ul>
+                    <li style="color: white;"><strong>GPU</strong>: GGUF Models hosted on Llama.cpp servers (CUDA release) via HuggingFace repos or Ollama, optimized for NVIDIA RTX 5070 TI GPU (12GB VRAM).</li>
+                    <li style="color: white;"><strong>CPU</strong>: GGUF Models hosted on Llama.cpp servers (CPU release) via HuggingFace repos, optimized for AMD Ryzen 9 8940HX.</li>
+                </ul>
+            </li>
+            <li style="color: white;"><strong>Benchmarks</strong>: Achieved parity with commercial models at significantly lower costs (up to 94.4% reduction) in domain-specific benchmarks, validating scalable and enterprise-grade performance.</li>
+            <li style="color: white;"><strong>Applications</strong>: Optimized for specialized contexts (e.g., research, analysis), ensuring secure, compliant, and cost-efficient generative AI architectures.</li>
+        </ul>
+		<hr>
         <p><a href="https://github.com/cmathgit/bible-chatgpt-prompts/blob/main/README.md#ai-security-methodology">AI-Security Methodology</a><br>
        <a href="https://openwebui.com/p/cmathopen/role-pseudonymous-prompting-protocol">Role-Pseudonymous Prompting Protocol (RPP)</a><br>
        <a href="https://github.com/cmathgit/aimmm-agent-bible-prompts/blob/main/papers/Role-Pseudonymous%20Prompting%20Protocol%20Paper.md">RPP Paper</a></p>
