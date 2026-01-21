@@ -5,8 +5,8 @@ This is the main index.html file for my GitHub Pages site
 It includes links to the following pages:
 
 - [anchoredtimesministry2027](https://cmathgit.github.io/anchoredtimesministry2027/)
-- [cruzgmacias-cv](https://cmathgit.github.io/cruzgmacias-cv/)
-- [crossofthemessiah](https://cmathgit.github.io/crossofthemessiah/)
+- [cruzgmacias-cv](https://cruzgmacias-cv.w3spaces.com/)
+- [crossofthemessiah](https://crossofthemessiah.w3spaces.com/)
 
 
 Welcome to the repository for my personal GitHub Pages site, hosted at [https://cmathgit.github.io/](https://cmathgit.github.io/).
@@ -34,7 +34,6 @@ This site serves as a central hub providing access to various aspects of my prof
 ## Pages Included
 
 *   **[Main Page (`index.html`)](https://cmathgit.github.io/)**: The entry point to the site, offering a brief welcome and links to the other pages.
-*   **[Anchored Times Ministry (`anchoredtimesministry2027`)](https://cmathgit.github.io/anchoredtimesministry2027/)**: Content related to Anchored Times Ministry. (Assuming this is the correct link based on `index.html`)
 *   **[Personal CV (`cruzgmacias-cv`)](https://cmathgit.github.io/cruzgmacias-cv/)**: My detailed Curriculum Vitae, outlining my work experience, education, technical skills, certifications, projects, and other professional activities.
 *   **[Music Portfolio (`crossofthemessiah`)](https://cmathgit.github.io/crossofthemessiah/)**: A showcase of my musical work and portfolio. (Assuming this is the correct link based on `index.html`)
 
@@ -45,7 +44,6 @@ This site is primarily built using:
 *   **HTML5**: For structuring the content of the web pages.
 *   **CSS3**: For styling and layout (including W3.CSS framework in the CV page).
 *   **JavaScript**: For dynamic elements and interactions (e.g., the Bible Gateway widget on the CV page).
-*   **Python**: For generating and hosting LLM-generated content.
 *   **W3Spaces**: For templated hosting of the site.
 
 ## Viewing the Site
@@ -141,18 +139,6 @@ The primary goal of this page is to share my musical journey, original compositi
 
 This page aims to provide an engaging overview of my musical endeavors.
 
-# Anchored Times Ministry (2027)
-README for [anchoredtimesministry2027](https://cmathgit.github.io/anchoredtimesministry2027/)
-Biblical Polemic & Response to AI-2027 Forecasts
-
-**Disclaimer:**
-
-This project contains a **fictional** [anchoredtimesministry2027](https://cmathgit.github.io/anchoredtimesministry2027/) simulating a Christian blog ("Anchored Times Blog") set circa 2027. This fictional blog serves as a polemic and biblical response to the secular AI progress scenarios presented on the external site `ai-2027.com`.
-
-While the blog itself is fictional, it utilizes **biblically accurate references** (primarily KJV, linked to Bible Gateway) and **real-world statements** from Christian (predominantly Baptist) leaders to lend authenticity to its perspective within the fictional context.
-
-The content for both the website and this README was substantially generated and refined using Large Language Models (LLMs).
-
 **Limitation of Liability Statement:**
 The author assumes no liability for any harm caused by or to the contents of this site, including but not limited to damages resulting from the interpretation or use of the fictional content, the external [website ai-2027.com](https://ai-2027.com/) site, or the AI technologies discussed. The author reserves the right to make revisions without prior notice.
 
@@ -163,32 +149,6 @@ Portions of this codebase were generated or refined using large language models 
 **# Limitation of Liability Statement**
 
 For a complete Limitation of Liability Statement, please visit my [website: cruzgmacias-cv](https://cmathgit.github.io/cruzgmacias-cv/).
-
-**[Website](https://cmathgit.github.io/anchoredtimesministry2027/) Content Overview:**
-
-The core of this project is the [website](https://cmathgit.github.io/anchoredtimesministry2027/) file, representing the fictional "Anchored Times Blog".
-
-*   **Purpose:** To provide biblical discernment for Christians navigating a hypothetical near-future (circa 2027) marked by rapid AI advancements, as imagined in forecasts like `ai-2027.com`.
-*   **Perspective:** Grounded in the authority of the Holy Scriptures (KJV), consistent with conservative Baptist theology (referencing the Baptist Faith & Message 2000).
-*   **Method:** The blog critically analyzes secular AI predictions (specifically the "Race" and "Slowdown" scenarios from `ai-2027.com`) through the lens of biblical prophecy, with a significant emphasis on the Book of Revelation.
-*   **Proposed Alternative:** It introduces and outlines a biblically-informed "Conversion" scenario, integrating plausible AI developments into a framework consistent with God's sovereignty and prophetic timeline.
-*   **Goal:** To encourage believers towards biblical discernment, Christ-centered hope, and faithful living, cautioning against both fearful rejection and uncritical embrace of technology, and rejecting technological utopianism or idolatry.
-
-**Key Page Sections in [https://cmathgit.github.io/anchoredtimesministry2027](https://cmathgit.github.io/anchoredtimesministry2027/):**
-
-*   **Home:** Introduces the blog's purpose and features recent fictional post excerpts.
-*   **Understanding the Times:** Contrasts secular AI forecasts (Race/Slowdown) with scriptural truth and outlines the "Conversion" perspective.
-*   **Revelation & AI:** Explores potential (instrumental) roles AI might play within the prophetic framework of Revelation 13 and beyond.
-*   **Bible Study:** Provides guidance and key passages for studying relevant scripture (Revelation, Matthew 24, etc.).
-*   **Hope & Encouragement:** Focuses on God's sovereignty, the Gospel, and the believer's hope in Christ amidst turmoil.
-*   **Resources:** Lists scripture resources, doctrinal standards, and includes real quotes from Baptist leaders on faith and technology.
-*   **About:** States the fictional ministry's doctrinal stance.
-*   **Contact:** Provides fictional contact information reflecting the blog's cautious tone.
-*   **Blog Placeholder:** A target section for the "Read More" links from the Home page excerpts.
-
-**JavaScript for Navigation:**
-
-The script included in the HTML file handles dynamic navigation between the different page sections based on clicked links (main nav, "Read More", "Back to Home"), providing a single-page application feel. It also manages the initial view based on the URL hash.
 
 For a comprehensive understanding of the fictional blog's structure, content, and functionality, please examine the `https://cmathgit.github.io/anchoredtimesministry2027/` file directly.
 
