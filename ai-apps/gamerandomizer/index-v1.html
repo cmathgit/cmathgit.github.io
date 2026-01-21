@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Collection Randomizer</title>
+    <style>
+        :root {
+            --color-primary: #2180818d;
+            --color-primary-hover: #1a7476;
+            --color-primary-active: #1a6473;
+            --color-bg: #fcfcf9;
+            --color-surface: #ffffff;
+            --color-text: #134252;
+            --color-text-secondary: #626c71;
+            --color-border: #5e5240;
+            --color-error: #c0152f;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--color-text);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(94, 82, 64, 0.15);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            margin: 0 0 8px 0;
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .subtitle {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+
+        .filters-panel {
+            background-color: var(--color-surface);
+            border: 1px solid rgba(94, 82, 64, 0.15);
+            border-radius: 8px;
+            padding: 20px;
+            height: fit-content;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        }
+
+        .filter-group {
+            margin-bottom: 24px;
+        }
+
+        .filter-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-label {
+            display: block;
+            font-weight: 500;
+            font-size: 13px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text);
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .filter-options::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .filter-options::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .filter-options::-webkit-scrollbar-thumb {
+            background: rgba(94, 82, 64, 0.2);
+            border-radius: 3px;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: var(--color-primary);
+        }
+
+        label {
+            cursor: pointer;
+            font-size: 13px;
+            user-select: none;
+        }
+
+        .year-inputs {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .year-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid rgba(94, 82, 64, 0.2);
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--color-text);
+            background-color: var(--color-surface);
+        }
+
+        .year-input:focus {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 0;
+        }
+
+        .to-label {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            white-space: nowrap;
+        }
+
+        .result-panel {
+            background-color: var(--color-surface);
+            border: 2px solid rgba(33, 128, 141, 0.3);
+            border-radius: 8px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        }
+
+        .result-empty {
+            color: var(--color-text-secondary);
+            font-size: 16px;
+        }
+
+        .result-game {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .game-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin: 0;
+            word-break: break-word;
+        }
+
+        .game-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            background-color: rgba(94, 82, 64, 0.05);
+            border-radius: 6px;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .detail-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-secondary);
+            font-weight: 600;
+        }
+
+        .detail-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: auto;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 150ms ease;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--color-primary-hover);
+        }
+
+        .btn-primary:active:not(:disabled) {
+            background-color: var(--color-primary-active);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background-color: rgba(94, 82, 64, 0.1);
+            color: var(--color-text);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(94, 82, 64, 0.15);
+        }
+
+        .match-count {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            text-align: center;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(94, 82, 64, 0.1);
+        }
+
+        .loading {
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .game-title {
+                font-size: 20px;
+            }
+
+            .game-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Game Collection Randomizer</h1>
+            <p class="subtitle">Discover your next adventure from your collection</p>
+        </header>
+
+        <div class="content">
+            <!-- Filters Panel -->
+            <div class="filters-panel">
+                <div class="filter-group">
+                    <label class="filter-label">🖥️ Platform/Service</label>
+                    <div class="filter-options" id="platformFilters"></div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">📅 Release Year</label>
+                    <div class="year-inputs">
+                        <input type="number" class="year-input" id="yearFrom" placeholder="From" min="1980" max="2030">
+                        <span class="to-label">to</span>
+                        <input type="number" class="year-input" id="yearTo" placeholder="To" min="1980" max="2030">
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">🎯 Genre</label>
+                    <div class="filter-options" id="genreFilters"></div>
+                </div>
+
+                <div class="match-count" id="matchCount">Loading collection...</div>
+
+                <div class="button-group">
+                    <button class="btn-secondary" onclick="resetFilters()">Reset</button>
+                    <button class="btn-primary" id="pickButton" onclick="pickRandomGame()" disabled>🎲 Random Game</button>
+                </div>
+            </div>
+
+            <!-- Result Panel -->
+            <div class="result-panel" id="resultPanel">
+                <div class="result-empty">👈 Adjust filters and pick a random game!</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Genre mapping database - maps game titles to genres
+        const genreDatabase = {
+            "Bloodborne": "Action RPG",
+            "Elden Ring": "Action RPG",
+            "Dark Souls Remastered": "Action RPG",
+            "Dark Souls II: Scholar of the First Sin": "Action RPG",
+            "Dark Souls III": "Action RPG",
+            "Nioh": "Action RPG",
+            "Nioh 2": "Action RPG",
+            "Demon's Souls": "Action RPG",
+            "Sekiro: Shadows Die Twice": "Action RPG",
+            "Hollow Knight": "Metroidvania",
+            "Salt and Sanctuary": "Action RPG",
+            "Mortal Shell": "Action RPG",
+            "The Witcher 3: Wild Hunt": "RPG",
+            "Baldur's Gate 3": "RPG",
+            "Dragon's Dogma: Dark Arisen": "Action RPG",
+            "Dragon's Dogma 2": "Action RPG",
+            "Final Fantasy VII": "RPG",
+            "Final Fantasy XIII": "RPG",
+            "Final Fantasy XII: Revenant Wings": "RPG",
+            "Chrono Trigger": "RPG",
+            "Tales of Arise": "RPG",
+            "Persona 5": "RPG",
+            "Dragon Ball FighterZ": "Fighting",
+            "Mortal Kombat X": "Fighting",
+            "Mortal Kombat XL": "Fighting",
+            "Marvel vs. Capcom 3": "Fighting",
+            "Injustice 2": "Fighting",
+            "Street Fighter": "Fighting",
+            "Ghost of Tsushima": "Action Adventure",
+            "Uncharted: The Nathan Drake Collection": "Action Adventure",
+            "The Last of Us Remastered": "Action Adventure",
+            "Red Dead Redemption": "Action Adventure",
+            "Red Dead Redemption 2": "Action Adventure",
+            "Grand Theft Auto V": "Action Adventure",
+            "Grand Theft Auto IV": "Action Adventure",
+            "Halo: Combat Evolved": "First-Person Shooter",
+            "Halo 2": "First-Person Shooter",
+            "Halo 3": "First-Person Shooter",
+            "Halo Infinite": "First-Person Shooter",
+            "Call of Duty: Black Ops": "First-Person Shooter",
+            "Call of Duty: World at War": "First-Person Shooter",
+            "Half-Life": "First-Person Shooter",
+            "Half-Life 2": "First-Person Shooter",
+            "Left 4 Dead": "First-Person Shooter",
+            "Left 4 Dead 2": "First-Person Shooter",
+            "Counter-Strike 2": "First-Person Shooter",
+            "Destiny 2": "First-Person Shooter",
+            "PUBG: Battlegrounds": "Battle Royale",
+            "Fortnite": "Battle Royale",
+            "Portal": "Puzzle",
+            "Portal 2": "Puzzle",
+            "The Talos Principle": "Puzzle",
+            "Tetris": "Puzzle",
+            "Stardew Valley": "Simulation",
+            "Animal Crossing: New Horizons": "Simulation",
+            "Minecraft": "Sandbox",
+            "Minecraft Legends": "Strategy",
+            "XCOM 2": "Strategy",
+            "Fire Emblem": "Strategy RPG",
+            "Nier: Automata": "Action RPG",
+            "Death Stranding": "Action Adventure",
+            "Kingdom Come: Deliverance": "RPG",
+            "Outlast": "Horror",
+            "Alien: Isolation": "Horror",
+            "Resident Evil": "Horror",
+            "Resident Evil 2": "Horror",
+            "Resident Evil 3": "Horror",
+            "Resident Evil 4": "Action Horror",
+            "Resident Evil 7: Biohazard": "Horror",
+            "Blair Witch": "Horror",
+            "The Evil Within": "Horror",
+            "Doom": "First-Person Shooter",
+            "Doom Eternal": "First-Person Shooter",
+            "Brütal Legend": "Action Adventure",
+            "Batman: Arkham Asylum": "Action Adventure",
+            "Superman": "Action Adventure",
+            "Spider-Man": "Action Adventure",
+            "Mass Effect": "Action RPG",
+            "Mass Effect 2": "Action RPG",
+            "Mass Effect 3": "Action RPG",
+            "Dragon Age: Origins": "Action RPG",
+            "Dragon Age: The Veilguard": "Action RPG",
+            "Cyberpunk 2077": "Action RPG",
+            "The Outer Worlds": "RPG",
+            "Fallout 3": "Action RPG",
+            "Fallout 4": "Action RPG",
+            "The Elder Scrolls III: Morrowind": "RPG",
+            "The Elder Scrolls IV: Oblivion": "RPG",
+            "The Elder Scrolls V: Skyrim": "RPG",
+            "Monster Hunter: World": "Action RPG",
+            "Armored Core VI": "Mecha Action",
+            "Muck": "Roguelike",
+            "Hades": "Roguelike",
+            "Risk of Rain": "Roguelike",
+            "Gundam Evolution": "Mecha Action",
+            "Metal Gear Solid": "Stealth Action",
+            "Tom Clancy's Splinter Cell": "Stealth Action",
+            "Tom Clancy's Ghost Recon": "Tactical Shooter",
+            "Rainbow Six Vegas": "Tactical Shooter",
+            "Assassin's Creed III": "Action Adventure",
+            "Fable": "Action RPG",
+            "Fable II": "Action RPG",
+            "Fable III": "Action RPG",
+            "Jade Empire": "Action RPG",
+            "Knights of the Old Republic": "RPG",
+            "Star Wars Jedi Knight: Jedi Academy": "Action Adventure",
+            "Dead Space": "Action Horror",
+            "System Shock": "Action RPG",
+            "BioShock": "Action RPG",
+            "BioShock Infinite": "First-Person Shooter",
+            "Thief": "Stealth",
+            "Dishonored": "Stealth Action",
+            "Dishonored 2": "Stealth Action",
+            "Hitman": "Stealth",
+            "Just Dance": "Rhythm",
+            "Dance Dance Revolution": "Rhythm",
+            "Guitar Hero": "Rhythm",
+            "Rock Band": "Rhythm",
+            "Tony Hawk's Pro Skater": "Sports",
+            "Skate 3": "Sports",
+            "NBA 2K": "Sports",
+            "Madden NFL": "Sports",
+            "MLB The Show": "Sports",
+            "Need for Speed": "Racing",
+            "Grand Turismo": "Racing",
+            "Mario Kart": "Racing",
+            "F1 2023": "Racing",
+            "DIRT": "Racing",
+            "Wipeout": "Racing",
+            "Super Monkey Ball": "Platformer",
+            "New Super Mario Bros": "Platformer",
+            "Super Mario 64": "Platformer",
+            "Super Mario Sunshine": "Platformer",
+            "Sonic": "Platformer",
+            "Donkey Kong Country": "Platformer",
+            "Mega Man": "Action Platformer",
+            "Castlevania": "Action Platformer",
+            "Little Nightmares": "Puzzle Adventure",
+            "A Short Hike": "Adventure",
+            "Stray": "Adventure",
+            "Abzu": "Adventure",
+            "Journey": "Adventure",
+            "What Remains of Edith Finch": "Adventure",
+            "The Walking Dead": "Adventure",
+            "Life is Strange": "Adventure",
+            "Detroit: Become Human": "Adventure",
+            "Heavy Rain": "Adventure",
+            "L.A. Noire": "Adventure",
+            "Grand Theft Auto: San Andreas": "Action Adventure",
+            "Max Payne": "Action Adventure",
+            "Manhunt": "Action Adventure",
+            "Deus Ex": "Action RPG",
+            "Deus Ex: Mankind Divided": "Action RPG",
+            "Crysis": "First-Person Shooter",
+            "Portal": "Puzzle",
+            "The Incredible Hulk: Ultimate Destruction": "Action Adventure",
+            "Iron Man": "Action Adventure",
+            "Prince of Persia": "Action Adventure",
+            "Shadow of the Colossus": "Action Adventure",
+            "God of War": "Action Adventure",
+            "Ninja Gaiden": "Action",
+            "Tenchu": "Stealth Action",
+            "Devil May Cry": "Action",
+            "Dante's Inferno": "Action Adventure",
+            "Silent Hill": "Horror Adventure",
+            "Metal Slug": "Run and Gun",
+            "Contra": "Action Platformer",
+            "Samurai Warriors": "Hack and Slash",
+            "Dynasty Warriors": "Hack and Slash",
+            "Warriors Orochi": "Hack and Slash",
+            "No More Heroes": "Action Adventure",
+            "Bayonetta": "Action",
+            "Lost Planet": "Action",
+            "StarFox": "Arcade Shooter",
+            "Galaga": "Arcade",
+            "Space Invaders": "Arcade",
+            "Pac-Man": "Arcade",
+            "Donkey Kong": "Arcade Platformer",
+            "Pokémon": "RPG",
+            "Monster Rancher": "RPG",
+            "Digimon": "RPG",
+            "Yo-kai Watch": "RPG",
+            "Persona": "RPG",
+            "Shin Megami Tensei": "RPG",
+            "Fire Emblem": "Strategy RPG",
+            "Disgaea": "Strategy RPG",
+            "Final Fantasy Tactics": "Strategy RPG",
+            "Tactics Ogre": "Strategy RPG",
+            "Langrisser": "Strategy RPG",
+            "Suikoden": "RPG",
+            "Grandia": "RPG",
+            "Star Ocean": "Action RPG",
+            "Atelier": "RPG",
+            "The Legend of Zelda": "Action Adventure",
+            "Kirby": "Platformer",
+            "Metroid": "Metroidvania",
+            "Samus": "Metroidvania",
+            "Castlevania: Symphony of the Night": "Metroidvania",
+            "Salt and Sanctuary": "Metroidvania",
+            "Hollow Knight": "Metroidvania",
+            "Ender Lilies": "Metroidvania",
+            "Timespinner": "Metroidvania",
+            "Death's Door": "Metroidvania",
+            "Ori": "Metroidvania",
+            "Guacamelee": "Metroidvania",
+            "Environmental Station Alpha": "Metroidvania",
+            "Control": "Action Adventure",
+            "Alan Wake": "Action Adventure",
+            "Prototype": "Action Adventure",
+            "inFamous": "Action Adventure",
+            "Saints Row": "Action Adventure",
+            "Sleeping Dogs": "Action Adventure",
+            "Watch Dogs": "Action Adventure",
+            "Borderlands": "Action RPG",
+            "Rage": "First-Person Shooter",
+            "Wolfenstein": "First-Person Shooter",
+            "Quake": "First-Person Shooter",
+            "Unreal Tournament": "First-Person Shooter",
+            "Team Fortress 2": "First-Person Shooter",
+            "Overwatch": "First-Person Shooter",
+            "Valorant": "First-Person Shooter",
+            "CS:GO": "First-Person Shooter",
+            "Apex Legends": "Battle Royale",
+            "Warzone": "Battle Royale",
+            "PlayerUnknown's Battlegrounds": "Battle Royale",
+            "Squad": "Tactical Shooter",
+            "Insurgency": "Tactical Shooter",
+            "Hell Let Loose": "Tactical Shooter",
+            "Ready or Not": "Tactical Shooter",
+            "Escape from Tarkov": "Tactical Shooter",
+            "ARMA": "Military Simulator",
+            "Wargame": "Strategy",
+            "Total War": "Strategy",
+            "Civilization": "Strategy",
+            "StarCraft": "Strategy",
+            "Warcraft": "Strategy",
+            "Age of Empires": "Strategy",
+            "Company of Heroes": "Strategy",
+            "Dawn of War": "Strategy",
+            "Tropico": "Simulation",
+            "Sim City": "Simulation",
+            "The Sims": "Simulation",
+            "Cities: Skylines": "Simulation",
+            "Planet Coaster": "Simulation",
+            "Two Point Hospital": "Simulation",
+            "Farming Simulator": "Simulation",
+            "Flight Simulator": "Simulation",
+            "Google Earth Pro": "Simulation",
+            "Euro Truck Simulator": "Simulation"
+        };
+
+        let allGames = [];
+        let filteredGames = [];
+        let lastPickedGame = null;
+
+        // Raw game data from collections
+        const gameData = [
+            // PC - Epic Games Store
+            {title: "Amnesia: Rebirth", platform: "Epic Games Store", year: 2020},
+            {title: "Blood Omen: Legacy of Kain", platform: "Epic Games Store", year: 1996},
+            {title: "Doors - Paradox", platform: "Epic Games Store", year: 2022},
+            {title: "Fashion Police Squad", platform: "Epic Games Store", year: 2022},
+            {title: "Fortnite", platform: "Epic Games Store", year: 2017},
+            {title: "Gas Station Simulator", platform: "Epic Games Store", year: 2021},
+            {title: "Gloomhaven", platform: "Epic Games Store", year: 2021},
+            {title: "LEGO Star Wars: The Skywalker Saga", platform: "Epic Games Store", year: 2022},
+            {title: "Liberte", platform: "Epic Games Store", year: 2023},
+            {title: "Lovecraft's Untold Stories", platform: "Epic Games Store", year: 2019},
+            {title: "Lysfanga: The Time Shift Warrior", platform: "Epic Games Store", year: 2024},
+            {title: "Mafia III: Definitive Edition", platform: "Epic Games Store", year: 2020},
+            {title: "Priest Simulator: Vampire Show", platform: "Epic Games Store", year: 2024},
+            {title: "Saints Row: The Third Remastered", platform: "Epic Games Store", year: 2020},
+            {title: "Super Space Club", platform: "Epic Games Store", year: 2023},
+            {title: "The Talos Principle", platform: "Epic Games Store", year: 2014},
+            {title: "The Last Show of Mr. Chardish", platform: "Epic Games Store", year: 2020},
+            {title: "Troublemaker", platform: "Epic Games Store", year: 2023},
+            // PC - GOG
+            {title: "Another World: 20th Anniversary Edition", platform: "GOG", year: 2013},
+            {title: "Berserk Boy", platform: "GOG", year: 2024},
+            {title: "BioShock Infinite", platform: "GOG", year: 2013},
+            {title: "Bleak Faith: Forsaken", platform: "GOG", year: 2023},
+            {title: "Dark Deity", platform: "GOG", year: 2021},
+            {title: "Dark Envoy", platform: "GOG", year: 2023},
+            {title: "Death Squared", platform: "GOG", year: 2017},
+            {title: "FATE", platform: "GOG", year: 2005},
+            {title: "FATE: Undiscovered Realms", platform: "GOG", year: 2008},
+            {title: "Fallout 3: Game of the Year Edition", platform: "GOG", year: 2008},
+            {title: "Fallout: New Vegas Ultimate Edition", platform: "GOG", year: 2010},
+            {title: "Fort Solis", platform: "GOG", year: 2023},
+            {title: "Golf With Your Friends", platform: "GOG", year: 2020},
+            {title: "Hellslave", platform: "GOG", year: 2022},
+            {title: "Jade Empire: Special Edition", platform: "GOG", year: 2005},
+            {title: "Jupiter Hell", platform: "GOG", year: 2019},
+            {title: "LEGO Star Wars - The Complete Saga", platform: "GOG", year: 2007},
+            {title: "Lords of the Fallen", platform: "GOG", year: 2014},
+            {title: "Mafia II", platform: "GOG", year: 2010},
+            {title: "Mafia II: Definitive Edition", platform: "GOG", year: 2020},
+            {title: "Mordheim: City of the Damned", platform: "GOG", year: 2015},
+            {title: "Prince of Persia: Warrior Within", platform: "GOG", year: 2004},
+            {title: "Prince of Persia: The Two Thrones", platform: "GOG", year: 2005},
+            {title: "Residual", platform: "GOG", year: 2021},
+            {title: "Saints Row 2", platform: "GOG", year: 2008},
+            {title: "Saints Row IV: Re-Elected", platform: "GOG", year: 2015},
+            {title: "Saints Row: Gat out of Hell", platform: "GOG", year: 2015},
+            {title: "STAR WARS Galactic Battlegrounds Saga", platform: "GOG", year: 2001},
+            {title: "STAR WARS Knights of the Old Republic II: The Sith Lords", platform: "GOG", year: 2004},
+            {title: "STAR WARS Rebellion", platform: "GOG", year: 1998},
+            {title: "STASIS: BONE TOTEM", platform: "GOG", year: 2023},
+            {title: "Styx: Master of Shadows", platform: "GOG", year: 2014},
+            {title: "Syberia: The World Before", platform: "GOG", year: 2022},
+            {title: "The Elder Scrolls II: Daggerfall", platform: "GOG", year: 1996},
+            {title: "The Last Spell", platform: "GOG", year: 2023},
+            {title: "TOEM", platform: "GOG", year: 2021},
+            {title: "Thief Gold", platform: "GOG", year: 1998},
+            {title: "Thief: Deadly Shadows", platform: "GOG", year: 2004},
+            {title: "Tomb Raider I-III Remastered", platform: "GOG", year: 2024},
+            {title: "True Fear: Forsaken Souls Part 2", platform: "GOG", year: 2018},
+            {title: "XIII", platform: "GOG", year: 2003},
+            {title: "XCOM 2", platform: "GOG", year: 2016},
+            {title: "You Will Die Here Tonight", platform: "GOG", year: 2023},
+            // PC - MS Store
+            {title: "Minecraft: Bedrock Edition", platform: "MS Store", year: 2011},
+            {title: "Minecraft Dungeons", platform: "MS Store", year: 2020},
+            {title: "Minecraft: Java Edition", platform: "MS Store", year: 2011},
+            {title: "Minecraft Legends", platform: "MS Store", year: 2023},
+            // PC - Steam
+            {title: "Age of Empires II: Definitive Edition", platform: "Steam", year: 2019},
+            {title: "Age of Empires III: Definitive Edition", platform: "Steam", year: 2020},
+            {title: "Among Us", platform: "Steam", year: 2018},
+            {title: "ANIMAL WELL", platform: "Steam", year: 2024},
+            {title: "Call of Duty: Black Ops", platform: "Steam", year: 2010},
+            {title: "Call of Duty: World at War", platform: "Steam", year: 2008},
+            {title: "Counter-Strike 2", platform: "Steam", year: 2023},
+            {title: "DARK SOULS REMASTERED", platform: "Steam", year: 2018},
+            {title: "DARK SOULS III", platform: "Steam", year: 2016},
+            {title: "Destiny 2", platform: "Steam", year: 2017},
+            {title: "Devil Daggers", platform: "Steam", year: 2016},
+            {title: "Dragon Age: Origins - Ultimate Edition", platform: "Steam", year: 2009},
+            {title: "ELDEN RING", platform: "Steam", year: 2022},
+            {title: "Enshrouded", platform: "Steam", year: 2024},
+            {title: "Fable Anniversary", platform: "Steam", year: 2014},
+            {title: "Fable - The Lost Chapters", platform: "Steam", year: 2005},
+            {title: "Fallout 76", platform: "Steam", year: 2018},
+            {title: "Getting Over It with Bennett Foddy", platform: "Steam", year: 2017},
+            {title: "GUNDAM EVOLUTION", platform: "Steam", year: 2022},
+            {title: "Half-Life", platform: "Steam", year: 1998},
+            {title: "Half-Life 2", platform: "Steam", year: 2004},
+            {title: "Half-Life 2: Deathmatch", platform: "Steam", year: 2004},
+            {title: "Half-Life Deathmatch: Source", platform: "Steam", year: 2006},
+            {title: "Halo Infinite", platform: "Steam", year: 2021},
+            {title: "Halo: The Master Chief Collection", platform: "Steam", year: 2014},
+            {title: "HighFleet", platform: "Steam", year: 2021},
+            {title: "Hollow Knight", platform: "Steam", year: 2017},
+            {title: "HYPER DEMON", platform: "Steam", year: 2022},
+            {title: "Iron Lung", platform: "Steam", year: 2022},
+            {title: "Knockout City", platform: "Steam", year: 2021},
+            {title: "Left 4 Dead", platform: "Steam", year: 2008},
+            {title: "Left 4 Dead 2", platform: "Steam", year: 2009},
+            {title: "Max Payne", platform: "Steam", year: 2001},
+            {title: "Max Payne 2: The Fall of Max Payne", platform: "Steam", year: 2003},
+            {title: "Muck", platform: "Steam", year: 2021},
+            {title: "MY HERO ULTRA RUMBLE", platform: "Steam", year: 2023},
+            {title: "Nightmare Kart", platform: "Steam", year: 2024},
+            {title: "Palworld", platform: "Steam", year: 2024},
+            {title: "Path of Exile", platform: "Steam", year: 2013},
+            {title: "PUBG: BATTLEGROUNDS", platform: "Steam", year: 2017},
+            {title: "Salt and Sanctuary", platform: "Steam", year: 2016},
+            {title: "Scorn", platform: "Steam", year: 2022},
+            {title: "SCP: Containment Breach Multiplayer", platform: "Steam", year: 2021},
+            {title: "Spooky's Jump Scare Mansion", platform: "Steam", year: 2015},
+            {title: "STAR WARS Knights of the Old Republic", platform: "Steam", year: 2003},
+            {title: "STAR WARS: The Old Republic", platform: "Steam", year: 2011},
+            {title: "Stardew Valley", platform: "Steam", year: 2016},
+            {title: "The Elder Scrolls III: Morrowind", platform: "Steam", year: 2002},
+            {title: "The Elder Scrolls IV: Oblivion", platform: "Steam", year: 2006},
+            {title: "The Elder Scrolls V: Skyrim", platform: "Steam", year: 2011},
+            {title: "The Elder Scrolls V: Skyrim Special Edition", platform: "Steam", year: 2016},
+            {title: "Trepang2", platform: "Steam", year: 2023},
+            {title: "Trove", platform: "Steam", year: 2015},
+            {title: "Unturned", platform: "Steam", year: 2014},
+            {title: "Witchfire", platform: "Steam", year: 2023},
+            {title: "You Have to Win the Game", platform: "Steam", year: 2012},
+            // Xbox
+            {title: "BloodRayne", platform: "Xbox", year: 2002},
+            {title: "Brothers in Arms: Earned in Blood", platform: "Xbox", year: 2005},
+            {title: "Brothers in Arms: Road to Hill 30", platform: "Xbox", year: 2005},
+            {title: "Brute Force", platform: "Xbox", year: 2003},
+            {title: "Call of Duty 2: Big Red One", platform: "Xbox", year: 2005},
+            {title: "Fable", platform: "Xbox", year: 2004},
+            {title: "Future Tactics: The Uprising", platform: "Xbox", year: 2004},
+            {title: "Grand Theft Auto: San Andreas", platform: "Xbox", year: 2005},
+            {title: "Half-Life 2", platform: "Xbox", year: 2005},
+            {title: "Halo 2", platform: "Xbox", year: 2004},
+            {title: "Halo 2 Multiplayer Map Pack", platform: "Xbox", year: 2005},
+            {title: "Halo: Combat Evolved", platform: "Xbox", year: 2001},
+            {title: "Jade Empire: Limited Edition", platform: "Xbox", year: 2005},
+            {title: "Madden NFL 2002", platform: "Xbox", year: 2001},
+            {title: "Manhunt", platform: "Xbox", year: 2004},
+            {title: "Max Payne", platform: "Xbox", year: 2001},
+            {title: "Max Payne 2: The Fall of Max Payne", platform: "Xbox", year: 2003},
+            {title: "Ninja Gaiden", platform: "Xbox", year: 2004},
+            {title: "Oddworld: Stranger's Wrath", platform: "Xbox", year: 2005},
+            {title: "Project Gotham Racing", platform: "Xbox", year: 2001},
+            {title: "Red Dead Revolver", platform: "Xbox", year: 2004},
+            {title: "SSX 3", platform: "Xbox", year: 2003},
+            {title: "Star Wars Battlefront", platform: "Xbox", year: 2004},
+            {title: "Star Wars Jedi Knight: Jedi Academy", platform: "Xbox", year: 2003},
+            {title: "Star Wars: Knights of the Old Republic", platform: "Xbox", year: 2003},
+            {title: "Star Wars: Knights of the Old Republic II: The Sith Lords", platform: "Xbox", year: 2004},
+            {title: "Star Wars: The Clone Wars", platform: "Xbox", year: 2002},
+            {title: "Tenchu: Return from Darkness", platform: "Xbox", year: 2004},
+            {title: "The Chronicles of Riddick: Escape from Butcher Bay", platform: "Xbox", year: 2004},
+            {title: "The Elder Scrolls III: Morrowind", platform: "Xbox", year: 2002},
+            {title: "Tom Clancy's Ghost Recon", platform: "Xbox", year: 2002},
+            {title: "Tom Clancy's Splinter Cell", platform: "Xbox", year: 2002},
+            {title: "XIII", platform: "Xbox", year: 2003},
+            // Xbox 360
+            {title: "Assassin's Creed III", platform: "Xbox 360", year: 2012},
+            {title: "Batman: Arkham Asylum", platform: "Xbox 360", year: 2010},
+            {title: "Brütal Legend", platform: "Xbox 360", year: 2009},
+            {title: "Call of Duty: Black Ops", platform: "Xbox 360", year: 2010},
+            {title: "Call of Duty: Ghosts", platform: "Xbox 360", year: 2013},
+            {title: "Dead Space", platform: "Xbox 360", year: 2008},
+            {title: "Dishonored", platform: "Xbox 360", year: 2012},
+            {title: "Dragon Age: Origins", platform: "Xbox 360", year: 2010},
+            {title: "Fable II", platform: "Xbox 360", year: 2008},
+            {title: "Fable III", platform: "Xbox 360", year: 2010},
+            {title: "Fallout 3", platform: "Xbox 360", year: 2008},
+            {title: "Fallout: New Vegas", platform: "Xbox 360", year: 2010},
+            {title: "Halo 3", platform: "Xbox 360", year: 2007},
+            {title: "Halo 3: ODST", platform: "Xbox 360", year: 2009},
+            {title: "Halo 4", platform: "Xbox 360", year: 2012},
+            {title: "Halo: Reach", platform: "Xbox 360", year: 2010},
+            {title: "Left 4 Dead 2", platform: "Xbox 360", year: 2009},
+            {title: "Mass Effect", platform: "Xbox 360", year: 2007},
+            {title: "Mass Effect 2", platform: "Xbox 360", year: 2010},
+            {title: "Mass Effect 3", platform: "Xbox 360", year: 2012},
+            {title: "Metal Gear Rising: Revengeance", platform: "Xbox 360", year: 2013},
+            {title: "Metal Gear Solid HD Collection", platform: "Xbox 360", year: 2011},
+            {title: "Midnight Club: Los Angeles", platform: "Xbox 360", year: 2009},
+            {title: "Minecraft: Xbox 360 Edition", platform: "Xbox 360", year: 2012},
+            {title: "Need for Speed: Hot Pursuit", platform: "Xbox 360", year: 2010},
+            {title: "Ninja Gaiden II", platform: "Xbox 360", year: 2008},
+            {title: "Red Dead Redemption", platform: "Xbox 360", year: 2010},
+            {title: "Skate 3", platform: "Xbox 360", year: 2010},
+            {title: "Spider-Man: Shattered Dimensions", platform: "Xbox 360", year: 2010},
+            {title: "Tenchu Z", platform: "Xbox 360", year: 2007},
+            {title: "Terraria", platform: "Xbox 360", year: 2013},
+            {title: "The Amazing Spider-Man", platform: "Xbox 360", year: 2012},
+            {title: "The Walking Dead: Survival Instinct", platform: "Xbox 360", year: 2013},
+            {title: "Tom Clancy's Rainbow Six Vegas", platform: "Xbox 360", year: 2006},
+            // Nintendo - N64
+            {title: "Dr. Mario 64", platform: "Nintendo 64", year: 2001},
+            {title: "GoldenEye 007", platform: "Nintendo 64", year: 1997},
+            {title: "Hey You, Pikachu!", platform: "Nintendo 64", year: 2000},
+            {title: "Mario Kart 64", platform: "Nintendo 64", year: 1997},
+            {title: "Pokémon Puzzle League", platform: "Nintendo 64", year: 2000},
+            {title: "Pokémon Stadium", platform: "Nintendo 64", year: 2000},
+            {title: "Super Mario 64", platform: "Nintendo 64", year: 1996},
+            {title: "Super Smash Bros.", platform: "Nintendo 64", year: 1999},
+            // GameCube
+            {title: "Dragon Ball Z: Budokai", platform: "GameCube", year: 2003},
+            {title: "Resident Evil", platform: "GameCube", year: 2002},
+            {title: "Resident Evil Zero", platform: "GameCube", year: 2002},
+            {title: "Super Mario Sunshine", platform: "GameCube", year: 2002},
+            {title: "Super Monkey Ball 2", platform: "GameCube", year: 2002},
+            // Wii
+            {title: "Chicken Shoot", platform: "Wii", year: 2007},
+            {title: "Dead Space: Extraction", platform: "Wii", year: 2009},
+            {title: "Just Dance 2", platform: "Wii", year: 2010},
+            {title: "Kawasaki Quad Bikes", platform: "Wii", year: 2007},
+            {title: "New Super Mario Bros. Wii", platform: "Wii", year: 2009},
+            {title: "Prince of Persia: Rival Swords", platform: "Wii", year: 2007},
+            {title: "Resident Evil 4: Wii Edition", platform: "Wii", year: 2007},
+            {title: "Rock Band", platform: "Wii", year: 2008},
+            {title: "Super Monkey Ball: Banana Blitz", platform: "Wii", year: 2006},
+            {title: "The Strike", platform: "Wii", year: 2009},
+            {title: "Tony Hawk's Proving Ground", platform: "Wii", year: 2007},
+            {title: "Wii Play", platform: "Wii", year: 2007},
+            {title: "Wii Sports", platform: "Wii", year: 2006},
+            {title: "Wii Sports Resort", platform: "Wii", year: 2009},
+            // DS
+            {title: "Blue Dragon Plus", platform: "Nintendo DS", year: 2009},
+            {title: "Brain Age: Train Your Brain in Minutes a Day!", platform: "Nintendo DS", year: 2006},
+            {title: "Chrono Trigger", platform: "Nintendo DS", year: 2008},
+            {title: "Dragon Ball Origins", platform: "Nintendo DS", year: 2008},
+            {title: "Final Fantasy XII: Revenant Wings", platform: "Nintendo DS", year: 2007},
+            {title: "Jam Sessions 2", platform: "Nintendo DS", year: 2009},
+            {title: "Metal Slug 7", platform: "Nintendo DS", year: 2008},
+            {title: "New Super Mario Bros.", platform: "Nintendo DS", year: 2006},
+            {title: "Pokémon Black Version", platform: "Nintendo DS", year: 2011},
+            {title: "Pokémon Black Version 2", platform: "Nintendo DS", year: 2012},
+            {title: "Pokémon Mystery Dungeon: Blue Rescue Team", platform: "Nintendo DS", year: 2006},
+            {title: "Pokémon Pearl Version", platform: "Nintendo DS", year: 2007},
+            {title: "Pokémon SoulSilver Version", platform: "Nintendo DS", year: 2010},
+            {title: "Resident Evil: Deadly Silence", platform: "Nintendo DS", year: 2006},
+            {title: "Super Scribblenauts", platform: "Nintendo DS", year: 2010},
+            {title: "Ultimate Mortal Kombat", platform: "Nintendo DS", year: 2007},
+            // 3DS
+            {title: "Animal Crossing: New Leaf", platform: "Nintendo 3DS", year: 2013},
+            {title: "Mario Kart 7", platform: "Nintendo 3DS", year: 2011},
+            {title: "Mega Man X", platform: "Nintendo 3DS", year: 1994},
+            {title: "Pokémon Crystal Version", platform: "Nintendo 3DS", year: 2001},
+            {title: "Pokémon Gold Version", platform: "Nintendo 3DS", year: 2000},
+            {title: "Pokémon Red Version", platform: "Nintendo 3DS", year: 1998},
+            {title: "Pokémon Yellow Version", platform: "Nintendo 3DS", year: 1999},
+            {title: "Super Mario Bros.", platform: "Nintendo 3DS", year: 1985},
+            {title: "Super Mario World", platform: "Nintendo 3DS", year: 1991},
+            {title: "Tales of the Abyss", platform: "Nintendo 3DS", year: 2012},
+            // Game Boy
+            {title: "Yoshi's Cookie", platform: "Game Boy", year: 1992},
+            // Game Boy Color
+            {title: "Pokémon Crystal Version", platform: "Game Boy Color", year: 2001},
+            {title: "Pokémon Gold Version", platform: "Game Boy Color", year: 2000},
+            {title: "Pokémon Trading Card Game", platform: "Game Boy Color", year: 2000},
+            {title: "The Legend of Zelda: Oracle of Ages", platform: "Game Boy Color", year: 2001},
+            // GBA
+            {title: "Ace Combat Advance", platform: "Game Boy Advance", year: 2005},
+            {title: "Dragon Ball Z: The Legacy of Goku II", platform: "Game Boy Advance", year: 2003},
+            {title: "Mario Kart: Super Circuit", platform: "Game Boy Advance", year: 2001},
+            {title: "Pokémon Emerald Version", platform: "Game Boy Advance", year: 2005},
+            {title: "Pokémon FireRed Version", platform: "Game Boy Advance", year: 2004},
+            {title: "Pokémon Sapphire Version", platform: "Game Boy Advance", year: 2003},
+            // Switch
+            {title: "A Short Hike", platform: "Nintendo Switch", year: 2020},
+            {title: "Animal Crossing: New Horizons", platform: "Nintendo Switch", year: 2020},
+            {title: "Another Crab's Treasure", platform: "Nintendo Switch", year: 2024},
+            {title: "Dark Souls: Remastered", platform: "Nintendo Switch", year: 2018},
+            {title: "Digimon Story: Cyber Sleuth: Complete Edition", platform: "Nintendo Switch", year: 2019},
+            {title: "Doom 64", platform: "Nintendo Switch", year: 2020},
+            {title: "Downwell", platform: "Nintendo Switch", year: 2019},
+            {title: "Final Fantasy VII", platform: "Nintendo Switch", year: 2019},
+            {title: "Hollow Knight", platform: "Nintendo Switch", year: 2018},
+            {title: "Hotline Miami Collection", platform: "Nintendo Switch", year: 2019},
+            {title: "L.A. Noire", platform: "Nintendo Switch", year: 2017},
+            {title: "Metal Gear Solid: Master Collection Vol. 1", platform: "Nintendo Switch", year: 2023},
+            {title: "One Strike", platform: "Nintendo Switch", year: 2018},
+            {title: "Pokémon Brilliant Diamond", platform: "Nintendo Switch", year: 2021},
+            {title: "Pokémon Legends: Arceus", platform: "Nintendo Switch", year: 2022},
+            {title: "Pokémon Scarlet", platform: "Nintendo Switch", year: 2022},
+            {title: "Pokémon Shining Pearl", platform: "Nintendo Switch", year: 2021},
+            {title: "Pokémon Sword", platform: "Nintendo Switch", year: 2019},
+            {title: "Pokémon Violet", platform: "Nintendo Switch", year: 2022},
+            {title: "Pokémon: Let's Go, Pikachu!", platform: "Nintendo Switch", year: 2018},
+            {title: "Salt and Sanctuary", platform: "Nintendo Switch", year: 2018},
+            {title: "Slain: Back from Hell", platform: "Nintendo Switch", year: 2017},
+            {title: "Stardew Valley", platform: "Nintendo Switch", year: 2017},
+            {title: "The Elder Scrolls V: Skyrim", platform: "Nintendo Switch", year: 2017},
+            {title: "Trials Rising", platform: "Nintendo Switch", year: 2019},
+            // PlayStation 1
+            {title: "Namco Museum Vol. 1", platform: "PS1", year: 1996},
+            {title: "Scrabble", platform: "PS1", year: 1996},
+            {title: "Tetris Plus", platform: "PS1", year: 1996},
+            {title: "Time Commando", platform: "PS1", year: 1996},
+            {title: "Tomb Raider: The Last Revelation", platform: "PS1", year: 1999},
+            {title: "Tony Hawk's Pro Skater", platform: "PS1", year: 1999},
+            // PlayStation 2
+            {title: "Dance Dance Revolution Extreme 2", platform: "PS2", year: 2005},
+            {title: "ESPN NBA 2K5", platform: "PS2", year: 2004},
+            {title: "Enter the Matrix", platform: "PS2", year: 2003},
+            {title: "Guitar Hero II", platform: "PS2", year: 2006},
+            {title: "Gun", platform: "PS2", year: 2005},
+            {title: "Iron Man", platform: "PS2", year: 2008},
+            {title: "Jak and Daxter: The Precursor Legacy", platform: "PS2", year: 2001},
+            {title: "MTV Music Generator 3: This Is the Remix", platform: "PS2", year: 2004},
+            {title: "MX 2002 featuring Ricky Carmichael", platform: "PS2", year: 2001},
+            {title: "Max Payne", platform: "PS2", year: 2001},
+            {title: "Metal Gear Solid 2: Sons of Liberty", platform: "PS2", year: 2001},
+            {title: "NBA Live 2003", platform: "PS2", year: 2002},
+            {title: "Need for Speed: Underground 2", platform: "PS2", year: 2004},
+            {title: "Silent Line: Armored Core", platform: "PS2", year: 2003},
+            {title: "The Fairly OddParents: Shadow Showdown", platform: "PS2", year: 2004},
+            {title: "The Incredible Hulk: Ultimate Destruction", platform: "PS2", year: 2005},
+            {title: "X-Men Origins: Wolverine", platform: "PS2", year: 2009},
+            // PlayStation 3
+            {title: "Alone in the Dark: Inferno", platform: "PS3", year: 2008},
+            {title: "Armored Core V", platform: "PS3", year: 2012},
+            {title: "Armored Core: Verdict Day", platform: "PS3", year: 2013},
+            {title: "Crysis 3", platform: "PS3", year: 2013},
+            {title: "Demon's Souls", platform: "PS3", year: 2009},
+            {title: "Final Fantasy XIII", platform: "PS3", year: 2010},
+            {title: "Gran Turismo 5", platform: "PS3", year: 2010},
+            {title: "Grand Theft Auto IV", platform: "PS3", year: 2008},
+            {title: "Heavy Rain", platform: "PS3", year: 2010},
+            {title: "Jak and Daxter Collection", platform: "PS3", year: 2012},
+            {title: "L.A. Noire", platform: "PS3", year: 2011},
+            {title: "Marvel vs. Capcom 3: Fate of Two Worlds", platform: "PS3", year: 2011},
+            {title: "Metal Gear Solid 4: Guns of the Patriots", platform: "PS3", year: 2008},
+            {title: "Ninja Gaiden 3", platform: "PS3", year: 2012},
+            {title: "Prince of Persia", platform: "PS3", year: 2008},
+            {title: "The Elder Scrolls IV: Oblivion", platform: "PS3", year: 2006},
+            // PlayStation 4
+            {title: "Alien: Isolation", platform: "PS4", year: 2014},
+            {title: "Ancestors: The Humankind Odyssey", platform: "PS4", year: 2019},
+            {title: "Armored Core VI: Fires of Rubicon", platform: "PS4", year: 2023},
+            {title: "Ashen", platform: "PS4", year: 2019},
+            {title: "Baldur's Gate: Dark Alliance", platform: "PS4", year: 2021},
+            {title: "Baldur's Gate: Dark Alliance II", platform: "PS4", year: 2022},
+            {title: "Berserk and the Band of the Hawk", platform: "PS4", year: 2016},
+            {title: "BioShock: The Collection", platform: "PS4", year: 2016},
+            {title: "Blair Witch", platform: "PS4", year: 2019},
+            {title: "Bloodborne", platform: "PS4", year: 2015},
+            {title: "Bomb Rush Cyberfunk", platform: "PS4", year: 2023},
+            {title: "Capcom Fighting Collection 2", platform: "PS4", year: 2025},
+            {title: "Carrion", platform: "PS4", year: 2021},
+            {title: "Code Vein", platform: "PS4", year: 2019},
+            {title: "Cyberpunk 2077", platform: "PS4", year: 2020},
+            {title: "Dark Souls II: Scholar of the First Sin", platform: "PS4", year: 2015},
+            {title: "Dark Souls III", platform: "PS4", year: 2016},
+            {title: "Dark Souls: Remastered", platform: "PS4", year: 2018},
+            {title: "Darksiders II: Deathinitive Edition", platform: "PS4", year: 2015},
+            {title: "Darksiders: Warmastered Edition", platform: "PS4", year: 2016},
+            {title: "Death Stranding", platform: "PS4", year: 2019},
+            {title: "Detroit: Become Human", platform: "PS4", year: 2018},
+            {title: "Deus Ex: Mankind Divided", platform: "PS4", year: 2016},
+            {title: "Digimon Story: Cyber Sleuth", platform: "PS4", year: 2015},
+            {title: "Downwell", platform: "PS4", year: 2016},
+            {title: "Dragon Ball FighterZ", platform: "PS4", year: 2018},
+            {title: "Dragon's Dogma: Dark Arisen", platform: "PS4", year: 2017},
+            {title: "Ender Lilies: Quietus of the Knights", platform: "PS4", year: 2021},
+            {title: "Fallout 4", platform: "PS4", year: 2015},
+            {title: "Ghost of Tsushima", platform: "PS4", year: 2020},
+            {title: "Ghostrunner", platform: "PS4", year: 2020},
+            {title: "Grand Theft Auto III", platform: "PS4", year: 2021},
+            {title: "Grand Theft Auto V", platform: "PS4", year: 2014},
+            {title: "Grand Theft Auto: San Andreas", platform: "PS4", year: 2021},
+            {title: "Grand Theft Auto: Vice City", platform: "PS4", year: 2021},
+            {title: "GreedFall", platform: "PS4", year: 2019},
+            {title: "High on Life", platform: "PS4", year: 2023},
+            {title: "Hollow Knight", platform: "PS4", year: 2018},
+            {title: "Injustice 2", platform: "PS4", year: 2017},
+            {title: "Injustice: Gods Among Us", platform: "PS4", year: 2013},
+            {title: "Kingdom Come: Deliverance", platform: "PS4", year: 2018},
+            {title: "LEGO Worlds", platform: "PS4", year: 2017},
+            {title: "Little Nightmares", platform: "PS4", year: 2017},
+            {title: "Little Nightmares II", platform: "PS4", year: 2021},
+            {title: "Little Nightmares III", platform: "PS4", year: 2025},
+            {title: "Lost in Random", platform: "PS4", year: 2021},
+            {title: "Mad Max", platform: "PS4", year: 2015},
+            {title: "Mass Effect Legendary Edition", platform: "PS4", year: 2021},
+            {title: "Metal Gear Solid V: The Phantom Pain", platform: "PS4", year: 2015},
+            {title: "Monster Hunter World: Iceborne", platform: "PS4", year: 2019},
+            {title: "Monster Hunter: World", platform: "PS4", year: 2018},
+            {title: "Mortal Kombat XL", platform: "PS4", year: 2016},
+            {title: "Mortal Shell", platform: "PS4", year: 2020},
+            {title: "Need for Speed: Hot Pursuit Remastered", platform: "PS4", year: 2020},
+            {title: "Nidhogg 2", platform: "PS4", year: 2017},
+            {title: "Nier: Automata", platform: "PS4", year: 2017},
+            {title: "Nine Sols", platform: "PS4", year: 2024},
+            {title: "Nioh 2", platform: "PS4", year: 2020},
+            {title: "Onimusha: Warlords", platform: "PS4", year: 2019},
+            {title: "Outlast", platform: "PS4", year: 2014},
+            {title: "Outward", platform: "PS4", year: 2019},
+            {title: "PUBG: Battlegrounds", platform: "PS4", year: 2018},
+            {title: "Prince of Persia: The Lost Crown", platform: "PS4", year: 2024},
+            {title: "Red Dead Redemption", platform: "PS4", year: 2023},
+            {title: "Red Dead Redemption 2", platform: "PS4", year: 2018},
+            {title: "Resident Evil", platform: "PS4", year: 2015},
+            {title: "Resident Evil 0", platform: "PS4", year: 2016},
+            {title: "Resident Evil 2", platform: "PS4", year: 2019},
+            {title: "Resident Evil 3", platform: "PS4", year: 2020},
+            {title: "Resident Evil 4", platform: "PS4", year: 2016},
+            {title: "Resident Evil 5", platform: "PS4", year: 2016},
+            {title: "Resident Evil 6", platform: "PS4", year: 2016},
+            {title: "Resident Evil 7: Biohazard", platform: "PS4", year: 2017},
+            {title: "Resident Evil Revelations 2", platform: "PS4", year: 2015},
+            {title: "Resident Evil Village", platform: "PS4", year: 2021},
+            {title: "Saints Row: The Third Remastered", platform: "PS4", year: 2020},
+            {title: "Salt and Sacrifice", platform: "PS4", year: 2022},
+            {title: "Salt and Sanctuary", platform: "PS4", year: 2016},
+            {title: "Sekiro: Shadows Die Twice", platform: "PS4", year: 2019},
+            {title: "Shadow of the Colossus", platform: "PS4", year: 2018},
+            {title: "Stardew Valley", platform: "PS4", year: 2016},
+            {title: "Stray", platform: "PS4", year: 2022},
+            {title: "Tales of Arise", platform: "PS4", year: 2021},
+            {title: "The Callisto Protocol", platform: "PS4", year: 2022},
+            {title: "The Evil Within", platform: "PS4", year: 2014},
+            {title: "The Last of Us Remastered", platform: "PS4", year: 2014},
+            {title: "The Surge", platform: "PS4", year: 2017},
+            {title: "The Talos Principle", platform: "PS4", year: 2015},
+            {title: "The Technomancer", platform: "PS4", year: 2016},
+            {title: "The Thing: Remastered", platform: "PS4", year: 2024},
+            {title: "The Witcher 3: Wild Hunt", platform: "PS4", year: 2015},
+            {title: "Titanfall 2", platform: "PS4", year: 2016},
+            {title: "Trek to Yomi", platform: "PS4", year: 2022},
+            {title: "Uncharted: The Nathan Drake Collection", platform: "PS4", year: 2015},
+            {title: "Wo Long: Fallen Dynasty", platform: "PS4", year: 2023},
+            // PlayStation 5
+            {title: "AI Limit", platform: "PS5", year: 2025},
+            {title: "Alone in the Dark", platform: "PS5", year: 2024},
+            {title: "Astro Bot", platform: "PS5", year: 2024},
+            {title: "Baldur's Gate 3", platform: "PS5", year: 2023},
+            {title: "Black Myth: Wukong", platform: "PS5", year: 2024},
+            {title: "Cyberpunk 2077", platform: "PS5", year: 2020},
+            {title: "Death Stranding", platform: "PS5", year: 2021},
+            {title: "Demon's Souls", platform: "PS5", year: 2020},
+            {title: "Dragon Age: The Veilguard", platform: "PS5", year: 2024},
+            {title: "Dragon Ball: Sparking! ZERO", platform: "PS5", year: 2024},
+            {title: "Dragon's Dogma 2", platform: "PS5", year: 2024},
+            {title: "Elden Ring", platform: "PS5", year: 2022},
+            {title: "Elden Ring: Nightreign", platform: "PS5", year: 2025},
+            {title: "Empire of the Ants", platform: "PS5", year: 2024},
+            {title: "Fallout 4", platform: "PS5", year: 2024},
+            {title: "Ghost of Tsushima", platform: "PS5", year: 2021},
+            {title: "Ghostrunner", platform: "PS5", year: 2020},
+            {title: "Ghostrunner 2", platform: "PS5", year: 2023},
+            {title: "Grand Theft Auto V", platform: "PS5", year: 2022},
+            {title: "Hell is Us", platform: "PS5", year: 2025},
+            {title: "High on Life", platform: "PS5", year: 2023},
+            {title: "Legacy of Kain: Soul Reaver 1 & 2 Remastered", platform: "PS5", year: 2025},
+            {title: "Lies of P", platform: "PS5", year: 2023},
+            {title: "Little Nightmares III", platform: "PS5", year: 2025},
+            {title: "Metal Gear Solid Delta: Snake Eater", platform: "PS5", year: 2025},
+            {title: "Minecraft", platform: "PS5", year: 2024},
+            {title: "Mortal Shell: Enhanced Edition", platform: "PS5", year: 2021},
+            {title: "Nine Sols", platform: "PS5", year: 2024},
+            {title: "Nioh 2: Remastered", platform: "PS5", year: 2021},
+            {title: "Nioh: Remastered", platform: "PS5", year: 2021},
+            {title: "Palworld", platform: "PS5", year: 2025},
+            {title: "Prince of Persia: The Lost Crown", platform: "PS5", year: 2024},
+            {title: "Resident Evil 2", platform: "PS5", year: 2022},
+            {title: "Resident Evil 3", platform: "PS5", year: 2022},
+            {title: "Resident Evil 4", platform: "PS5", year: 2023},
+            {title: "Resident Evil 7: Biohazard", platform: "PS5", year: 2022},
+            {title: "Resident Evil Village", platform: "PS5", year: 2021},
+            {title: "Sackboy: A Big Adventure", platform: "PS5", year: 2020},
+            {title: "Stray", platform: "PS5", year: 2022},
+            {title: "Tales of Arise", platform: "PS5", year: 2021},
+            {title: "The Elder Scrolls V: Skyrim", platform: "PS5", year: 2021},
+            {title: "The First Berserker: Khazan", platform: "PS5", year: 2025},
+            {title: "The Last Faith", platform: "PS5", year: 2023},
+            {title: "The Outer Worlds", platform: "PS5", year: 2023},
+            {title: "The Thing: Remastered", platform: "PS5", year: 2024},
+            {title: "The Witcher 3: Wild Hunt", platform: "PS5", year: 2022},
+            {title: "Thymesia", platform: "PS5", year: 2022},
+            {title: "Trek to Yomi", platform: "PS5", year: 2022},
+            {title: "Wo Long: Fallen Dynasty", platform: "PS5", year: 2023},
+            // PlayStation Plus (treating as separate service)
+            {title: "Abzu", platform: "PS Plus", year: 2016},
+            {title: "Alien: Isolation", platform: "PS Plus", year: 2014},
+            {title: "Battlefield V", platform: "PS Plus", year: 2018},
+            {title: "BioShock: The Collection", platform: "PS Plus", year: 2016},
+            {title: "Bloodborne", platform: "PS Plus", year: 2015},
+            {title: "Bomb Rush Cyberfunk", platform: "PS Plus", year: 2023},
+            {title: "Code Vein", platform: "PS Plus", year: 2019},
+            {title: "Cyberpunk 2077", platform: "PS Plus", year: 2020},
+            {title: "Days Gone", platform: "PS Plus", year: 2019},
+            {title: "Death Stranding", platform: "PS Plus", year: 2019},
+            {title: "Detroit: Become Human", platform: "PS Plus", year: 2018},
+            {title: "Deus Ex: Mankind Divided", platform: "PS Plus", year: 2016},
+            {title: "Doom Eternal", platform: "PS Plus", year: 2020},
+            {title: "Fallout 4", platform: "PS Plus", year: 2015},
+            {title: "Fall Guys", platform: "PS Plus", year: 2020},
+            {title: "Ghost of Tsushima", platform: "PS Plus", year: 2020},
+            {title: "Ghostrunner", platform: "PS Plus", year: 2020},
+            {title: "God of War", platform: "PS Plus", year: 2018},
+            {title: "High on Life", platform: "PS Plus", year: 2023},
+            {title: "Hollow Knight", platform: "PS Plus", year: 2017},
+            {title: "Injustice 2", platform: "PS Plus", year: 2017},
+            {title: "Lies of P", platform: "PS Plus", year: 2023},
+            {title: "Little Nightmares", platform: "PS Plus", year: 2017},
+            {title: "Little Nightmares II", platform: "PS Plus", year: 2021},
+            {title: "Mad Max", platform: "PS Plus", year: 2015},
+            {title: "Mass Effect Legendary Edition", platform: "PS Plus", year: 2021},
+            {title: "Metal Gear Solid V: The Phantom Pain", platform: "PS Plus", year: 2015},
+            {title: "Monster Hunter: World", platform: "PS Plus", year: 2018},
+            {title: "Mortal Kombat X", platform: "PS Plus", year: 2016},
+            {title: "Mortal Shell", platform: "PS Plus", year: 2020},
+            {title: "Nioh", platform: "PS Plus", year: 2017},
+            {title: "Nioh 2", platform: "PS Plus", year: 2020},
+            {title: "Red Dead Redemption", platform: "PS Plus", year: 2023},
+            {title: "Red Dead Redemption 2", platform: "PS Plus", year: 2018},
+            {title: "Resident Evil 2", platform: "PS Plus", year: 2019},
+            {title: "Resident Evil 3", platform: "PS Plus", year: 2020},
+            {title: "Resident Evil 7: Biohazard", platform: "PS Plus", year: 2017},
+            {title: "Sackboy: A Big Adventure", platform: "PS Plus", year: 2020},
+            {title: "Shadow of the Colossus", platform: "PS Plus", year: 2018},
+            {title: "Stardew Valley", platform: "PS Plus", year: 2016},
+            {title: "Stray", platform: "PS Plus", year: 2022},
+            {title: "Tales of Arise", platform: "PS Plus", year: 2021},
+            {title: "The Last of Us Remastered", platform: "PS Plus", year: 2014},
+            {title: "The Witcher 3: Wild Hunt", platform: "PS Plus", year: 2015},
+            {title: "Trek to Yomi", platform: "PS Plus", year: 2022},
+            {title: "Until Dawn", platform: "PS Plus", year: 2015},
+            {title: "Alone in the Dark", platform: "PS Plus", year: 2024},
+            {title: "Bugsnax", platform: "PS Plus", year: 2020},
+            {title: "Death Stranding Director's Cut", platform: "PS Plus", year: 2019},
+            {title: "Ghost of Tsushima Director's Cut", platform: "PS Plus", year: 2020},
+            {title: "Ghostrunner", platform: "PS Plus", year: 2020},
+            {title: "Marvel's Guardians of the Galaxy", platform: "PS Plus", year: 2021},
+            {title: "Mortal Shell: Enhanced Edition", platform: "PS Plus", year: 2021},
+            {title: "Nioh 2 Remastered", platform: "PS Plus", year: 2021},
+            {title: "Resident Evil 2", platform: "PS Plus", year: 2019},
+            {title: "Resident Evil 3", platform: "PS Plus", year: 2020},
+            {title: "Resident Evil 7: Biohazard", platform: "PS Plus", year: 2017},
+            {title: "Sackboy: A Big Adventure", platform: "PS Plus", year: 2020},
+            {title: "The Witcher 3: Wild Hunt", platform: "PS Plus", year: 2022},
+            {title: "Uncharted: Legacy of Thieves Collection", platform: "PS Plus", year: 2022}
+        ];
+
+        // Initialize app
+        function init() {
+            // Enrich games with genres
+            allGames = gameData.map(game => ({
+                ...game,
+                genre: genreDatabase[game.title] || "Unknown"
+            }));
+
+            // Remove duplicates from PS Plus (already counted in PS4/PS5)
+            allGames = allGames.filter((game, index, self) => 
+                index === self.findIndex(g => 
+                    g.title === game.title && g.platform === game.platform && g.year === game.year
+                )
+            );
+
+            populateFilters();
+            updateMatchCount();
+            filteredGames = [...allGames];
+        }
+
+        function populateFilters() {
+            // Platforms
+            const platforms = [...new Set(allGames.map(g => g.platform))].sort();
+            const platformHtml = platforms.map(p => `
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="platform-${p}" value="${p}" onchange="updateFilters()">
+                    <label for="platform-${p}">${p}</label>
+                </div>
+            `).join('');
+            document.getElementById('platformFilters').innerHTML = platformHtml;
+
+            // Genres
+            const genres = [...new Set(allGames.map(g => g.genre))].sort();
+            const genreHtml = genres.map(g => `
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="genre-${g}" value="${g}" onchange="updateFilters()">
+                    <label for="genre-${g}">${g}</label>
+                </div>
+            `).join('');
+            document.getElementById('genreFilters').innerHTML = genreHtml;
+        }
+
+        function updateFilters() {
+            const selectedPlatforms = Array.from(document.querySelectorAll('input[id^="platform-"]:checked')).map(e => e.value);
+            const selectedGenres = Array.from(document.querySelectorAll('input[id^="genre-"]:checked')).map(e => e.value);
+            const yearFrom = parseInt(document.getElementById('yearFrom').value) || 0;
+            const yearTo = parseInt(document.getElementById('yearTo').value) || 9999;
+
+            filteredGames = allGames.filter(game => {
+                const platformMatch = selectedPlatforms.length === 0 || selectedPlatforms.includes(game.platform);
+                const genreMatch = selectedGenres.length === 0 || selectedGenres.includes(game.genre);
+                const yearMatch = game.year >= yearFrom && game.year <= yearTo;
+                return platformMatch && genreMatch && yearMatch;
+            });
+
+            updateMatchCount();
+        }
+
+        function updateMatchCount() {
+            const count = filteredGames.length;
+            const text = count === 0 ? 'No matches' : count === 1 ? '1 game' : `${count} games`;
+            document.getElementById('matchCount').textContent = text;
+            document.getElementById('pickButton').disabled = count === 0;
+        }
+
+        function resetFilters() {
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.getElementById('yearFrom').value = '';
+            document.getElementById('yearTo').value = '';
+            filteredGames = [...allGames];
+            updateMatchCount();
+        }
+
+        function pickRandomGame() {
+            if (filteredGames.length === 0) return;
+
+            let randomGame;
+            do {
+                randomGame = filteredGames[Math.floor(Math.random() * filteredGames.length)];
+            } while (filteredGames.length > 1 && randomGame === lastPickedGame);
+
+            lastPickedGame = randomGame;
+
+            const resultPanel = document.getElementById('resultPanel');
+            resultPanel.innerHTML = `
+                <div class="result-game">
+                    <h2 class="game-title">${randomGame.title}</h2>
+                    <div class="game-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Platform/Service</div>
+                            <div class="detail-value">${randomGame.platform}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Release Year</div>
+                            <div class="detail-value">${randomGame.year}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Genre</div>
+                            <div class="detail-value">${randomGame.genre}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Add event listeners for year inputs
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+            document.getElementById('yearFrom').addEventListener('change', updateFilters);
+            document.getElementById('yearTo').addEventListener('change', updateFilters);
+        });
+    </script>
+</body>
+<footer>
+    <p style="text-align: center; font-size: 0.9em; color: #666;">
+        &copy; 2025 Game Picker. Powered by Perplexity AI Labs.    
+    </p>
+</footer>
+</html>

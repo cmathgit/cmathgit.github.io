@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suno Style of Music Prompt Generator</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            text-align: center; 
+            margin: 0;
+            padding: 20px; 
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #111;
+        }
+        .description {
+            max-width: 600px;
+            margin: 20px auto;
+            line-height: 1.6;
+            color: #555;
+        }
+        #generateBtn { 
+            padding: 12px 20px; 
+            font-size: 1.1em; 
+            cursor: pointer; 
+            border-radius: 8px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 10px;
+        }
+        #generateBtn:hover {
+            background-color: #0056b3;
+        }
+        #generateBtn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .prompt-section {
+            margin-top: 40px;
+        }
+        .prompt-container { 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            position: relative;
+        }
+        #resultContainer {
+             display: none; /* Initially hidden */
+        }
+        .prompt-output { 
+            font-size: 1.1em; 
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .copy-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .copy-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: #555;
+            transition: stroke 0.3s ease;
+        }
+        .copy-btn:hover svg {
+            stroke: #000;
+        }
+        .copy-feedback {
+            font-size: 0.9em;
+            color: #28a745;
+            font-weight: bold;
+            position: absolute;
+            left: calc(50% + 270px); /* Position next to the button */
+            white-space: nowrap;
+        }
+        footer {
+            margin-top: 3rem; /* from mt-12 */
+            text-align: center;
+            color: #6b7280; /* from text-gray-500 */
+            font-size: 0.875rem; /* from text-sm */
+        }
+        #downloadArchiveBtn {
+            margin-top: 20px;
+            padding: 10px 18px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 8px;
+            border: 1px solid #007bff;
+            background-color: #fff;
+            color: #007bff;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        #downloadArchiveBtn:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+        #clearArchiveBtn {
+            margin-left: 10px;
+            background-color: #dc3545;
+            color: white;
+            border: 1px solid #dc3545;
+        }
+        #clearArchiveBtn:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+        .archive-buttons button {
+            padding: 10px 18px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            margin-top: 20px;
+        }
+        footer p {
+             margin-top: 1rem; /* from mt-4 */
+        }
+        footer small {
+            font-size: 0.75rem; /* from text-xs */
+            font-style: italic;
+            display: block;
+            max-width: 700px;
+            margin: 1rem auto;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Selective Suno Style of Music Prompt Generator</h1>
+        <a href="index.html">Use Default Generator</a><br><a href="../kjvlookup/index.html">Generate Lyrics with KJV Lookup</a>
+        <p class="description"><small>This refined tool generates a random style of music prompt for Suno with a more selective approach. You can copy the prompt and paste it into the Suno prompt input field. A random combination of genres, instruments, musical modes, and styles will be generated for you. It is recommended that the resulting prompt be reviewed or loaded into an LLM for further refinement as the adjectives and descriptions may not be appropriate for the instrument selected. Try something like:<br><b>I want you to act as a Suno prompt generator, and respond with only the modified prompt nothing else I will send a prompt you have to generate a custom Suno prompt which includes exactly the Style of Music prompt provided based on the content of the prompt there will be adjectives before each instrument that may not apply eg staccato bağlama guess what a master musician might do if he were writing the prompt and replace these descriptors with something more appropriate for each instrument. My first request is:</b></small></p>
+        <button id="generateBtn">Generate Style of Music</button>
+        
+        <div id="resultContainer" class="prompt-container">
+            <input type="text" id="genreOutput" class="prompt-output" readonly>
+            <button id="copyBtn" class="copy-btn" title="Copy to clipboard">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </button>
+            <span id="copyFeedback" class="copy-feedback"></span>
+        </div>
+
+        <div class="prompt-section">
+            <p class="description">Use the text below in <strong>Suno's 'Exclude from Style' field</strong> to help avoid generic pop sounds when generating music. Yes, for best results, always exclude pop genres.</p>
+            <div id="excludeContainer" class="prompt-container">
+                <input type="text" id="excludeOutput" class="prompt-output" readonly value="pop, electropop, synthpop, indie pop, K-pop, J-pop, dance-pop, art pop, teen pop, hyperpop, bubblegum pop, dream pop, power pop, pop rock, alternative pop, soft pop, pop punk, country pop, chamber pop, jazz pop">
+                <button id="copyExcludeBtn" class="copy-btn" title="Copy to clipboard">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                 <span id="copyExcludeFeedback" class="copy-feedback"></span>
+            </div>
+        </div>
+
+        <div class="archive-buttons">
+            <button id="downloadArchiveBtn">Download Prompt Archive</button>
+            <button id="clearArchiveBtn">Clear Prompt Archive</button>
+        </div>
+        <p class="description">Every prompt generated is saved to your browser's local storage. You can download the archive of prompts at any time. <strong>Note: The archive is not saved to any server or database.</strong></p>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2025 Music Generator Tool</p>
+            <p><small>Content Disclaimer and Limitation of Liability: The content published on this channel/platform, including but not limited to videos, posts, captions, audio, visuals, and written text, may contain material generated, in whole or in part, using artificial intelligence (AI) technologies. This includes but is not limited to generative text, synthetic images, voice simulation, video synthesis, music composition, lyrics, and other algorithmically produced or enhanced media. While reasonable efforts are made to review, moderate, and curate content prior to its publication, the use of AI systems inherently involves the possibility of generating material that may be inaccurate, offensive, inappropriate, obscene, vulgar, or otherwise objectionable. The creator(s), owner(s), and operator(s) of this channel/page do not guarantee the accuracy, completeness, reliability, or appropriateness of any content generated or published. By accessing or consuming this content, you acknowledge and accept the following: 1. No Warranties: All content is provided "as is" without warranties of any kind, express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, and non-infringement. 2. No Liability for AI Output: The creator(s) disclaim any and all liability arising from or related to content that may be generated by AI tools or platforms, including any harm, offense, or damages that may result. 3. Viewer Discretion Advised: Due to the experimental and unpredictable nature of AI-generated media, viewer and reader discretion is strongly advised. Some content may not be suitable for all audiences. 4. No Endorsement: The appearance of any names, individuals, likenesses, or organizations in AI-generated content is purely coincidental and does not imply any affiliation, endorsement, or approval unless explicitly stated. 5. Limitation of Damages: In no event shall the creator(s), owner(s), or any affiliated party be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of your access to, use of, or reliance on the content. This disclaimer is subject to updates and modifications without prior notice. Continued access or use of the content constitutes acceptance of these terms.</small></p>
+        </footer>
+    </div>
+    <script>
+        // --- DICTIONARIES ---
+        const adjectives = ["fast", "slow", "aggressive", "reflective", "engaging", "uplifting", "soulful", "vibrant", "voices", "lo-fi", "jazz-infused beats", "warm", "rich basslines", "jazzy guitar riffs", "soft keys", "mellow synths", "smooth", "emotive vocals", "harmonies", "reverb", "echo", "dreamy", "atmospheric", "deep brass fanfares", "excited", "crescendoing", "upbeat", "lush strings", "soft piano motifs", "flowing woodwind lines", "minimalist film score", "ambient orchestral soundscape", "90s", "80s", "70s", "60s", "50s", "40s", "30s", "20s", "2000s", "pulsating", "throbbing", "resonant", "booming", "whispering", "staccato", "legato", "syncopated", "percussive", "soaring", "ethereal", "gritty", "simmering", "vibrating", "rushing", "crisp", "dynamic", "explosive", "smoky", "wailing", "murmuring", "chiming", "tingling", "bouncing", "rumbling", "undulating", "sizzling", "sparkling", "jarring", "subdued", "low-pass sweep", "high-pass sweep", "band-pass sweep", "low-pass filter", "high-pass filter", "band-pass filter"];
+        const drumKits = [["Standard Acoustic Kit", "Snare", "Bass Drum", "Toms", "Cymbals"], ["Jazz Drum Kit", "Smaller Bass Drum", "Ride Cymbal", "Snare", "Hi-Hats"], ["Rock Drum Kit", "Large Bass Drum", "Loud Snare", "Toms", "Crash Cymbals"], ["Metal Drum Kit", "Double Bass Pedals", "Multiple Toms", "China Cymbals", "Splash Cymbals"], ["Funk Drum Kit", "Tight Snare", "Quick Hi-Hats", "Smaller Toms", "Ride Cymbal"], ["Blues Drum Kit", "Warm Snare", "Minimal Cymbals", "Bass Drum", "Toms"], ["Orchestral Drum Kit", "Timpani", "Bass Drum", "Snare", "Cymbals"], ["Country Drum Kit", "Crisp Snare", "Brushes", "Bass Drum", "Hi-Hats"], ["Electronic Drum Set", "Roland", "Alesis", "Yamaha", "Pads/Triggers"], ["Hybrid Drum Kit", "Acoustic Drums", "Electronic Pads", "Triggers", "Sound Module"], ["Sampling Pad Drum Kit", "Akai", "Roland SPD", "Pads", "Sample Triggers"], ["Trigger-based Drum Kit", "Triggers", "Acoustic Drums", "Sound Module", "Electronic Sounds"], ["Synth Drum Kit", "Analog", "Digital", "Modular Synth", "Drum Synth"], ["Analog Drum Machine", "Roland TR-808", "TR-909", "Bass Drum Synth", "Hi-Hats"], ["Digital Drum Machine", "Akai MPC", "Elektron Digitakt", "Samples", "Sequences"], ["World Percussion Kit", "Congas", "Bongos", "Djembes", "Cajón"], ["Latin Percussion Kit", "Timbales", "Cowbells", "Claves", "Bongos"], ["Brazilian Samba Kit", "Surdo", "Tamborim", "Pandeiro", "Agogô"], ["Afro-Cuban Kit", "Congas", "Claves", "Cowbells", "Bongos"], ["Reggae Drum Kit", "Rim Clicks", "Off-beat Hi-Hats", "Snare", "Bass Drum"], ["Recording Studio Drum Kit", "Balanced Sound", "Dampened Heads", "Snare", "Bass Drum"], ["Compact/Cocktail Drum Kit", "Small Bass Drum", "Snare", "Hi-Hats", "Crash Cymbal"], ["Travel Drum Kit", "Collapsible", "Lightweight", "Snare", "Bass Drum"], ["Quiet Practice Kit", "Mesh Heads", "Rubber Pads", "Silent Cymbals", "Bass Pedal"], ["Brushes Kit", "Snare with Brushes", "Hi-Hats", "Bass Drum", "Ride Cymbal"], ["Minimal Drum Kit", "Bass Drum", "Snare", "Hi-Hat", "Crash Cymbal"], ["Custom Drum Kit", "Exotic Wood", "Hand-built", "Custom Finish", "Unique Hardware"], ["Vintage Drum Kit", "Old Shells", "Vintage Tone", "Snare", "Bass Drum"], ["Double Bass Drum Kit", "Two Bass Drums", "Toms", "Snare", "Cymbals"], ["Open Tuning Drum Kit", "Higher-tuned Toms", "Bass Drum", "Snare", "Cymbals"]];
+        const drumLoopGenres = [["Drum Loop House", true], ["Drum Loop Techno", true], ["Drum Loop Trance", true], ["Drum Loop Dubstep", true], ["Drum Loop Drum & Bass", true], ["Drum Loop Jungle", true], ["Drum Loop Trap", true], ["Drum Loop Future Bass", true], ["Drum Loop Lo-fi", true], ["Drum Loop Chillhop", true], ["Drum Loop Boom Bap", true], ["Drum Loop Modern Trap", true], ["Drum Loop R&B", true], ["Drum Loop Afrobeats", true], ["Drum Loop Dancehall", true], ["Drum Loop Reggaeton", true], ["Drum Loop Classic Rock", true], ["Drum Loop Hard Rock", true], ["Drum Loop Grunge", true], ["Drum Loop Punk Rock", true], ["Drum Loop Pop Punk", true], ["Drum Loop Metal", true], ["Drum Loop Swing", true], ["Drum Loop Big Band", true], ["Drum Loop Bebop", true], ["Drum Loop Bossa Nova", true], ["Drum Loop Jazz-Fusion", true], ["Drum Loop Blues Shuffle", true], ["Drum Loop Funk", true], ["Drum Loop Neo-Soul", true], ["Drum Loop Motown", true], ["Drum Loop Disco", true], ["Drum Loop Samba", true], ["Drum Loop Reggae", true], ["Drum Loop Afro-Cuban", true], ["Drum Loop Middle Eastern", true], ["Drum Loop Indie Rock", true], ["Drum Loop Indie Pop", true], ["Drum Loop Synthpop", true], ["Drum Loop Electropop", true], ["Drum Loop Alternative", true], ["Drum Loop Shoegaze", true], ["Drum Loop Pop Ballad", true], ["Drum Loop IDM", true], ["Drum Loop Glitch Hop", true], ["Drum Loop Downtempo", true], ["Drum Loop Ambient", true], ["Drum Loop Minimalism", true], ["Drum Loop House", true], ["Drum Loop Techno", true], ["Drum Loop Trance", true], ["Drum Loop Dubstep", true], ["Drum & Bass", true], ["Drum Loop Jungle", true], ["Drum Loop Trap", true], ["Drum Loop Future Bass", true], ["Drum Loop Lo-fi", true], ["Drum Loop Chillhop", true], ["Drum Loop Boom Bap", true], ["Drum Loop Modern Trap", true], ["Drum Loop R&B", true], ["Drum Loop Afrobeats", true], ["Drum Loop Dancehall", true], ["Drum Loop Reggaeton", true], ["Drum Loop Classic Rock", true], ["Drum Loop Hard Rock", true], ["Drum Loop Grunge", true], ["Drum Loop Punk Rock", true], ["Drum Loop Pop Punk", true], ["Drum Loop Metal", true], ["Drum Loop Swing", true], ["Drum Loop Big Band", true], ["Drum Loop Bebop", true], ["Drum Loop Bossa Nova", true], ["Drum Loop Jazz-Fusion", true], ["Drum Loop Blues Shuffle", true], ["Drum Loop Funk", true], ["Drum Loop Neo-Soul", true], ["Drum Loop Motown", true], ["Drum Loop Disco", true], ["Drum Loop Samba", true], ["Drum Loop Reggae", true], ["Drum Loop Afro-Cuban", true], ["Drum Loop Middle Eastern", true], ["Drum Loop Indie Rock", true], ["Indie Pop Drum Loop", true], ["Drum Loop Synthpop", true], ["Drum Loop Electropop", true], ["Drum Loop Alternative", true], ["Drum Loop Shoegaze", true], ["Drum Loop Pop Ballad", true], ["Drum Loop IDM", true], ["Drum Loop Glitch Hop", true], ["Drum Loop Downtempo", true], ["Drum Loop Ambient", true], ["Drum Loop Minimalism", true], ["Drum Loop Experimental Hip Hop", true], ["Drum Loop Punk Rap", true], ["Drum Loop Noise", true], ["Drum Loop Industrial", true], ["Drum Loop Rap Rock", true], ["Drum Loop Electropunk", true], ["Drum Loop Avant-garde", true], ["Drum Loop Death Trips", true], ["Drum Loop Math Drums", true], ["Drum Loop Progressive Metal", true], ["Drum Loop Progressive Metal Djent", true], ["Drum Loop Progressive Metal Djent Screamo", true], ["Drum Loop Metalcore Djent Screamo", true], ["Drum Loop Fast Aggressive Phonk", true], ["Drum Loop Slow Ambient Drone", true], ["Drum Loop Heavy Metal", true], ["Drum Loop Fast Jazz Fusion", true], ["Drum Loop Slow Reggae", true], ["Drum Loop Heavy Ambient Drone", true], ["Drum Loop Fast Salsa", true], ["Drum Loop Fast Bluegrass", true], ["Drum Loop Fast Screamo", true], ["Drum Loop Fast Reggaeton", true], ["Drum Loop Slow Psychedelic Rock", true], ["Drum Loop Fast Techno", true], ["Drum Loop Slow R&B", true], ["Drum Loop Fast Thrash Metal", true], ["Drum Loop Heavy Dubstep", true], ["Drum Loop Heavy Industrial", true], ["Drum Loop Heavy Doom Metal", true], ["Drum Loop Fast Flamenco", true], ["Drum Loop Fast Drum and Bass", true], ["Drum Loop Heavy Sludge Metal", true], ["Drum Loop Slow Tango", true], ["Drum Loop Fast Garage Rock", true], ["Drum Loop Heavy Death Metal", true], ["Drum Loop Fast Punk Rock", true], ["Drum Loop Fast House", true], ["Drum Loop Minimalist Techno", true], ["Drum Loop Darkwave", true], ["Drum Loop Chiptune", true], ["Drum Loop Kpop", true], ["Drum Loop Math Rock", true], ["Drum Loop Vaporwave", true], ["Drum Loop Shoegaze", true], ["Drum Loop Lo-fi Hip Hop", true], ["Drum Loop Haunting Atmospheric Witch House", true], ["Drum Loop Fast Progressive House", true], ["Drum Loop Fantasy RPG OST", true], ["Drum Loop Baroque", true], ["Drum Loop Binaural Beats", true], ["Drum Loop Heavy Psyche", true], ["Drum Loop Upbeat Jazz", true], ["Drum Loop Burning Jazz", true], ["Drum Loop Video Game OST", true], ["Drum Loop Smooth Vaporwave Jazz Lo-fi Hip Hop", true], ["Drum Loop American Folk", true], ["Drum Loop Hip Hop 80-115 BPM", true], ["Drum Loop Juke/Footwork", true]];
+        const musicKeys = [["C Ionian", "C", "Major", "Ionian", "8B"], ["C# Ionian", "C#", "Major", "Ionian", "3B"], ["Db Ionian", "Db", "Major", "Ionian", "3B"], ["D Ionian", "D", "Major", "Ionian", "10B"], ["D# Ionian", "D#", "Major", "Ionian", "5B"], ["Eb Ionian", "Eb", "Major", "Ionian", "5B"], ["E Ionian", "E", "Major", "Ionian", "12B"], ["F Ionian", "F", "Major", "Ionian", "7B"], ["F# Ionian", "F#", "Major", "Ionian", "2B"], ["Gb Ionian", "Gb", "Major", "Ionian", "2B"], ["G Ionian", "G", "Major", "Ionian", "9B"], ["G# Ionian", "G#", "Major", "Ionian", "4B"], ["Ab Ionian", "Ab", "Major", "Ionian", "4B"], ["A Ionian", "A", "Major", "Ionian", "11B"], ["A# Ionian", "A#", "Major", "Ionian", "6B"], ["Bb Ionian", "Bb", "Major", "Ionian", "6B"], ["B Ionian", "B", "Major", "Ionian", "1B"], ["C Dorian", "C", "Minor", "Dorian", "8A"], ["C# Dorian", "C#", "Minor", "Dorian", "3A"], ["Db Dorian", "Db", "Minor", "Dorian", "3A"], ["D Dorian", "D", "Minor", "Dorian", "10A"], ["D# Dorian", "D#", "Minor", "Dorian", "5A"], ["Eb Dorian", "Eb", "Minor", "Dorian", "5A"], ["E Dorian", "E", "Minor", "Dorian", "12A"], ["F Dorian", "F", "Minor", "Dorian", "7A"], ["F# Dorian", "F#", "Minor", "Dorian", "2A"], ["Gb Dorian", "Gb", "Minor", "Dorian", "2A"], ["G Dorian", "G", "Minor", "Dorian", "9A"], ["G# Dorian", "G#", "Minor", "Dorian", "4A"], ["Ab Dorian", "Ab", "Minor", "Dorian", "4A"], ["A Dorian", "A", "Minor", "Dorian", "11A"], ["A# Dorian", "A#", "Minor", "Dorian", "6A"], ["Bb Dorian", "Bb", "Minor", "Dorian", "6A"], ["B Dorian", "B", "Minor", "Dorian", "1A"], ["C Phrygian", "C", "Minor", "Phrygian", "8A"], ["C# Phrygian", "C#", "Minor", "Phrygian", "3A"], ["Db Phrygian", "Db", "Minor", "Phrygian", "3A"], ["D Phrygian", "D", "Minor", "Phrygian", "10A"], ["D# Phrygian", "D#", "Minor", "Phrygian", "5A"], ["Eb Phrygian", "Eb", "Minor", "Phrygian", "5A"], ["E Phrygian", "E", "Minor", "Phrygian", "12A"], ["F Phrygian", "F", "Minor", "Phrygian", "7A"], ["F# Phrygian", "F#", "Minor", "Phrygian", "2A"], ["Gb Phrygian", "Gb", "Minor", "Phrygian", "2A"], ["G Phrygian", "G", "Minor", "Phrygian", "9A"], ["G# Phrygian", "G#", "Minor", "Phrygian", "4A"], ["Ab Phrygian", "Ab", "Minor", "Phrygian", "4A"], ["A Phrygian", "A", "Minor", "Phrygian", "11A"], ["A# Phrygian", "A#", "Minor", "Phrygian", "6A"], ["Bb Phrygian", "Bb", "Minor", "Phrygian", "6A"], ["B Phrygian", "B", "Minor", "Phrygian", "1A"], ["C Lydian", "C", "Major", "Lydian", "8B"], ["C# Lydian", "C#", "Major", "Lydian", "3B"], ["Db Lydian", "Db", "Major", "Lydian", "3B"], ["D Lydian", "D", "Major", "Lydian", "10B"], ["D# Lydian", "D#", "Major", "Lydian", "5B"], ["Eb Lydian", "Eb", "Major", "Lydian", "5B"], ["E Lydian", "E", "Major", "Lydian", "12B"], ["F Lydian", "F", "Major", "Lydian", "7B"], ["F# Lydian", "F#", "Major", "Lydian", "2B"], ["Gb Lydian", "Gb", "Major", "Lydian", "2B"], ["G Lydian", "G", "Major", "Lydian", "9B"], ["G# Lydian", "G#", "Major", "Lydian", "4B"], ["Ab Lydian", "Ab", "Major", "Lydian", "4B"], ["A Lydian", "A", "Major", "Lydian", "11B"], ["A# Lydian", "A#", "Major", "Lydian", "6B"], ["Bb Lydian", "Bb", "Major", "Lydian", "6B"], ["B Lydian", "B", "Major", "Lydian", "1B"], ["C Mixolydian", "C", "Major", "Mixolydian", "8B"], ["C# Mixolydian", "C#", "Major", "Mixolydian", "3B"], ["Db Mixolydian", "Db", "Major", "Mixolydian", "3B"], ["D Mixolydian", "D", "Major", "Mixolydian", "10B"], ["D# Mixolydian", "D#", "Major", "Mixolydian", "5B"], ["Eb Mixolydian", "Eb", "Major", "Mixolydian", "5B"], ["E Mixolydian", "E", "Major", "Mixolydian", "12B"], ["F Mixolydian", "F", "Major", "Mixolydian", "7B"], ["F# Mixolydian", "F#", "Major", "Mixolydian", "2B"], ["Gb Mixolydian", "Gb", "Major", "Mixolydian", "2B"], ["G Mixolydian", "G", "Major", "Mixolydian", "9B"], ["G# Mixolydian", "G#", "Major", "Mixolydian", "4B"], ["Ab Mixolydian", "Ab", "Major", "Mixolydian", "4B"], ["A Mixolydian", "A", "Major", "Mixolydian", "11B"], ["A# Mixolydian", "A#", "Major", "Mixolydian", "6B"], ["Bb Mixolydian", "Bb", "Major", "Mixolydian", "6B"], ["B Mixolydian", "B", "Major", "Mixolydian", "1B"], ["C Aeolian", "C", "Minor", "Aeolian", "8A"], ["C# Aeolian", "C#", "Minor", "Aeolian", "3A"], ["Db Aeolian", "Db", "Minor", "Aeolian", "3A"], ["D Aeolian", "D", "Minor", "Aeolian", "10A"], ["D# Aeolian", "D#", "Minor", "Aeolian", "5A"], ["Eb Aeolian", "Eb", "Minor", "Aeolian", "5A"], ["E Aeolian", "E", "Minor", "Aeolian", "12A"], ["F Aeolian", "F", "Minor", "Aeolian", "7A"], ["F# Aeolian", "F#", "Minor", "Aeolian", "2A"], ["Gb Aeolian", "Gb", "Minor", "Aeolian", "2A"], ["G Aeolian", "G", "Minor", "Aeolian", "9A"], ["G# Aeolian", "G#", "Minor", "Aeolian", "4A"], ["Ab Aeolian", "Ab", "Minor", "Aeolian", "4A"], ["A Aeolian", "A", "Minor", "Aeolian", "11A"], ["A# Aeolian", "A#", "Minor", "Aeolian", "6A"], ["Bb Aeolian", "Bb", "Minor", "Aeolian", "6A"], ["B Aeolian", "B", "Minor", "Aeolian", "1A"], ["C Locrian", "C", "Minor", "Locrian", "8A"], ["C# Locrian", "C#", "Minor", "Locrian", "3A"], ["Db Locrian", "Db", "Minor", "Locrian", "3A"], ["D Locrian", "D", "Minor", "Locrian", "10A"], ["D# Locrian", "D#", "Minor", "Locrian", "5A"], ["Eb Locrian", "Eb", "Minor", "Locrian", "5A"], ["E Locrian", "E", "Minor", "Locrian", "12A"], ["F Locrian", "F", "Minor", "Locrian", "7A"], ["F# Locrian", "F#", "Minor", "Locrian", "2A"], ["Gb Locrian", "Gb", "Minor", "Locrian", "2A"], ["G Locrian", "G", "Minor", "Locrian", "9A"], ["G# Locrian", "G#", "Minor", "Locrian", "4A"], ["Ab Locrian", "Ab", "Minor", "Locrian", "4A"], ["A Locrian", "A", "Minor", "Locrian", "11A"], ["A# Locrian", "A#", "Minor", "Locrian", "6A"], ["Bb Locrian", "Bb", "Minor", "Locrian", "6A"], ["B Locrian", "B", "Minor", "Locrian", "1A"]];
+        const percussionInstruments = [["Snare Drum", "Traditional", "Drums", "Membranophones"], ["Bass Drum", "Traditional", "Drums", "Membranophones"], ["Rack Tom", "Traditional", "Drums", "Membranophones"], ["Floor Tom", "Traditional", "Drums", "Membranophones"], ["Concert Bass Drum", "Concert", "Drums", "Membranophones"], ["Djembe", "West African Drum", "Drums", "Membranophones"], ["Cajón", "Box Drum", "Drums", "Membranophones"], ["Bongos", "Latin Percussion", "Drums", "Membranophones"], ["Congas", "Cuban Drum", "Drums", "Membranophones"], ["Tabla", "Indian Percussion", "Drums", "Membranophones"], ["Doumbek", "Middle Eastern Drum", "Drums", "Membranophones"], ["Handpan", "Hang Drum", "Drums", "Membranophones"], ["Frame Drum", "Traditional", "Drums", "Membranophones"], ["Timpani", "Orchestral Drum", "Drums", "Membranophones"], ["Taiko Drums", "Japanese Drum", "Drums", "Membranophones"], ["Talking Drum", "Dundun", "Drums", "Membranophones"], ["Octobans", "Extended Tom Drums", "Drums", "Membranophones"], ["Rototoms", "Tunable Drum", "Drums", "Membranophones"], ["Surdo", "Brazilian Bass Drum", "Drums", "Membranophones"], ["Pandeiro", "Brazilian Tambourine", "Drums", "Membranophones"], ["Timbales", "Cuban Drums", "Drums", "Membranophones"], ["Kanjira", "South Indian Frame Drum", "Drums", "Membranophones"], ["Bodhrán", "Irish Frame Drum", "Drums", "Membranophones"], ["Hi-Hats", "Traditional", "Cymbals", "Idiophones"], ["Crash Cymbal", "Traditional", "Cymbals", "Idiophones"], ["Ride Cymbal", "Traditional", "Cymbals", "Idiophones"], ["Splash Cymbal", "Small Cymbal", "Cymbals", "Idiophones"], ["China Cymbal", "Trashy Sounding", "Cymbals", "Idiophones"], ["Bell Cymbal", "Focused Sound", "Cymbals", "Idiophones"], ["Swish Cymbal", "Wide Sound", "Cymbals", "Idiophones"], ["Finger Cymbals", "Zills", "Cymbals", "Idiophones"], ["Gong", "Traditional", "Gongs and Bells", "Idiophones"], ["Tam-tam", "Flat Gong", "Gongs and Bells", "Idiophones"], ["Agogô Bells", "West African", "Gongs and Bells", "Idiophones"], ["Bell Tree", "Chime Tree", "Gongs and Bells", "Idiophones"], ["Cowbell", "Traditional", "Gongs and Bells", "Idiophones"], ["Almglocken", "Tuned Cowbells", "Gongs and Bells", "Idiophones"], ["Hand Bells", "Orchestral", "Gongs and Bells", "Idiophones"], ["Temple Blocks", "Orchestral", "Gongs and Bells", "Idiophones"], ["Crotales", "Antique Cymbals", "Gongs and Bells", "Idiophones"], ["Triangle", "Traditional", "Small Percussive", "Idiophones"], ["Woodblock", "Traditional", "Small Percussive", "Idiophones"], ["Claves", "Traditional", "Small Percussive", "Idiophones"], ["Castanets", "Spanish", "Small Percussive", "Idiophones"], ["Maracas", "Latin Percussion", "Small Percussive", "Idiophones"], ["Guiro", "Latin Percussion", "Small Percussive", "Idiophones"], ["Vibraslap", "Percussive Sound", "Small Percussive", "Idiophones"], ["Cabasa", "Latin Percussion", "Small Percussive", "Idiophones"], ["Shakers", "Traditional", "Small Percussive", "Idiophones"], ["Rainstick", "Ambient", "Small Percussive", "Idiophones"], ["Flexatone", "Unique Sound", "Small Percussive", "Idiophones"], ["Slapstick", "Whip", "Small Percussive", "Idiophones"], ["Chimes", "Tubular Bells", "Chimes and Resonant", "Idiophones"], ["Mark Tree", "Wind Chimes", "Chimes and Resonant", "Idiophones"], ["Glockenspiel", "Orchestral", "Chimes and Resonant", "Idiophones"], ["Xylophone", "Orchestral", "Chimes and Resonant", "Idiophones"], ["Marimba", "Orchestral", "Chimes and Resonant", "Idiophones"], ["Vibraphone", "Jazz", "Chimes and Resonant", "Idiophones"], ["Steelpan", "Caribbean", "Chimes and Resonant", "Idiophones"], ["Electronic Drum Pads", "Roland SPD-SX", "Electronic Percussion", "Pads"], ["Trigger Pads", "Electronic", "Electronic Percussion", "Triggers"], ["Drum Machines", "TR-808", "Electronic Percussion", "Akai MPC"], ["Hybrid Kits", "Acoustic and Electronic", "Electronic Percussion", "Modules"], ["Synth Drums", "Analog and Digital", "Electronic Percussion", "Synthesizers"], ["Tambourine", "Traditional", "Miscellaneous", "Idiophones"], ["Ocean Drum", "Ambient", "Miscellaneous", "Membranophones"], ["Log Drum", "Wooden", "Miscellaneous", "Idiophones"], ["Thunder Sheet", "Special Effect", "Miscellaneous", "Idiophones"], ["Spring Drum", "Special Effect", "Miscellaneous", "Membranophones"], ["Bamboo Wind Chimes", "Traditional", "Miscellaneous", "Idiophones"], ["Anklung", "Indonesian", "Miscellaneous", "Idiophones"], ["Slit Drum", "African", "Miscellaneous", "Idiophones"], ["Bullroarer", "Indigenous", "Miscellaneous", "Aerophones"]];
+        const songGenresList = ["Music Theater", "zydeco", "experimental hip hop", "punk rap", "noise", "industrial", "rap rock", "electropunk", "Avant-garde", "death trips", "math drums", "drum and bass", "ambient drone", "progressive metal djent", "Tech House", "reggaeton", "heavy thrash metal", "bolero", "heavy industrial", "IDM (Intelligent Dance Music)", "ranchera", "breakbeat", "Jungle Drum n Bass", "lo-fi indie", "60s Proto Metal", "Electronic Drum n Bass", "smooth fusion jazz", "Grime 140 BPM", "contemporary classical", "Avant Garde", "heavy sludge metal", "Jazz Fusion", "Freestyle Electro", "Freestyle Dance Music", "minimalist techno", "Hip Hop 80-115 BPM", "lo-fi hip hop", "krautrock", "progressive metal", "progressive house", "Math Rock", "Progressive House", "Soundtrack", "psychedelic rock", "Oldskool Latin Freestyle", "vaporwave lo-fi hip-hop", "corrido", "american folk", "celtic guitar melody", "Math Prog Rock", "haunting witch house", "symphonic metal", "neofolk", "Hardstyle", "glitch", "Neurofunk Drum n Bass", "Neurofunk 170-180 BPM", "Fusion Freestyle", "heavy death metal", "American hip hop", "Liquid Drum n Bass", "Electronic Dance", "Heavy Blues", "contemporary worship", "Early 90s Freestyle Dance", "J-Pop", "chiptune", "shoegaze", "heart throb freestyle", "Space music", "Acid Rock", "mongolian folk metal", "slow indie rock", "gospel hymn", "Triphop", "christian worship", "Freestyle EDM", "garage rock", "Drum n Bass BPM 160-180", "lo-fi hip-hop", "middle-eastern", "Progressive Trance", "ska", "disco", "Fusion House", "Electronic", "hardcore punk", " flamenco", "techno", "waltz", "salsa", "80s heart throb freestyle", "heavy doom metal", "Techstep Drum n Bass", "Freestyle Music Mix", "Early Metal", "Early 2000s Drum n Bass", "vaporwave", "post-rock", "Sambass Drum n Bass", "slow tango", "Chinese Classical folk", "Drum n Bass", "ranchera-Mariachi Fusion", "noise rock", "country folk", "grindcore", "Breakcore Drum n Bass", "Deep House", "bossa nova", "folk ballad", "witch house", "Trance", "trap", "Dubstep", "film score", "Drumstep", "banda", "chicano rap", "norteño", "classical acoustic guitar", "heavy dubstep", "mongolian folk", "darkwave", "kpop", "house", "hardstyle", "narcocorridos", "jazz fusion", "Jazz-funk", "classical celtic guitar", "huapango", "Christian hip hop", "wonky", "breakcore", "Club/Dance", "classical guitar melody", "future garage", "punk rock", "metal djent screamo", "EDM Techno", "Oldskool Freestyle Mix", "fast aggressive phonk", "Halftime Drum n Bass", "chillwave", "Hardstyle 150 BPM", "mariachi", "math rock", "Heavy Psyche", "EDM", "minimalism", "screamo", "slow blues", "Jump Up Drum n Bass", "Hip Hop", "acid jazz", "Gospel Rap", "70s Proto Metal", "Hip Hop/Rap", "cumbia", "christian worship", "American Christian hip hop", "ambient Christian worship", "powernoise", "lo-fi house", "witch house", "metalcore djent screamo", "UK funky", "western", "Early 90s  Freestyle", "heavy metal", "bluegrass", "smooth vaporwave jazz", "Concert marches", "Oldskool Latin Freestyle", "soul", "Schranz", "hip-hop", "R&B", "Juke/Footwork", "Intelligent Drum n Bass", "electroswing", "bluegrass gospel", "New Jersey Hip Hop", "Oldschool jungle", "chamber music", "son jarocho", "reggae", "ambient drone", "NYC Hip Hop", "jungle", "Psychedelic", "electronic dance music", "Acid Techno", "UK garage/2-step", "Motown", "Mo Town", "Soulful Motown", "alternative rock", "art rock", "experimental rock", "art pop", "Britpop", "Progressive Rock", "Post-Rock", "gospel soul", "A Capella", "Upbeat Jazz", "Burning Jazz", "Burning Jazz, Liquid Drum and Bass", "Video Game OST", "Video Game Original Sound Track", "Cinematic Score", "Orchestral, Ambient, atmospheric", "Fantasy RPG Game OST", "Fantasy RPG Video Game OST", "RPG Video Game Original Sound Track", "Fantasy RPG Original Sound Track", "Suite bergamasque", "Baroque", "Baroque, Complex polyphony, ornate melodies", "Classical", "Romantic", "Impressionist", "Expressionist", "Modernism", "Neoclassicism", "Serialism", "Avant-Garde", "Renaissance", "Chamber Music", "Opera", "Choral Music", "Programmatic Music", "Minimalism", "Baroque, Complex polyphony, ornate melodies", "Classical, structured forms, sonata, symphony, homophony.", "Classical, structured forms, sonata, homophony.", "Classical, structured forms, symphony, homophony.", "Romantic, Emotional expression, expanded orchestra, programmatic music, lyrical melodies", "Romantic, Emotional expression, expanded orchestra", "Romantic, programmatic music, lyrical melodies", "Impressionist, atmospheric, ambiguous harmonies, tone color", "Expressionist, Intense emotion, dissonance, atonal, fragmented melodies", "Modernism, dissonant, abstract.", "Serialism, twelve-tone technique, mathematical", "Minimalism, simple motifs, meditative quality", "Avant-Garde, unconventional, Experimental", "Renaissance, Polyphonic, modal, vocal", "Choral Music, choir, religious, ceremonial", "Programmatic Music", "binaural beats", "binaural beats, theta wave", "binaural beats, beta wave", "binaural beats, alpha wave", "Minimalist Soundscapes", "Minimalist Soundscapes", "Minimalist Soundscapes", "Corporate or Upbeat Instrumental", "Corporate Instrumental", "Upbeat Instrumental", "Corporate Upbeat", "Corporate or Upbeat Instrumental", "Chillhop", "Futuristic Sound Design", "Percussive Solos", "Drum Solos", "Bass Solos", "Guitar Solos", "Keyboard Solos", "Synth Solos", "String Solos", "Brass Solos", "Woodwind Solos", "Hip Hop Drum Solos", "Rock Drum Solos", "Pop Drum Solos", "Country Drum Solos", "Blues Drum Solos", "Jazz Drum Solos", "Reggae Drum Solos", "Soul Drum Solos", "Hip Hop Drum Loop", "Rock Drum Loop", "Pop Drum Loop", "Country Drum Loop", "Blues Drum Loop", "Jazz Drum Loop", "Reggae Drum Loop", "Drum Loop", "Music Theater", "classical acoustic guitar", "experimental hip hop", "punk rap", "noise"];
+        const songGenres = [...new Set(songGenresList)];
+        const tempos = [["Largo", 40, 60], ["Larghetto", 60, 66], ["Adagio", 66, 76], ["Andante", 76, 108], ["Moderato", 108, 120], ["Allegro", 120, 168], ["Presto", 168, 200], ["Prestissimo", 200, 420]];
+        const drumStyles = ["Rhythm-Only", "Pitched Drum Elements", "Electronic"];
+        
+        // --- DOM ELEMENTS ---
+        const generateBtn = document.getElementById('generateBtn');
+        const resultContainer = document.getElementById('resultContainer');
+        const genreOutput = document.getElementById('genreOutput');
+        const copyBtn = document.getElementById('copyBtn');
+        const copyFeedback = document.getElementById('copyFeedback');
+        const excludeOutput = document.getElementById('excludeOutput');
+        const copyExcludeBtn = document.getElementById('copyExcludeBtn');
+        const copyExcludeFeedback = document.getElementById('copyExcludeFeedback');
+        const downloadArchiveBtn = document.getElementById('downloadArchiveBtn');
+        const clearArchiveBtn = document.getElementById('clearArchiveBtn');
+        
+        // --- HELPER FUNCTIONS ---
+        function getRandomElement(arr) {
+            if (!arr || arr.length === 0) return '';
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        // --- CORE LOGIC ---
+        
+        /**
+         * Generates a style of music prompt.
+         * Mimics the logic from the Python script's `generate_custom_random_style_of_music_prompt`.
+         * Assumes instrumental context due to lack of vocalist data.
+         */
+        function generateStyleOfMusicPrompt() {
+            let combination = "";
+            while (true) {
+                const songGenre = getRandomElement(songGenres);
+        
+                const instrument1 = getRandomElement(percussionInstruments)[0];
+                const instrument2 = getRandomElement(percussionInstruments)[0];
+                const instrument3 = getRandomElement(percussionInstruments)[0];
+                const instrument4 = getRandomElement(percussionInstruments)[0];
+        
+                const parts = [
+                    songGenre,
+                    `${getRandomElement(adjectives)} ${instrument1}`,
+                    `${getRandomElement(adjectives)} ${instrument2}`,
+                    `${getRandomElement(adjectives)} ${instrument3}`,
+                    `${getRandomElement(adjectives)} ${instrument4}`,
+                ];
+        
+                const tempoInfo = getRandomElement(tempos);
+                const [tempoName, minBpm, maxBpm] = tempoInfo;
+                const bpm = Math.floor(Math.random() * (maxBpm - minBpm + 1)) + minBpm;
+                parts.push(`${tempoName} ${bpm} bpm`);
+        
+                const keyInfo = getRandomElement(musicKeys);
+                parts.push(keyInfo[0]);
+                
+                combination = parts.join(', ');
+        
+                if (combination.length < 200) {
+                    break;
+                }
+            }
+            return combination;
+        }
+
+        /**
+         * Generates a drum loop prompt.
+         * Mimics the logic from the Python script's `generate_custom_random_drum_loop_prompt`.
+         */
+        function generateDrumLoopPrompt() {
+            let combination = "";
+            while (true) {
+                const drumLoopGenre = getRandomElement(drumLoopGenres)[0];
+                const drumKit = getRandomElement(drumKits).join(', ');
+
+                const percussion1 = getRandomElement(percussionInstruments)[0];
+                const percussion2 = getRandomElement(percussionInstruments)[0];
+                const percussion3 = getRandomElement(percussionInstruments)[0];
+                const percussion4 = getRandomElement(percussionInstruments)[0];
+
+                const style = getRandomElement(drumStyles);
+
+                const parts = [
+                    drumLoopGenre,
+                    drumKit,
+                    `${getRandomElement(adjectives)} ${percussion1}`,
+                    `${getRandomElement(adjectives)} ${percussion2}`,
+                    `${getRandomElement(adjectives)} ${percussion3}`,
+                    `${getRandomElement(adjectives)} ${percussion4}`,
+                    style
+                ];
+
+                const tempoInfo = getRandomElement(tempos);
+                const [tempoName, minBpm, maxBpm] = tempoInfo;
+                const bpm = Math.floor(Math.random() * (maxBpm - minBpm + 1)) + minBpm;
+                parts.push(`${tempoName} ${bpm} bpm`);
+
+                const keyInfo = getRandomElement(musicKeys);
+                parts.push(keyInfo[0]);
+
+                combination = parts.join(', ');
+
+                if (combination.length < 200) {
+                    break;
+                }
+            }
+            return combination;
+        }
+
+        /**
+         * Randomly selects a prompt generation function and returns its result.
+         */
+        function generateRandomPrompt() {
+            const promptGenerators = [
+                generateStyleOfMusicPrompt,
+                generateDrumLoopPrompt
+            ];
+            const selectedGenerator = getRandomElement(promptGenerators);
+            return selectedGenerator();
+        }
+        
+        generateBtn.addEventListener('click', () => {
+            const randomPrompt = generateRandomPrompt();
+            genreOutput.value = randomPrompt;
+            resultContainer.style.display = 'flex';
+            copyFeedback.textContent = '';
+            savePromptToArchive(randomPrompt);
+        });
+
+        clearArchiveBtn.addEventListener('click', () => {
+            if (confirm("Are you sure you want to clear the entire prompt archive? This action cannot be undone.")) {
+                localStorage.removeItem('promptArchive');
+                alert('Prompt archive has been cleared.');
+            }
+        });
+
+        function savePromptToArchive(prompt) {
+            let archive = JSON.parse(localStorage.getItem('promptArchive')) || [];
+            archive.push(prompt);
+            localStorage.setItem('promptArchive', JSON.stringify(archive));
+        }
+
+        downloadArchiveBtn.addEventListener('click', () => {
+            let archive = JSON.parse(localStorage.getItem('promptArchive')) || [];
+            if (archive.length === 0) {
+                alert('No prompts have been generated yet.');
+                return;
+            }
+            const csvContent = archive.map(prompt => `"${prompt.replace(/"/g, '""')}"`).join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'suno-music-prompt-selective-archive.csv');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        function setupCopyButton(button, input, feedback) {
+            button.addEventListener('click', () => {
+                if (input.value) {
+                    navigator.clipboard.writeText(input.value).then(() => {
+                        feedback.textContent = 'Copied!';
+                        setTimeout(() => {
+                            feedback.textContent = '';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy text: ', err);
+                        feedback.textContent = 'Failed!';
+                        feedback.style.color = 'red';
+                        setTimeout(() => {
+                            feedback.textContent = '';
+                            feedback.style.color = '#28a745';
+                        }, 2000);
+                    });
+                }
+            });
+        }
+
+        setupCopyButton(copyBtn, genreOutput, copyFeedback);
+        setupCopyButton(copyExcludeBtn, excludeOutput, copyExcludeFeedback);
+    </script>
+</body>
+</html>
