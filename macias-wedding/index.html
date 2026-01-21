@@ -1,148 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<title>Wedding Photo Album</title>
+<title>HTTP Status 301</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--<link rel="stylesheet" href="css/w3_v4.css">  for working offline -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!--<link rel="stylesheet" href="css/google_api_raleway.css"> for working offline -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<!--<link rel="stylesheet" href="css/fa_all.css"> for working offline -->
+<!--To redirect immediately, set this parameter to “0”, i.e., set content="0";-->
+<meta http-equiv="refresh" content="7; url='https://macias-wedding.w3spaces.com/'" /> <!--replace url with redirect url-->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
-<!--<link rel="stylesheet" href="css/styles.css">-->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <style>
-body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-.w3-quarter img{margin-bottom: -6px; cursor: pointer}
-.w3-third img{margin-bottom: -6px; cursor: pointer}
-.w3-half img{margin-bottom: -6px; cursor: pointer}
-.w3-quarter img:hover{opacity: 0.6; transition: 0.3s}
-.w3-third img:hover{opacity: 0.6; transition: 0.3s}
-.w3-half img:hover{opacity: 0.6; transition: 0.3s}
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
 .bgimg {
-
-  /*background-image: url('./images/flowers5.jpg');*/
-  background-image: url('https://1drv.ms/i/c/351e429395ffd928/IQS8iXy1Yz_zQKEyRq6JKGhlAXIqG_8rTdvd743u88DvC3E');
+  /*background-image: url('mailbox_ks.jpg');*/
+  background-image: url('https://1drv.ms/i/c/351e429395ffd928/IQS-PCVJtahtSLYrIY_Ks1itAXiE6BuEJRVF0MWmCge5Dhc?width=1024');
   min-height: 100%;
   background-position: center;
   background-size: cover;
 }
 </style>
 </head>
-<body class="w3-light-grey">
+<body>
 
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-bar-block w3-black w3-animate-right w3-top w3-text-light-grey w3-large" style="z-index:3;width:250px;font-weight:bold;display:none;right:0;" id="mySidebar">
-  <a href="javascript:void()" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-32">CLOSE</a> 
-  <a href="page_1.html" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">PHOTOS</a> 
-  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">ABOUT</a> 
- <!-- <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">CONTACT</a> -->
-  <a href="#other" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">INVITE</a>
-  <a href="#other" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">VIDEOS</a>
-  <a href="#slide" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">SLIDESHOW</a>
-</nav>
-
-<!-- Top menu on small screens -->
-<header class="w3-container w3-top w3-white w3-large w3-padding-12">
-  <span class="w3-left w3-padding">Tahia &amp; Cruz Macias Wedding Photo Album</span>
-  <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
-</header>
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-<!-- !PAGE CONTENT! -->
-<div class="bgimg w3-main w3-content" style="max-width:1600px;margin-top:83px">
-  
-   <!-- Photo-Album section -->
-  <div class="w3-container w3-center w3-text-light-grey w3-padding-32" id="photos">
-	<div class="w3-padding-small w3-section w3-dark-grey w3-round">
-		<h4><b><a href='page_1.html'>
-			<i class="fa-solid fa-book w3-large w3-hover-opacity"></i> Click here to begin viewing the Wedding Photo Album
-		</a></b></h4>
-	</div>
-    <div class="w3-content w3-center">
-		<!--<img src="./images/IMG_0704.jpg" style="width:100%" onclick="onClick(this)" alt="Blow out the Unity Candle">-->
-    <img src="https://1drv.ms/i/c/351e429395ffd928/IQRqHnEewBWLTJEeAmUoQDIEAZd4zRPpEE3f2ZkA84o527Q" style="width:100%" onclick="onClick(this)" alt="Blow out the Unity Candle">
-    </div>
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-topleft w3-padding-large w3-xlarge">HTTP Status 301</div>
+  <div class="w3-display-middle">
+    <h1 class="w3-jumbo w3-animate-top">Don't worry! We have moved to a new location. :)</h1>
+    <hr class="w3-border-white" style="margin:auto;width:40%">
+    <p class="w3-large w3-center">You will be redirected to the new site domain in <div class="w3-center" id="countdown"></div></p>
+	<!--replace url with redirect url-->
+	<button class="w3-button w3-light w3-padding-small w3-section">
+		<a href='https://macias-wedding.w3spaces.com/'><i class="fa fa-home"> Click here</i> to be redirected now.</a>
+	</button>
   </div>
- 
-  <!-- Modal for full size images on click-->
-  <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
-    <span class="w3-button w3-black w3-xlarge w3-display-topright">×</span>
-    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-      <img id="img01" class="w3-image">
-      <p id="caption"></p>
-    </div>
+  <div class="w3-display-bottomleft w3-padding-large">
+    Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a> and <a href="https://fontawesome.com/" target="_blank">fontawesome.css</a>
   </div>
-
-  <!-- Slideshow section -->
-  <div class="w3-container w3-dark-grey w3-center w3-text-light-grey w3-padding-32" id="slide">
-    <h4><b><a href='https://www.youtube.com/watch?v=NAuGNXasu3c&list=PLf7Ql7AUTrnAyAYPjipOgQG2Aa2mTMY5k&index=11&ab_channel=CruzMacias'>
-			<i class="fa-solid fa-camera w3-large w3-hover-opacity"></i> Wedding Photos Slideshow
-	</a></b></h4>
-    <div class="w3-content w3-black w3-round w3-center frame-1" style="max-width:600px">
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/NAuGNXasu3c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br>Hint: Select the gear icon to go to settings and change quality to HD (720p)
-    </div>
-  </div>
-
-  <!-- About section -->
-  <div class="w3-container w3-center w3-text-light-grey w3-padding-32" id="about">
-	<div class="w3-padding-small w3-center w3-section w3-dark-grey w3-round">
-		<h4><b>About Us</b></h4>
-    </div>
-  	<!--<img src="./images/wedding_couple.jpg" alt="Newlyweds Portrait" class="w3-image w3-padding-32" style="width:100%" onclick="onClick(this)">-->
-    <img src="https://1drv.ms/i/c/351e429395ffd928/IQTYYGN8Ut9qS6BPTjnW-XZpAUnQLXZqwoRan1GVJFJq7Yw" alt="Newlyweds Portrait" class="w3-image w3-padding-32" style="width:100%" onclick="onClick(this)">
-    <div class="w3-content w3-dark-grey w3-center w3-round" style="max-width:600px">
-      <h4>Tahia &amp; Cruz Macias Wedding Photo Album</h4>
-      <p>A collection of photographs taken at our Valentine's Wedding Ceremony on the Twelfth Day of February, Two-Thousand &amp; Twenty-Two.</p>
-	  <p>We are the Macias family and we welcome you on this site where the beautiful memories of February 12, 2022 are shared, so you can relive the moments. Thank you for taking the time to visit this page.</p>
-    </div>
-  </div>
-  <!-- Footer -->
-  <footer class="w3-container w3-padding-32 w3-grey">  
-    <div class="w3-row-padding">
-      <div class="w3-half">
-        <h3>Tips</h3>
-        <p>Choose any photo to expand. Right-Click or Hold the image and select "Save As" to download to your device.</p>      
-      </div>
-    
-      <div class="w3-half" id="other">
-        <h3>Other Web-Pages</h3>
-        <ul class="w3-ul">
-          <li class="w3-padding-16 w3-hover-light">
-            <!-- Macias Wedding Invite Page -->
-			<button class="w3-button w3-hover-light w3-padding-small w3-section w3-text-black">
-				<a href='invite.html'> 
-					<!--<img src="./images/flowers5.jpg" class="w3-left w3-margin-right" style="width:50px">-->
-          <img src="https://1drv.ms/i/c/351e429395ffd928/IQS8iXy1Yz_zQKEyRq6JKGhlAXIqG_8rTdvd743u88DvC3E" class="w3-left w3-margin-right" style="width:50px">
-					<span class="w3-large"> <i class="fa fa-heart w3-small"></i> Wedding Invite</span>
-				</a>
-			</button>
-          </li>
-		  <li class="w3-padding-16 w3-hover-light">
-			<!-- Macias Wedding Videos Page -->
-			<button class="w3-button w3-hover-light w3-padding-small w3-section w3-text-black">
-				<a href='video_links.html'> 
-					<!--<img src="./images/wedding_location3.jpg" class="w3-left w3-margin-right" style="width:50px">-->
-          <img src="https://1drv.ms/i/c/351e429395ffd928/IQSUlxYNxsluSZr378VasiYSATLd1IP2GpaeS274n2D2xic" class="w3-left w3-margin-right" style="width:50px">
-					<span class="w3-large"> <i class="fa fa-play w3-small"></i> Wedding Videos</span>
-				</a>
-			</button>
-		  </li>
-        </ul>
-      </div>
-    </div>
-  </footer>
-  
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
-
-<!-- End page content -->
 </div>
-
- <!-- Load external JavaScript -->
-<script src="javascript/sidebar.js"></script>
-
+<!-- Load external JavaScript -->
+<script src="countdown.js"></script>
 </body>
 </html>
