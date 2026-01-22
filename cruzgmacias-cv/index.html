@@ -693,10 +693,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 			<hr>
     </div>
     <div class="w3-container">
-    <h5 class="w3-opacity"><b>OpenWebUI & Local LLM Deployment/Integration</b></h5>
+    <h5 class="w3-opacity"><b>OpenWebUI Deployment & Local LLM Integration</b></h5>
     <p>Maintaining and expanding the OpenWebUI platform for Generative AI web integration, locally hosted small language models (SLMs) and cloud-based large language models (LLMs) via a unified architecture. See my preferred DIY Language Model-Stack(s) below which include RAG/Embedding models, web search tools, OCR, and reranking models. Key components include:</p>
     <ul>
-        <li><strong>Models/Tools</strong>: Integrated diverse models (e.g., GLM, Mistral, Perplexity, GGUF) and tools (llama.cpp, Ollama, LMStudio, LangChain) with custom middleware.</li>
+		<li style="color: white;"><strong>Tools</strong>: Integrated various tools, filters, and functions: <a href="https://console.groq.com/docs/tool-use/built-in-tools/wolfram-alpha">Groq Compound Systems Wolfram Alpha integration</a> filtering (inject compound_custom parameters into the request payload), <a href="https://products.wolframalpha.com/llm-api/documentation">Wolfram Alpha LLM API<a> tool call, KJV Bible verse retrieval using <a href="https://github.com/aruljohn/Bible-kjv">Bible-kjv JSON library</a>, and Verse of the Day for any Bible translation/version using <a href="https://www.biblegateway.com/votd/get/?format=JSON&version=9">BibleGateway Web-Service</a></li>
+        <li style="color: white;"><strong>Models</strong>: Integrated diverse models (e.g., GLM, Mistral, Perplexity, GGUF) and tools (llama.cpp, Ollama, LMStudio, LangChain) with custom middleware.</li>
         <li><strong>Stack</strong>: Python (FastAPI, REST), cURL, WebSocket streaming, async/await, Docker, and Python venv/uv.</li>
         <li><strong>Features</strong>: Retrieval-augmented generation (RAG), embedding, reranking pipelines, Model Context Protocol (MCP) servers, multi-agent systems, and privacy-preserving protocols like Role-Pseudonymous Prompting (RPP).</li>
         <li><strong>Benchmarks</strong>: Achieved parity with commercial models at significantly lower costs (up to 94.4% reduction) in domain-specific benchmarks, validating scalable and enterprise-grade performance.</li>
