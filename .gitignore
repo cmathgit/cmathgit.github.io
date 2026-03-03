@@ -42,18 +42,18 @@ anchoredtimesministry2027/About EVANs Roles Radio Edit.mp3
 anchoredtimesministry2027/EVAN Final Transmission Radio Edit.mp3
 anchoredtimesministry2027/EVAN Theological Discourse Radio Edit.mp3
 anchoredtimesministry2027/EVAN Theoloigcal Treatise Radio Edit.mp3
-!examples/boid/boidstory.mp3
-!examples/boid/incandescent house.mp3
-!examples/boid/image_2025-04-11_04-15-13.png
-!examples/boid/image_2025-04-11_03-58-24.png
+!ai-apps/boid/boidstory.mp3
+!ai-apps/boid/incandescent house.mp3
+!ai-apps/boid/image_2025-04-11_04-15-13.png
+!ai-apps/boid/image_2025-04-11_03-58-24.png
 macias-baby-shower-2025/pobitro/etymology_notes.txt
 !macias-baby-shower-2025/watercolor-blue.png
 !macias-baby-shower-2025/sanskrit-lexicon-mw0-p611-pavitra.pdf
 !macias-baby-shower-2025/pobitro/PobitroEtymology-OriginalFamilyPortrait_v2.png
 !macias-baby-shower-2025/pobitro/LL-Q9610_(ben)-Titodutta-পবিত্র.wav
 !macias-baby-shower-2025/pobitro/cruz-guitar.mp3
-examples/musicpromptgenerator/*.csv
-examples/gamerandomizer/*.txt
+ai-apps/musicpromptgenerator/*.csv
+ai-apps/gamerandomizer/*.txt
 ai-apps/bible-news-digest/digest-example.md
 ai-apps/bible-news-digest/generateDigest.py
 ai-apps/bible-news-digest/system-prompt.md
