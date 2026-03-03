@@ -15,6 +15,7 @@
 *.jpeg
 *.gif
 *.py
+*.bat
 .cursorignore
 .env
 env/**
