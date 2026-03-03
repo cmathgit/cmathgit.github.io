@@ -54,6 +54,7 @@ macias-baby-shower-2025/pobitro/etymology_notes.txt
 !macias-baby-shower-2025/pobitro/cruz-guitar.mp3
 ai-apps/musicpromptgenerator/*.csv
 ai-apps/gamerandomizer/game-catalog/*.txt
+ai-apps/bible-news-digest/DSPy_Explained.md
 ai-apps/bible-news-digest/digest-example.md
 ai-apps/bible-news-digest/generateDigest.py
 ai-apps/bible-news-digest/system-prompt.md
