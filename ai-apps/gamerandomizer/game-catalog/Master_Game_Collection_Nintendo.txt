@@ -1,0 +1,163 @@
+=========================================================================================================
+                                 ║  MASTER NINTENDO GAME COLLECTION  ║                                  
+=========================================================================================================
+
+📋 ORGANIZATION: By Console (Custom Order) → Alphabetically by Title → Release Year
+💿 Games appearing on multiple consoles (Physical/Digital) are listed in each respective section
+
+=========================================================================================================
+                                       ║  COLLECTION STATISTICS  ║                                       
+=========================================================================================================
+  Total Collection Items: 89
+  Nintendo 64: 8
+  GameCube: 5
+  Wii: 14
+  Nintendo DS: 16
+  Nintendo 3DS: 10
+  Game Boy: 1
+  Game Boy Color: 4
+  Game Boy Advance: 6
+  Nintendo Switch: 25
+
+=========================================================================================================
+                                            ║  N64 GAMES  ║                                              
+=========================================================================================================
+Release Year    | Game Title
+---------------------------------------------------------------------------------------------------------
+2001            | Dr. Mario 64
+1997            | GoldenEye 007
+2000            | Hey You, Pikachu!
+1997            | Mario Kart 64
+2000            | Pokémon Puzzle League
+2000            | Pokémon Stadium
+1996            | Super Mario 64
+1999            | Super Smash Bros.
+
+=========================================================================================================
+                                          ║  GAMECUBE GAMES  ║                                           
+=========================================================================================================
+Release Year    | Game Title
+---------------------------------------------------------------------------------------------------------
+2003            | Dragon Ball Z: Budokai
+2002            | Resident Evil
+2002            | Resident Evil Zero
+2002            | Super Mario Sunshine
+2002            | Super Monkey Ball 2
+
+=========================================================================================================
+                                            ║  WII GAMES  ║                                              
+=========================================================================================================
+Release Year    | Game Title
+---------------------------------------------------------------------------------------------------------
+2007            | Chicken Shoot
+2009            | Dead Space: Extraction
+2010            | Just Dance 2
+2007            | Kawasaki Quad Bikes
+2009            | New Super Mario Bros. Wii
+2007            | Prince of Persia: Rival Swords
+2007            | Resident Evil 4: Wii Edition
+2008            | Rock Band
+2006            | Super Monkey Ball: Banana Blitz
+2009            | The Strike
+2007            | Tony Hawk's Proving Ground
+2007            | Wii Play
+2006            | Wii Sports
+2009            | Wii Sports Resort
+
+=========================================================================================================
+                                            ║  DS GAMES  ║                                               
+=========================================================================================================
+Release Year    | Game Title
+---------------------------------------------------------------------------------------------------------
+2009            | Blue Dragon Plus
+2006            | Brain Age: Train Your Brain in Minutes a Day!
+2008            | Chrono Trigger
+2008            | Dragon Ball Origins
+2007            | Final Fantasy XII: Revenant Wings
+2009            | Jam Sessions 2
+2008            | Metal Slug 7
+2006            | New Super Mario Bros.
+2011            | Pokémon Black Version
+2012            | Pokémon Black Version 2
+2006            | Pokémon Mystery Dungeon: Blue Rescue Team
+2007            | Pokémon Pearl Version
+2010            | Pokémon SoulSilver Version
+2006            | Resident Evil: Deadly Silence
+2010            | Super Scribblenauts
+2007            | Ultimate Mortal Kombat
+
+=========================================================================================================
+                                            ║  3DS GAMES  ║                                              
+=========================================================================================================
+Release Year    | Game Title
+---------------------------------------------------------------------------------------------------------
+2013            | Animal Crossing: New Leaf
+2011            | Mario Kart 7
+1994            | Mega Man X (Virtual Console)
+2001            | Pokémon Crystal Version (Virtual Console)
+2000            | Pokémon Gold Version (Virtual Console)
+1998            | Pokémon Red Version (Virtual Console)
+1999            | Pokémon Yellow Version: Special Pikachu Edition (Virtual Console)
+1985            | Super Mario Bros. (Virtual Console)
+1991            | Super Mario World (Virtual Console)
+2012            | Tales of the Abyss
+
+=========================================================================================================
+                                          ║  GAMEBOY GAMES  ║                                            
+=========================================================================================================
+Release Year    | Game Title
+---------------------------------------------------------------------------------------------------------
+1992            | Yoshi's Cookie
+
+=========================================================================================================
+                                       ║  GAMEBOY COLOR GAMES  ║                                         
+=========================================================================================================
+Release Year    | Game Title
+---------------------------------------------------------------------------------------------------------
+2001            | Pokémon Crystal Version
+2000            | Pokémon Gold Version
+2000            | Pokémon Trading Card Game
+2001            | The Legend of Zelda: Oracle of Ages
+
+=========================================================================================================
+                                      ║  GAMEBOY ADVANCE GAMES  ║                                        
+=========================================================================================================
+Release Year    | Game Title
+---------------------------------------------------------------------------------------------------------
+2005            | Ace Combat Advance
+2003            | Dragon Ball Z: The Legacy of Goku II
+2001            | Mario Kart: Super Circuit
+2005            | Pokémon Emerald Version
+2004            | Pokémon FireRed Version
+2003            | Pokémon Sapphire Version
+
+=========================================================================================================
+                                           ║  SWITCH GAMES  ║                                            
+=========================================================================================================
+Release Year    | Game Title
+---------------------------------------------------------------------------------------------------------
+2020            | A Short Hike
+2020            | Animal Crossing: New Horizons
+2024            | Another Crab's Treasure
+2018            | Dark Souls: Remastered
+2019            | Digimon Story: Cyber Sleuth: Complete Edition
+2020            | Doom 64
+2019            | Downwell
+2019            | Final Fantasy VII
+2018            | Hollow Knight
+2019            | Hotline Miami Collection
+2017            | L.A. Noire
+2023            | Metal Gear Solid: Master Collection Vol. 1
+2018            | One Strike
+2021            | Pokémon Brilliant Diamond
+2022            | Pokémon Legends: Arceus
+2022            | Pokémon Scarlet
+2021            | Pokémon Shining Pearl
+2019            | Pokémon Sword
+2022            | Pokémon Violet
+2018            | Pokémon: Let's Go, Pikachu!
+2018            | Salt and Sanctuary
+2017            | Slain: Back from Hell
+2017            | Stardew Valley
+2017            | The Elder Scrolls V: Skyrim
+2019            | Trials Rising
