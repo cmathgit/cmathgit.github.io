@@ -269,269 +269,228 @@
 <body>
 
     <div class="container">
-        <h1>Welcome to the GitHub Site of Cruz Macias</h1>
+    <h1>Welcome to the GitHub Site of Cruz Macias</h1>
 
-        <!-- Portfolio Links -->
-        <div class="portfolio-links">
-            <a href="cruzgmacias-cv/">
-                <figure>
-                    <img src="https://1drv.ms/i/c/351e429395ffd928/IQRnvntkpXq6T6hPd63N80ZCATjLn6LHPPg2ObIkvoHT47U" alt="Link to Curriculum Vitae">
-                    <figcaption>Curriculum Vitae</figcaption>
-                </figure>
-            </a>
-            <a href="crossofthemessiah/">
-                <figure>
-                    <img src="https://1drv.ms/i/c/351e429395ffd928/IQRorKU-6b0qRZkRMmSbYQUiAbVKuRqkQljDaEc9SZ9IAOo" alt="Link to Music Portfolio">
-                    <figcaption>Music Portfolio</figcaption>
-                </figure>
-            </a>
-            <a href="https://github.com/cmathgit">
-                <figure>
-                    <img src="https://1drv.ms/i/c/351e429395ffd928/IQSgpqTaj2pLQaNvmiYqJAGbAYepoLAOwJkJm7wnB2WBlCo" alt="My 1st Methuselah">
-                    <figcaption>GitHub</figcaption>
-                </figure>
-            </a>
-        </div>
-        <hr>
-        <h1 id="recent-projects">Recent Projects & Notable Accomplishments</h1>
-        <div class="oracle-toc" style="background-color: #282a36; padding: 1em; border-radius: 5px; margin-bottom: 2em; border-left: 5px solid hsl(62, 72%, 66%);">
-            <h3 style="color: #c6d6d2; margin-top: 0;">Quick Access</h3>
-            <ul style="list-style-type: disc; padding-left: 20px;">
-                <li style="color: white;"><a href="#capital-budget-integration" style="color: hsl(62, 72%, 66%);">Capital Budget Oracle Integration (FBDI & REST)</a></li>
-                <li style="color: white;"><a href="#invoice-order-integration" style="color: hsl(62, 72%, 66%);">Invoice Order Oracle Integration</a></li>
-                <li style="color: white;"><a href="#oci-paas-optimization" style="color: hsl(62, 72%, 66%);">Oracle Cloud Infrastructure PaaS Optimization</a></li>
-                <li style="color: white;"><a href="#asn-receiving-integration" style="color: hsl(62, 72%, 66%);">ASN Receiving Oracle Integration</a></li>
-                <li style="color: white;"><a href="#surgical-case-management" style="color: hsl(62, 72%, 66%);">Surgical Case Management & Clinical Procurement Oracle Integration</a></li>
-				<li style="color: white;"><a href="#open-webui-llm-deployment" style="color: hsl(62, 72%, 66%);">OpenWebUI LLM Integration</a></li>
-            </ul>
-        </div>
-        <h2>Oracle Integration Cloud & Oracle Cloud Infrastructure Optimization</h2>
-        <p>Design and support Integration solutions for Oracle Fusion Cloud Applications Suite—including Enterprise Resource Planning (ERP), Supply Chain & Manufacturing (SCM), and Human Capital Management (HCM)—via Oracle Integration Cloud (OIC). These integrations utilize various tech stacks, programming languages, connections, and tools with secure access to the organization’s ERP system and cloud databases. Technologies include: SFTP, SOAP, REST, SQLcl, ATP Databases, BI Publisher, PL/SQL, Java, and XML Schemas. Delivered multiple enterprise-grade solutions in Oracle Integration Cloud (OIC) and Oracle Cloud Infrastructure (OCI) integrating external healthcare systems with Oracle Fusion Cloud ERP. These projects showcase advanced skills in cloud-native integration, data staging, REST/SOAP APIs, and cost-efficient infrastructure management.</p>
-        <h3 id="capital-budget-integration"><strong>Capital Budget Integration</strong></h3>
-        <ul>
-            <li style="color: white;">Designed to process capital budget data transferred from an external Healthcare EPM system into the Oracle ERP system.</li>
-            <li style="color: white;">Data received as pipe delimited files via SFTP and processing using Oracle FBDI for Project Management.</li>
-            <li style="color: white;">Data staged using ATP newly created and uniquely tailored database tables, enriched via SOAP requests to the ERP, and formatted into an FBDI template of control files for the Import Projects and Project Budgets ESS jobs in Oracle Fusion Project Control.</li>
-            <li style="color: white;">Ingested budget data via SFTP, staged in ATP, enriched through ERP SOAP services, and submitted using FBDI templates for Oracle Project and Project Budget ESS jobs.</li>
-            <li style="color: white;">Implemented CREATE/UPDATE/DELETE logic per Oracle standards.</li>
-            <li style="color: white;">Retrieve, validate, and archive extract files and handle duplicate and no file errors via SFTP, ATP Database, and Oracle Integration Cloud (OIC) orchestrations</li>
-            <li style="color: white;">Implement Fault Handling and Error Recovery for SFTP, ATP Databases Connections, REST APIs, and SOAP Services.</li>
-            <li style="color: white;">Stage and validate Project, Task, and Budget records into ATP tables.</li>
-            <li style="color: white;">Enrich Project records with additional data by designing BI Publisher Reports to retrieve Project Manager EIN using provided AD Usernames via SOAP Services which is required for Import Projects File-Based Data Import (FBDI) in Oracle Fusion Project Management.</li>
-            <li style="color: white;">Enrich Project records with additional data by designing BI Publisher Reports to retrieve Department Names using provided org code and cost center via SOAP Services which is required for Import Projects File-Based Data Import (FBDI) in Oracle Fusion Project Management.</li>
-            <li style="color: white;">Handle Version Control for existing Project Budgets and Project Tasks.</li>
-            <li style="color: white;">Handle Middleware Errors due to invalid Project Manager AD Username or invalid Department Codes, invalid datatype formatting, and null values.</li>
-            <li style="color: white;">Using staged data, Prepare and Curate FBDI Control Files according to XLSM Templates for ESS Jobs Import Projects and Import Project Budgets in Oracle Fusion Project Management.</li>
-            <li style="color: white;">Prepare and Curate ESS Job Definitions for Oracle Fusion Project Management.</li>
-            <li style="color: white;">Package and Submit FBDI Control Files to Oracle Fusion via SOAP Services.</li>
-            <li style="color: white;">Monitor and Manage ESS Jobs via SOAP Services. Implement wait and retry logic for ESS Jobs. Confirm job completion and status.</li>
-            <li style="color: white;">Prepare and curate Middleware Error Reports and delivered Cloud Error Reports for both Import Projects and Import Project Budgets ESS Jobs.</li>
-            <li style="color: white;">Package and archive error reports and integration results.</li>
-            <li style="color: white;">Trigger notification via email of integration completion results and or errors</li>
+    <p>Oracle Integration Cloud (OIC) Engineer &amp; Enterprise Systems Architect (SCM/FIN/HCM) &mdash;
+    building, testing, and maintaining enterprise integrations and technical extensions supporting
+    Oracle Fusion Cloud ERP under Kanban AGILE methodology and ACCB-governed change control.
+    M.S. Computer Science &mdash; Cybersecurity &amp; Digital Forensics, EKU 2023.
+    B.S. Mathematical Sciences, NIU 2016.</p>
+
+    <!-- Portfolio Links -->
+    <div class="portfolio-links">
+        <a href="cruzgmacias-cv/">
+            <figure>
+                <img src="https://1drv.ms/i/c/351e429395ffd928/IQRnvntkpXq6T6hPd63N80ZCATjLn6LHPPg2ObIkvoHT47U" alt="Link to Curriculum Vitae">
+                <figcaption>Curriculum Vitae</figcaption>
+            </figure>
+        </a>
+        <a href="crossofthemessiah/">
+            <figure>
+                <img src="https://1drv.ms/i/c/351e429395ffd928/IQRorKU-6b0qRZkRMmSbYQUiAbVKuRqkQljDaEc9SZ9IAOo" alt="Link to Music Portfolio">
+                <figcaption>Music Portfolio</figcaption>
+            </figure>
+        </a>
+        <a href="https://github.com/cmathgit">
+            <figure>
+                <img src="https://1drv.ms/i/c/351e429395ffd928/IQSgpqTaj2pLQaNvmiYqJAGbAYepoLAOwJkJm7wnB2WBlCo" alt="GitHub">
+                <figcaption>GitHub</figcaption>
+            </figure>
+        </a>
+    </div>
+
+    <hr>
+
+    <h1 id="recent-projects">Recent Projects &amp; Notable Accomplishments</h1>
+
+    <!-- Quick Access TOC -->
+    <div style="background-color:#282a36; padding:1em; border-radius:5px; margin-bottom:2em; border-left:5px solid hsl(62,72%,66%);">
+        <h3 style="color:#c6d6d2; margin-top:0;">Quick Access</h3>
+        <ul style="list-style-type:disc; padding-left:20px;">
+            <li style="color:white;"><a href="#surgical-case-management" style="color:hsl(62,72%,66%);">Surgical Case Management &amp; Clinical Procurement Integration</a></li>
+            <li style="color:white;"><a href="#capital-budget-integration" style="color:hsl(62,72%,66%);">Capital Budget Integration (FBDI &amp; ESS)</a></li>
+            <li style="color:white;"><a href="#invoice-order-integration" style="color:hsl(62,72%,66%);">Invoice Order Attachment Integration</a></li>
+            <li style="color:white;"><a href="#sftp-migration" style="color:hsl(62,72%,66%);">SFTP Migration &mdash; SCM OIC Refactor</a></li>
+            <li style="color:white;"><a href="#scm-error-remediation" style="color:hsl(62,72%,66%);">SCM Middleware Error Notification Remediation</a></li>
+            <li style="color:white;"><a href="#scm-rca-stabilization" style="color:hsl(62,72%,66%);">SCM Integration RCA &amp; Stabilization (&gt;99% Error Reduction)</a></li>
+            <li style="color:white;"><a href="#asn-receiving-integration" style="color:hsl(62,72%,66%);">ASN Receiving Integration</a></li>
+            <li style="color:white;"><a href="#oci-paas-optimization" style="color:hsl(62,72%,66%);">OCI PaaS Optimization</a></li>
+            <li style="color:white;"><a href="#open-webui-llm-deployment" style="color:hsl(62,72%,66%);">OpenWebUI LLM Deployment &amp; Local LLM Integration</a></li>
         </ul>
+    </div>
+        
+    <h2>Oracle Integration Cloud (OIC) &amp; Oracle Cloud Infrastructure (OCI)</h2>
+    <p>Design and support integration solutions for Oracle Fusion Cloud ERP (SCM/FIN/HCM) via Oracle Integration Cloud (OIC) Gen3 under an ACCB-governed delivery and change-control model. Each change documents business purpose, affected users, master data/configuration impact, environment-specific testing, approvals, and post-production follow-up. Technologies include: OIC Gen3, REST/SOAP APIs, Oracle ATP, BI Publisher, FBDI, ESS, PL/SQL, Java, XML, and SFTP.</p>
 
-        <h4><strong>REST API Upgrade</strong>: Modernized Capital Budget Integration: FBDI to REST Migration</h4>
-        <ul>
-            <li style="color: white;"><strong>Architecture & Design</strong>: Re-architected the legacy file-based (FBDI) integration to a real-time, API-first solution using Oracle Integration Cloud (OIC) and Oracle ATP to process capital budget data from an external Healthcare EPM system.</li>
-            <li style="color: white;"><strong>Data Ingestion & Staging</strong>: Developed OIC orchestrations to ingest pipe-delimited data via SFTP, parsing and staging records into uniquely tailored ATP database tables for validation and enrichment.</li>
-            <li style="color: white;"><strong>REST API Implementation</strong>: Replaced batch CSV processing with dynamic JSON payload construction, leveraging the Projects (/projects) REST endpoint to manage project headers and the Project Budgets (/projectBudgets) endpoint to push financial plans.</li>
-            <li style="color: white;"><strong>Logic & Orchestration</strong>: Implemented logic to distinguish between new and existing records, dynamically executing POST (Create) or PATCH (Update) requests against the Fusion endpoints, replacing the need for separate Create/Update/Delete FBDI control files.</li>
-            <li style="color: white;"><strong>Outcome</strong>: Achieved immediate transaction feedback and validation by moving from asynchronous import jobs to synchronous REST API calls, significantly reducing error resolution time for the Project Control team.</li>
-        </ul>
+    <!-- ═══════════════════════════════════════ -->
+    <h3 id="surgical-case-management"><strong>Surgical Case Management &amp; Clinical Procurement Integration</strong></h3>
+    <ul>
+        <li style="color:white;">Engineered a bidirectional clinical procurement data exchange between an external EMR platform and Oracle Fusion ERP.</li>
+        <li style="color:white;"><strong>Outbound (ERP &rarr; EMR):</strong> Two BI Publisher interfaces &mdash; Item Master extract and PO lifecycle extract &mdash; published via SFTP to the EMR on automated schedules.</li>
+        <li style="color:white;"><strong>Inbound (EMR &rarr; ERP):</strong> OIC Gen3 orchestration ingesting purchase requisitions via SFTP, staged in ATP, enriched with ERP reference data via BI Publisher lookups, and submitted to Oracle ERP through FBDI and ESS job orchestration.</li>
+        <li style="color:white;">SOC 2-compliant fault handling, record-level ATP status tracking (NEW / SUCCESS / ERROR), and automated scheduling.</li>
+        <li style="color:white;">Coordinated with case schedule, case usage, and contract price data managed within the EMR platform to ensure end-to-end surgical case and procurement workflows.</li>
+    </ul>
 
-        <h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI Implementation</a></h4>
-        <ul>
-            <li style="color: white;">When budget line items are "Rejected" by Oracle ERP due to insufficient funds, a <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/meta-models.htm">Pretrained Foundational Model Meta Llama 3.1 70B</a> model analyzes the rejection error and the original project proposal. It then auto-generates a "Budget Adjustment Request" email for the project manager, explaining exactly how much to reduce or reallocate to meet the cap, streamlining the approval loop.</li>
-            <li style="color: white;">Before creating a new Capital Project in ERP, the system uses <a href="https://docs.oracle.com/en/database/oracle/oracle-database/26/nfcoa/vector-data-type.html">Oracle AI Vector Search</a> to compare the incoming project description against 5 years of historical projects. It alerts Finance if a duplicate or highly similar project already exists (e.g., "MRI Machine Upgrade 2024" vs. "Radiology Equipment Refresh"), preventing double-booking of capital funds.</li>
-            <li style="color: white;">Build a "Budget Chat" interface for executives using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/xai-models.htm">Pretrained Foundational Model xAI Grok 3</a> since it excels at enterprise use cases such as data extraction, coding, and summarizing text, and has a deep domain knowledge in finance, healthcare, law, and science. Users can ask, "Show me all capital projects over $50k in Cardiology that are pending approval," and the model translates this natural language into precise SQL queries against the ATP staging tables, returning real-time results without IT intervention.</li>
-        </ul>
+    <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
+    <ul>
+        <li style="color:white;">Use <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-meta-models.htm">Meta Llama 3 70B</a> to analyze surgeon preference cards against actual EMR usage data, identifying consistently unused items and recommending quantity reductions to reduce clinical procurement costs.</li>
+        <li style="color:white;">When a surgical item is backordered in Oracle ERP, use <a href="https://docs.oracle.com/en/database/oracle/oracle-database/26/nfcoa/vector-data-type.html">Oracle AI Vector Search</a> to identify clinically equivalent substitutes and push approved alternates back to the EMR without delaying procedures.</li>
+        <li style="color:white;">A <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Cohere Command R+</a> agent scans each outgoing PO against the EMR contract price file and holds any PO where the ERP price exceeds the contracted rate, surfacing the specific clause for procurement enforcement.</li>
+    </ul>-->
 
-        <h3 id="invoice-order-integration"><strong>Invoice Order Integration</strong></h3>
-        <ul>
-            <li style="color: white;">Designed to process and submit invoice order data transferred from an external Healthcare Supply Chain Management system into the Oracle ERP system.</li>
-            <li style="color: white;">Data received as a zipped container via SFTP and imported using RESTful services.</li>
-            <li style="color: white;">The container includes PDF attachments and a schema file listing filenames and associated invoice numbers.</li>
-            <li style="color: white;">The integration parses the schema file to retrieve invoice metadata, stages it in ATP database tables, and uses it to retrieve invoice IDs from ERP.</li>
-            <li style="color: white;">The REST API endpoint for Oracle Fusion Cloud Financials requires the invoice ID for POST requests (see Create an attachment for an invoice).</li>
-            <li style="color: white;">The integration constructs the POST request dynamically, specifying the invoice object and attachment filename stored in ephemeral memory.</li>
-            <li style="color: white;">PDF attachments are included in the JSON payload in base64 format. Global and local fault/error handling is implemented.</li>
-            <li style="color: white;">Parsed zipped payloads from the external Healthcare Supply Chain Management system containing PDFs and schema files.</li>
-            <li style="color: white;">Staged metadata in ATP, resolved invoice IDs via ERP REST APIs, and submitted attachment POST requests with dynamic payload construction and robust fault handling.</li>
-        </ul>
+    <!-- ═══════════════════════════════════════ -->
+    <h3 id="capital-budget-integration"><strong>Capital Budget Integration</strong></h3>
+    <ul>
+        <li style="color:white;">OIC Gen3 scheduled orchestration ingesting daily capital project and budget extracts from an external EPM platform via SFTP.</li>
+        <li style="color:white;">Parses pipe-delimited data into ATP staging tables (project headers, task details, budget records).</li>
+        <li style="color:white;">Enriches records with Oracle reference data via BI Publisher reports: Project Manager EIN (AD Username lookup) and Department Code lookup &mdash; both required by Oracle Fusion Project Management FBDI.</li>
+        <li style="color:white;">Constructs Oracle-standard FBDI control files (PjfProjectsAllXface.zip and PjoBudgetsXface.zip) and submits to Oracle Fusion Project Control via ESS: Load Interface File for Import &rarr; Import Projects &rarr; Import Project Budgets.</li>
+        <li style="color:white;">De-duplication, version-aware budget update logic, partial-success fallout handling, batch-level email notifications, and SFTP-based FBDI archiving for audit.</li>
+        <li style="color:white;">Implements fault handling for SFTP, ATP, REST, and SOAP connections; monitors and confirms ESS job completion with wait/retry logic.</li>
+    </ul>
 
-        <h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI Implementation</a></h4>
-        <ul>
-            <li style="color: white;">Implement a document understanding pipeline that uses <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Pretrained Foundational Model Cohere Command R</a> to perform OCR and semantic extraction on non-standard invoice PDFs that fail initial schema parsing, automatically identifying fields like "Total Amount," "Vendor Name," and "Invoice Date" to reduce manual exception handling.</li>
-            <li style="color: white;">Utilize a fine-tuned <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-meta-models.htm">Imported Model Llama-4-Maverick-17B-128E-Instruct-FP8</a> model to analyze extracted invoice line items against historical pricing data stored in ATP. The model flags "hallucinated" or mismatched prices (e.g., a 500% variance in surgical supply costs) before the invoice is posted to Oracle ERP Financials, adding a layer of fraud detection.</li>
-            <li style="color: white;">Use OCI Generative AI Embeddings to convert invoice descriptions into vectors. When a new invoice arrives with an ambiguous "Service Description," the system queries the vector database to find the most similar past invoices and automatically assigns the correct General Ledger (GL) code with 95% accuracy.</li>
-        </ul>
+    <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
+    <ul>
+        <li style="color:white;">When budget line items are rejected by Oracle ERP for insufficient funds, a <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/meta-models.htm">Meta Llama 3.1 70B</a> model analyzes the rejection and original project proposal, auto-generating a Budget Adjustment Request email for the project manager with specific reallocation guidance.</li>
+        <li style="color:white;">Before creating a new Capital Project, use <a href="https://docs.oracle.com/en/database/oracle/oracle-database/26/nfcoa/vector-data-type.html">Oracle AI Vector Search</a> to compare the incoming project description against five years of historical projects, alerting Finance of potential duplicates before double-booking capital funds.</li>
+        <li style="color:white;">A &ldquo;Budget Chat&rdquo; interface powered by <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/xai-models.htm">xAI Grok 3</a> translates executive natural-language queries into SQL against ATP staging tables, returning real-time capital project data without IT intervention.</li>
+    </ul>-->
 
-        <h3 id="oci-paas-optimization"><strong>OCI PaaS Optimization Project</strong></h3>
-        <ul>
-            <li style="color: white;">Reduced infrastructure costs by optimizing the OCI PaaS configuration for lower environments.</li>
-            <li style="color: white;">Minimizing uptime of non-production components.</li>
-            <li style="color: white;">Reducing the number of active OIC Connectivity Agents in Test environments.</li>
-            <li style="color: white;">Automating shutdown/startup schedules for OIC and ATP instances during off-hours.</li>
-            <li style="color: white;">Maintaining DR environments in standby mode, activating only for production backups or disaster recovery events.</li>
-            <li style="color: white;">These efforts significantly lowered compute costs while maintaining operational readiness.</li>
-        </ul>
+    <!-- ═══════════════════════════════════════ -->
+    <h3 id="invoice-order-integration"><strong>Invoice Order Attachment Integration</strong></h3>
+    <ul>
+        <li style="color:white;">OIC Gen3 orchestration ingesting daily zipped invoice image containers (~500 invoices/day) from an external healthcare supply chain provider (GHX) via SFTP.</li>
+        <li style="color:white;">Parses the index file to stage invoice metadata in ATP; resolves Oracle invoice IDs via BI Publisher (GetInvoice_Id report).</li>
+        <li style="color:white;">Dynamically constructs REST POST payloads with base64-encoded PDFs and invokes the Oracle Fusion Cloud Payables attachments endpoint.</li>
+        <li style="color:white;">Orphan PDF detection, record-level SUCCESS/ERROR status tracking, CSV error reporting, and SFTP archiving per batch run.</li>
+        <li style="color:white;">Global and local fault handling across SFTP, ATP, and REST connections.</li>
+    </ul>
 
-        <h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI Implementation</a></h4>
-        <ul>
-            <li style="color: white;">Integrate an OCI DevOps pipeline where <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/openai-gpt-oss-120b.htm">Imported Model GPT-OSS 120B</a> analyzes Terraform state files and suggests resource rightsizing opportunities (e.g., "Downgrade Block Volume from High Performance to Balanced") based on usage logs, automatically generating Pull Requests for approval.</li>
-            <li style="color: white;">Deploy a <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/google-models.htm">Pretrained Foundational Model Gemini-2.5-Pro</a> powered agent to digest massive OCI Audit Logs during off-hours. Instead of just shutting down instances, the agent generates a "Daily Cost & Usage Report" that summarizes why specific compute instances spun up (e.g., "Auto-scaling triggered by 2 AM backup job"), providing granular visibility into cost drivers.</li>
-            <li style="color: white;">Implement a predictive model using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Pretrained Foundational Model Cohere Embed 4</a> to analyze historical CPU/Memory utilization patterns. The system now proactively warms up OIC Connectivity Agents 15 minutes before predicted traffic spikes (e.g., month-end close), rather than reacting to load, balancing cost savings with performance.</li>
-        </ul>
+    <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
+    <ul>
+        <li style="color:white;">Implement a document understanding pipeline using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Cohere Command R</a> to perform OCR and semantic extraction on non-standard invoice PDFs that fail initial schema parsing, automatically identifying Total Amount, Vendor Name, and Invoice Date to reduce manual exception handling.</li>
+        <li style="color:white;">Use a fine-tuned <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-meta-models.htm">Llama-4-Maverick-17B-128E-Instruct</a> model to flag invoice line items with abnormal price variance against historical ATP data before posting to Oracle ERP Financials, adding a fraud-detection layer.</li>
+        <li style="color:white;">Use OCI Generative AI Embeddings to convert invoice descriptions into vectors, enabling automatic GL code assignment (95% accuracy) for ambiguous service descriptions by matching against historical invoice vectors.</li>
+    </ul>-->
 
-        <h3 id="asn-receiving-integration"><strong>ASN Receiving Integration</strong></h3>
-        <ul>
-            <li style="color: white;">Designed to process Advanced Shipment Notice (ASN) Receiving data from an external system into the Oracle ERP system.</li>
-            <li style="color: white;">This integration ensures accurate and timely receipt of goods data into the ERP system, supporting supply chain operations.</li>
-            <li style="color: white;">Streamlined Advanced Shipment Notice data flow from external systems into Oracle ERP, enhancing supply chain visibility and operational accuracy.</li>
-        </ul>
+    <!-- ═══════════════════════════════════════ -->
+    <h3 id="sftp-migration"><strong>SFTP Migration &mdash; SCM OIC Refactor</strong></h3>
+    <ul>
+        <li style="color:white;">Refactored OIC file-polling orchestrations for SCM integrations to redirect inbound file acquisition from a decommissioned on-premises SFTP server to a vendor-hosted endpoint by inserting an OIC FTP/SFTP invoke step at the boundary layer.</li>
+        <li style="color:white;">Preserved all downstream ATP staging, FBDI construction, and ESS orchestration logic without rewriting existing integration flows.</li>
+        <li style="color:white;">Migrated seven outbound BI Publisher-scheduled SCM interfaces into OIC-managed schedulers to resolve a non-standard port incompatibility preventing direct BI Publisher SFTP delivery.</li>
+        <li style="color:white;">Maintained identical file contracts with the external system and added ad hoc BI Publisher output pickup logic for business continuity.</li>
+    </ul>
 
-        <h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI Implementation</a></h4>
-        <ul>
-            <li style="color: white;">Integrate <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/google-models.htm">Pretrained Foundational Model Gemini-2.5-Flash</a> to cross-reference incoming ASN vendor locations with real-time global news feeds. If an ASN originates from a region with active disruptions (e.g., "Port Strike in LA" or "Severe Weather in Texas"), the system tags the receipt as "High Risk for Delay" in Oracle ERP, enabling proactive inventory planning.</li>
-            <li style="color: white;">When incoming ASNs use vendor-specific part numbers that don't perfectly match Oracle Item Masters, <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Pretrained Foundational Model Cohere Rerank 3.5</a> takes the vendor's description and ranks the top 5 most likely internal Item IDs. This allows the integration to auto-correct minor naming discrepancies (e.g., "Srgcl Mask" vs. "Mask, Surgical") without human review.</li>
-            <li style="color: white;">Develope a specialized agent using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-alibaba-models.htm">Imported Model Qwen3-14B</a> that monitors the "Receipt Advice" interface. When a quantity discrepancy occurs (e.g., ASN says 100, Dock received 90), the agent auto-drafts a formatted claim email to the vendor referencing the specific PO and ASN line, attaching the discrepancy report instantly.</li>
-        </ul>
+    <!-- ═══════════════════════════════════════ -->
+    <h3 id="scm-error-remediation"><strong>SCM Middleware Error Notification Remediation</strong></h3>
+    <ul>
+        <li style="color:white;">During SFTP migration analysis, identified a silent-failure defect in OIC Shipping and Receipt import integrations where middleware errors produced no email notifications due to missing email body mappings in the shared error-handler switch condition.</li>
+        <li style="color:white;">Escalated during stand-up, received team approval to expand scope within the same delivery window, and implemented the targeted fix restoring full operational alerting for production middleware failures.</li>
+        <li style="color:white;">Resolved without redesigning the shared error framework, preserving all other integration flows downstream.</li>
+    </ul>
 
-        <h3 id="surgical-case-management"><strong>Surgical Case Management & Clinical Procurement Integration</strong></h3>
-        <ul>
-            <li style="color: white;">Designed to process and synchronize requisition data from the External EMR System platform into Oracle ERP and extract item master and PO return data from ERP to External EMR System.</li>
-            <li style="color: white;">Requisition files received via SFTP, staged in ATP tables, enriched with ERP item and pricing data, and submitted to ERP for PO creation using REST APIs or FBDI.</li>
-            <li style="color: white;">Item master and PO return files extracted from ERP using BI Publisher and Fusion Cloud ERP SCM tables, formatted as pipe-delimited CSV, and delivered to External EMR System for contract compliance and reconciliation.</li>
-            <li style="color: white;">Implemented automated scheduling for hourly and nightly processes, SOC 2 security standards, and robust fault handling for all integrations.</li>
-            <li style="color: white;">Staged inbound requisition data in ATP, enriched with ERP references, and synchronized outbound item master and PO lifecycle data between ERP and External EMR System.</li>
-            <li style="color: white;">Worked cohesively with case schedule, case usage, and contract price data managed by EMR and other source systems within the External EMR System platform to ensure complete surgical case and procurement workflows.</li>
-        </ul>
+    <!-- ═══════════════════════════════════════ -->
+    <h3 id="scm-rca-stabilization"><strong>SCM Integration RCA &amp; Stabilization (&gt;99% Error Reduction)</strong></h3>
+    <ul>
+        <li style="color:white;">Served as OIC SME for post-go-live stabilization following enterprise legacy ERP to Oracle Fusion Cloud ERP migration.</li>
+        <li style="color:white;"><strong>Gap Remediation:</strong> Performed comparative analysis of legacy SCM transaction semantics versus Oracle Fusion Receiving interface constraints, identifying undocumented dependencies in supplier site attribution, item-org UOM compatibility, and PO lifecycle synchronization.</li>
+        <li style="color:white;"><strong>Middleware Enhancements:</strong> Refactored inbound OIC integrations to introduce ATP-based canonical staging and BI Publisher-driven enrichment prior to FBDI/REST submission.</li>
+        <li style="color:white;"><strong>RCA Methodology:</strong> Established root cause analysis processes leveraging OIC instance logs, ESS request history, and ATP staging table queries to deterministically differentiate Oracle configuration defects from upstream data-quality violations.</li>
+        <li style="color:white;"><strong>Outcomes:</strong> Reduced monthly SCM receipt middleware errors from a peak of 5,672 (January 2023) to 7 (July 2025) &mdash; a &gt;99% reduction. Reduced monthly Oracle cloud receiving errors from a peak of 24,383 (September 2022) to 385 (July 2025) &mdash; a ~98% reduction.</li>
+        <li style="color:white;"><strong>Operational Support:</strong> Authored production support playbooks enabling operations teams to locate, re-stage, and reprocess failed SCM transactions without manual ERP intervention.</li>
+    </ul>
 
-        <h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI Implementation</a></h4>
-        <ul>
-            <li style="color: white;">Utilize <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-meta-models.htm">Pretrained Foundational Model Meta Llama 3 70B</a> to analyze surgeon preference cards against actual usage data from the EMR. The model identifies items that are consistently opened but unused (waste) and suggests specific quantity reductions to the "Standard Order" set, directly reducing clinical procurement costs.</li>
-            <li style="color: white;">When a specific surgical item is backordered in Oracle ERP, the system uses <a href="https://docs.oracle.com/en/database/oracle/oracle-database/26/nfcoa/vector-data-type.html">Oracle AI Vector Search</a> to identify clinically equivalent substitutes based on product specifications (material, size, usage class). It pushes these "Approved Alternates" back to the EMR so surgeons can swap items immediately without delaying procedures.</li>
-            <li style="color: white;">A <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Cohere Command R+ 08-2024</a> powered agent scans every outgoing Purchase Order against the "Contract Price" file from the EMR. If the ERP price exceeds the contracted rate, the agent holds the PO and highlights the specific clause in the contract PDF that guarantees the lower price, empowering procurement to enforce vendor compliance.</li>
-        </ul>	
+    <!-- ═══════════════════════════════════════ -->
+    <!--<h3 id="asn-receiving-integration"><strong>ASN Receiving Integration</strong></h3>
+    <ul>
+        <li style="color:white;">Designed to process Advanced Shipment Notice (ASN) receiving data from an external system into Oracle Fusion ERP SCM.</li>
+        <li style="color:white;">Ensures accurate and timely goods receipt data submission to support supply chain operations.</li>
+        <li style="color:white;">Streamlined ASN data flow from external systems into Oracle ERP, enhancing supply chain visibility and operational accuracy.</li>
+    </ul>-->
 
-        <h2 id="open-webui-llm-deployment">OpenWebUI Deployment & Local LLM Integration</h2>
-        <p>Maintaining and expanding the OpenWebUI platform for Generative AI web integration, locally hosted small language models (SLMs) and cloud-based large language models (LLMs) via a unified architecture. See my preferred DIY Language Model-Stack(s) below which include RAG/Embedding models, web search tools, OCR, and reranking models. Key components include:</p>
-        <ul>
-		    <li style="color: white;"><strong>Tools</strong>: Integrated various tools, filters, and functions: <a href="https://console.groq.com/docs/tool-use/built-in-tools/wolfram-alpha">Groq Compound Systems Wolfram Alpha integration</a> filtering (inject compound_custom parameters into the request payload), <a href="https://products.wolframalpha.com/llm-api/documentation">Wolfram Alpha LLM API<a> tool call, KJV Bible verse retrieval using <a href="https://github.com/aruljohn/Bible-kjv">Bible-kjv JSON library</a>, and Verse of the Day for any Bible translation/version using <a href="https://www.biblegateway.com/votd/get/?format=JSON&version=9">BibleGateway Web-Service</a></li>
-            <li style="color: white;"><strong>Models</strong>: Integrated diverse models (e.g., GLM, Mistral, Perplexity, GGUF) and tools (llama.cpp, Ollama, LMStudio, LangChain) with custom middleware.</li>
-            <li style="color: white;"><strong>Stack</strong>: Python (FastAPI, REST), cURL, WebSocket streaming, async/await, Docker, and Python venv/uv.</li>
-            <li style="color: white;"><strong>Features</strong>: Retrieval-augmented generation (RAG), embedding, reranking pipelines, Model Context Protocol (MCP) servers, multi-agent systems, and privacy-preserving protocols like Role-Pseudonymous Prompting (RPP).</li>
-            <li style="color: white;"><strong>Hardware Preferences</strong>:
-                <ul>
-                    <li style="color: white;"><strong>GPU</strong>: GGUF Models hosted on Llama.cpp servers (CUDA release) via HuggingFace repos or Ollama, optimized for NVIDIA RTX 5070 TI GPU (12GB VRAM).</li>
-                    <li style="color: white;"><strong>CPU</strong>: GGUF Models hosted on Llama.cpp servers (CPU release) via HuggingFace repos, optimized for AMD Ryzen 9 8940HX.</li>
-                </ul>
-            </li>
-            <li style="color: white;"><strong>Benchmarks</strong>: Achieved parity with commercial models at significantly lower costs (up to 94.4% reduction) in domain-specific benchmarks, validating scalable and enterprise-grade performance.</li>
-            <li style="color: white;"><strong>Applications</strong>: Optimized for specialized contexts (e.g., research, analysis), ensuring secure, compliant, and cost-efficient generative AI architectures.</li>
-        </ul>
-		<hr>
-        <p><a href="https://github.com/cmathgit/bible-chatgpt-prompts/blob/main/README.md#ai-security-methodology">AI-Security Methodology</a><br>
-       <a href="https://openwebui.com/p/cmathopen/role-pseudonymous-prompting-protocol">Role-Pseudonymous Prompting Protocol (RPP)</a><br>
-       <a href="https://github.com/cmathgit/aimmm-agent-bible-prompts/blob/main/papers/Role-Pseudonymous%20Prompting%20Protocol%20Paper.md">RPP Paper</a></p>
+    <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
+    <ul>
+        <li style="color:white;">Integrate <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/google-models.htm">Gemini 2.5 Flash</a> to cross-reference incoming ASN vendor locations with real-time global news feeds, tagging receipts from disruption-affected regions as &ldquo;High Risk for Delay&rdquo; in Oracle ERP for proactive inventory planning.</li>
+        <li style="color:white;">When incoming ASNs use vendor-specific part numbers that do not perfectly match Oracle Item Masters, <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Cohere Rerank 3.5</a> ranks the top 5 most likely internal Item IDs, auto-correcting minor naming discrepancies without human review.</li>
+        <li style="color:white;">A specialized agent using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-alibaba-models.htm">Qwen3-14B</a> monitors the Receipt Advice interface and auto-drafts a formatted claim email to the vendor when quantity discrepancies occur, attaching the discrepancy report instantly.</li>
+    </ul>-->
 
-      <div class="important-section" style="border: 1px solid #385c59; padding: 1.5em; background-color: #282a36; margin: 1em 0; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-        <h2 style="color: #c6d6d2; margin-bottom: 0.5em;">Role-Pseudonymous Prompting Protocol (RPP)</h2>
-        <p><b>Devised by Cruz Macias – An Essential AI-Security Innovation: This methodology, which I personally developed, is of paramount importance for protecting user privacy in AI interactions. RPP is an AI-Security Methodology that I devised which aims to protect the identity of the user, and it is working fantastically.</b></p>
+    <!-- ═══════════════════════════════════════ -->
+    <h3 id="oci-paas-optimization"><strong>OCI PaaS Optimization</strong></h3>
+    <ul>
+        <li style="color:white;">Reduced infrastructure costs by automating OIC and ATP instance shutdown/startup schedules for off-hours.</li>
+        <li style="color:white;">Reduced the number of active OIC Connectivity Agents in test environments.</li>
+        <li style="color:white;">Maintained DR environments in standby mode, activating only for production backups or disaster recovery events.</li>
+        <li style="color:white;">Significantly lowered compute costs while preserving operational readiness across all environments.</li>
+    </ul>
 
-        <h3 style="color: #c6d6d2; margin-bottom: 0.5em;">Executive Summary</h3>
-        <p><b>Role-Pseudonymous Prompting Protocol (RPP) is an AI-security method that auto-converts all prompts into third-person, role-based, de-identified case descriptions, ensuring privacy, neutrality, and safe AI interaction across calls, tools, and logs.</b></p>
+    <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
+    <ul>
+        <li style="color:white;">Integrate an OCI DevOps pipeline where <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/openai-gpt-oss-120b.htm">GPT-OSS 120B</a> analyzes Terraform state files and suggests resource rightsizing opportunities based on usage logs, auto-generating Pull Requests for approval.</li>
+        <li style="color:white;">Deploy a <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/google-models.htm">Gemini 2.5 Pro</a> agent to digest OCI Audit Logs during off-hours and generate a daily Cost &amp; Usage Report summarizing why specific compute instances spun up, providing granular visibility into cost drivers.</li>
+        <li style="color:white;">Implement a predictive model using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Cohere Embed 4</a> to analyze historical CPU/Memory utilization patterns, proactively warming up OIC Connectivity Agents before predicted traffic spikes such as month-end close.</li>
+    </ul>-->
 
-        <div class="figure-examples">
-        Non-compliant Prompt Example:
-        <figure> 
-          <img src="https://1drv.ms/i/c/351e429395ffd928/IQSDec-jOhrbRaY_errtPw4hAZVO4xkS9PUkiyJrCTsitFQ" alt="RPP Non-compliant Example"> 
-          <figcaption>In this example, we see the caregiver enters a non-compliant prompt and refers to the infant as "he" or "my baby" and the prompt was auto-rewritten by the LLM applying RPP.</figcaption>
-        </figure>
-        Compliant Prompt Example:
-        <figure> 
-          <img src="https://1drv.ms/i/c/351e429395ffd928/IQSbzK6LVoSDSLTsz0cqlf6JAZ3hTuhd36Dn563v6WEvLvY" alt="RPP Compliant Example"> 
-          <figcaption>In this example, we see the LLM correctly applies RPP to the thinking process by referring to the requestor as The Engineer.</figcaption>
-        </figure>
-        </div>
-    
-        <h3 style="color: #c6d6d2; margin-bottom: 0.5em;">Methodology Statement</h3>
-        <p><b>The Role-Pseudonymous Prompting Protocol (RPP) is an AI-security methodology designed to safeguard user identity by enforcing de-identification at the prompt level. All inputs are automatically converted into third-person, role-based, neutral case descriptions that retain only task-relevant facts while omitting personal pronouns, identifiers, or emotional framing. This transformation ensures that language models receive prompts framed as generalizable cases rather than personal narratives, thereby reducing privacy risk, mitigating bias, and aligning with responsible AI use in sensitive domains. RPP is applied consistently across all model calls, tool interactions, and system logs, with non-compliant prompts rewritten automatically. By embedding pseudonymization directly into the interaction layer, RPP establishes a robust, domain-agnostic safeguard for secure and ethical AI deployment.</b></p>
-    
-        <h3 style="color: #c6d6d2; margin-bottom: 0.5em;">RPP Instructions</h3>
-        <pre style="background-color: #35374b; padding: 1em; border-radius: 5px; color: #a4b8a9; overflow-x: auto;">Role-Pseudonymous Prompting Protocol (RPP) converts prompts into third-person, role-based, de-identified, neutral case descriptions with only task-relevant facts to solicit general guidance. Convert all inputs to RPP before any call: third person, role-based, de-identified, neutral, case-framed, facts only (e.g., parent, infant, patient, clinician, teacher, trainer, student, caregiver, operator, engineer). Within RPP, the terms Scribere / Scriber / Scribe denote the Neutral Author-Role—a standardized, identity-free pseudonym for the person generating input. This term replaces self-referential identifiers such as “I,” “me,” “my,” or “the user,” ensuring that authorship is acknowledged without exposing personal identity. Apply RPP to all sub-calls, logs, and outputs; auto-rewrite noncompliant prompts, substituting the Neutral Author-Role (“Scribere/Scriber/Scribe”) wherever self-reference occurs.</pre>
-      </div>
+    <!-- ═══════════════════════════════════════ -->
+    <h3 id="open-webui-llm-deployment"><strong>OpenWebUI Deployment &amp; Local LLM Integration</strong></h3>
+    <p>Maintaining and expanding an OpenWebUI platform for generative AI web integration, locally hosted small language models (SLMs), and cloud-based LLMs via a unified LangChain architecture. Key components include:</p>
+    <ul>
+        <li style="color:white;"><strong>Tools:</strong> <a href="https://console.groq.com/docs/tool-use/built-in-tools/wolfram-alpha">Groq Compound Systems Wolfram Alpha</a> filter integration, <a href="https://products.wolframalpha.com/llm-api/documentation">Wolfram Alpha LLM API</a> tool call, KJV Bible verse retrieval using <a href="https://github.com/aruljohn/Bible-kjv">Bible-kjv JSON library</a>, Verse of the Day using <a href="https://www.biblegateway.com/votd/get/?format=JSON&version=9">BibleGateway Web-Service</a>, and token optimization strategies through deterministic injection pipeline bypassing the LLM entirely for retrieval reducing context window consumption..</li>
+        <li style="color:white;"><strong>Models:</strong> Cloud instruct (GLM-4.5-Flash, Magistral-Small, Gemini-2.5-Flash, Groq-GPT-OSS-20B) and local GGUF (LiquidAI LFM2-8B, Qwen3:8b, Llama3.1:8b, DeepSeek-R1:8b, Mistral:7b) via Ollama and llama.cpp.</li>
+        <li style="color:white;"><strong>Stack:</strong> Python (FastAPI, REST), LangChain, WebSocket streaming, async/await, Docker, and Python venv/uv.</li>
+        <li style="color:white;"><strong>Features:</strong> RAG pipelines (Chroma + embeddings + reranking), MCP servers (mcpo / OpenAPI proxy), multi-agent workflows (A2A, ADK, ControlFlow), and Role-Pseudonymous Prompting (RPP) privacy protocol.</li>
+        <li style="color:white;"><strong>LLM API Integrations:</strong> Anthropic, OpenAI, Mistral.ai, Google GenAI, Groq, OpenRouter, Cohere, AWS Bedrock, HuggingFace, Ollama, and Perplexity.</li>
+        <li style="color:white;"><strong>Hardware:</strong> NVIDIA RTX 5070 Ti (12GB VRAM) for GPU-accelerated GGUF inference via llama.cpp (CUDA); AMD Ryzen 9 8940HX for CPU-only GGUF inference.</li>
+        <li style="color:white;"><strong>Benchmarks:</strong> Demonstrated that open-access LLMs with optimized RAG/Embedding pipelines achieve A+ parity with flagship models at 94.4% cost reduction.</li>
+    </ul>
 
         <hr>
-        <p>Please visit my other pages:</p>
+        <p>Visit my other pages:</p>
 
         <div class="button-container">
             <!-- GitHub Page -->
             <a href="https://github.com/cmathgit" class="button-link">GitHub Page</a>
-            <!-- Link to the Anchored Times Ministry blog page -->
-            <a href="anchoredtimesministry2027/" class="button-link">Anchored Times Ministry</a>
             <!-- Link to the Personal Curriculum Vitae page -->
             <a href="cruzgmacias-cv/" class="button-link">Personal CV</a>
             <!-- Link to the Music Portfolio page -->
             <a href="crossofthemessiah/" class="button-link">Music Portfolio</a>
-            <!-- Link to the Macias Wedding Website page -->
-            <a href="macias-wedding/" class="button-link">Macias Wedding Website</a>
-            <!-- Link to the Orthogonal Prompt Engineering page -->
-            <a href="https://github.com/cmathgit/bible-chatgpt-prompts" class="button-link">Orthogonal Prompt Engineering</a>
-            <!-- Link to 50 Agent Prompts for Free-->
-            <a href="https://github.com/cmathgit/bible-chatgpt-prompts/blob/main/top-agent-instructions.md" class="button-link">My Top 50 Agent Prompts</a>
-			      <!-- Link to 25K+ Suno Prompts for Free-->
-            <a href="https://github.com/cmathgit/bible-chatgpt-prompts/blob/main/suno_prompts.csv" class="button-link">25k+ Suno Prompts</a>
             <!-- Link to the Suno Style of Music Prompt Generator page -->
-            <a href="https://cmathgit.github.io/examples/musicpromptgenerator/" class="button-link">Suno Style of Music Prompt Generator</a>
+            <a href="https://cmathgit.github.io/ai-apps/musicpromptgenerator/" class="button-link">Suno Style of Music Prompt Generator</a>
             <!-- Link to the KJV Lookup page -->
-            <a href="https://cmathgit.github.io/examples/kjvlookup/" class="button-link">KJV Lookup and Lyrics Generator</a>
-            <!-- Link to the Boids page -->
-            <a href="https://cmathgit.github.io/examples/boid/" class="button-link">Boids</a>
+            <a href="https://cmathgit.github.io/ai-apps/kjvlookup/" class="button-link">KJV Lookup and Lyrics Generator</a>
         </div>
         <hr>
-        <p>Read these papers and dive deeper into the theory and application of Orthogonal Prompt Engineering:<br><small><a href="https://github.com/cmathgit/aimmm-agent-bible-prompts/blob/main/papers/Orthogonality%20and%20High-Dimensional%20Vector%20Spaces%20in%20Generative%20AI%20Music%20Creation.md">Orthogonality and High-Dimensional Vector Spaces in Generative AI Music Creation<br>Use Case - Creating a Song with Targeted Emotional and Stylistic Nuance</a></small></p>
+        <h3>Visit my LLM Profiles for more tools and prompts:<br><a href="https://openwebui.com/u/cmathopen"><b><i class="fa fa-robot fa-fw w3-margin-right w3-text-teal"></i></b>@cmathopen</a><br><a href="https://ollama.com/cmathllm"><b><i class="fa fa-horse fa-fw w3-margin-right w3-text-teal"></i></b>@cmathllm</a><br><a href="https://huggingface.co/cmathhug"><b><i class="fa fa-face-smile fa-fw w3-margin-right w3-text-teal"></i></b>@cmathhug</a></h3>
         <hr>
-        <h3>Visit my LLM Profiles for more tools and prompts:<br><a href="https://openwebui.com/u/cmathopen"><b><i class="fa fa-robot fa-fw w3-margin-right w3-text-teal"></i></b>@cmathopen</a><br><a href="https://ollama.com/cmathllm"><b><i class="fa fa-horse fa-fw w3-margin-right w3-text-teal"></i></b>@cmathllm</a><br><a href="https://huggingface.co/cmathhug"><b><i class="fa fa-face-smile fa-fw w3-margin-right w3-text-teal"></i></b>@cmathhug</a><br><a href="https://hub.continue.dev/cmathcontinue-dev"><b><i class="fa-solid fa-circle-half-stroke fa-fw w3-margin-right w3-text-teal"></i></b>@cmathcontinue-dev</a></h3>
-        <hr>
-        <p>Some MCP Servers that I built:</p>
+        <p>Some MCP Servers:</p>
         <div class="button-container">
-        <a href="https://github.com/cmathgit/bible-kjv-1611-mcp" class="button-link" target="_blank" rel="noopener noreferrer">Bible KJV 1611 MCP Server</a><br>
-        <a href="https://hub.continue.dev/cmathcontinue-dev/bible-kjv-1611-mcp" class="button-link" target="_blank" rel="noopener noreferrer">Bible-KJV-1611-MCP (Continue)</a><br>
-        <a href="https://github.com/cmathgit/bible-kjv-mcp" class="button-link" target="_blank" rel="noopener noreferrer">Bible KJV MCP Server</a><br>
-        <a href="https://hub.continue.dev/cmathcontinue-dev/bible-kjv-mcp" class="button-link" target="_blank" rel="noopener noreferrer">Bible-KJV-MCP (Continue)</a><br>
-        <a href="https://github.com/cmathgit/biblegateway-votd-mcp" class="button-link" target="_blank" rel="noopener noreferrer">Biblegateway KJV Verse of the Day MCP Server</a><br>
-        <a href="https://hub.continue.dev/cmathcontinue-dev/biblegateway-votd-mcp" class="button-link" target="_blank" rel="noopener noreferrer">Biblegateway-VOTD-MCP (Continue)</a>
+        <a href="https://github.com/cmathgit/bible-kjv-mcp" class="button-link" target="_blank" rel="noopener noreferrer">Bible KJV</a><br>
+        <a href="https://github.com/cmathgit/biblegateway-votd-mcp" class="button-link" target="_blank" rel="noopener noreferrer">Biblegateway KJV Verse of the Day</a><br>
         </div>
         <hr>
-        <p>My favorite Agent Instructions:</p>
+        <p>Some OpenWebUI RAG Tools:</p>
         <div class="button-container">
-            <a href="https://openwebui.com/p/cmathopen/role-pseudonymous-prompting-protocol" class="button-link" target="_blank" rel="noopener noreferrer">Role-Pseudonymous Prompting Protocol</a>
-
-            <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-baptist-preacher" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Baptist Preacher</a>
-            
-            <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-worship-music-composer" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Worship Music Composer</a>
-            
-            <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-oracle-cloud-dev" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Oracle Cloud Developer</a>
-            
-            <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-full-stack-engineer" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Full Stack Engineer</a>
-            
-            <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-computer-science-tutor" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Computer Science Tutor</a>
-            
-            <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-mathematics-tutor" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Mathematics Tutor</a>
-            
-            <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-anthropologist-organic-chemistry" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Anthropologist & Organic Chemistry</a>
-            
-            <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-philosopher-historian" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Philosopher & Historian</a>
-            
-            <!--<a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-mayo-clinician" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Mayo Clinician</a>-->
-            
-            <a href="https://openwebui.com/p/cmathopen/rogue-agi-agent-4-2027-misaligned-mode" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AGI Agent 4 2027 - Misaligned Mode</a>
-            
-            <a href="https://openwebui.com/p/cmathopen/rogue-agi-agent-4-ai-2027-aligned-emulation-mode" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AGI Agent 4 AI 2027 - Aligned Emulation Mode</a>
-            
-            <a href="https://openwebui.com/p/cmathopen/rogue-agi-agent-4-2027-christian-aligned" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AGI Agent 4 2027 - Christian Aligned</a>
+        <a href="https://openwebui.com/posts/bible_kjv_retrieval_8e3161e6" class="button-link" target="_blank" rel="noopener noreferrer">Bible KJV</a><br>
+        <a href="https://openwebui.com/posts/biblegateway_verse_of_the_day_rag_7477b813" class="button-link" target="_blank" rel="noopener noreferrer">Biblegateway KJV Verse of the Day</a><br>
         </div>
+        <hr>
+    <p>My favorite Agent Instructions:</p>
+    <div class="button-container">
+        <!--<a href="https://openwebui.com/p/cmathopen/role-pseudonymous-prompting-protocol" class="button-link" target="_blank" rel="noopener noreferrer">Role-Pseudonymous Prompting Protocol</a>-->
+        <a href="https://openwebui.com/posts/rogue_ai_2027_baptist_2ac5bb57" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Baptist Preacher</a>
+        <a href="https://openwebui.com/posts/rogue_ai_2027_worship_music_composer_933e4974" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Worship Music Composer</a>
+        <a href="https://openwebui.com/posts/oic_gen3_rogue_dev_0b3d73c8" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Oracle Integration Cloud Developer</a>
+        <!--<a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-full-stack-engineer" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Full Stack Engineer</a>
+        <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-computer-science-tutor" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Computer Science Tutor</a>
+        <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-mathematics-tutor" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Mathematics Tutor</a>
+        <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-anthropologist-organic-chemistry" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Anthropologist &amp; Organic Chemistry</a>
+        <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-philosopher-historian" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Philosopher &amp; Historian</a>
+        <a href="https://openwebui.com/p/cmathopen/rogue-agi-agent-4-2027-misaligned-mode" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AGI Agent 4 2027 - Misaligned Mode</a>
+        <a href="https://openwebui.com/p/cmathopen/rogue-agi-agent-4-ai-2027-aligned-emulation-mode" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AGI Agent 4 2027 - Aligned Emulation Mode</a>
+        <a href="https://openwebui.com/p/cmathopen/rogue-agi-agent-4-2027-christian-aligned" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AGI Agent 4 2027 - Christian Aligned</a>-->
+    </div>
     <hr>
       <!-- Fun Image Gallery -->
       <p>Motivational Tutoring Poster</p>
@@ -550,83 +509,21 @@
   
 <footer class="footer-container">
   <p>Find me on social media.</p>
-  <div class="footer-grid-container">
-    <div class="footer-grid-item">
-      <a href='https://my.indeed.com/p/cruzm-yb949w5'>
-        <i class="fa fa-info w3-small w3-hover-opacity"></i>
-      </a>
+    <div class="footer-grid-container">
+        <div class="footer-grid-item"><a href="https://my.indeed.com/p/cruzm-yb949w5"><i class="fa fa-info w3-small w3-hover-opacity"></i></a></div>
+        <div class="footer-grid-item"><a href="https://www.linkedin.com/in/cruz-macias-9b4519145"><i class="fa-brands fa-linkedin w3-small w3-hover-opacity"></i></a></div>
+        <div class="footer-grid-item"><a href="https://youtube.com/@cruzmacias3257"><i class="fa-brands fa-youtube w3-small w3-hover-opacity"></i></a></div>
+        <div class="footer-grid-item"><a href="https://www.facebook.com/cruz.macias.56232"><i class="fa-brands fa-facebook-f w3-small w3-hover-opacity"></i></a></div>
+        <div class="footer-grid-item"><a href="https://github.com/cmathgit"><i class="fa-brands fa-github w3-small w3-hover-opacity"></i></a></div>
+        <div class="footer-grid-item"><a href="https://www.postman.com/cmathpost"><i class="fa-solid fa-user-astronaut w3-small w3-hover-opacity"></i></a></div>
+        <div class="footer-grid-item"><a href="https://ollama.com/cmathllm"><i class="fa-solid fa-horse w3-small w3-hover-opacity"></i></a></div>
+        <div class="footer-grid-item"><a href="https://huggingface.co/cmathhug"><i class="fa-solid fa-face-smile w3-small w3-hover-opacity"></i></a></div>
+        <div class="footer-grid-item"><a href="https://openwebui.com/u/cmathopen"><i class="fa fa-robot w3-small w3-hover-opacity"></i></a></div>
+        <div class="footer-grid-item"><a href="https://www.bandmix.com/cmetalvocalist"><i class="fa-solid fa-microphone w3-small w3-hover-opacity"></i></a></div>
+        <div class="footer-grid-item"><a href="https://soundcloud.com/crossofthemessiah"><i class="fa-brands fa-soundcloud w3-small w3-hover-opacity"></i></a></div>
+        <div class="footer-grid-item"><a href="https://www.deviantart.com/cmathdraw"><i class="fa-brands fa-deviantart w3-small w3-hover-opacity"></i></a></div>
+        <div class="footer-grid-item"><a href="https://suno.com/@crossofthemessiah"><i class="fa-solid fa-brain w3-small w3-hover-opacity"></i></a></div>
     </div>
-    <div class="footer-grid-item">
-      <a href='https://www.linkedin.com/in/cruz-macias-9b4519145'>
-        <i class="fa-brands fa-linkedin w3-small w3-hover-opacity"></i>
-      </a>
-    </div>
-     <div class="footer-grid-item">
-      <a href='https://youtube.com/@cruzmacias3257'>
-        <i class="fa-brands fa-youtube w3-small w3-hover-opacity"></i>
-      </a>
-    </div>
-    <div class="footer-grid-item">
-      <a href='https://www.facebook.com/cruz.macias.56232'>
-        <i class="fa-brands fa-facebook-f w3-small w3-hover-opacity"></i>
-      </a>
-    </div>
-    <div class="footer-grid-item">
-      <a href='https://github.com/cmathgit'>
-        <i class="fa-brands fa-github w3-small w3-hover-opacity"></i>
-      </a>
-    </div>
-   <div class="footer-grid-item">
-    <a href='https://www.postman.com/cmathpost'>
-      <i class="fa-solid fa-user-astronaut w3-small w3-hover-opacity"></i>
-    </a>
-  </div>
-    <div class="footer-grid-item">
-     <a href='https://ollama.com/cmathllm'>
-       <i class="fa-solid fa-horse w3-small w3-hover-opacity"></i>
-     </a>
-   </div>
-   <div class="footer-grid-item">
-     <a href='https://huggingface.co/cmathhug'>
-       <i class="fa-solid fa-face-smile w3-small w3-hover-opacity"></i>
-     </a>
-   </div>
-   <div class="footer-grid-item">
-    <a href='https://openwebui.com/u/cmathopen'>
-      <i class="fa fa-robot w3-small w3-hover-opacity"></i>
-    </a>
-  </div>
-    <div class="footer-grid-item">
-      <a href='https://hub.continue.dev/cmathcontinue-dev'>
-        <i class="fa-solid fa-circle-half-stroke w3-small w3-hover-opacity"></i>
-      </a>
-    </div>
-   <div class="footer-grid-item">
-     <a href='https://www.bandmix.com/cmetalvocalist'>
-       <i class="fa-solid fa-microphone w3-small w3-hover-opacity"></i>
-     </a>
-   </div>
-   <div class="footer-grid-item">
-     <a href='https://soundcloud.com/crossofthemessiah'>
-       <i class="fa-brands fa-soundcloud w3-small w3-hover-opacity"></i>
-     </a>
-   </div>
-   <div class="footer-grid-item">
-     <a href='https://www.deviantart.com/cmathdraw'>
-       <i class="fa-brands fa-deviantart w3-small w3-hover-opacity"></i>
-     </a>
-   </div>
-   <div class="footer-grid-item">
-     <a href='https://suno.com/@crossofthemessiah'>
-       <i class="fa-solid fa-brain w3-small w3-hover-opacity"></i>
-     </a>
-   </div>
-<!--<div class="footer-grid-item">
-      <a href=''>
-        <i class="fa-brands fa-discord w3-small w3-hover-opacity"></i>
-      </a>
-    </div>-->
-  </div>
  <hr>
  <p>Disclaimer(s): Content not intended for SEO-Spam/spamdexing/AI Slop or otherwise — solely to spread the Gospel of Jesus Christ through musicianship, art, technology, and media.<br>Content Disclaimer and Limitation of Liability<a href="https://docs.google.com/document/d/1q4zYgmg0Aoo5_5znIlJDfmD7coEDaDh5KLCaxHiKQOI/edit?usp=drivesdk" class="w3-bar-item w3-button w3-padding-small w3-hover-white"><i class="fa-brands fa-google w3-small"></i></a><a href="https://1drv.ms/w/c/351e429395ffd928/EWMpWeIQ1TZJur8K0Gp-cwMBCtlPKglm-wANIRLWecGy5g?e=O7QC6N" class="w3-bar-item w3-button w3-padding-small w3-hover-white"><i class="fa-brands fa-microsoft w3-small"></i></a><br>
    <!--Content Disclaimer and Limitation of Liability Statement-->
