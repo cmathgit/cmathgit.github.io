@@ -360,7 +360,7 @@
     <!-- ═══════════════════════════════════════ -->
     <h3 id="invoice-order-integration"><strong>Invoice Order Attachment Integration</strong></h3>
     <ul>
-        <li style="color:white;">OIC Gen3 orchestration ingesting daily zipped invoice image containers (~500 invoices/day) from an external healthcare supply chain provider (GHX) via SFTP.</li>
+        <li style="color:white;">OIC Gen3 orchestration ingesting daily zipped invoice image containers (~500 invoices/day) from an external healthcare supply chain provider via SFTP.</li>
         <li style="color:white;">Parses the index file to stage invoice metadata in ATP; resolves Oracle invoice IDs via BI Publisher (GetInvoice_Id report).</li>
         <li style="color:white;">Dynamically constructs REST POST payloads with base64-encoded PDFs and invokes the Oracle Fusion Cloud Payables attachments endpoint.</li>
         <li style="color:white;">Orphan PDF detection, record-level SUCCESS/ERROR status tracking, CSV error reporting, and SFTP archiving per batch run.</li>
