@@ -344,8 +344,8 @@
     <ul>
         <li style="color:white;">OIC Gen3 scheduled orchestration ingesting daily capital project and budget extracts from an external EPM platform via SFTP.</li>
         <li style="color:white;">Parses pipe-delimited data into ATP staging tables (project headers, task details, budget records).</li>
-        <li style="color:white;">Enriches records with Oracle reference data via BI Publisher reports: Project Manager EIN (AD Username lookup) and Department Code lookup &mdash; both required by Oracle Fusion Project Management FBDI.</li>
-        <li style="color:white;">Constructs Oracle-standard FBDI control files (PjfProjectsAllXface.zip and PjoBudgetsXface.zip) and submits to Oracle Fusion Project Control via ESS: Load Interface File for Import &rarr; Import Projects &rarr; Import Project Budgets.</li>
+        <li style="color:white;">Enriches records with Oracle reference data via BI Publisher lookups for project ownership and cost center resolution, both required by Oracle Fusion Project Management FBDI.</li>
+        <li style="color:white;">Constructs Oracle-standard FBDI control files for projects and budgets and submits to Oracle Fusion Project Control via ESS: Load Interface File for Import &rarr; Import Projects &rarr; Import Project Budgets.</li>
         <li style="color:white;">De-duplication, version-aware budget update logic, partial-success fallout handling, batch-level email notifications, and SFTP-based FBDI archiving for audit.</li>
         <li style="color:white;">Implements fault handling for SFTP, ATP, REST, and SOAP connections; monitors and confirms ESS job completion with wait/retry logic.</li>
     </ul>
@@ -361,7 +361,7 @@
     <h3 id="invoice-order-integration"><strong>Invoice Order Attachment Integration</strong></h3>
     <ul>
         <li style="color:white;">OIC Gen3 orchestration ingesting daily zipped invoice image containers (~500 invoices/day) from an external healthcare supply chain provider via SFTP.</li>
-        <li style="color:white;">Parses the index file to stage invoice metadata in ATP; resolves Oracle invoice IDs via BI Publisher (GetInvoice_Id report).</li>
+        <li style="color:white;">Parses the index file to stage invoice metadata in ATP; resolves Oracle invoice IDs via BI Publisher data model lookup</li>
         <li style="color:white;">Dynamically constructs REST POST payloads with base64-encoded PDFs and invokes the Oracle Fusion Cloud Payables attachments endpoint.</li>
         <li style="color:white;">Orphan PDF detection, record-level SUCCESS/ERROR status tracking, CSV error reporting, and SFTP archiving per batch run.</li>
         <li style="color:white;">Global and local fault handling across SFTP, ATP, and REST connections.</li>
@@ -398,7 +398,7 @@
         <li style="color:white;"><strong>Gap Remediation:</strong> Performed comparative analysis of legacy SCM transaction semantics versus Oracle Fusion Receiving interface constraints, identifying undocumented dependencies in supplier site attribution, item-org UOM compatibility, and PO lifecycle synchronization.</li>
         <li style="color:white;"><strong>Middleware Enhancements:</strong> Refactored inbound OIC integrations to introduce ATP-based canonical staging and BI Publisher-driven enrichment prior to FBDI/REST submission.</li>
         <li style="color:white;"><strong>RCA Methodology:</strong> Established root cause analysis processes leveraging OIC instance logs, ESS request history, and ATP staging table queries to deterministically differentiate Oracle configuration defects from upstream data-quality violations.</li>
-        <li style="color:white;"><strong>Outcomes:</strong> Reduced monthly SCM receipt middleware errors from a peak of 5,672 (January 2023) to 7 (July 2025) &mdash; a &gt;99% reduction. Reduced monthly Oracle cloud receiving errors from a peak of 24,383 (September 2022) to 385 (July 2025) &mdash; a ~98% reduction.</li>
+        <li style="color:white;"><strong>Outcomes:</strong> Reduced monthly SCM receipt middleware errors by over 99% and Oracle cloud receiving errors by approximately 98% following post-go-live stabilization, thereby eliminating the majority of integration failures within three years of migration.</li>
         <li style="color:white;"><strong>Operational Support:</strong> Authored production support playbooks enabling operations teams to locate, re-stage, and reprocess failed SCM transactions without manual ERP intervention.</li>
     </ul>
 

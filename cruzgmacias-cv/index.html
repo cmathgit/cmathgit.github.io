@@ -322,7 +322,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:100%">100%</div>
 </div>
 
-<p>IT Audit &amp; Change Control Management (NIST, ISO, FedRAMP, PCI DSS, CSA/STAR) &ndash; Deloitte Annual Audit</p>
+<p>IT Audit &amp; Change Control Management (NIST, ISO, FedRAMP, PCI DSS, CSA/STAR)</p>
 <div class="w3-light-grey w3-round-xlarge w3-small">
   <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:100%">100%</div>
 </div>
@@ -437,9 +437,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         defects from upstream data-quality violations.</li>
       <li><b>Operational Support:</b> Authored production support playbooks enabling operations teams to locate,
         re-stage, and reprocess failed SCM transactions without manual ERP intervention.</li>
-      <li><b>Outcomes:</b> Reduced monthly SCM receipt middleware errors from a peak of 5,672 (January 2023) to 7
-        (July 2025) a &gt;99% reduction and monthly Oracle cloud receiving errors from a peak of
-        24,383 (September 2022) to 385 (July 2025), a ~98% reduction.</li>
+      <li><b>Outcomes:</b> Reduced monthly SCM receipt middleware errors by over 99% and Oracle cloud receiving errors by approximately 98% following post-go-live stabilization thereby eliminating the majority of integration failures within three years of migration.</li>
     </ul>
 
     <br>
@@ -458,8 +456,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <li><b>Capital Budget Integration:</b> Built an OIC Gen3 scheduled orchestration ingesting daily capital
         project and budget extracts from an external EPM platform via SFTP, parsing pipe-delimited data into ATP
         staging tables (project headers, task details, budget records), enriching records with Oracle reference
-        data via BI Publisher reports (Project Manager EIN and Department Code lookups), constructing
-        Oracle-standard FBDI control files (PjfProjectsAllXface.zip and PjoBudgetsXface.zip), and submitting them
+        data via BI Publisher lookups for project ownership and cost center resolution, constructing
+        Oracle-standard FBDI control files for <a href="https://docs.oracle.com/en/cloud/saas/project-management/26b/oefpp/importprojects-3229.html#Details">projects and budgets</a>, and submitting them
         to Oracle Fusion Project Control via ESS job orchestration (Load Interface File for Import &rarr; Import
         Projects &rarr; Import Project Budgets) with de-duplication, version-aware budget update logic,
         partial-success fallout handling, batch-level email notifications, and SFTP-based FBDI archiving for
@@ -468,7 +466,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <li><b>Invoice Order Attachment Integration:</b> Developed an OIC Gen3 orchestration ingesting daily zipped
         invoice image containers (~500 invoices/day) from an external healthcare supply chain provider via
         SFTP, parsing the index file to stage invoice metadata in ATP, resolving Oracle invoice IDs via BI
-        Publisher (GetInvoice_Id report), dynamically constructing REST POST payloads with base64-encoded PDFs,
+        Publisher data models, dynamically constructing REST POST payloads with base64-encoded PDFs,
         and invoking the Oracle Fusion Cloud Payables attachments endpoint with orphan PDF detection,
         record-level SUCCESS/ERROR status tracking, CSV error reporting, and SFTP archiving per batch run.</li>
 
@@ -614,15 +612,15 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         <li><b>Capital Budget Integration</b>
           <ul>
             <li>Built an OIC Gen3 scheduled orchestration ingesting daily capital project and budget extracts from an external EPM platform via SFTP, parsing pipe-delimited data into ATP staging tables (project headers, task details, budget records) with file de-duplication and batch ID tracking.</li>
-            <li>Enriched records with Oracle reference data via BI Publisher reports (Project Manager EIN and Department Code resolution); generated Oracle-standard FBDI control files (PjfProjectsAllXface.zip and PjoBudgetsXface.zip) with version-aware budget update logic (Version1 = create, Version2+ = update).</li>
+            <li>Enriched records with Oracle reference data via BI Publisher lookups for project ownership and cost center resolution; generated Oracle-standard FBDI control files for <a href="https://docs.oracle.com/en/cloud/saas/project-management/26b/oefpp/importprojects-3229.html#Details">projects and budgets</a> with version-aware budget update logic (Version1 = create, Version2+ = update).</li>
             <li>Submitted FBDI packages to Oracle Fusion Project Control via ESS job orchestration (Load Interface File for Import &rarr; Import Projects &rarr; Import Project Budgets) with polling, request-ID tracking, partial-success fallout handling, and SFTP-based archiving per batch run.</li>
           </ul>
         </li>
 
         <li><b>Invoice Order Attachment Integration</b>
           <ul>
-            <li>Developed an OIC Gen3 orchestration ingesting daily zipped invoice image containers (~500 invoices/day) from an external healthcare supply chain provider via SFTP; parsed the index file to stage invoice metadata in ATP (INVOICE_IMG_ZIP_TBL and INVOICE_IMG_PDF_TBL).</li>
-            <li>Resolved Oracle invoice IDs via BI Publisher (GetInvoice_Id report); dynamically constructed REST POST payloads with base64-encoded PDFs and invoked the Oracle Fusion Cloud Payables attachments endpoint (/fscmRestApi/resources/.../invoices/{invoicesUniqID}/child/attachments).</li>
+            <li>Developed an OIC Gen3 orchestration ingesting daily zipped invoice image containers (~500 invoices/day) from an external healthcare supply chain provider via SFTP; parsed the index file invoice metadata and stored in ATP staging tables.</li>
+            <li>Resolved Oracle invoice IDs via BI Publisher data models; dynamically constructed REST POST payloads with base64-encoded PDFs and invoked the <a href="https://docs.oracle.com/en/cloud/saas/financials/26b/farfa/op-invoices-invoicesuniqid-child-attachments-post.html">Oracle Fusion Cloud Payables attachments endpoint.</a></li>
             <li>Implemented orphan PDF detection, record-level SUCCESS/ERROR status tracking, CSV error reporting per batch, and SFTP archiving eliminating manual AP attachment workflows and providing a complete audit trail per run.</li>
           </ul>
         </li>
@@ -651,7 +649,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <ul>
             <li>Served as OIC SME for post-go-live stabilization following enterprise legacy ERP to Oracle Fusion Cloud ERP migration. Performed comparative analysis of legacy SCM transaction semantics versus Oracle Fusion Receiving interface constraints, identifying undocumented dependencies in supplier site attribution, item-org UOM compatibility, and PO lifecycle synchronization.</li>
             <li>Refactored inbound integrations to introduce ATP-based canonical staging and BI Publisher-driven enrichment prior to FBDI/REST submission. Established RCA methodology using OIC instance logs, ESS request history, and ATP staging table queries to deterministically differentiate Oracle configuration defects from upstream data-quality violations.</li>
-            <li>Reduced monthly SCM receipt middleware errors from a peak of 5,672 (January 2023) to 7 (July 2025) a &gt;99% reduction and monthly Oracle cloud receiving errors from a peak of 24,383 (September 2022) to 385 (July 2025), a ~98% reduction. Authored production support playbooks enabling deterministic reprocessing without manual ERP intervention.</li>
+            <li>Reduced monthly SCM receipt middleware errors by over 99% and Oracle cloud receiving errors by approximately 98% following post-go-live stabilization thereby eliminating the majority of integration failures within three years of migration.</li>
           </ul>
         </li>
 
@@ -676,8 +674,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         <li>Partner with functional analysts and business users to define information flow, data requirements, and system specifications translating business requirements into technical solutions and assisting functional users in completing functional requirements documentation.</li>
         <li>Support troubleshooting, testing, and deployment of integrations and extensions across DEV, TEST, and PROD environments conducting unit, integrated, functional, and user acceptance testing (UAT) and performing developer-to-developer QA per change control management requirements.</li>
         <li>Maintain technical documentation including lean specifications, UML diagrams, operational procedures, system documentation, PERT/Gantt charts, and training modules supporting knowledge transfer for ongoing IT staff support and vendor coordination.</li>
-        <li>Serve as ACCB (Application Change Control Board) member participating in weekly reviews enforcing NIST, ISO, FedRAMP, and PCI DSS compliance for code changes, system-wide updates, and application migrations through mandatory functional and technical requirements review, testing documentation, developer-to-developer QA, and owner approval.</li>
-        <li>Participate in annual IT auditing conducted by Deloitte, testing for FedRAMP, PCI DSS, NIST, and ISO compliance; maintain and document change control security processes per Cloud Security Alliance (CSA) and Security Trust Assurance Registry (STAR) standards.</li>
+        <li>Serve as Application Change Control Board member, participating in governance reviews enforcing enterprise compliance standards including NIST, ISO, and PCI DSS for code changes, system-wide updates, and application migrations through mandatory functional and technical requirements review, testing documentation, developer-to-developer QA, and owner approval.</li>
+        <li>Participate in annual IT auditing conducted by an independent external audit firm, testing for FedRAMP, PCI DSS, NIST, and ISO compliance; maintain and document change control security processes per Cloud Security Alliance (CSA) and Security Trust Assurance Registry (STAR) standards.</li>
         <li>Develop and manage complex BI Publisher reports employing SQL, XML, JSON, and XSL/XSLT for template customization and data transformation; manage bursting queries, SFTP connections, AD Group permissions (rwx), and Lookup Types and Codes for outbound interfaces across JSON, XML, CSV, TSV, TXT, and RTF formats.</li>
         <li>Administer EPM Automate Cloud PaaS environment: monitor and execute batch scripts via Windows Task Scheduler over RDP, manage login credentials, generate and encrypt key files using TLS with SHA-256, and develop new EPM Automate scripts for business needs.</li>
         <li>Build web applications via Oracle VBCS to enable operational management (start/stop) of OIC integrations; develop and maintain Lookup Tables for data models and implementations.</li>
