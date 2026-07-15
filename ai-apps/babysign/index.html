@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>Baby Signs — Learn Simple Communication</title>
+    <meta name="description"
+        content="Interactive sign language learning application for infants. Teach your baby four core signs — Eat, Milk, Water, Sleep — through engaging touch interaction with audio feedback.">
+    <style>
+        /* ═══════════════════════════════════════
+           1. RESET & TOUCH SUPPRESSION
+           ═══════════════════════════════════════ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        html,
+        body {
+            width: 100vw;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            background: linear-gradient(160deg, #0d0d1a 0%, #1a1a2e 45%, #16213e 100%);
+            font-family: -apple-system, 'SF Pro Rounded', 'Segoe UI', system-ui, Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ═══════════════════════════════════════
+           2. AMBIENT BACKGROUND
+           ═══════════════════════════════════════ */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(60px);
+            opacity: 0.12;
+        }
+
+        /* ═══════════════════════════════════════
+           3. MAIN GRID LAYOUT
+           ═══════════════════════════════════════ */
+        #app {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-auto-rows: minmax(160px, 1fr);
+            gap: 20px;
+            padding: 20px;
+            width: 100vw;
+            min-height: 100vh;
+            padding-top: max(20px, env(safe-area-inset-top, 20px));
+            padding-bottom: max(60px, env(safe-area-inset-bottom, 20px));
+            padding-left: max(20px, env(safe-area-inset-left, 20px));
+            padding-right: max(20px, env(safe-area-inset-right, 20px));
+            z-index: 1;
+        }
+
+        /* ═══════════════════════════════════════
+           4. CARD STYLES
+           ═══════════════════════════════════════ */
+        .sign-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 28px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            min-height: 180px;
+            min-width: 180px;
+            will-change: transform;
+        }
+
+        /* Glossy highlight overlay */
+        .sign-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            background: linear-gradient(145deg,
+                    rgba(255, 255, 255, 0.28) 0%,
+                    rgba(255, 255, 255, 0.08) 35%,
+                    rgba(255, 255, 255, 0) 60%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Inner shadow for depth */
+        .sign-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            box-shadow:
+                inset 0 -6px 16px rgba(0, 0, 0, 0.18),
+                inset 0 2px 4px rgba(255, 255, 255, 0.15);
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .sign-card.active {
+            transform: scale(0.92);
+        }
+
+        /* ═══════════════════════════════════════
+           5. CARD CONTENT
+           ═══════════════════════════════════════ */
+        .card-icon {
+            width: 48%;
+            max-width: 150px;
+            height: auto;
+            filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.2));
+            position: relative;
+            z-index: 1;
+            will-change: transform;
+        }
+
+        .card-label {
+            font-size: clamp(24px, 5.5vw, 44px);
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.95);
+            letter-spacing: 5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ═══════════════════════════════════════
+           6. IDLE FLOAT ANIMATION
+           ═══════════════════════════════════════ */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        .card-icon {
+            animation: float 3.5s ease-in-out infinite;
+        }
+
+        .sign-card:nth-child(2) .card-icon {
+            animation-delay: -0.8s;
+        }
+
+        .sign-card:nth-child(3) .card-icon {
+            animation-delay: -1.6s;
+        }
+
+        .sign-card:nth-child(4) .card-icon {
+            animation-delay: -2.4s;
+        }
+
+        .sign-card:nth-child(5) .card-icon {
+            animation-delay: -0.4s;
+        }
+
+        .sign-card:nth-child(6) .card-icon {
+            animation-delay: -1.2s;
+        }
+
+        .sign-card:nth-child(7) .card-icon {
+            animation-delay: -2.0s;
+        }
+
+        .sign-card:nth-child(8) .card-icon {
+            animation-delay: -2.8s;
+        }
+
+        .sign-card:nth-child(9) .card-icon {
+            animation-delay: -0.6s;
+        }
+
+        .sign-card:nth-child(10) .card-icon {
+            animation-delay: -1.4s;
+        }
+
+        /* ═══════════════════════════════════════
+           7. TAP BOUNCE ANIMATION
+           ═══════════════════════════════════════ */
+        @keyframes tapBounce {
+            0% {
+                transform: scale(1);
+            }
+
+            18% {
+                transform: scale(1.28);
+            }
+
+            38% {
+                transform: scale(0.88);
+            }
+
+            55% {
+                transform: scale(1.12);
+            }
+
+            72% {
+                transform: scale(0.96);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .sign-card.tapped .card-icon {
+            animation: tapBounce 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        /* ═══════════════════════════════════════
+           8. HAND SIGN GESTURE ANIMATIONS
+           ═══════════════════════════════════════ */
+
+        /* EAT: hand taps toward mouth */
+        @keyframes eatGesture {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            20% {
+                transform: translate(-14px, 8px) rotate(-8deg);
+            }
+
+            40% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            60% {
+                transform: translate(-14px, 8px) rotate(6deg);
+            }
+
+            80% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+        }
+
+        .sign-card.tapped[data-sign="eat"] .eat-anim {
+            animation: eatGesture 1s ease-in-out;
+        }
+
+        /* MILK: hand squeezes open / close */
+        @keyframes milkGesture {
+
+            0%,
+            100% {
+                transform: scaleX(1) scaleY(1);
+            }
+
+            18% {
+                transform: scaleX(0.65) scaleY(1.18);
+            }
+
+            36% {
+                transform: scaleX(1.12) scaleY(0.92);
+            }
+
+            54% {
+                transform: scaleX(0.68) scaleY(1.15);
+            }
+
+            72% {
+                transform: scaleX(1.08) scaleY(0.95);
+            }
+        }
+
+        .sign-card.tapped[data-sign="milk"] .milk-anim {
+            animation: milkGesture 1s ease-in-out;
+        }
+
+        /* WATER: cup tilts side to side */
+        @keyframes waterGesture {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            22% {
+                transform: rotate(-22deg) translateY(-4px);
+            }
+
+            50% {
+                transform: rotate(0deg);
+            }
+
+            72% {
+                transform: rotate(22deg) translateY(-4px);
+            }
+        }
+
+        .sign-card.tapped[data-sign="water"] .water-anim {
+            animation: waterGesture 1s ease-in-out;
+        }
+
+        /* SLEEP: hand sweeps downward */
+        @keyframes sleepGesture {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            45% {
+                transform: translateY(22px) scale(0.82);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .sign-card.tapped[data-sign="sleep"] .sleep-anim {
+            animation: sleepGesture 1.3s ease-in-out;
+        }
+
+        /* ZZZ float upward on sleep tap */
+        @keyframes zzzDrift {
+            0% {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translateY(-18px);
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+        }
+
+        .sign-card.tapped[data-sign="sleep"] .sleep-zzz {
+            animation: zzzDrift 1.3s ease-in-out;
+        }
+
+        /* TOY: twist motion */
+        @keyframes toyGesture {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            20% {
+                transform: rotate(18deg);
+            }
+
+            40% {
+                transform: rotate(-18deg);
+            }
+
+            60% {
+                transform: rotate(14deg);
+            }
+
+            80% {
+                transform: rotate(-10deg);
+            }
+        }
+
+        .sign-card.tapped[data-sign="toy"] .toy-anim {
+            animation: toyGesture 0.9s ease-in-out;
+        }
+
+        /* PLAY: shake / wiggle */
+        @keyframes playGesture {
+
+            0%,
+            100% {
+                transform: rotate(0deg) scale(1);
+            }
+
+            15% {
+                transform: rotate(-12deg) scale(1.08);
+            }
+
+            30% {
+                transform: rotate(12deg) scale(1.08);
+            }
+
+            45% {
+                transform: rotate(-10deg) scale(1.04);
+            }
+
+            60% {
+                transform: rotate(10deg) scale(1.04);
+            }
+
+            80% {
+                transform: rotate(0deg) scale(1);
+            }
+        }
+
+        .sign-card.tapped[data-sign="play"] .play-anim {
+            animation: playGesture 0.9s ease-in-out;
+        }
+
+        /* PACIFIER: tap motion at lips */
+        @keyframes pacifierGesture {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            25% {
+                transform: translateY(-10px);
+            }
+
+            50% {
+                transform: translateY(0);
+            }
+
+            75% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .sign-card.tapped[data-sign="pacifier"] .pacifier-anim {
+            animation: pacifierGesture 0.8s ease-in-out;
+        }
+
+        /* CHANGE: swap / flip motion */
+        @keyframes changeGesture {
+
+            0%,
+            100% {
+                transform: rotateY(0deg);
+            }
+
+            25% {
+                transform: rotateY(90deg);
+            }
+
+            50% {
+                transform: rotateY(180deg);
+            }
+
+            75% {
+                transform: rotateY(270deg);
+            }
+        }
+
+        .sign-card.tapped[data-sign="change"] .change-anim {
+            animation: changeGesture 0.9s ease-in-out;
+        }
+
+        /* BATH: scrub up-down */
+        @keyframes bathGesture {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            20% {
+                transform: translateY(-8px);
+            }
+
+            40% {
+                transform: translateY(6px);
+            }
+
+            60% {
+                transform: translateY(-6px);
+            }
+
+            80% {
+                transform: translateY(4px);
+            }
+        }
+
+        .sign-card.tapped[data-sign="bath"] .bath-anim {
+            animation: bathGesture 0.8s ease-in-out;
+        }
+
+        /* TEETH: side-to-side brush */
+        @keyframes teethGesture {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(8px);
+            }
+
+            40% {
+                transform: translateX(-8px);
+            }
+
+            60% {
+                transform: translateX(6px);
+            }
+
+            80% {
+                transform: translateX(-5px);
+            }
+        }
+
+        .sign-card.tapped[data-sign="teeth"] .teeth-anim {
+            animation: teethGesture 0.8s ease-in-out;
+        }
+
+        /* ═══════════════════════════════════════
+           9. GLOW RING ON TAP
+           ═══════════════════════════════════════ */
+        .glow-ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 32px;
+            pointer-events: none;
+            z-index: 4;
+            opacity: 0;
+        }
+
+        @keyframes glowPulse {
+            0% {
+                opacity: 0;
+                box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
+            }
+
+            40% {
+                opacity: 1;
+                box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.3);
+            }
+
+            100% {
+                opacity: 0;
+                box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0), 0 0 60px rgba(255, 255, 255, 0);
+            }
+        }
+
+        .sign-card.tapped .glow-ring {
+            animation: glowPulse 0.7s ease-out;
+        }
+
+        /* ═══════════════════════════════════════
+           10. SPARKLE PARTICLES
+           ═══════════════════════════════════════ */
+        .sparkle {
+            position: absolute;
+            border-radius: 50%;
+            background: white;
+            pointer-events: none;
+            z-index: 5;
+            animation: sparkleAnim 0.85s ease-out forwards;
+        }
+
+        @keyframes sparkleAnim {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: translate(var(--sx), var(--sy)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           11. CAREGIVER BUTTON
+           ═══════════════════════════════════════ */
+        #caregiver-btn {
+            position: fixed;
+            top: max(16px, env(safe-area-inset-top, 16px));
+            right: max(16px, env(safe-area-inset-right, 16px));
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        #caregiver-btn.pressing {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.12);
+        }
+
+        .progress-ring {
+            position: absolute;
+            width: 46px;
+            height: 46px;
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring circle {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.65);
+            stroke-width: 2.5;
+            stroke-dasharray: 131;
+            stroke-dashoffset: 131;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 3s linear;
+        }
+
+        #caregiver-btn.pressing .progress-ring circle {
+            stroke-dashoffset: 0;
+        }
+
+        /* ═══════════════════════════════════════
+           12. CAREGIVER OVERLAY
+           ═══════════════════════════════════════ */
+        #caregiver-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 8, 24, 0.96);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 48px 20px 100px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.45s ease;
+        }
+
+        #caregiver-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        #caregiver-overlay h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .overlay-subtitle {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        .guide-card {
+            width: 100%;
+            max-width: 520px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 18px;
+            padding: 22px 24px;
+            margin-bottom: 14px;
+            border-left: 5px solid;
+        }
+
+        .guide-card h2 {
+            font-size: 19px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }
+
+        .guide-card .sign-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 14px;
+        }
+
+        .guide-card p {
+            font-size: 14.5px;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.78);
+            margin-bottom: 8px;
+        }
+
+        .guide-card .tip {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-top: 8px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.55;
+        }
+
+        .protocol-section {
+            width: 100%;
+            max-width: 520px;
+            margin-top: 24px;
+            margin-bottom: 14px;
+        }
+
+        .protocol-section h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 12px;
+            letter-spacing: 0.3px;
+        }
+
+        .protocol-step {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-bottom: 10px;
+        }
+
+        .protocol-step strong {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+        }
+
+        .protocol-step p {
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 4px;
+        }
+
+        #close-overlay {
+            position: fixed;
+            bottom: max(28px, env(safe-area-inset-bottom, 28px));
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 14px 44px;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 201;
+            letter-spacing: 0.5px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        #close-overlay:active {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(-50%) scale(0.96);
+        }
+
+        /* ═══════════════════════════════════════
+           13. RESPONSIVE ADJUSTMENTS
+           ═══════════════════════════════════════ */
+        @media (max-width: 480px) {
+            #app {
+                gap: 14px;
+                padding: 14px;
+            }
+
+            .sign-card {
+                border-radius: 22px;
+            }
+
+            .sign-card::before,
+            .sign-card::after {
+                border-radius: 22px;
+            }
+
+            .card-label {
+                font-size: 20px;
+                letter-spacing: 3px;
+                margin-top: 6px;
+            }
+
+            .card-icon {
+                width: 42%;
+            }
+        }
+
+        @media (orientation: landscape) and (max-height: 500px) {
+            #app {
+                gap: 12px;
+                padding: 12px;
+            }
+
+            .card-icon {
+                width: 32%;
+                max-width: 100px;
+            }
+
+            .card-label {
+                font-size: 18px;
+                letter-spacing: 2px;
+                margin-top: 4px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #app {
+                gap: 32px;
+                padding: 32px;
+            }
+
+            .card-icon {
+                max-width: 180px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main id="app"></main>
+
+    <!-- Caregiver access button (3-second long-press required) -->
+    <button id="caregiver-btn" aria-label="Caregiver Guide — hold for 3 seconds">
+        <svg class="progress-ring" viewBox="0 0 46 46">
+            <circle cx="23" cy="23" r="20.8" />
+        </svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4" />
+            <circle cx="12" cy="8" r="0.5" fill="currentColor" />
+        </svg>
+    </button>
+
+    <!-- Caregiver instruction overlay -->
+    <div id="caregiver-overlay">
+        <h1>👶 Caregiver Guide</h1>
+        <p class="overlay-subtitle">How to model each sign for your infant<br>Hold each card's icon in context to teach
+        </p>
+        <div id="guide-cards"></div>
+
+        <div class="protocol-section">
+            <h3>📋 Teaching Protocol</h3>
+            <div class="protocol-step">
+                <strong>1. Establish Joint Attention</strong>
+                <p>Position yourself at the infant's eye level. Wait until they are actively looking at your face or
+                    hands before showing a gesture.</p>
+            </div>
+            <div class="protocol-step">
+                <strong>2. Model &amp; Verbalize Simultaneously</strong>
+                <p>Execute the physical sign while speaking the target word clearly. Say "It is time to <em>eat</em>"
+                    while tapping fingertips to lips.</p>
+            </div>
+            <div class="protocol-step">
+                <strong>3. Execute in Immediate Context</strong>
+                <p>Sign precisely at the moment the need is being met. Sign <em>milk</em> right before handing over the
+                    bottle. Immediate proximity links action to reward.</p>
+            </div>
+            <div class="protocol-step">
+                <strong>4. Shape &amp; Reinforce Approximations</strong>
+                <p>Infants produce imperfect versions of signs. Recognize any attempt immediately, verbalize the correct
+                    word, model the precise sign again, and fulfill the need.</p>
+            </div>
+        </div>
+
+        <div class="protocol-section">
+            <h3>🎯 Milestones</h3>
+            <div class="protocol-step">
+                <p><strong>Receptive understanding</strong> (recognition): 2–3 weeks of consistent modeling.</p>
+                <p><strong>Expressive execution</strong> (producing sign): 3–6 weeks after initiation.</p>
+                <p><strong>Consistency across caregivers</strong> is critical — all adults must use the same gestures.
+                </p>
+            </div>
+        </div>
+
+        <button id="close-overlay">Close Guide</button>
+    </div>
+
+    <script>
+        /* =================================================================
+           CORE SIGN DATA — Immutable Configuration
+           ================================================================= */
+        const SIGN_DATA = [
+            {
+                id: "eat",
+                label: "EAT",
+                speechText: "Eat. Time to eat food.",
+                chimeFreq: [440, 554.37],
+                bgColor: "#FFB300",
+                shadowColor: "rgba(255, 179, 0, 0.35)",
+                svgIcon: `<svg viewBox="0 0 120 120" class="card-icon" aria-hidden="true">
+                <!-- Plate -->
+                <ellipse cx="60" cy="92" rx="44" ry="13" fill="rgba(255,255,255,0.18)"/>
+                <ellipse cx="60" cy="90" rx="42" ry="11" fill="rgba(255,255,255,0.1)"/>
+
+                <!-- Apple -->
+                <circle cx="45" cy="56" r="23" fill="#E53935"/>
+                <circle cx="58" cy="54" r="21" fill="#EF5350"/>
+                <ellipse cx="40" cy="44" rx="5" ry="9" fill="rgba(255,255,255,0.3)" transform="rotate(-18 40 44)"/>
+                <path d="M54 33 Q57 21 62 24" stroke="#5D4037" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <ellipse cx="63" cy="25" rx="9" ry="4.5" fill="#66BB6A" transform="rotate(-28 63 25)"/>
+
+                <!-- Carrot -->
+                <path d="M87 48 L96 80 L78 80Z" fill="#FF7043"/>
+                <line x1="84" y1="58" x2="86" y2="72" stroke="#FFB74D" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="89" y1="55" x2="90" y2="68" stroke="#FFB74D" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M83 49 Q87 39 91 49" stroke="#43A047" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+
+                <!-- Hand sign: pinched "O" for eat -->
+                <g transform="translate(90, 26)">
+                    <g class="eat-anim">
+                        <ellipse rx="9" ry="11" fill="#FFCCBC" stroke="#DFA98A" stroke-width="1.5"/>
+                        <circle cy="-13" r="5.5" fill="#FFCCBC" stroke="#DFA98A" stroke-width="1.5"/>
+                        <circle cy="-13" r="2.2" fill="#DFA98A" opacity="0.25"/>
+                    </g>
+                </g>
+
+                <!-- Accent sparkle -->
+                <circle cx="28" cy="34" r="2.5" fill="rgba(255,255,255,0.5)"/>
+            </svg>`,
+                caregiverInstructions: "Press the tips of the thumb and fingers together to form a flattened \"O\" or beak shape. Tap the fingertips against closed lips 2–3 times. Say \"eat\" or \"time to eat\" clearly each time.",
+                caregiverTip: "Sign immediately before presenting food. Accept any hand-to-mouth gesture as a valid motor approximation and respond with the correct word.",
+                videoUrl: "https://www.youtube.com/watch?v=_nkTVDYw-VY"
+            },
+            {
+                id: "milk",
+                label: "MILK",
+                speechText: "Milk. Drink your milk.",
+                chimeFreq: [523.25, 659.25],
+                bgColor: "#42A5F5",
+                shadowColor: "rgba(66, 165, 245, 0.35)",
+                svgIcon: `<svg viewBox="0 0 120 120" class="card-icon" aria-hidden="true">
+                <!-- Bottle nipple -->
+                <path d="M50 16 Q50 6 60 6 Q70 6 70 16" fill="#FFCC80" stroke="#F9A825" stroke-width="1.5"/>
+                <!-- Bottle cap ring -->
+                <rect x="46" y="16" width="28" height="9" rx="3.5" fill="#E0E0E0" stroke="#BDBDBD" stroke-width="1"/>
+                <!-- Bottle body -->
+                <rect x="42" y="25" width="36" height="70" rx="7" fill="rgba(255,255,255,0.88)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+                <!-- Milk fill -->
+                <rect x="44" y="52" width="32" height="41" rx="5" fill="#BBDEFB"/>
+                <!-- Measurement lines -->
+                <line x1="44" y1="44" x2="52" y2="44" stroke="rgba(0,0,0,0.07)" stroke-width="1"/>
+                <line x1="44" y1="56" x2="52" y2="56" stroke="rgba(0,0,0,0.07)" stroke-width="1"/>
+                <line x1="44" y1="68" x2="52" y2="68" stroke="rgba(0,0,0,0.07)" stroke-width="1"/>
+                <!-- Bubbles -->
+                <circle cx="56" cy="62" r="3.5" fill="rgba(255,255,255,0.55)"/>
+                <circle cx="66" cy="70" r="2.5" fill="rgba(255,255,255,0.4)"/>
+                <circle cx="58" cy="80" r="3" fill="rgba(255,255,255,0.3)"/>
+                <!-- Shine reflection -->
+                <rect x="48" y="30" width="4.5" height="30" rx="2.2" fill="rgba(255,255,255,0.4)"/>
+
+                <!-- Hand sign: squeezing fist for milk -->
+                <g transform="translate(95, 55)">
+                    <g class="milk-anim">
+                        <ellipse rx="10" ry="12" fill="#FFCCBC" stroke="#DFA98A" stroke-width="1.5"/>
+                        <rect x="-8" y="-20" width="5" height="12" rx="2.5" fill="#FFCCBC" stroke="#DFA98A" stroke-width="1"/>
+                        <rect x="-2" y="-23" width="5" height="15" rx="2.5" fill="#FFCCBC" stroke="#DFA98A" stroke-width="1"/>
+                        <rect x="4" y="-21" width="5" height="13" rx="2.5" fill="#FFCCBC" stroke="#DFA98A" stroke-width="1"/>
+                        <rect x="9" y="-17" width="4.5" height="9" rx="2" fill="#FFCCBC" stroke="#DFA98A" stroke-width="1"/>
+                    </g>
+                </g>
+
+                <!-- Floating drops -->
+                <circle cx="28" cy="42" r="4.5" fill="rgba(255,255,255,0.25)"/>
+                <circle cx="22" cy="62" r="3" fill="rgba(255,255,255,0.18)"/>
+            </svg>`,
+                caregiverInstructions: "Extend the hand forward and open the fingers wide, then close them tightly into a fist. Repeat this opening and closing motion, resembling squeezing a sponge or milking.",
+                caregiverTip: "Sign right before offering the bottle or breast. A closed fist waving or any squeezing motion is the common infant approximation — reinforce it immediately.",
+                videoUrl: "https://www.youtube.com/watch?v=F_wq6RpLDsI"
+            },
+            {
+                id: "water",
+                label: "WATER",
+                speechText: "Water. Have some water.",
+                chimeFreq: [587.33, 739.99],
+                bgColor: "#00897B",
+                shadowColor: "rgba(0, 137, 123, 0.35)",
+                svgIcon: `<svg viewBox="0 0 120 120" class="card-icon" aria-hidden="true">
+                <!-- Main water drop -->
+                <path d="M60 10 Q60 10 35 58 Q26 74 35 89 Q44 104 60 104 Q76 104 85 89 Q94 74 85 58 Q60 10 60 10Z" fill="rgba(255,255,255,0.88)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+                <!-- Inner water fill -->
+                <path d="M60 30 Q60 30 41 64 Q34 76 41 87 Q48 98 60 98 Q72 98 79 87 Q86 76 79 64 Q60 30 60 30Z" fill="#B2EBF2"/>
+                <!-- Reflection highlight -->
+                <ellipse cx="47" cy="52" rx="5.5" ry="13" fill="rgba(255,255,255,0.42)" transform="rotate(-14 47 52)"/>
+                <!-- Tiny bubbles inside -->
+                <circle cx="55" cy="75" r="2.5" fill="rgba(255,255,255,0.35)"/>
+                <circle cx="65" cy="82" r="2" fill="rgba(255,255,255,0.25)"/>
+
+                <!-- Small splash drops -->
+                <circle cx="22" cy="78" r="5.5" fill="rgba(255,255,255,0.35)"/>
+                <circle cx="98" cy="62" r="4.5" fill="rgba(255,255,255,0.28)"/>
+                <circle cx="92" cy="84" r="3" fill="rgba(255,255,255,0.2)"/>
+
+                <!-- Cup icon (infant-friendly water sign substitute) -->
+                <g transform="translate(94, 94)">
+                    <g class="water-anim">
+                        <path d="M-11 -12 L-8 7 Q0 12 8 7 L11 -12Z" fill="#B2EBF2" stroke="#4DD0E1" stroke-width="1.5" stroke-linejoin="round"/>
+                        <rect x="-11" y="-14" width="22" height="4" rx="2" fill="#4DD0E1"/>
+                        <path d="M-6 -3 L-5 5 Q0 8 5 5 L6 -3Z" fill="#80DEEA"/>
+                    </g>
+                </g>
+
+                <!-- Ripple lines -->
+                <path d="M28 110 Q44 104 60 110 Q76 116 92 110" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M35 116 Q48 112 60 116 Q72 120 85 116" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>`,
+                caregiverInstructions: "Extend the index, middle, and ring fingers upward to form a \"W\" shape while holding the pinky finger down with the thumb. Tap the side of the index finger against the chin twice. For infants struggling with the \"W\" handshape, mime holding an imaginary cup to the mouth and tilting it backward.",
+                caregiverTip: "The cup-to-mouth substitute is much easier for infant motor coordination. Sign before each water or juice offering consistently.",
+                videoUrl: "https://www.youtube.com/watch?v=m49LzvNVTgc"
+            },
+            {
+                id: "sleep",
+                label: "SLEEP",
+                speechText: "Sleep. Time for bedtime.",
+                chimeFreq: [392.00, 329.63],
+                bgColor: "#7E57C2",
+                shadowColor: "rgba(126, 87, 194, 0.35)",
+                svgIcon: `<svg viewBox="0 0 120 120" class="card-icon" aria-hidden="true">
+                <!-- Crescent moon -->
+                <path d="M50 16 C26 18 12 40 12 62 C12 86 32 104 56 104 C70 104 83 96 90 84 C68 94 46 82 46 56 C46 36 58 22 78 16 C68 12 58 14 50 16Z" fill="#FFF9C4" stroke="#FFE082" stroke-width="1"/>
+                <!-- Moon face - closed eye -->
+                <path d="M34 56 Q39 51 44 56" fill="none" stroke="#F9A825" stroke-width="2.2" stroke-linecap="round"/>
+                <!-- Moon rosy cheek -->
+                <circle cx="28" cy="63" r="4.5" fill="#FFE0B2" opacity="0.45"/>
+                <!-- Moon smile -->
+                <path d="M32 68 Q39 75 46 68" fill="none" stroke="#F9A825" stroke-width="2" stroke-linecap="round"/>
+
+                <!-- Stars -->
+                <polygon points="84,20 86,27 93,27 88,31 90,38 84,34 78,38 80,31 75,27 82,27" fill="#FFE082"/>
+                <polygon points="100,46 101.5,51 106,51 102.5,53.5 104,58 100,55.5 96,58 97.5,53.5 94,51 98.5,51" fill="#FFF9C4" opacity="0.8"/>
+                <polygon points="78,74 79.5,77 83,77 80.5,79.5 82,83 78,80.5 74,83 75.5,79.5 73,77 76.5,77" fill="#FFF9C4" opacity="0.55"/>
+
+                <!-- ZZZ -->
+                <g class="sleep-zzz">
+                    <text x="90" y="38" font-size="15" font-weight="800" fill="rgba(255,255,255,0.45)" font-family="sans-serif">z</text>
+                    <text x="98" y="27" font-size="11" font-weight="800" fill="rgba(255,255,255,0.32)" font-family="sans-serif">z</text>
+                    <text x="104" y="18" font-size="8" font-weight="800" fill="rgba(255,255,255,0.2)" font-family="sans-serif">z</text>
+                </g>
+
+                <!-- Hand sign: open palm sweeping down for sleep -->
+                <g transform="translate(82, 56)">
+                    <g class="sleep-anim">
+                        <ellipse rx="8.5" ry="10.5" fill="#FFCCBC" stroke="#DFA98A" stroke-width="1.5"/>
+                        <ellipse cx="-5.5" cy="-12" rx="3" ry="7" fill="#FFCCBC" stroke="#DFA98A" stroke-width="1"/>
+                        <ellipse cx="0" cy="-15" rx="3" ry="8" fill="#FFCCBC" stroke="#DFA98A" stroke-width="1"/>
+                        <ellipse cx="5.5" cy="-13" rx="3" ry="7.5" fill="#FFCCBC" stroke="#DFA98A" stroke-width="1"/>
+                        <ellipse cx="10" cy="-9" rx="2.5" ry="5.5" fill="#FFCCBC" stroke="#DFA98A" stroke-width="1"/>
+                    </g>
+                </g>
+
+                <!-- Soft cloud -->
+                <ellipse cx="56" cy="112" rx="40" ry="8" fill="rgba(255,255,255,0.06)"/>
+            </svg>`,
+                caregiverInstructions: "Start with an open hand, fingers extended, placed over the forehead. Slowly draw the hand downward toward the chin while bringing the fingers and thumb together to touch. Simultaneously close your eyes and tilt your head slightly as the hand passes over the face.",
+                caregiverTip: "Sign at the very start of the bedtime routine while dimming lights. Any downward hand motion near the face counts as a valid infant approximation.",
+                videoUrl: "https://www.youtube.com/watch?v=qShRTh7EGxA"
+            },
+            {
+                id: "toy",
+                label: "TOY",
+                speechText: "Toy. Let's play with a toy.",
+                chimeFreq: [494, 622],
+                bgColor: "#EC407A",
+                shadowColor: "rgba(236, 64, 122, 0.35)",
+                svgIcon: `<svg viewBox="0 0 120 120" class="card-icon" aria-hidden="true">
+                <!-- Stacking ring base -->
+                <ellipse cx="60" cy="98" rx="35" ry="8" fill="rgba(255,255,255,0.2)"/>
+                <!-- Pole -->
+                <rect x="57" y="30" width="6" height="68" rx="3" fill="rgba(255,255,255,0.25)"/>
+                <!-- Ring 1 (bottom, largest) -->
+                <ellipse cx="60" cy="88" rx="28" ry="8" fill="#EF5350"/>
+                <ellipse cx="60" cy="85" rx="28" ry="8" fill="#E53935"/>
+                <!-- Ring 2 -->
+                <ellipse cx="60" cy="72" rx="22" ry="7" fill="#FFA726"/>
+                <ellipse cx="60" cy="69" rx="22" ry="7" fill="#FB8C00"/>
+                <!-- Ring 3 -->
+                <ellipse cx="60" cy="56" rx="17" ry="6" fill="#66BB6A"/>
+                <ellipse cx="60" cy="53" rx="17" ry="6" fill="#43A047"/>
+                <!-- Ring 4 (top, smallest) -->
+                <ellipse cx="60" cy="42" rx="12" ry="5" fill="#42A5F5"/>
+                <ellipse cx="60" cy="40" rx="12" ry="5" fill="#1E88E5"/>
+                <!-- Top ball -->
+                <g class="toy-anim">
+                    <circle cx="60" cy="28" r="8" fill="#AB47BC"/>
+                    <circle cx="57" cy="25" r="2.5" fill="rgba(255,255,255,0.35)"/>
+                </g>
+                <!-- Sparkles -->
+                <circle cx="30" cy="35" r="2" fill="rgba(255,255,255,0.4)"/>
+                <circle cx="90" cy="45" r="1.5" fill="rgba(255,255,255,0.3)"/>
+            </svg>`,
+                caregiverInstructions: "Make a 'T' handshape with both hands (fist with thumb tucked between index and middle fingers). Twist both wrists back and forth simultaneously.",
+                caregiverTip: "Sign before offering a toy. Any twisting hand motion or reaching toward toys counts as a valid early approximation.",
+                videoUrl: "https://www.youtube.com/watch?v=6IemMWPDCkc"
+            },
+            {
+                id: "play",
+                label: "PLAY",
+                speechText: "Play. Let's play!",
+                chimeFreq: [554, 698],
+                bgColor: "#7CB342",
+                shadowColor: "rgba(124, 179, 66, 0.35)",
+                svgIcon: `<svg viewBox="0 0 120 120" class="card-icon" aria-hidden="true">
+                <!-- Ball -->
+                <circle cx="60" cy="52" r="30" fill="#FF7043"/>
+                <circle cx="60" cy="52" r="30" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+                <!-- Ball stripe -->
+                <path d="M32 42 Q60 62 88 42" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M36 58 Q60 38 84 58" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round"/>
+                <!-- Ball highlight -->
+                <ellipse cx="48" cy="40" rx="8" ry="10" fill="rgba(255,255,255,0.2)" transform="rotate(-20 48 40)"/>
+                <!-- Star decorations -->
+                <g class="play-anim">
+                    <polygon points="60,12 62,18 68,18 63,22 65,28 60,24 55,28 57,22 52,18 58,18" fill="#FFE082"/>
+                </g>
+                <!-- Bounce lines -->
+                <line x1="42" y1="88" x2="48" y2="84" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-linecap="round"/>
+                <line x1="60" y1="90" x2="60" y2="85" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+                <line x1="78" y1="88" x2="72" y2="84" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-linecap="round"/>
+                <!-- Ground shadow -->
+                <ellipse cx="60" cy="100" rx="25" ry="5" fill="rgba(255,255,255,0.1)"/>
+            </svg>`,
+                caregiverInstructions: "Extend the thumb and pinky finger on both hands (making 'Y' handshapes). Shake or twist both hands simultaneously in a playful motion.",
+                caregiverTip: "Sign when initiating play or when the infant seems restless and wants stimulation. Any hand shaking or waving counts.",
+                videoUrl: "https://www.youtube.com/watch?v=6IemMWPDCkc"
+            },
+            {
+                id: "pacifier",
+                label: "PACI",
+                speechText: "Pacifier. Here is your pacifier.",
+                chimeFreq: [466, 587],
+                bgColor: "#AB47BC",
+                shadowColor: "rgba(171, 71, 188, 0.35)",
+                svgIcon: `<svg viewBox="0 0 120 120" class="card-icon" aria-hidden="true">
+                <!-- Shield / guard -->
+                <ellipse cx="60" cy="55" rx="32" ry="26" fill="rgba(255,255,255,0.85)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                <!-- Holes in shield -->
+                <circle cx="42" cy="52" r="5" fill="rgba(171,71,188,0.2)" stroke="rgba(171,71,188,0.15)" stroke-width="1"/>
+                <circle cx="78" cy="52" r="5" fill="rgba(171,71,188,0.2)" stroke="rgba(171,71,188,0.15)" stroke-width="1"/>
+                <!-- Nipple -->
+                <g class="pacifier-anim">
+                    <ellipse cx="60" cy="32" rx="12" ry="14" fill="#FFCC80" stroke="#F9A825" stroke-width="1.5"/>
+                    <ellipse cx="60" cy="28" rx="8" ry="9" fill="#FFE082"/>
+                    <ellipse cx="57" cy="25" rx="3" ry="4" fill="rgba(255,255,255,0.3)"/>
+                </g>
+                <!-- Handle ring -->
+                <path d="M48 72 Q48 92 60 92 Q72 92 72 72" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="4" stroke-linecap="round"/>
+                <path d="M48 72 Q48 90 60 90 Q72 90 72 72" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                <!-- Sparkle -->
+                <circle cx="82" cy="35" r="2" fill="rgba(255,255,255,0.5)"/>
+                <circle cx="36" cy="40" r="1.5" fill="rgba(255,255,255,0.4)"/>
+            </svg>`,
+                caregiverInstructions: "Touch the lips with the thumb and index finger pinched together, or tap a closed fist gently against the lips to mimic sucking motion.",
+                caregiverTip: "Sign when the infant is fussy and wants their pacifier. Any tapping or pointing at the mouth area counts.",
+                videoUrl: "https://www.youtube.com/watch?v=HjVir4PrEeI"
+            },
+            {
+                id: "change",
+                label: "CHANGE",
+                speechText: "Change. Time for a diaper change.",
+                chimeFreq: [415, 523],
+                bgColor: "#FF7043",
+                shadowColor: "rgba(255, 112, 67, 0.35)",
+                svgIcon: `<svg viewBox="0 0 120 120" class="card-icon" aria-hidden="true">
+                <!-- Diaper shape -->
+                <path d="M30 40 L30 65 Q30 90 60 95 Q90 90 90 65 L90 40 Z" fill="rgba(255,255,255,0.85)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                <!-- Diaper inner -->
+                <path d="M38 48 L38 65 Q38 82 60 86 Q82 82 82 65 L82 48 Z" fill="rgba(255,255,255,0.15)"/>
+                <!-- Tape tabs -->
+                <g class="change-anim">
+                    <rect x="25" y="38" width="18" height="10" rx="3" fill="#80DEEA" stroke="#4DD0E1" stroke-width="1.2"/>
+                    <rect x="77" y="38" width="18" height="10" rx="3" fill="#80DEEA" stroke="#4DD0E1" stroke-width="1.2"/>
+                </g>
+                <!-- Cute pattern on diaper -->
+                <circle cx="50" cy="65" r="3" fill="rgba(255,112,67,0.2)"/>
+                <circle cx="60" cy="60" r="2.5" fill="rgba(255,112,67,0.15)"/>
+                <circle cx="70" cy="65" r="3" fill="rgba(255,112,67,0.2)"/>
+                <circle cx="55" cy="74" r="2" fill="rgba(255,112,67,0.12)"/>
+                <circle cx="65" cy="72" r="2.5" fill="rgba(255,112,67,0.15)"/>
+                <!-- Motion arrows (swap) -->
+                <path d="M44 28 Q52 20 58 28" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+                <polygon points="58,25 62,28 58,31" fill="rgba(255,255,255,0.35)"/>
+                <path d="M76 28 Q68 20 62 28" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-linecap="round"/>
+                <polygon points="62,25 58,28 62,31" fill="rgba(255,255,255,0.25)"/>
+            </svg>`,
+                caregiverInstructions: "Make fists with both hands. Place one fist on top of the other, then swap their positions by rotating them. Repeat the swapping motion once or twice.",
+                caregiverTip: "Sign at every diaper change, right as you lay the infant down. Tapping the hip area or any hand-swapping gesture counts as an early attempt.",
+                videoUrl: "https://www.youtube.com/watch?v=kbwqkH7UxI8"
+            },
+            {
+                id: "bath",
+                label: "BATH",
+                speechText: "Bath. Time for a bath.",
+                chimeFreq: [494, 659],
+                bgColor: "#26C6DA",
+                shadowColor: "rgba(38, 198, 218, 0.35)",
+                svgIcon: `<svg viewBox="0 0 120 120" class="card-icon" aria-hidden="true">
+                <!-- Tub body -->
+                <path d="M20 58 L20 85 Q20 100 60 100 Q100 100 100 85 L100 58 Z" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+                <!-- Tub rim -->
+                <rect x="15" y="54" width="90" height="8" rx="4" fill="rgba(255,255,255,0.85)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                <!-- Water in tub -->
+                <path d="M24 62 L24 82 Q24 94 60 94 Q96 94 96 82 L96 62 Z" fill="#80DEEA" opacity="0.5"/>
+                <!-- Water ripple -->
+                <path d="M30 70 Q45 65 60 70 Q75 75 90 70" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- Bubbles -->
+                <g class="bath-anim">
+                    <circle cx="40" cy="48" r="7" fill="rgba(255,255,255,0.5)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                    <circle cx="38" cy="45" r="2" fill="rgba(255,255,255,0.5)"/>
+                    <circle cx="55" cy="42" r="9" fill="rgba(255,255,255,0.45)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+                    <circle cx="52" cy="38" r="2.5" fill="rgba(255,255,255,0.5)"/>
+                    <circle cx="72" cy="46" r="6" fill="rgba(255,255,255,0.4)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                    <circle cx="70" cy="43" r="1.8" fill="rgba(255,255,255,0.45)"/>
+                    <circle cx="48" cy="34" r="5" fill="rgba(255,255,255,0.35)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                    <circle cx="65" cy="36" r="4" fill="rgba(255,255,255,0.3)"/>
+                </g>
+                <!-- Faucet -->
+                <rect x="82" y="35" width="5" height="20" rx="2.5" fill="rgba(255,255,255,0.4)"/>
+                <path d="M84 35 Q84 28 78 28 L74 28" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" stroke-linecap="round"/>
+                <!-- Small drops -->
+                <circle cx="74" cy="33" r="1.5" fill="rgba(255,255,255,0.35)"/>
+                <circle cx="73" cy="38" r="1" fill="rgba(255,255,255,0.25)"/>
+            </svg>`,
+                caregiverInstructions: "Make fists with both hands and rub them up and down on your chest or torso, as if scrubbing yourself clean.",
+                caregiverTip: "Sign right before bath time begins. Any rubbing motion on the body counts as a valid first attempt.",
+                videoUrl: "https://www.youtube.com/watch?v=rvFDc2qM76k"
+            },
+            {
+                id: "teeth",
+                label: "TEETH",
+                speechText: "Teeth. Time to brush teeth.",
+                chimeFreq: [554, 740],
+                bgColor: "#5C6BC0",
+                shadowColor: "rgba(92, 107, 192, 0.35)",
+                svgIcon: `<svg viewBox="0 0 120 120" class="card-icon" aria-hidden="true">
+                <!-- Toothbrush handle -->
+                <rect x="52" y="55" width="12" height="50" rx="5" fill="#42A5F5" stroke="#1E88E5" stroke-width="1.5"/>
+                <!-- Handle grip lines -->
+                <line x1="55" y1="75" x2="61" y2="75" stroke="#1E88E5" stroke-width="1" opacity="0.4"/>
+                <line x1="55" y1="80" x2="61" y2="80" stroke="#1E88E5" stroke-width="1" opacity="0.4"/>
+                <line x1="55" y1="85" x2="61" y2="85" stroke="#1E88E5" stroke-width="1" opacity="0.4"/>
+                <!-- Brush neck -->
+                <rect x="55" y="48" width="6" height="10" rx="2" fill="#64B5F6"/>
+                <!-- Brush head -->
+                <g class="teeth-anim">
+                    <rect x="48" y="22" width="20" height="28" rx="8" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                    <!-- Bristles -->
+                    <line x1="52" y1="26" x2="52" y2="34" stroke="#E0E0E0" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="55" y1="26" x2="55" y2="34" stroke="#E0E0E0" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="58" y1="26" x2="58" y2="34" stroke="#E0E0E0" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="61" y1="26" x2="61" y2="34" stroke="#E0E0E0" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="64" y1="26" x2="64" y2="34" stroke="#E0E0E0" stroke-width="1.5" stroke-linecap="round"/>
+                    <!-- Toothpaste blob -->
+                    <path d="M50 24 Q54 16 58 20 Q62 14 66 22" fill="#80CBC4" stroke="#4DB6AC" stroke-width="1"/>
+                </g>
+                <!-- Sparkle stars -->
+                <circle cx="38" cy="30" r="2.5" fill="rgba(255,255,255,0.5)"/>
+                <circle cx="82" cy="40" r="2" fill="rgba(255,255,255,0.4)"/>
+                <circle cx="35" cy="50" r="1.5" fill="rgba(255,255,255,0.3)"/>
+                <!-- Mini sparkle lines -->
+                <line x1="80" y1="25" x2="85" y2="20" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="83" y1="28" x2="88" y2="28" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>`,
+                caregiverInstructions: "Extend the index finger and rub it back and forth across the front teeth or along the mouth, mimicking a brushing motion.",
+                caregiverTip: "Sign before brushing. Any finger-to-mouth rubbing motion counts as the infant's early attempt at this sign.",
+                videoUrl: "https://www.youtube.com/watch?v=hKnAROM1Q-E"
+            }
+        ];
+
+        /* =================================================================
+           AUDIO ENGINE — Web Audio API Oscillator Chimes
+           ================================================================= */
+        let audioCtx = null;
+
+        function ensureAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playChime(frequencies) {
+            try {
+                const ctx = ensureAudioContext();
+                const now = ctx.currentTime;
+
+                frequencies.forEach((freq, i) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, now + i * 0.22);
+
+                    // Envelope: quick attack, gentle decay
+                    gain.gain.setValueAtTime(0, now + i * 0.22);
+                    gain.gain.linearRampToValueAtTime(0.28, now + i * 0.22 + 0.04);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.22 + 0.65);
+
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+
+                    osc.start(now + i * 0.22);
+                    osc.stop(now + i * 0.22 + 0.7);
+                });
+            } catch (e) {
+                // Graceful fallback — audio not critical
+            }
+        }
+
+        /* =================================================================
+           SPEECH ENGINE — Web Speech API Synthesis
+           ================================================================= */
+        let voicesLoaded = false;
+
+        function loadVoices() {
+            if (!window.speechSynthesis) return;
+            window.speechSynthesis.getVoices();
+            voicesLoaded = true;
+        }
+
+        if (window.speechSynthesis) {
+            loadVoices();
+            if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                window.speechSynthesis.onvoiceschanged = loadVoices;
+            }
+        }
+
+        function speak(text) {
+            if (!window.speechSynthesis) return;
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.82;
+            utterance.pitch = 1.12;
+            utterance.volume = 1.0;
+
+            // Prefer a clear English voice
+            const voices = window.speechSynthesis.getVoices();
+            const preferred =
+                voices.find(v => v.lang.startsWith('en') && /female|samantha|karen|zira|fiona/i.test(v.name)) ||
+                voices.find(v => v.lang.startsWith('en-US')) ||
+                voices.find(v => v.lang.startsWith('en')) ||
+                null;
+            if (preferred) utterance.voice = preferred;
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        /* =================================================================
+           SPARKLE PARTICLE EFFECT
+           ================================================================= */
+        function createSparkles(card) {
+            const count = 10;
+            for (let i = 0; i < count; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                const angle = (i / count) * Math.PI * 2 + (Math.random() * 0.4 - 0.2);
+                const dist = 35 + Math.random() * 65;
+                sparkle.style.setProperty('--sx', `${Math.cos(angle) * dist}px`);
+                sparkle.style.setProperty('--sy', `${Math.sin(angle) * dist}px`);
+                sparkle.style.left = '50%';
+                sparkle.style.top = '50%';
+                const size = 4 + Math.random() * 7;
+                sparkle.style.width = size + 'px';
+                sparkle.style.height = size + 'px';
+                sparkle.style.animationDelay = (Math.random() * 0.12) + 's';
+                card.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 950);
+            }
+        }
+
+        /* =================================================================
+           AMBIENT BACKGROUND ORBS
+           ================================================================= */
+        function createAmbientOrbs() {
+            const colors = ['#FFB300', '#42A5F5', '#00897B', '#7E57C2'];
+            const body = document.body;
+            colors.forEach((color, i) => {
+                const orb = document.createElement('div');
+                orb.className = 'bg-orb';
+                const size = 200 + Math.random() * 200;
+                orb.style.width = size + 'px';
+                orb.style.height = size + 'px';
+                orb.style.background = color;
+                orb.style.left = (10 + (i % 2) * 60 + Math.random() * 20) + '%';
+                orb.style.top = (10 + Math.floor(i / 2) * 50 + Math.random() * 20) + '%';
+                body.insertBefore(orb, body.firstChild);
+            });
+        }
+        createAmbientOrbs();
+
+        /* =================================================================
+           RENDER INTERACTIVE CARDS
+           ================================================================= */
+        const app = document.getElementById('app');
+
+        SIGN_DATA.forEach((sign, index) => {
+            const card = document.createElement('div');
+            card.className = 'sign-card';
+            card.id = `card-${sign.id}`;
+            card.setAttribute('data-sign', sign.id);
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-label', `Learn the sign for ${sign.label}`);
+            card.style.background = `linear-gradient(145deg, ${sign.bgColor}, ${adjustBrightness(sign.bgColor, -25)})`;
+            card.style.boxShadow = `0 10px 36px ${sign.shadowColor}, 0 3px 10px rgba(0,0,0,0.2)`;
+
+            card.innerHTML = `
+            <div class="glow-ring"></div>
+            ${sign.svgIcon}
+            <span class="card-label">${sign.label}</span>
+        `;
+
+            // Staggered entry fade-in
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.85)';
+            setTimeout(() => {
+                card.style.transition = 'opacity 0.55s ease, transform 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+                setTimeout(() => {
+                    card.style.transition = 'transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                }, 600);
+            }, 80 + index * 110);
+
+            // Interaction cooldown
+            let cooldown = false;
+
+            const activate = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (cooldown) return;
+                cooldown = true;
+
+                // Press-down visual feedback
+                card.classList.add('active');
+                setTimeout(() => card.classList.remove('active'), 150);
+
+                // Trigger tap animation (overrides float)
+                card.classList.remove('tapped');
+                void card.offsetWidth; // force reflow
+                card.classList.add('tapped');
+                setTimeout(() => card.classList.remove('tapped'), 1400);
+
+                // Sparkle burst
+                createSparkles(card);
+
+                // Audio chime
+                playChime(sign.chimeFreq);
+
+                // Spoken word
+                speak(sign.speechText);
+
+                // Cooldown reset
+                setTimeout(() => { cooldown = false; }, 1300);
+            };
+
+            card.addEventListener('pointerdown', activate, { passive: false });
+
+            app.appendChild(card);
+        });
+
+        /* =================================================================
+           CAREGIVER OVERLAY — Long-Press Logic
+           ================================================================= */
+        const caregiverBtn = document.getElementById('caregiver-btn');
+        const overlay = document.getElementById('caregiver-overlay');
+        const closeBtn = document.getElementById('close-overlay');
+        const guideContainer = document.getElementById('guide-cards');
+
+        // Render guide instruction cards
+        SIGN_DATA.forEach(sign => {
+            const gc = document.createElement('div');
+            gc.className = 'guide-card';
+            gc.style.borderLeftColor = sign.bgColor;
+            const videoLink = sign.videoUrl
+                ? `<a href="${sign.videoUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:10px;padding:8px 16px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:rgba(255,255,255,0.8);font-size:13px;font-weight:600;text-decoration:none;letter-spacing:0.3px;transition:background 0.2s;">▶ Watch Video Demo</a>`
+                : '';
+            gc.innerHTML = `
+            <h2>${sign.label}</h2>
+            <p class="sign-label">ASL Gesture Instruction</p>
+            <p><strong>How to sign:</strong> ${sign.caregiverInstructions}</p>
+            <div class="tip">💡 <strong>Tip:</strong> ${sign.caregiverTip}</div>
+            ${videoLink}
+        `;
+            guideContainer.appendChild(gc);
+        });
+
+        // 3-second long-press handler
+        let pressTimer = null;
+        let isPressing = false;
+
+        function startPress(e) {
+            e.preventDefault();
+            if (overlay.classList.contains('open')) return;
+            isPressing = true;
+            caregiverBtn.classList.add('pressing');
+            pressTimer = setTimeout(() => {
+                if (isPressing) {
+                    overlay.classList.add('open');
+                    caregiverBtn.classList.remove('pressing');
+                    isPressing = false;
+                }
+            }, 3000);
+        }
+
+        function cancelPress() {
+            isPressing = false;
+            caregiverBtn.classList.remove('pressing');
+            if (pressTimer) {
+                clearTimeout(pressTimer);
+                pressTimer = null;
+            }
+        }
+
+        caregiverBtn.addEventListener('pointerdown', startPress, { passive: false });
+        caregiverBtn.addEventListener('pointerup', cancelPress);
+        caregiverBtn.addEventListener('pointerleave', cancelPress);
+        caregiverBtn.addEventListener('pointercancel', cancelPress);
+
+        // Close overlay
+        closeBtn.addEventListener('pointerdown', (e) => {
+            e.preventDefault();
+            overlay.classList.remove('open');
+        });
+
+        /* =================================================================
+           COLOR UTILITY
+           ================================================================= */
+        function adjustBrightness(hex, amount) {
+            const num = parseInt(hex.replace('#', ''), 16);
+            const r = Math.max(0, Math.min(255, (num >> 16) + amount));
+            const g = Math.max(0, Math.min(255, ((num >> 8) & 0x00FF) + amount));
+            const b = Math.max(0, Math.min(255, (num & 0x0000FF) + amount));
+            return '#' + (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        }
+
+        /* =================================================================
+           BROWSER LOCKDOWN — Prevent Infant-Triggered Navigation
+           ================================================================= */
+
+        // Prevent pinch-zoom gestures
+        document.addEventListener('gesturestart', e => e.preventDefault(), { passive: false });
+        document.addEventListener('gesturechange', e => e.preventDefault(), { passive: false });
+        document.addEventListener('gestureend', e => e.preventDefault(), { passive: false });
+
+        // Prevent double-tap zoom
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, { passive: false });
+
+        // Allow scrolling on the main grid but prevent overscroll bounce
+        document.body.addEventListener('touchmove', (e) => {
+            // Only prevent default when overlay is closed AND at scroll boundaries
+            // to avoid overscroll bounce, but allow normal grid scrolling
+        }, { passive: true });
+
+        // Prevent context menu
+        document.addEventListener('contextmenu', e => e.preventDefault());
+
+    </script>
+</body>
+
+</html>
