@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="description" content="Baby Bible — An interactive infant learning app for BFM2000, Free Will Baptist Treatise theology, and KJV Bible verses.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Baby Bible — Learn God's Word</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS DESIGN SYSTEM
+           ======================================== */
+        :root {
+            --font-family: 'Nunito', sans-serif;
+
+            /* Palette */
+            --sky-100: #e0f2fe;
+            --sky-200: #bae6fd;
+            --sky-400: #38bdf8;
+            --sky-500: #0ea5e9;
+            --sky-600: #0284c7;
+
+            --amber-100: #fef3c7;
+            --amber-200: #fde68a;
+            --amber-400: #fbbf24;
+            --amber-500: #f59e0b;
+
+            --rose-100: #ffe4e6;
+            --rose-200: #fecdd3;
+            --rose-400: #fb7185;
+            --rose-500: #f43f5e;
+
+            --emerald-100: #d1fae5;
+            --emerald-200: #a7f3d0;
+            --emerald-400: #34d399;
+            --emerald-500: #10b981;
+
+            --violet-100: #ede9fe;
+            --violet-200: #ddd6fe;
+            --violet-400: #a78bfa;
+            --violet-500: #8b5cf6;
+
+            --orange-100: #ffedd5;
+            --orange-200: #fed7aa;
+            --orange-400: #fb923c;
+            --orange-500: #f97316;
+
+            --pink-100: #fce7f3;
+            --pink-200: #fbcfe8;
+            --pink-400: #f472b6;
+            --pink-500: #ec4899;
+
+            --teal-100: #ccfbf1;
+            --teal-400: #2dd4bf;
+
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-300: #cbd5e1;
+            --slate-400: #94a3b8;
+            --slate-500: #64748b;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-800: #1e293b;
+            --slate-900: #0f172a;
+
+            --white: #ffffff;
+            --black: #000000;
+
+            /* Shadows */
+            --shadow-card: 0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-card-hover: 0 12px 48px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
+            --shadow-button: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-glow: 0 0 40px rgba(14,165,233,0.15);
+
+            /* Radii */
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+            --radius-xl: 36px;
+            --radius-full: 9999px;
+
+            /* Transitions */
+            --transition-fast: 0.15s cubic-bezier(0.4,0,0.2,1);
+            --transition-normal: 0.3s cubic-bezier(0.4,0,0.2,1);
+            --transition-bounce: 0.5s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        /* ========================================
+           RESET & BASE
+           ======================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(145deg, #e0f2fe 0%, #fef3c7 30%, #fce7f3 60%, #d1fae5 100%);
+            background-attachment: fixed;
+            color: var(--slate-800);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* ========================================
+           FLOATING BACKGROUND SHAPES
+           ======================================== */
+        .bg-shapes {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: float-shape 20s ease-in-out infinite;
+        }
+
+        .bg-shape:nth-child(1) {
+            width: 200px; height: 200px;
+            background: var(--sky-400);
+            top: 10%; left: -5%;
+            animation-delay: 0s;
+        }
+        .bg-shape:nth-child(2) {
+            width: 150px; height: 150px;
+            background: var(--rose-400);
+            top: 60%; right: -3%;
+            animation-delay: -5s;
+            animation-duration: 25s;
+        }
+        .bg-shape:nth-child(3) {
+            width: 180px; height: 180px;
+            background: var(--amber-400);
+            bottom: 5%; left: 20%;
+            animation-delay: -10s;
+            animation-duration: 22s;
+        }
+        .bg-shape:nth-child(4) {
+            width: 120px; height: 120px;
+            background: var(--emerald-400);
+            top: 30%; right: 15%;
+            animation-delay: -7s;
+            animation-duration: 18s;
+        }
+        .bg-shape:nth-child(5) {
+            width: 100px; height: 100px;
+            background: var(--violet-400);
+            bottom: 25%; left: 60%;
+            animation-delay: -3s;
+            animation-duration: 28s;
+        }
+
+        @keyframes float-shape {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -20px) scale(1.05); }
+            50% { transform: translate(-20px, 30px) scale(0.95); }
+            75% { transform: translate(20px, 10px) scale(1.02); }
+        }
+
+        /* ========================================
+           HEADER BAR
+           ======================================== */
+        .header {
+            position: relative;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            flex-shrink: 0;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .home-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-full);
+            border: none;
+            background: linear-gradient(135deg, var(--sky-400), var(--violet-400));
+            color: var(--white);
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform var(--transition-bounce), box-shadow var(--transition-normal);
+            box-shadow: var(--shadow-button);
+        }
+        .home-btn:active {
+            transform: scale(0.9);
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--sky-600), var(--violet-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-full);
+            border: none;
+            background: rgba(255,255,255,0.6);
+            color: var(--slate-600);
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-normal);
+        }
+        .icon-btn:active {
+            transform: scale(0.9);
+            background: rgba(255,255,255,0.9);
+        }
+        .icon-btn.active {
+            background: linear-gradient(135deg, var(--emerald-400), var(--teal-400));
+            color: var(--white);
+            box-shadow: 0 2px 12px rgba(16,185,129,0.3);
+        }
+
+        /* ========================================
+           MAIN CONTENT AREA
+           ======================================== */
+        .main {
+            flex: 1;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========================================
+           HOME SCREEN
+           ======================================== */
+        .screen {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .screen.hidden {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+
+        .home-screen {
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            overflow-y: auto;
+        }
+
+        .home-hero {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .home-hero-emoji {
+            font-size: 72px;
+            display: block;
+            animation: gentle-bounce 3s ease-in-out infinite;
+            line-height: 1.2;
+        }
+
+        .home-hero-title {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--sky-500), var(--violet-500), var(--rose-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 8px;
+        }
+
+        .home-hero-sub {
+            font-size: 15px;
+            color: var(--slate-500);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        @keyframes gentle-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .mode-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .mode-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
+            border-radius: var(--radius-lg);
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            color: var(--white);
+            box-shadow: var(--shadow-card);
+            transition: transform var(--transition-bounce), box-shadow var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mode-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .mode-card:active {
+            transform: scale(0.96);
+        }
+
+        .mode-card-bible {
+            background: linear-gradient(135deg, #0ea5e9, #3b82f6, #6366f1);
+        }
+        .mode-card-bfm {
+            background: linear-gradient(135deg, #f59e0b, #f97316, #ef4444);
+        }
+        .mode-card-fwb {
+            background: linear-gradient(135deg, #10b981, #14b8a6, #06b6d4);
+        }
+
+        .mode-card-icon {
+            font-size: 42px;
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .mode-card-text h2 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+
+        .mode-card-text p {
+            font-size: 13px;
+            opacity: 0.85;
+            font-weight: 600;
+        }
+
+        /* ========================================
+           CARD VIEWER SCREEN
+           ======================================== */
+        .card-screen {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+
+        .card-viewport {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .content-card {
+            width: 100%;
+            max-width: 520px;
+            max-height: 100%;
+            border-radius: var(--radius-xl);
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(255,255,255,0.6);
+            padding: 28px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
+            overflow-y: auto;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .content-card.swipe-left {
+            transform: translateX(-120%) rotate(-8deg);
+            opacity: 0;
+        }
+
+        .content-card.swipe-right {
+            transform: translateX(120%) rotate(8deg);
+            opacity: 0;
+        }
+
+        .content-card.enter-left {
+            transform: translateX(-120%) rotate(-8deg);
+            opacity: 0;
+            transition: none;
+        }
+
+        .content-card.enter-right {
+            transform: translateX(120%) rotate(8deg);
+            opacity: 0;
+            transition: none;
+        }
+
+        .card-category-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .badge-bible {
+            background: linear-gradient(135deg, var(--sky-100), var(--sky-200));
+            color: var(--sky-600);
+        }
+        .badge-bfm {
+            background: linear-gradient(135deg, var(--amber-100), var(--orange-100));
+            color: var(--orange-500);
+        }
+        .badge-fwb {
+            background: linear-gradient(135deg, var(--emerald-100), var(--teal-100));
+            color: var(--emerald-500);
+        }
+
+        .card-emoji {
+            font-size: 56px;
+            margin-bottom: 12px;
+            animation: gentle-bounce 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--slate-800);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .card-subtitle {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--slate-400);
+            margin-bottom: 14px;
+            letter-spacing: 0.3px;
+        }
+
+        .card-body {
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--slate-700);
+            font-weight: 600;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 0 4px;
+            width: 100%;
+        }
+
+        .card-body::-webkit-scrollbar {
+            width: 4px;
+        }
+        .card-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .card-body::-webkit-scrollbar-thumb {
+            background: var(--slate-300);
+            border-radius: 4px;
+        }
+
+        .card-reference {
+            margin-top: 14px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--slate-400);
+            font-style: italic;
+        }
+
+        .card-tap-hint {
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--slate-400);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            animation: pulse-hint 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-hint {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* ========================================
+           BOTTOM NAVIGATION BAR
+           ======================================== */
+        .bottom-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 20px;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.5);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 50;
+        }
+
+        .nav-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-full);
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform var(--transition-bounce), box-shadow var(--transition-normal);
+            box-shadow: var(--shadow-button);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.88);
+        }
+
+        .nav-prev, .nav-next {
+            background: var(--white);
+            color: var(--slate-700);
+        }
+
+        .nav-speak {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--sky-400), var(--violet-400));
+            color: var(--white);
+            font-size: 26px;
+        }
+
+        .nav-speak.speaking {
+            background: linear-gradient(135deg, var(--rose-400), var(--orange-400));
+            animation: pulse-speak 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse-speak {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(244,63,94,0.4); }
+            50% { box-shadow: 0 0 0 12px rgba(244,63,94,0); }
+        }
+
+        .card-counter {
+            position: absolute;
+            right: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--slate-400);
+        }
+
+        /* ========================================
+           PARENT SETTINGS PANEL
+           ======================================== */
+        .settings-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .settings-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .settings-panel {
+            background: var(--white);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            padding: 28px 24px 40px;
+            width: 100%;
+            max-width: 500px;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .settings-overlay.open .settings-panel {
+            transform: translateY(0);
+        }
+
+        .settings-handle {
+            width: 40px;
+            height: 5px;
+            background: var(--slate-300);
+            border-radius: var(--radius-full);
+            margin: 0 auto 20px;
+        }
+
+        .settings-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--slate-800);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--slate-100);
+        }
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+
+        .setting-label {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .setting-label span:first-child {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--slate-700);
+        }
+        .setting-label span:last-child {
+            font-size: 12px;
+            color: var(--slate-400);
+            font-weight: 600;
+        }
+
+        /* Toggle Switch */
+        .toggle {
+            width: 52px;
+            height: 30px;
+            background: var(--slate-300);
+            border-radius: var(--radius-full);
+            position: relative;
+            cursor: pointer;
+            transition: background var(--transition-normal);
+            border: none;
+            flex-shrink: 0;
+        }
+        .toggle.on {
+            background: linear-gradient(135deg, var(--emerald-400), var(--teal-400));
+        }
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: var(--white);
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: transform var(--transition-normal);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+        .toggle.on::after {
+            transform: translateX(22px);
+        }
+
+        /* Range Slider */
+        .speed-slider {
+            width: 120px;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            background: var(--slate-200);
+            border-radius: var(--radius-full);
+            outline: none;
+        }
+        .speed-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--sky-400), var(--violet-400));
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(14,165,233,0.3);
+        }
+
+        /* ========================================
+           CONFETTI CANVAS
+           ======================================== */
+        #confetti-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        /* ========================================
+           RESPONSIVE ADJUSTMENTS
+           ======================================== */
+        @media (min-width: 768px) {
+            .home-hero-emoji { font-size: 96px; }
+            .home-hero-title { font-size: 40px; }
+            .mode-grid { grid-template-columns: 1fr; max-width: 480px; }
+            .mode-card { padding: 24px 28px; }
+            .mode-card-icon { font-size: 50px; }
+            .mode-card-text h2 { font-size: 24px; }
+            .mode-card-text p { font-size: 14px; }
+            .card-emoji { font-size: 72px; }
+            .card-title { font-size: 28px; }
+            .card-body { font-size: 20px; max-height: 300px; }
+            .content-card { padding: 36px 32px; }
+        }
+
+        @media (max-height: 600px) {
+            .home-hero-emoji { font-size: 48px; }
+            .home-hero-title { font-size: 24px; }
+            .card-emoji { font-size: 40px; }
+            .card-title { font-size: 18px; }
+            .card-body { font-size: 15px; max-height: 120px; }
+            .content-card { padding: 16px; }
+            .mode-card { padding: 14px 18px; }
+            .mode-card-icon { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background floating shapes -->
+    <div class="bg-shapes">
+        <div class="bg-shape"></div>
+        <div class="bg-shape"></div>
+        <div class="bg-shape"></div>
+        <div class="bg-shape"></div>
+        <div class="bg-shape"></div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Header Bar -->
+    <header class="header" id="header-bar">
+        <div class="header-left">
+            <button class="home-btn" id="btn-home" title="Home" aria-label="Go Home">🏠</button>
+            <span class="header-title" id="header-title-text">Baby Bible</span>
+        </div>
+        <div class="header-right">
+            <button class="icon-btn" id="btn-autoplay" title="Auto-Play" aria-label="Toggle Auto-Play">▶️</button>
+            <button class="icon-btn" id="btn-settings" title="Parent Settings" aria-label="Open Settings">⚙️</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main" id="main-content">
+        <!-- HOME SCREEN -->
+        <div class="screen home-screen" id="screen-home">
+            <div class="home-hero">
+                <span class="home-hero-emoji">📖✨</span>
+                <h1 class="home-hero-title">Baby Bible</h1>
+                <p class="home-hero-sub">Tap a card to start learning!</p>
+            </div>
+            <div class="mode-grid">
+                <button class="mode-card mode-card-bible" id="btn-mode-bible" aria-label="Bible Verses">
+                    <span class="mode-card-icon">📖</span>
+                    <div class="mode-card-text">
+                        <h2>Bible Verses</h2>
+                        <p>KJV Scriptures for little ones</p>
+                    </div>
+                </button>
+                <button class="mode-card mode-card-bfm" id="btn-mode-bfm" aria-label="Baptist Faith and Message 2000">
+                    <span class="mode-card-icon">✝️</span>
+                    <div class="mode-card-text">
+                        <h2>BFM2000</h2>
+                        <p>Baptist Faith &amp; Message 2000</p>
+                    </div>
+                </button>
+                <button class="mode-card mode-card-fwb" id="btn-mode-fwb" aria-label="Free Will Baptist Treatise">
+                    <span class="mode-card-icon">🕊️</span>
+                    <div class="mode-card-text">
+                        <h2>FWB Treatise</h2>
+                        <p>Free Will Baptist Theology</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- CARD VIEWER SCREEN -->
+        <div class="screen card-screen hidden" id="screen-cards">
+            <div class="card-viewport" id="card-viewport">
+                <div class="content-card" id="content-card">
+                    <div class="card-category-badge badge-bible" id="card-badge">📖 BIBLE</div>
+                    <div class="card-emoji" id="card-emoji">📖</div>
+                    <div class="card-title" id="card-title">Loading...</div>
+                    <div class="card-subtitle" id="card-subtitle"></div>
+                    <div class="card-body" id="card-body">Tap to hear this read aloud!</div>
+                    <div class="card-reference" id="card-reference"></div>
+                    <div class="card-tap-hint">🔊 Tap card to hear it read aloud</div>
+                </div>
+            </div>
+            <nav class="bottom-nav" id="bottom-nav">
+                <button class="nav-btn nav-prev" id="btn-prev" aria-label="Previous Card">⬅️</button>
+                <button class="nav-btn nav-speak" id="btn-speak" aria-label="Read Aloud">🔊</button>
+                <button class="nav-btn nav-next" id="btn-next" aria-label="Next Card">➡️</button>
+                <span class="card-counter" id="card-counter">1 / 1</span>
+            </nav>
+        </div>
+    </main>
+
+    <!-- Parent Settings Overlay -->
+    <div class="settings-overlay" id="settings-overlay">
+        <div class="settings-panel">
+            <div class="settings-handle"></div>
+            <div class="settings-title">👨‍👩‍👧 Parent Settings</div>
+
+            <div class="setting-row">
+                <div class="setting-label">
+                    <span>Auto-Play</span>
+                    <span>Auto-advance cards with read-aloud</span>
+                </div>
+                <button class="toggle" id="toggle-autoplay" aria-label="Toggle auto-play"></button>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-label">
+                    <span>Speech Speed</span>
+                    <span>How fast verses are read</span>
+                </div>
+                <input type="range" class="speed-slider" id="speed-slider" min="0.4" max="1.2" step="0.1" value="0.7" aria-label="Speech speed">
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-label">
+                    <span>Auto-Play Delay</span>
+                    <span>Seconds between cards</span>
+                </div>
+                <input type="range" class="speed-slider" id="delay-slider" min="3" max="15" step="1" value="6" aria-label="Auto-play delay">
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-label">
+                    <span>Celebration Effects</span>
+                    <span>Confetti on card change</span>
+                </div>
+                <button class="toggle on" id="toggle-confetti" aria-label="Toggle confetti"></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // ==============================================================
+    //  BABY BIBLE APP — CORE LOGIC
+    // ==============================================================
+
+    // ── CONTENT DATA ──────────────────────────────────────────────
+
+    const BIBLE_VERSES = [
+        { emoji: "🌅", title: "In the Beginning", ref: "Genesis 1:1", text: "In the beginning God created the heaven and the earth." },
+        { emoji: "💡", title: "Let There Be Light", ref: "Genesis 1:3", text: "And God said, Let there be light: and there was light." },
+        { emoji: "🌿", title: "Very Good", ref: "Genesis 1:31", text: "And God saw every thing that he had made, and, behold, it was very good." },
+        { emoji: "🌈", title: "God's Promise", ref: "Genesis 9:13", text: "I do set my bow in the cloud, and it shall be for a token of a covenant between me and the earth." },
+        { emoji: "⭐", title: "God's Promise to Abraham", ref: "Genesis 15:5", text: "And he brought him forth abroad, and said, Look now toward heaven, and tell the stars, if thou be able to number them: and he said unto him, So shall thy seed be." },
+        { emoji: "🙏", title: "Be Strong and Courageous", ref: "Joshua 1:9", text: "Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest." },
+        { emoji: "❤️", title: "Love the Lord", ref: "Deuteronomy 6:5", text: "And thou shalt love the LORD thy God with all thine heart, and with all thy soul, and with all thy might." },
+        { emoji: "🐑", title: "The Lord Is My Shepherd", ref: "Psalm 23:1", text: "The LORD is my shepherd; I shall not want." },
+        { emoji: "💚", title: "Green Pastures", ref: "Psalm 23:2-3", text: "He maketh me to lie down in green pastures: he leadeth me beside the still waters. He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake." },
+        { emoji: "🛡️", title: "No Fear", ref: "Psalm 23:4", text: "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me." },
+        { emoji: "☀️", title: "This Is the Day", ref: "Psalm 118:24", text: "This is the day which the LORD hath made; we will rejoice and be glad in it." },
+        { emoji: "🌟", title: "Wonderfully Made", ref: "Psalm 139:14", text: "I will praise thee; for I am fearfully and wonderfully made: marvellous are thy works; and that my soul knoweth right well." },
+        { emoji: "🏔️", title: "My Help Comes from the Lord", ref: "Psalm 121:1-2", text: "I will lift up mine eyes unto the hills, from whence cometh my help. My help cometh from the LORD, which made heaven and earth." },
+        { emoji: "📜", title: "A Lamp to My Feet", ref: "Psalm 119:105", text: "Thy word is a lamp unto my feet, and a light unto my path." },
+        { emoji: "👶", title: "Children Are a Heritage", ref: "Psalm 127:3", text: "Lo, children are an heritage of the LORD: and the fruit of the womb is his reward." },
+        { emoji: "🙌", title: "Give Thanks", ref: "Psalm 136:1", text: "O give thanks unto the LORD; for he is good: for his mercy endureth for ever." },
+        { emoji: "🤝", title: "Trust in the Lord", ref: "Proverbs 3:5-6", text: "Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths." },
+        { emoji: "📖", title: "Train Up a Child", ref: "Proverbs 22:6", text: "Train up a child in the way he should go: and when he is old, he will not depart from it." },
+        { emoji: "🦅", title: "Wings Like Eagles", ref: "Isaiah 40:31", text: "But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint." },
+        { emoji: "🌸", title: "Plans for You", ref: "Jeremiah 29:11", text: "For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end." },
+        { emoji: "🔥", title: "Great Is Thy Faithfulness", ref: "Lamentations 3:22-23", text: "It is of the LORD's mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness." },
+        { emoji: "🌾", title: "Streams in the Desert", ref: "Isaiah 35:6", text: "Then shall the lame man leap as an hart, and the tongue of the dumb sing: for in the wilderness shall waters break out, and streams in the desert." },
+        { emoji: "💜", title: "God So Loved the World", ref: "John 3:16", text: "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life." },
+        { emoji: "✨", title: "The Light of the World", ref: "John 8:12", text: "Then spake Jesus again unto them, saying, I am the light of the world: he that followeth me shall not walk in darkness, but shall have the light of life." },
+        { emoji: "🚪", title: "I Am the Door", ref: "John 10:9", text: "I am the door: by me if any man enter in, he shall be saved, and shall go in and out, and find pasture." },
+        { emoji: "🍞", title: "Bread of Life", ref: "John 6:35", text: "And Jesus said unto them, I am the bread of life: he that cometh to me shall never hunger; and he that believeth on me shall never thirst." },
+        { emoji: "🛤️", title: "The Way, Truth, and Life", ref: "John 14:6", text: "Jesus saith unto him, I am the way, the truth, and the life: no man cometh unto the Father, but by me." },
+        { emoji: "🕊️", title: "Peace I Leave with You", ref: "John 14:27", text: "Peace I leave with you, my peace I give unto you: not as the world giveth, give I unto you. Let not your heart be troubled, neither let it be afraid." },
+        { emoji: "🍇", title: "I Am the Vine", ref: "John 15:5", text: "I am the vine, ye are the branches: He that abideth in me, and I in him, the same bringeth forth much fruit: for without me ye can do nothing." },
+        { emoji: "💕", title: "Love One Another", ref: "John 13:34", text: "A new commandment I give unto you, That ye love one another; as I have loved you, that ye also love one another." },
+        { emoji: "🌊", title: "Living Water", ref: "John 4:14", text: "But whosoever drinketh of the water that I shall give him shall never thirst; but the water that I shall give him shall be in him a well of water springing up into everlasting life." },
+        { emoji: "🎁", title: "The Gift of God", ref: "Romans 6:23", text: "For the wages of sin is death; but the gift of God is eternal life through Jesus Christ our Lord." },
+        { emoji: "💪", title: "All Things Work Together", ref: "Romans 8:28", text: "And we know that all things work together for good to them that love God, to them who are the called according to his purpose." },
+        { emoji: "🏆", title: "More Than Conquerors", ref: "Romans 8:37", text: "Nay, in all these things we are more than conquerors through him that loved us." },
+        { emoji: "🔗", title: "Nothing Can Separate Us", ref: "Romans 8:38-39", text: "For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord." },
+        { emoji: "👄", title: "Confess and Believe", ref: "Romans 10:9", text: "That if thou shalt confess with thy mouth the Lord Jesus, and shalt believe in thine heart that God hath raised him from the dead, thou shalt be saved." },
+        { emoji: "🦋", title: "A New Creature", ref: "2 Corinthians 5:17", text: "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new." },
+        { emoji: "🎖️", title: "By Grace Through Faith", ref: "Ephesians 2:8-9", text: "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God: Not of works, lest any man should boast." },
+        { emoji: "⚔️", title: "The Armor of God", ref: "Ephesians 6:11", text: "Put on the whole armour of God, that ye may be able to stand against the wiles of the devil." },
+        { emoji: "💎", title: "I Can Do All Things", ref: "Philippians 4:13", text: "I can do all things through Christ which strengtheneth me." },
+        { emoji: "😊", title: "Rejoice Always", ref: "Philippians 4:4", text: "Rejoice in the Lord alway: and again I say, Rejoice." },
+        { emoji: "🕊️", title: "The Peace of God", ref: "Philippians 4:7", text: "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus." },
+        { emoji: "🌍", title: "All Things Created", ref: "Colossians 1:16", text: "For by him were all things created, that are in heaven, and that are in earth, visible and invisible, whether they be thrones, or dominions, or principalities, or powers: all things were created by him, and for him." },
+        { emoji: "📚", title: "Study to Show Thyself Approved", ref: "2 Timothy 2:15", text: "Study to shew thyself approved unto God, a workman that needeth not to be ashamed, rightly dividing the word of truth." },
+        { emoji: "📘", title: "All Scripture Is Inspired", ref: "2 Timothy 3:16", text: "All scripture is given by inspiration of God, and is profitable for doctrine, for reproof, for correction, for instruction in righteousness." },
+        { emoji: "🔑", title: "Faith Is", ref: "Hebrews 11:1", text: "Now faith is the substance of things hoped for, the evidence of things not seen." },
+        { emoji: "👀", title: "Looking Unto Jesus", ref: "Hebrews 12:2", text: "Looking unto Jesus the author and finisher of our faith; who for the joy that was set before him endured the cross, despising the shame, and is set down at the right hand of the throne of God." },
+        { emoji: "🌏", title: "Go Ye Therefore", ref: "Matthew 28:19-20", text: "Go ye therefore, and teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Ghost: Teaching them to observe all things whatsoever I have commanded you: and, lo, I am with you alway, even unto the end of the world." },
+        { emoji: "👧", title: "Let the Little Children Come", ref: "Matthew 19:14", text: "But Jesus said, Suffer little children, and forbid them not, to come unto me: for of such is the kingdom of heaven." },
+        { emoji: "🌱", title: "The Mustard Seed", ref: "Matthew 17:20", text: "If ye have faith as a grain of mustard seed, ye shall say unto this mountain, Remove hence to yonder place; and it shall remove; and nothing shall be impossible unto you." },
+        { emoji: "🙏", title: "Ask, Seek, Knock", ref: "Matthew 7:7", text: "Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you." },
+        { emoji: "💡", title: "Let Your Light Shine", ref: "Matthew 5:16", text: "Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven." },
+        { emoji: "❤️", title: "God Is Love", ref: "1 John 4:8", text: "He that loveth not knoweth not God; for God is love." },
+        { emoji: "🧹", title: "Forgiveness", ref: "1 John 1:9", text: "If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness." },
+        { emoji: "🏠", title: "Many Mansions", ref: "John 14:2", text: "In my Father's house are many mansions: if it were not so, I would have told you. I go to prepare a place for you." },
+        { emoji: "🌅", title: "He Is Risen", ref: "Matthew 28:6", text: "He is not here: for he is risen, as he said. Come, see the place where the Lord lay." },
+    ];
+
+    const BFM2000_ARTICLES = [
+        {
+            emoji: "📜", title: "I. The Scriptures",
+            baby: "God gave us the Bible — His special book!",
+            text: "The Holy Bible was written by men divinely inspired and is God's revelation of Himself to man. It is a perfect treasure of divine instruction. It has God for its author, salvation for its end, and truth, without any mixture of error, for its matter. Therefore, all Scripture is totally true and trustworthy.",
+            ref: "2 Timothy 3:16 · 2 Peter 1:21 · Psalm 119:105"
+        },
+        {
+            emoji: "👑", title: "II. God the Father",
+            baby: "God is our loving Father in heaven!",
+            text: "God as Father reigns with providential care over His universe, His creatures, and the flow of the stream of human history according to the purposes of His grace. God is Father in truth to those who become children of God through faith in Jesus Christ. He is fatherly in His attitude toward all men.",
+            ref: "Genesis 1:1 · Matthew 6:9 · John 1:12"
+        },
+        {
+            emoji: "✝️", title: "II. God the Son",
+            baby: "Jesus is God's Son who loves us so much!",
+            text: "Christ is the eternal Son of God. In His incarnation as Jesus Christ He was conceived of the Holy Spirit and born of the virgin Mary. He honored the divine law by His personal obedience, and in His substitutionary death on the cross He made provision for the redemption of men from sin. He was raised from the dead with a glorified body and appeared to His disciples.",
+            ref: "John 1:1,14 · Matthew 1:23 · Romans 5:8"
+        },
+        {
+            emoji: "🕊️", title: "II. God the Holy Spirit",
+            baby: "The Holy Spirit is God living in our hearts!",
+            text: "The Holy Spirit is the Spirit of God, fully divine. He inspired holy men of old to write the Scriptures. He exalts Christ. He convicts men of sin, of righteousness, and of judgment. He enlightens and empowers the believer and the church in worship, evangelism, and service.",
+            ref: "John 14:16-17 · Acts 1:8 · John 16:8"
+        },
+        {
+            emoji: "👤", title: "III. Man",
+            baby: "God made people special — in His own image!",
+            text: "Man is the special creation of God, made in His own image. He created them male and female as the crowning work of His creation. By his free choice man sinned against God and brought sin into the human race. The sacredness of human personality is evident in that God created man in His own image.",
+            ref: "Genesis 1:27 · Genesis 2:7 · Romans 3:23"
+        },
+        {
+            emoji: "💝", title: "IV. Salvation",
+            baby: "Jesus saves us because He loves us!",
+            text: "Salvation involves the redemption of the whole man, and is offered freely to all who accept Jesus Christ as Lord and Saviour, who by His own blood obtained eternal redemption for the believer. Salvation includes regeneration, justification, sanctification, and glorification. There is no salvation apart from personal faith in Jesus Christ as Lord.",
+            ref: "John 3:16 · Ephesians 2:8-9 · Romans 10:9"
+        },
+        {
+            emoji: "🎯", title: "V. God's Purpose of Grace",
+            baby: "God chose to love us and will never stop!",
+            text: "Election is the gracious purpose of God, according to which He regenerates, justifies, sanctifies, and glorifies sinners. All true believers endure to the end. Those whom God has accepted in Christ, and sanctified by His Spirit, will never fall away from the state of grace, but shall persevere to the end.",
+            ref: "Romans 8:28-30 · Ephesians 1:4-5 · John 10:28-29"
+        },
+        {
+            emoji: "⛪", title: "VI. The Church",
+            baby: "The church is God's family together!",
+            text: "A New Testament church of the Lord Jesus Christ is an autonomous local congregation of baptized believers, associated by covenant in the faith and fellowship of the gospel. The New Testament speaks also of the church as the Body of Christ which includes all of the redeemed of all the ages.",
+            ref: "Matthew 16:18 · Ephesians 1:22-23 · Acts 2:41-47"
+        },
+        {
+            emoji: "💧", title: "VII. Baptism and the Lord's Supper",
+            baby: "Baptism and the Lord's Supper remember Jesus!",
+            text: "Christian baptism is the immersion of a believer in water in the name of the Father, the Son, and the Holy Spirit. It is an act of obedience symbolizing the believer's faith in a crucified, buried, and risen Saviour. The Lord's Supper is a symbolic act of obedience commemorating the death of the Redeemer and anticipating His second coming.",
+            ref: "Matthew 28:19 · Romans 6:3-5 · 1 Corinthians 11:23-26"
+        },
+        {
+            emoji: "☀️", title: "VIII. The Lord's Day",
+            baby: "Sunday is a special day to worship God!",
+            text: "The first day of the week is the Lord's Day. It commemorates the resurrection of Christ from the dead and should include exercises of worship and spiritual devotion, both public and private.",
+            ref: "Acts 20:7 · Revelation 1:10 · Mark 16:9"
+        },
+        {
+            emoji: "🏰", title: "IX. The Kingdom",
+            baby: "God is King over everything!",
+            text: "The Kingdom of God includes both His general sovereignty over the universe and His particular kingship over men who willfully acknowledge Him as King. The full consummation of the Kingdom awaits the return of Jesus Christ and the end of this age.",
+            ref: "Matthew 6:10 · Daniel 2:44 · Revelation 11:15"
+        },
+        {
+            emoji: "🌠", title: "X. Last Things",
+            baby: "Jesus is coming back one day!",
+            text: "God, in His own time and in His own way, will bring the world to its appropriate end. Jesus Christ will return personally and visibly in glory to the earth. The dead will be raised and Christ will judge all men in righteousness. The unrighteous will be consigned to Hell. The righteous in their resurrected and glorified bodies will receive their reward and will dwell forever in Heaven with the Lord.",
+            ref: "1 Thessalonians 4:16-17 · Revelation 21:1-4 · John 14:3"
+        },
+        {
+            emoji: "📢", title: "XI. Evangelism and Missions",
+            baby: "We tell everyone about Jesus!",
+            text: "It is the duty and privilege of every follower of Christ and of every church of the Lord Jesus Christ to endeavor to make disciples of all nations. The new birth of man's spirit by God's Holy Spirit means the birth of love for others. Missionary effort on the part of all rests thus upon a spiritual necessity of the regenerate life.",
+            ref: "Matthew 28:19-20 · Acts 1:8 · Romans 10:14-15"
+        },
+        {
+            emoji: "🎓", title: "XII. Education",
+            baby: "Learning God's Word makes us wise!",
+            text: "Christianity is the faith of enlightenment and intelligence. In Jesus Christ abide all the treasures of wisdom and knowledge. All sound learning is, therefore, a part of our Christian heritage. The freedom of a teacher in a Christian school is limited by the pre-eminence of Jesus Christ and the authoritative nature of the Scriptures.",
+            ref: "Proverbs 22:6 · Colossians 2:3 · Deuteronomy 6:6-7"
+        },
+        {
+            emoji: "🪙", title: "XIII. Stewardship",
+            baby: "Everything belongs to God — we share!",
+            text: "God is the source of all blessings, temporal and spiritual; all that we have and are we owe to Him. Christians have a spiritual debtorship to the whole world. They are therefore under obligation to serve Him with their time, talents, and material possessions.",
+            ref: "1 Chronicles 29:14 · Malachi 3:10 · 2 Corinthians 9:7"
+        },
+        {
+            emoji: "🤝", title: "XIV. Cooperation",
+            baby: "Churches work together for God!",
+            text: "Christ's people should, as occasion requires, organize such associations and conventions as may best secure cooperation for the great objects of the Kingdom of God. Such organizations have no authority over one another or over the churches. Cooperation is desirable between the various Christian denominations.",
+            ref: "Acts 15:1-35 · 1 Corinthians 1:10 · Ephesians 4:1-6"
+        },
+        {
+            emoji: "🌍", title: "XV. The Christian and Social Order",
+            baby: "Christians help make the world better!",
+            text: "All Christians are under obligation to seek to make the will of Christ supreme in our own lives and in human society. Every Christian should seek to bring industry, government, and society as a whole under the sway of the principles of righteousness, truth, and brotherly love.",
+            ref: "Matthew 5:13-16 · James 1:27 · Micah 6:8"
+        },
+        {
+            emoji: "☮️", title: "XVI. Peace and War",
+            baby: "God wants us to live in peace!",
+            text: "It is the duty of Christians to seek peace with all men on principles of righteousness. In accordance with the spirit and teachings of Christ they should do all in their power to put an end to war. The true remedy for the war spirit is the gospel of our Lord.",
+            ref: "Matthew 5:9 · Romans 12:18 · Isaiah 2:4"
+        },
+        {
+            emoji: "🗽", title: "XVII. Religious Liberty",
+            baby: "Everyone is free to worship God!",
+            text: "God alone is Lord of the conscience, and He has left it free from the doctrines and commandments of men which are contrary to His Word or not contained in it. Church and state should be separate. The state owes to every church protection and full freedom in the pursuit of its spiritual ends.",
+            ref: "James 4:12 · Romans 13:1-7 · Matthew 22:21"
+        },
+        {
+            emoji: "👨‍👩‍👧‍👦", title: "XVIII. The Family",
+            baby: "God loves families and made them special!",
+            text: "God has ordained the family as the foundational institution of human society. Marriage is the uniting of one man and one woman in covenant commitment for a lifetime. Children, from the moment of conception, are a blessing and heritage from the Lord. Parents are to demonstrate to their children God's pattern for marriage.",
+            ref: "Genesis 2:24 · Psalm 127:3 · Ephesians 5:22-33"
+        }
+    ];
+
+    const FWB_TREATISE = [
+        {
+            emoji: "📜", title: "The Holy Scriptures",
+            baby: "The Bible is God's perfect Word to us!",
+            text: "The Scriptures of the Old and New Testaments were given by inspiration of God and are the only sufficient, certain, and authoritative rule of all saving knowledge, faith, and obedience. They are our infallible guide to understanding the will of God.",
+            ref: "2 Timothy 3:16-17 · 2 Peter 1:19-21"
+        },
+        {
+            emoji: "👑", title: "God — The Holy Trinity",
+            baby: "One God — Father, Son, and Holy Spirit!",
+            text: "There is one living and true God, the Maker and Preserver of all things. In the unity of the Godhead, there are three persons: the Father, the Son, and the Holy Ghost, equal in every divine perfection, and executing distinct but harmonious offices in the great work of redemption.",
+            ref: "Deuteronomy 6:4 · Matthew 28:19 · 2 Corinthians 13:14"
+        },
+        {
+            emoji: "✝️", title: "Jesus Christ — God the Son",
+            baby: "Jesus is God who became a man to save us!",
+            text: "Christ is God manifest in the flesh. He is the Son of God, conceived by the Holy Spirit and born of the virgin Mary, truly God and truly man. He honored the divine law by His personal obedience, and by His death made a full atonement for all human sins. He rose from the dead and is now at the right hand of God interceding for us.",
+            ref: "John 1:1,14 · Hebrews 2:14 · 1 Timothy 2:5"
+        },
+        {
+            emoji: "🕊️", title: "The Holy Spirit",
+            baby: "The Holy Spirit helps us know God!",
+            text: "The Holy Spirit is a divine person, equal with the Father and the Son. He convicts of sin, of righteousness, and of judgment. He bears witness to the truth. He is the Agent of the new birth. He comforts, guides, and sustains believers.",
+            ref: "John 16:8-11 · John 3:5-6 · Romans 8:14-16"
+        },
+        {
+            emoji: "🌳", title: "Free Will",
+            baby: "God lets us choose to love Him!",
+            text: "God created man in His own image, with free will and the ability to choose. The human will is free and self-controlled, having power to yield to the influence of the truth and the Spirit, or to resist them. Through the fall, man lost his original righteousness, yet he retains the freedom to choose, empowered by God's prevenient grace, to accept or reject the Gospel.",
+            ref: "Genesis 1:27 · Deuteronomy 30:19 · Joshua 24:15 · John 7:17"
+        },
+        {
+            emoji: "🌊", title: "The Fall of Man",
+            baby: "People chose to disobey God, but He still loves us!",
+            text: "God originally created man in His own image, upright and without sin. By voluntary transgression, man fell from that state. In consequence, all mankind are now sinners, not by constraint, but by choice. Man is by nature utterly void of holiness and inclined to evil, and is therefore under just condemnation to eternal ruin, without defense or excuse.",
+            ref: "Genesis 3:1-6 · Romans 3:10-12 · Romans 5:12"
+        },
+        {
+            emoji: "🎁", title: "Free Grace — The Atonement",
+            baby: "Jesus died for everyone — His love is for all!",
+            text: "The call of the Gospel is co-extensive with the atonement to all men. Christ tasted death for every man. God's free grace is offered to every person. The atonement provides a basis for God to save all who come to Him through Jesus Christ. God's grace is not limited to an elect few but extends freely to all mankind.",
+            ref: "John 3:16 · 1 Timothy 2:4-6 · Hebrews 2:9 · 2 Peter 3:9"
+        },
+        {
+            emoji: "🔑", title: "Free Salvation — Repentance and Faith",
+            baby: "Salvation is free! Just believe in Jesus!",
+            text: "The conditions of salvation are repentance toward God and faith in the Lord Jesus Christ. Repentance is a sincere turning from sin to God. Faith is receiving Christ as Saviour and Lord, resting upon Him alone for salvation. Justification is the pardon of sin and the acceptance of the sinner as righteous, solely through faith in Christ.",
+            ref: "Acts 20:21 · Romans 3:24-26 · Ephesians 2:8-9"
+        },
+        {
+            emoji: "🌱", title: "Regeneration — New Birth",
+            baby: "God makes us brand new inside!",
+            text: "Regeneration is the new birth — a change of heart wrought by the Holy Spirit, through which the believer becomes a partaker of the divine nature. It is effected in a manner above our comprehension by the power of the Holy Spirit in connection with divine truth, so as to secure our voluntary obedience to the Gospel.",
+            ref: "John 3:3-7 · 2 Corinthians 5:17 · Titus 3:5"
+        },
+        {
+            emoji: "🙌", title: "Sanctification",
+            baby: "God helps us grow to be more like Jesus!",
+            text: "Sanctification is the process of being made holy, which is begun at regeneration, and is carried on in the hearts of believers by the Holy Spirit, in the continual use of the appointed means — the Word of God, self-examination, self-denial, watchfulness, and prayer.",
+            ref: "1 Thessalonians 5:23 · John 17:17 · 2 Corinthians 7:1"
+        },
+        {
+            emoji: "⚠️", title: "Perseverance — Apostasy",
+            baby: "We must keep following Jesus every day!",
+            text: "There are strong grounds to hope that the truly regenerate will persevere unto the end and be saved through the power of divine grace. However, believers may fall from grace and apostatize, and unless they repent, will be eternally lost. This is a distinguishing doctrine: the believer must continue in faith and obedience.",
+            ref: "Hebrews 6:4-6 · 2 Peter 2:20-21 · Galatians 5:4 · Hebrews 3:12-14"
+        },
+        {
+            emoji: "⛪", title: "The Church",
+            baby: "The church is all God's people together!",
+            text: "A Christian church is a congregation of believers, associated by covenant in the faith and fellowship of the Gospel. The church observes the ordinances of Christ, is governed by His laws, and exercises the gifts, rights, and privileges invested in them by His Word. Its officers are pastors (or elders) and deacons.",
+            ref: "Acts 2:41-42 · Ephesians 1:22-23 · 1 Timothy 3:1-13"
+        },
+        {
+            emoji: "💧", title: "Baptism",
+            baby: "Baptism shows everyone we follow Jesus!",
+            text: "Water baptism is the immersion of a believer in water, in the name of the Father, and the Son, and the Holy Spirit. It is an outward act symbolizing the inner spiritual experience of the believer — the death, burial, and resurrection of Christ, and the believer's death to sin and resurrection to walk in newness of life.",
+            ref: "Matthew 28:19 · Acts 8:36-39 · Romans 6:3-4"
+        },
+        {
+            emoji: "🍷", title: "The Lord's Supper",
+            baby: "The Lord's Supper helps us remember Jesus!",
+            text: "The Lord's Supper is a memorial of the sufferings and death of our Lord Jesus Christ. It should be observed regularly by all Christians. The elements of bread and the cup represent the body and blood of Christ and are to be partaken of in a worthy manner, in remembrance of His sacrifice.",
+            ref: "1 Corinthians 11:23-26 · Luke 22:19-20"
+        },
+        {
+            emoji: "🦶", title: "Washing of the Saints' Feet",
+            baby: "We serve each other like Jesus did!",
+            text: "The washing of the saints' feet was taught and practiced by our Lord Jesus Christ. It is a sacred ordinance teaching humility and service to one another. It is the duty of every believer to practice this ordinance according to the example and command of our Lord.",
+            ref: "John 13:4-17"
+        },
+        {
+            emoji: "🌠", title: "The Second Coming and Last Things",
+            baby: "Jesus is coming back — what a wonderful day!",
+            text: "The Lord Jesus Christ will come again to earth personally, visibly, and bodily to judge the living and the dead. The righteous will be received into everlasting blessedness in heaven. The wicked will be cast into everlasting punishment. The return of Christ is the blessed hope of the church.",
+            ref: "Acts 1:11 · 1 Thessalonians 4:16-17 · Revelation 20:11-15"
+        }
+    ];
+
+    // ── APP STATE ─────────────────────────────────────────────────
+
+    let currentMode = null;       // 'bible' | 'bfm' | 'fwb'
+    let currentIndex = 0;
+    let currentData = [];
+    let isAutoPlay = false;
+    let autoPlayTimer = null;
+    let isSpeaking = false;
+
+    // Settings
+    let speechRate = 0.7;
+    let autoPlayDelay = 6;
+    let confettiEnabled = true;
+
+    // Touch handling
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchMoved = false;
+
+    // ── DOM REFS ──────────────────────────────────────────────────
+
+    const screenHome = document.getElementById('screen-home');
+    const screenCards = document.getElementById('screen-cards');
+    const contentCard = document.getElementById('content-card');
+    const cardBadge = document.getElementById('card-badge');
+    const cardEmoji = document.getElementById('card-emoji');
+    const cardTitle = document.getElementById('card-title');
+    const cardSubtitle = document.getElementById('card-subtitle');
+    const cardBody = document.getElementById('card-body');
+    const cardReference = document.getElementById('card-reference');
+    const cardCounter = document.getElementById('card-counter');
+    const headerTitleText = document.getElementById('header-title-text');
+
+    const btnHome = document.getElementById('btn-home');
+    const btnAutoplay = document.getElementById('btn-autoplay');
+    const btnSettings = document.getElementById('btn-settings');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const btnSpeak = document.getElementById('btn-speak');
+
+    const btnModeBible = document.getElementById('btn-mode-bible');
+    const btnModeBfm = document.getElementById('btn-mode-bfm');
+    const btnModeFwb = document.getElementById('btn-mode-fwb');
+
+    const settingsOverlay = document.getElementById('settings-overlay');
+    const toggleAutoplay = document.getElementById('toggle-autoplay');
+    const toggleConfetti = document.getElementById('toggle-confetti');
+    const speedSlider = document.getElementById('speed-slider');
+    const delaySlider = document.getElementById('delay-slider');
+
+    const confettiCanvas = document.getElementById('confetti-canvas');
+    const confettiCtx = confettiCanvas.getContext('2d');
+
+    // ── CONFETTI SYSTEM ───────────────────────────────────────────
+
+    let confettiParticles = [];
+    let confettiAnimating = false;
+
+    function resizeConfettiCanvas() {
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+    }
+    resizeConfettiCanvas();
+    window.addEventListener('resize', resizeConfettiCanvas);
+
+    function launchConfetti() {
+        if (!confettiEnabled) return;
+        confettiParticles = [];
+        const colors = ['#f43f5e','#fbbf24','#34d399','#38bdf8','#a78bfa','#fb923c','#ec4899','#2dd4bf'];
+        const shapes = ['circle','rect','star'];
+
+        for (let i = 0; i < 60; i++) {
+            confettiParticles.push({
+                x: Math.random() * confettiCanvas.width,
+                y: -20 - Math.random() * 100,
+                size: 6 + Math.random() * 8,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                shape: shapes[Math.floor(Math.random() * shapes.length)],
+                speedY: 2 + Math.random() * 3,
+                speedX: (Math.random() - 0.5) * 3,
+                rotation: Math.random() * 360,
+                rotationSpeed: (Math.random() - 0.5) * 10,
+                opacity: 1,
+                decay: 0.003 + Math.random() * 0.005
+            });
+        }
+
+        if (!confettiAnimating) {
+            confettiAnimating = true;
+            animateConfetti();
+        }
+    }
+
+    function animateConfetti() {
+        confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+
+        confettiParticles = confettiParticles.filter(p => p.opacity > 0);
+
+        if (confettiParticles.length === 0) {
+            confettiAnimating = false;
+            return;
+        }
+
+        confettiParticles.forEach(p => {
+            p.y += p.speedY;
+            p.x += p.speedX;
+            p.rotation += p.rotationSpeed;
+            p.opacity -= p.decay;
+
+            confettiCtx.save();
+            confettiCtx.globalAlpha = Math.max(0, p.opacity);
+            confettiCtx.translate(p.x, p.y);
+            confettiCtx.rotate((p.rotation * Math.PI) / 180);
+            confettiCtx.fillStyle = p.color;
+
+            if (p.shape === 'circle') {
+                confettiCtx.beginPath();
+                confettiCtx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+                confettiCtx.fill();
+            } else if (p.shape === 'rect') {
+                confettiCtx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+            } else {
+                // star
+                drawStar(confettiCtx, 0, 0, 5, p.size / 2, p.size / 4);
+                confettiCtx.fill();
+            }
+
+            confettiCtx.restore();
+        });
+
+        requestAnimationFrame(animateConfetti);
+    }
+
+    function drawStar(ctx, cx, cy, spikes, outerR, innerR) {
+        let rot = (Math.PI / 2) * 3;
+        const step = Math.PI / spikes;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - outerR);
+        for (let i = 0; i < spikes; i++) {
+            ctx.lineTo(cx + Math.cos(rot) * outerR, cy + Math.sin(rot) * outerR);
+            rot += step;
+            ctx.lineTo(cx + Math.cos(rot) * innerR, cy + Math.sin(rot) * innerR);
+            rot += step;
+        }
+        ctx.lineTo(cx, cy - outerR);
+        ctx.closePath();
+    }
+
+    // ── TEXT-TO-SPEECH ────────────────────────────────────────────
+
+    function speakCard() {
+        if (!('speechSynthesis' in window)) return;
+
+        if (speechSynthesis.speaking || speechSynthesis.pending) {
+            speechSynthesis.cancel();
+            setSpeakingState(false);
+            return;
+        }
+
+        const item = currentData[currentIndex];
+        if (!item) return;
+
+        let textToSpeak = '';
+        if (currentMode === 'bible') {
+            textToSpeak = item.text;
+        } else {
+            textToSpeak = item.baby + ' ... ' + item.text;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.lang = 'en-US';
+        utterance.rate = speechRate;
+        utterance.pitch = 1.0;
+
+        utterance.onstart = () => setSpeakingState(true);
+        utterance.onend = () => {
+            setSpeakingState(false);
+            if (isAutoPlay) {
+                autoPlayTimer = setTimeout(() => navigateCard(1), autoPlayDelay * 1000);
+            }
+        };
+        utterance.onerror = () => setSpeakingState(false);
+
+        speechSynthesis.speak(utterance);
+    }
+
+    function setSpeakingState(speaking) {
+        isSpeaking = speaking;
+        if (speaking) {
+            btnSpeak.classList.add('speaking');
+        } else {
+            btnSpeak.classList.remove('speaking');
+        }
+    }
+
+    function stopSpeech() {
+        if ('speechSynthesis' in window) {
+            speechSynthesis.cancel();
+        }
+        setSpeakingState(false);
+    }
+
+    // ── CARD RENDERING ───────────────────────────────────────────
+
+    function renderCard(direction) {
+        const item = currentData[currentIndex];
+        if (!item) return;
+
+        // Animate out current card
+        if (direction !== 0) {
+            const exitClass = direction > 0 ? 'swipe-left' : 'swipe-right';
+            contentCard.classList.add(exitClass);
+
+            setTimeout(() => {
+                contentCard.classList.remove(exitClass);
+                const enterClass = direction > 0 ? 'enter-right' : 'enter-left';
+                contentCard.classList.add(enterClass);
+                updateCardContent(item);
+
+                // Force reflow
+                void contentCard.offsetWidth;
+                contentCard.classList.remove(enterClass);
+            }, 250);
+        } else {
+            updateCardContent(item);
+        }
+
+        // Update counter
+        cardCounter.textContent = `${currentIndex + 1} / ${currentData.length}`;
+    }
+
+    function updateCardContent(item) {
+        // Badge
+        if (currentMode === 'bible') {
+            cardBadge.className = 'card-category-badge badge-bible';
+            cardBadge.textContent = '📖 KJV BIBLE';
+        } else if (currentMode === 'bfm') {
+            cardBadge.className = 'card-category-badge badge-bfm';
+            cardBadge.textContent = '✝️ BFM2000';
+        } else {
+            cardBadge.className = 'card-category-badge badge-fwb';
+            cardBadge.textContent = '🕊️ FWB TREATISE';
+        }
+
+        cardEmoji.textContent = item.emoji;
+        cardTitle.textContent = item.title;
+
+        if (currentMode === 'bible') {
+            cardSubtitle.textContent = item.ref;
+            cardBody.textContent = item.text;
+            cardReference.textContent = '';
+        } else {
+            cardSubtitle.textContent = item.baby;
+            cardBody.textContent = item.text;
+            cardReference.textContent = item.ref;
+        }
+    }
+
+    // ── NAVIGATION ────────────────────────────────────────────────
+
+    function navigateCard(direction) {
+        if (currentData.length === 0) return;
+
+        stopSpeech();
+        clearTimeout(autoPlayTimer);
+
+        currentIndex += direction;
+        if (currentIndex < 0) currentIndex = currentData.length - 1;
+        if (currentIndex >= currentData.length) currentIndex = 0;
+
+        renderCard(direction);
+        launchConfetti();
+
+        if (isAutoPlay) {
+            // In auto-play, speak immediately after card appears
+            setTimeout(() => speakCard(), 400);
+        }
+    }
+
+    function showScreen(screen) {
+        screenHome.classList.add('hidden');
+        screenCards.classList.add('hidden');
+
+        if (screen === 'home') {
+            screenHome.classList.remove('hidden');
+            headerTitleText.textContent = 'Baby Bible';
+            stopSpeech();
+            stopAutoPlay();
+        } else {
+            screenCards.classList.remove('hidden');
+        }
+    }
+
+    function enterMode(mode) {
+        currentMode = mode;
+        currentIndex = 0;
+
+        if (mode === 'bible') {
+            currentData = BIBLE_VERSES;
+            headerTitleText.textContent = '📖 Bible Verses';
+        } else if (mode === 'bfm') {
+            currentData = BFM2000_ARTICLES;
+            headerTitleText.textContent = '✝️ BFM2000';
+        } else {
+            currentData = FWB_TREATISE;
+            headerTitleText.textContent = '🕊️ FWB Treatise';
+        }
+
+        showScreen('cards');
+        renderCard(0);
+        launchConfetti();
+    }
+
+    // ── AUTO-PLAY ─────────────────────────────────────────────────
+
+    function startAutoPlay() {
+        isAutoPlay = true;
+        btnAutoplay.classList.add('active');
+        toggleAutoplay.classList.add('on');
+        // Start speaking current card
+        setTimeout(() => speakCard(), 300);
+    }
+
+    function stopAutoPlay() {
+        isAutoPlay = false;
+        clearTimeout(autoPlayTimer);
+        btnAutoplay.classList.remove('active');
+        toggleAutoplay.classList.remove('on');
+        stopSpeech();
+    }
+
+    function toggleAutoPlay() {
+        if (isAutoPlay) {
+            stopAutoPlay();
+        } else {
+            if (currentMode) startAutoPlay();
+        }
+    }
+
+    // ── TOUCH GESTURES ────────────────────────────────────────────
+
+    function handleTouchStart(e) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchMoved = false;
+    }
+
+    function handleTouchMove(e) {
+        const dx = e.touches[0].clientX - touchStartX;
+        const dy = e.touches[0].clientY - touchStartY;
+        if (Math.abs(dx) > 15 || Math.abs(dy) > 15) {
+            touchMoved = true;
+        }
+    }
+
+    function handleTouchEnd(e) {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+
+        // If horizontal swipe is dominant and significant
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+            if (dx < 0) {
+                navigateCard(1);  // Swipe left → next
+            } else {
+                navigateCard(-1); // Swipe right → prev
+            }
+        } else if (!touchMoved) {
+            // Tap — read aloud
+            speakCard();
+        }
+    }
+
+    // ── SETTINGS ──────────────────────────────────────────────────
+
+    function openSettings() {
+        settingsOverlay.classList.add('open');
+    }
+
+    function closeSettings() {
+        settingsOverlay.classList.remove('open');
+    }
+
+    // ── EVENT LISTENERS ───────────────────────────────────────────
+
+    // Mode selection
+    btnModeBible.addEventListener('click', () => enterMode('bible'));
+    btnModeBfm.addEventListener('click', () => enterMode('bfm'));
+    btnModeFwb.addEventListener('click', () => enterMode('fwb'));
+
+    // Navigation
+    btnHome.addEventListener('click', () => showScreen('home'));
+    btnPrev.addEventListener('click', () => navigateCard(-1));
+    btnNext.addEventListener('click', () => navigateCard(1));
+    btnSpeak.addEventListener('click', () => speakCard());
+
+    // Auto-play
+    btnAutoplay.addEventListener('click', toggleAutoPlay);
+
+    // Settings
+    btnSettings.addEventListener('click', openSettings);
+    settingsOverlay.addEventListener('click', (e) => {
+        if (e.target === settingsOverlay) closeSettings();
+    });
+
+    toggleAutoplay.addEventListener('click', () => {
+        toggleAutoPlay();
+    });
+
+    toggleConfetti.addEventListener('click', () => {
+        confettiEnabled = !confettiEnabled;
+        toggleConfetti.classList.toggle('on', confettiEnabled);
+    });
+
+    speedSlider.addEventListener('input', (e) => {
+        speechRate = parseFloat(e.target.value);
+    });
+
+    delaySlider.addEventListener('input', (e) => {
+        autoPlayDelay = parseInt(e.target.value);
+    });
+
+    // Touch gestures on card viewport
+    const cardViewport = document.getElementById('card-viewport');
+    cardViewport.addEventListener('touchstart', handleTouchStart, { passive: true });
+    cardViewport.addEventListener('touchmove', handleTouchMove, { passive: true });
+    cardViewport.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    // Keyboard navigation (for desktop testing)
+    document.addEventListener('keydown', (e) => {
+        if (!currentMode) return;
+        if (e.key === 'ArrowLeft') navigateCard(-1);
+        if (e.key === 'ArrowRight') navigateCard(1);
+        if (e.key === ' ') { e.preventDefault(); speakCard(); }
+    });
+
+    // Prevent double-tap zoom on mobile
+    document.addEventListener('dblclick', (e) => e.preventDefault());
+
+    // ── INIT ──────────────────────────────────────────────────────
+    showScreen('home');
+
+    </script>
+</body>
+</html>
