@@ -125,19 +125,28 @@ class Level {
         fill(140, 5, 2, 8, 4);           // Cathedral left wall top (rows 5-12)
         fill(140, 16, 2, 5, 4);          // Cathedral left wall bottom (rows 16-20)
 
+        // Place the Lamp tile on top of the bottom wall (row 15, column 140)
+        this.tiles[15][140] = 10;
+        // Register the Lamp checkpoint coordinates
+        this.lamps.push({ x: 140, y: 15 });
+
+
         this.tiles[18][142] = 11;        // crate
         this.tiles[19][142] = 11;        // crate
         this.tiles[19][143] = 11;        // crate
 
         fill(148, 14, 1, 6, 4);          // Pillar
         fill(158, 14, 1, 6, 4);          // Pillar
-        fill(145, 16, 5, 1, 2);          // Platform
+        fill(145, 16, 6, 1, 2);          // Platform
+        fill(151, 18, 2, 1, 2);          // Platform
+        this.tiles[15][152] = 11;        // crate
+        this.tiles[15][153] = 11;        // crate
         fill(155, 14, 5, 1, 2);          // Platform
 
         this.enemySpawns.push({ type: 'churchServant', x: 150, y: 19, patrolL: 145, patrolR: 156 });
         this.enemySpawns.push({ type: 'churchServant', x: 163, y: 19, patrolL: 159, patrolR: 168 });
 
-        this.items.push({ x: 157, y: 13, type: 'bloodVial', collected: false });
+        this.items.push({ x: 157, y: 19, type: 'bloodVial', collected: false });
         this.items.push({ x: 165, y: 19, type: 'bloodVial', collected: false });
 
         // Pre-boss lamp
