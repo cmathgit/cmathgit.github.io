@@ -66,3 +66,7 @@ ai-apps/bible-news-digest/digest-result.json
 ai-apps/bible-news-digest/websearch-results.json
 ai-apps/bible-news-digest/archives/**
 ai-apps/bible-news-digest/archives/*
+!ai-apps/blobo/audio/beastman-voice.mp3
+!ai-apps/blobo/audio/boss-music.mp3
+!ai-apps/blobo/audio/level-one-music.mp3
+!ai-apps/blobo/audio/sewer-music.mp3
