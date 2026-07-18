@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BLOBO — A Bloodborne-inspired 2D Metroidvania sidescroller with trick weapons, rally system, parry mechanics, and visceral attacks. Play as a Hunter in the dark streets of Yharnam.">
+    <title>BLOBO — Bloodborne 2D Metroidvania</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="loading">Awakening the Hunter…</div>
+    </div>
+
+    <!-- Engine modules (order matters: dependencies first) -->
+    <script src="js/input.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/level.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/enemies.js"></script>
+    <script src="js/boss.js"></script>
+    <script src="js/hud.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Hide loading screen once everything is ready
+        window.addEventListener('load', () => {
+            const el = document.getElementById('loading');
+            if (el) el.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
