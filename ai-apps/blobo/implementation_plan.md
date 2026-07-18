@@ -1,6 +1,14 @@
 # Bloodborne 2D Metroidvania Demo — "BLOBO"
-
 A sidescrolling Metroidvania demo inspired by Bloodborne's story, themes, and mechanics. One interconnected level culminating in a boss fight. All core Bloodborne combat systems translated to 2D.
+
+![Blobo Banner](art/cover.png)
+
+## Screenshots
+![Screenshot 1](art/screencapture_2026-07-18_14-23-04.png)
+![Screenshot 2](art/screencapture_2026-07-18_14-25-00.png)
+
+## Demo on YouTube
+[![Watch the demo](https://img.youtube.com/vi/ovsavIS-pDU/maxresdefault.jpg)](https://youtu.be/ovsavIS-pDU)
 
 ## Proposed Architecture
 
