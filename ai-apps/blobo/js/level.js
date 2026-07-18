@@ -119,13 +119,13 @@ class Level {
 
         /* ---- Section 5 : Cathedral Approach  (140–169) ---- */
         //fill(140, 21, 3, 4, 1);          // Step up
-        fill(142, 20, 27, 5, 4);         // Cathedral floor
+        fill(142, 20, 28, 5, 4);         // Cathedral floor
 
         // Cathedral left wall split: gap at rows 13-15 (matching Sewer Wall R exit)
         fill(140, 5, 2, 8, 4);           // Cathedral left wall top (rows 5-12)
         fill(140, 16, 2, 5, 4);          // Cathedral left wall bottom (rows 16-20)
 
-        // Place the Lamp tile on top of the bottom wall (row 15, column 140)
+        // Pre-boss lamp
         this.tiles[15][140] = 10;
         // Register the Lamp checkpoint coordinates
         this.lamps.push({ x: 140, y: 15 });
@@ -144,18 +144,19 @@ class Level {
         fill(155, 14, 5, 1, 2);          // Platform
 
         this.enemySpawns.push({ type: 'churchServant', x: 150, y: 19, patrolL: 145, patrolR: 156 });
+        this.enemySpawns.push({ type: 'churchServant', x: 165, y: 19, patrolL: 160, patrolR: 167 });
         this.enemySpawns.push({ type: 'churchServant', x: 163, y: 19, patrolL: 159, patrolR: 168 });
 
         this.items.push({ x: 157, y: 19, type: 'bloodVial', collected: false });
         this.items.push({ x: 165, y: 19, type: 'bloodVial', collected: false });
 
         // Pre-boss lamp
-        this.tiles[19][168] = 10;
-        this.lamps.push({ x: 168, y: 19 });
+        //this.tiles[19][168] = 10;
+        //this.lamps.push({ x: 168, y: 19 });
 
         /* ---- Section 6 : Boss Arena  (170–199) ---- */
         fill(170, 20, 30, 5, 4);         // Arena floor
-        fill(170, 5, 1, 15, 4);          // Left wall
+        fill(170, 5, 1, 12, 4);          // Left wall
         fill(199, 5, 1, 20, 4);          // Right wall
 
         this.fogGates.push({ x: 172, y: 15, active: true });
