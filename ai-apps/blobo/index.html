@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="BLOBO — A Bloodborne-inspired 2D Metroidvania sidescroller with trick weapons, rally system, parry mechanics, and visceral attacks. Play as a Hunter in the dark streets of Yharnam.">
+    <meta name="description"
+        content="BLOBO — A Bloodborne-inspired 2D Metroidvania sidescroller with trick weapons, rally system, parry mechanics, and visceral attacks. Play as a Hunter in the dark streets of Yharnam.">
     <title>BLOBO — Bloodborne 2D Metroidvania</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <div id="game-container">
         <canvas id="game-canvas"></canvas>
@@ -23,7 +26,9 @@
     <script src="js/enemies.js"></script>
     <script src="js/boss.js"></script>
     <script src="js/hud.js"></script>
+    <script src="js/hud-rush.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/main-rush.js"></script> <!-- The new mode -->
     <script>
         // Hide loading screen once everything is ready
         window.addEventListener('load', () => {
@@ -32,4 +37,5 @@
         });
     </script>
 </body>
+
 </html>

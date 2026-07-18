@@ -63,7 +63,6 @@ class Boss {
         this.nameReveal = 180;
         G.audio.bossRoar();
         G.renderer.addShake(6, 20);
-        G.audio.startBossMusic();
     }
 
     update(player, level) {
@@ -299,7 +298,6 @@ class Boss {
             this._set(BS.DEATH);
             this.vx = 0;
             G.audio.enemyDeath();
-            G.audio.stopBossMusic();
             G.renderer.addShake(12, 30);
             G.particles.deathSmoke(this.x + this.w / 2, this.y + this.h / 2);
             G.particles.visceralBurst(this.x + this.w / 2, this.y + this.h / 3);

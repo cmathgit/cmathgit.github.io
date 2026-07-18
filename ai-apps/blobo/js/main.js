@@ -65,7 +65,7 @@ function init() {
     G.state = 'TITLE';
     G.stateTimer = 0;
 
-    requestAnimationFrame(loop);
+    G.loopId = requestAnimationFrame(loop);
 }
 
 /* ================================================================
@@ -79,7 +79,7 @@ function loop(ts) {
     update();
     render();
     G.input.update();
-    requestAnimationFrame(loop);
+    G.loopId = requestAnimationFrame(loop);
 }
 
 /* ================================================================
@@ -90,7 +90,7 @@ function update() {
         case 'TITLE':
             if (G.input.confirm) {
                 G.audio.init();
-                G.audio.startAmbient();
+                G.audio.playVoice();
                 G.state = 'PLAYING';
                 G.stateTimer = 0;
             }
@@ -125,7 +125,18 @@ function update() {
 
         case 'VICTORY':
             G.particles.update();
+            if (G.stateTimer > 180 && G.input.confirm) {
+                if (typeof initRush === 'function') {
+                    cancelAnimationFrame(G.loopId);
+                    initRush();
+                }
+            }
             break;
+    }
+
+    // Handle music switching based on player position and game state
+    if (G.state !== 'TITLE' && G.audio && G.audio.initialized) {
+        G.audio.updateMusicArea(G.player.x, G.state);
     }
 }
 
@@ -331,7 +342,6 @@ function checkBossTrigger() {
     const fgX = fg.x * G.RTILE;
     if (p.x + p.w > fgX + G.RTILE / 2) {
         fg.active = false;
-        G.audio.stopAmbient();
         G.state = 'BOSS_INTRO';
         G.stateTimer = 0;
     }
@@ -364,8 +374,6 @@ function respawnAll() {
     // Reset level
     G.level.reset();
     G.particles.clear();
-    G.audio.stopBossMusic();
-    G.audio.startAmbient();
 }
 
 /* ================================================================
