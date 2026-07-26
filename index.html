@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,29 +12,29 @@
     <!-- Favicon Placeholder (Optional) -->
     <link rel="icon" href="github_pro_favicon.ico" type="image/x-icon">
 
-    <!--W3.CSS--> 
-		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-		
-		<!--Font Awesome Free ICONS 6.1.1 by @fontawesome - https://fontawesome.com-->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+    <!--W3.CSS-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!--Font Awesome Free ICONS 6.1.1 by @fontawesome - https://fontawesome.com-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 
     <!-- MathJax Configuration -->
     <script>
-      MathJax = {
-        tex: {
-          inlineMath: [['\\(', '\\)']], // Define inline math delimiters
-          displayMath: [['\\[', '\\]']]  // Define display math delimiters
-        },
-        svg: {
-          fontCache: 'global' // Use SVG output with global font cache
-        }
-      };
-  </script>
-  <!-- Load MathJax -->
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-  </script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']], // Define inline math delimiters
+                displayMath: [['\\[', '\\]']]  // Define display math delimiters
+            },
+            svg: {
+                fontCache: 'global' // Use SVG output with global font cache
+            }
+        };
+    </script>
+    <!-- Load MathJax -->
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+        </script>
 
 
     <!--External Style Sheets-->
@@ -41,134 +42,195 @@
     <style>
         /* Basic Reset and Body Styling */
         * {
-            box-sizing: border-box; /* Makes layout math easier */
+            box-sizing: border-box;
+            /* Makes layout math easier */
             margin: 0;
             padding: 0;
         }
 
         body {
-            font-family: 'Lato', sans-serif; /* Modern sans-serif font */
+            font-family: 'Lato', sans-serif;
+            /* Modern sans-serif font */
             line-height: 1.6;
-            background-color: #1b1c25; /* Dracula background */
-            color: #54a286; /* Dracula default text */
-            display: flex; /* Enable flexbox for centering */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            min-height: 100vh; /* Ensure body takes full viewport height */
-            padding: 1em; /* Add padding for smaller screens */
+            background-color: #1b1c25;
+            /* Dracula background */
+            color: #54a286;
+            /* Dracula default text */
+            display: flex;
+            /* Enable flexbox for centering */
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
+            min-height: 100vh;
+            /* Ensure body takes full viewport height */
+            padding: 1em;
+            /* Add padding for smaller screens */
         }
 
         /* Content Container */
         .container {
-            background-color: #35374b; /* Dracula pre/code background for contrast */
-            padding: 2em 3em; /* Padding inside the container */
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-            text-align: center; /* Center text within container */
-            max-width: 600px; /* Limit width on larger screens */
-            width: 100%; /* Ensure it takes full width on smaller screens */
+            background-color: #35374b;
+            /* Dracula pre/code background for contrast */
+            padding: 2em 3em;
+            /* Padding inside the container */
+            border-radius: 8px;
+            /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+            text-align: center;
+            /* Center text within container */
+            max-width: 600px;
+            /* Limit width on larger screens */
+            width: 100%;
+            /* Ensure it takes full width on smaller screens */
         }
 
         /* Footer Container */
         .footer-container {
-            background-color: #35374b; /* Dracula pre/code background for contrast */
-            padding: 2em 3em; /* Padding inside the container */
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            background-color: #35374b;
+            /* Dracula pre/code background for contrast */
+            padding: 2em 3em;
+            /* Padding inside the container */
+            border-radius: 8px;
+            /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
         }
 
         /* Heading Style */
         h1 {
-            color: #c6d6d2; /* Dracula heading color */
-            margin-bottom: 0.75em; /* Space below heading */
-            font-weight: 700; /* Bolder font weight */
+            color: #c6d6d2;
+            /* Dracula heading color */
+            margin-bottom: 0.75em;
+            /* Space below heading */
+            font-weight: 700;
+            /* Bolder font weight */
         }
 
         /* Paragraph Style */
         p {
             color: #a4b8a9;
-            margin-bottom: 1.5em; /* Space below paragraph */
+            margin-bottom: 1.5em;
+            /* Space below paragraph */
         }
 
         /* General Link Style */
         a {
-            color: hsl(62, 72%, 66%); /* Dracula link blue */
+            color: hsl(62, 72%, 66%);
+            /* Dracula link blue */
             text-decoration: none;
         }
+
         a:hover {
             text-decoration: underline;
         }
 
         /* Button Container */
         .button-container {
-            display: flex; /* Use flexbox for button layout */
-            flex-direction: column; /* Stack buttons vertically by default */
-            gap: 1em; /* Space between buttons */
+            display: flex;
+            /* Use flexbox for button layout */
+            flex-direction: column;
+            /* Stack buttons vertically by default */
+            gap: 1em;
+            /* Space between buttons */
         }
 
         /* Button Styling */
         .button-link {
-            display: inline-block; /* Treat links as block-level elements for styling */
-            background-color: hsl(222, 35%, 41%); /* Dracula link blue */
-            color: #83ff60; /* Keep white text for contrast */
-            padding: 0.8em 1.5em; /* Padding inside button */
-            text-decoration: none; /* Remove underline */
-            border-radius: 5px; /* Slightly rounded corners */
-            font-weight: 700; /* Bolder text */
-            transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            display: inline-block;
+            /* Treat links as block-level elements for styling */
+            background-color: hsl(222, 35%, 41%);
+            /* Dracula link blue */
+            color: #83ff60;
+            /* Keep white text for contrast */
+            padding: 0.8em 1.5em;
+            /* Padding inside button */
+            text-decoration: none;
+            /* Remove underline */
+            border-radius: 5px;
+            /* Slightly rounded corners */
+            font-weight: 700;
+            /* Bolder text */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            /* Smooth transitions */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
         }
 
         .button-link:hover,
-        .button-link:focus { /* Add focus state for accessibility */
-            background-color: hsl(277, 42%, 45%); /* Darker Dracula link blue */
-            color: #d8f84a; /* Keep white text */
-            transform: translateY(-2px); /* Slight lift effect */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
-            outline: none; /* Remove default focus outline if desired */
+        .button-link:focus {
+            /* Add focus state for accessibility */
+            background-color: hsl(277, 42%, 45%);
+            /* Darker Dracula link blue */
+            color: #d8f84a;
+            /* Keep white text */
+            transform: translateY(-2px);
+            /* Slight lift effect */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+            /* Enhanced shadow */
+            outline: none;
+            /* Remove default focus outline if desired */
         }
 
         /* Responsive Design - Adjust button layout for wider screens */
         @media (min-width: 500px) {
             .button-container {
-                flex-direction: row; /* Arrange buttons horizontally */
-                justify-content: center; /* Center buttons horizontally */
-                flex-wrap: wrap; /* Allow buttons to wrap if needed */
+                flex-direction: row;
+                /* Arrange buttons horizontally */
+                justify-content: center;
+                /* Center buttons horizontally */
+                flex-wrap: wrap;
+                /* Allow buttons to wrap if needed */
             }
         }
 
         .footer-grid-container {
-          display: grid;
-          grid-template-columns: auto auto auto auto;
-          justify-content: center;
-          gap: 10px 15px; /* 10px gap between rows, 15px between columns */
-          /* Optional: Align items within their grid cell (e.g., center them) */
-          align-items: center; /* Vertically center items in their cell */
-          justify-items: center; /* Horizontally center items in their cell */
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            justify-content: center;
+            gap: 10px 15px;
+            /* 10px gap between rows, 15px between columns */
+            /* Optional: Align items within their grid cell (e.g., center them) */
+            align-items: center;
+            /* Vertically center items in their cell */
+            justify-items: center;
+            /* Horizontally center items in their cell */
         }
 
         .footer-grid-item {
-          text-align: center;
+            text-align: center;
         }
+
         /* Ensure icons use the link color */
         .footer-grid-item a i {
-            color: hsl(219, 42%, 55%); /* Dracula link blue */
+            color: hsl(219, 42%, 55%);
+            /* Dracula link blue */
         }
+
         .footer-grid-item a:hover i {
             /* Optional: define hover color for icons if needed, often inherit works fine */
-            /* color: darken(hsl(223, 42%, 55%), 10%); */ /* Example */
+            /* color: darken(hsl(223, 42%, 55%), 10%); */
+            /* Example */
         }
 
         .image-gallery {
-            margin-top: 2em; /* Space above the images */
-            display: flex; /* Arrange images in a row */
-            justify-content: space-around; /* Space them out */
-            align-items: center; /* Align vertically */
-            flex-wrap: wrap; /* Allow wrapping on small screens */
-            gap: 1em; /* Space between images if they wrap */
+            margin-top: 2em;
+            /* Space above the images */
+            display: flex;
+            /* Arrange images in a row */
+            justify-content: space-around;
+            /* Space them out */
+            align-items: center;
+            /* Align vertically */
+            flex-wrap: wrap;
+            /* Allow wrapping on small screens */
+            gap: 1em;
+            /* Space between images if they wrap */
         }
 
-        .image-gallery img, .portfolio-links img {
+        .image-gallery img,
+        .portfolio-links img {
             max-width: 150px;
             height: auto;
             border-radius: 5px;
@@ -186,15 +248,19 @@
         /* Responsive adjustments for images if needed */
         @media (max-width: 600px) {
             .image-gallery img {
-                max-width: 100px; /* Smaller images on smaller screens */
+                max-width: 100px;
+                /* Smaller images on smaller screens */
             }
         }
 
-        .image-gallery figure, .portfolio-links figure {
-            margin: 0; /* Reset default figure margin */
+        .image-gallery figure,
+        .portfolio-links figure {
+            margin: 0;
+            /* Reset default figure margin */
         }
 
-        .image-gallery figcaption, .portfolio-links figcaption {
+        .image-gallery figcaption,
+        .portfolio-links figcaption {
             margin-top: 0.5em;
             font-size: 0.9em;
             color: #a4b8a9;
@@ -230,16 +296,20 @@
         }
 
         .figure-examples {
-            margin: 1.5em auto; /* Center container and add vertical space */
-            max-width: 450px;   /* Constrain the width */
+            margin: 1.5em auto;
+            /* Center container and add vertical space */
+            max-width: 450px;
+            /* Constrain the width */
         }
 
         .figure-examples figure {
-            margin: 0; /* Reset default figure margin */
+            margin: 0;
+            /* Reset default figure margin */
         }
 
         .figure-examples img {
-            max-width: 100%; /* Image is responsive within the container */
+            max-width: 100%;
+            /* Image is responsive within the container */
             height: auto;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -257,194 +327,293 @@
 
         /* Horizontal Rule Style */
         hr {
-            height: 1px; /* Thinner line */
+            height: 1px;
+            /* Thinner line */
             padding: 0;
             margin: 24px 0;
-            background-color: #385c59; /* Dracula HR color */
+            background-color: #385c59;
+            /* Dracula HR color */
             border: 0;
         }
-
     </style>
 </head>
+
 <body>
 
     <div class="container">
-    <h1>Welcome to the GitHub Site of Cruz Macias</h1>
+        <h1>Welcome to the GitHub Site of Cruz Macias</h1>
 
-    <p>Oracle Integration Cloud (OIC) Engineer &amp; Enterprise Systems Architect (SCM/FIN/HCM) &mdash;
-    building, testing, and maintaining enterprise integrations and technical extensions supporting
-    Oracle Fusion Cloud ERP under Kanban AGILE methodology and change control management.
-    M.S. Computer Science &mdash; Cybersecurity &amp; Digital Forensics, EKU 2023.
-    B.S. Mathematical Sciences, NIU 2016.</p>
+        <p><small>Disclaimer: views expressed on this page are my own and do not represent my employer, current nor
+                former. This applies to any and all posts and interactions on this platform both past a future. Content
+                not intended for SEO-Spam/spamdexing/AI Slop or otherwise — solely to spread the Gospel of Jesus Christ
+                through musicianship, art, technology, and media. I receive zero compensation from any entity for any
+                products or services shared — any perceived promotion material is a result of organic personal interest.
+                Read the full disclaimer at the bottom of the page or at <a
+                    href="https://docs.google.com/document/d/1F8WUkStTyV0ZcsjluN9WtvUm29hRzqNtZ7GcNX76acA/edit?usp=sharing"
+                    class="w3-bar-item w3-button w3-padding-small w3-hover-white" target="_blank"
+                    rel="noopener noreferrer" title="Statement of Copyright Protection - Google Docs"
+                    aria-label="Statement of Copyright Protection on Google Docs"><i
+                        class="fa-brands fa-google w3-small"></i></a>
+                <a href="https://1drv.ms/w/c/351e429395ffd928/EZGNUfx73lxMr7hjtTtP-r8BHmmyJou95yUiOCcZBggJtg?e=mKv9xN"
+                    class="w3-bar-item w3-button w3-padding-small w3-hover-white" target="_blank"
+                    rel="noopener noreferrer" title="Statement of Copyright Protection - OneDrive"
+                    aria-label="Statement of Copyright Protection on OneDrive"><i
+                        class="fa-brands fa-microsoft w3-small"></i></a></small></p>
+        <p>Oracle Integration Cloud (OIC) Engineer &amp; Enterprise Systems Architect (SCM/FIN/HCM) &mdash;
+            building, testing, and maintaining enterprise integrations and technical extensions supporting
+            Oracle Fusion Cloud ERP under Kanban AGILE methodology and change control management.
+            M.S. Computer Science &mdash; Cybersecurity &amp; Digital Forensics, EKU 2023.
+            B.S. Mathematical Sciences, NIU 2016.</p>
 
-    <!-- Portfolio Links -->
-    <div class="portfolio-links">
-        <a href="cruzgmacias-cv/">
-            <figure>
-                <img src="https://1drv.ms/i/c/351e429395ffd928/IQQQYA4wibHIRLJucCS5W6rxAZVjPTVm8tljAmINObjvDwE" alt="Link to Curriculum Vitae">
-                <figcaption>Curriculum Vitae</figcaption>
-            </figure>
-        </a>
-        <a href="crossofthemessiah/">
-            <figure>
-                <img src="https://1drv.ms/i/c/351e429395ffd928/IQRorKU-6b0qRZkRMmSbYQUiAbVKuRqkQljDaEc9SZ9IAOo" alt="Link to Music Portfolio">
-                <figcaption>Music Portfolio</figcaption>
-            </figure>
-        </a>
-        <a href="https://github.com/cmathgit">
-            <figure>
-                <img src="https://1drv.ms/i/c/351e429395ffd928/IQSgpqTaj2pLQaNvmiYqJAGbAYepoLAOwJkJm7wnB2WBlCo" alt="GitHub">
-                <figcaption>GitHub</figcaption>
-            </figure>
-        </a>
-    </div>
+        <!-- Portfolio Links -->
+        <div class="portfolio-links">
+            <a href="cruzgmacias-cv/">
+                <figure>
+                    <img src="https://1drv.ms/i/c/351e429395ffd928/IQQQYA4wibHIRLJucCS5W6rxAZVjPTVm8tljAmINObjvDwE"
+                        alt="Link to Curriculum Vitae">
+                    <figcaption>Curriculum Vitae</figcaption>
+                </figure>
+            </a>
+            <a href="crossofthemessiah/">
+                <figure>
+                    <img src="https://1drv.ms/i/c/351e429395ffd928/IQRorKU-6b0qRZkRMmSbYQUiAbVKuRqkQljDaEc9SZ9IAOo"
+                        alt="Link to Music Portfolio">
+                    <figcaption>Music Portfolio</figcaption>
+                </figure>
+            </a>
+            <a href="https://github.com/cmathgit">
+                <figure>
+                    <img src="https://1drv.ms/i/c/351e429395ffd928/IQSgpqTaj2pLQaNvmiYqJAGbAYepoLAOwJkJm7wnB2WBlCo"
+                        alt="GitHub">
+                    <figcaption>GitHub</figcaption>
+                </figure>
+            </a>
+        </div>
 
-    <hr>
+        <hr>
 
-    <h1 id="recent-projects">Notable Projects &amp; Integration Builds</h1>
+        <h1 id="recent-projects">Notable Projects &amp; Integration Builds</h1>
 
-    <!-- Quick Access TOC -->
-    <div style="background-color:#282a36; padding:1em; border-radius:5px; margin-bottom:2em; border-left:5px solid hsl(62,72%,66%);">
-        <h3 style="color:#c6d6d2; margin-top:0;">Quick Access</h3>
-        <ul style="list-style-type:disc; padding-left:20px;">
-            <li style="color:white;"><a href="#surgical-case-management" style="color:hsl(62,72%,66%);">Surgical Case Management &amp; Clinical Procurement Integration</a></li>
-            <li style="color:white;"><a href="#capital-budget-integration" style="color:hsl(62,72%,66%);">Capital Budget Integration (FBDI &amp; ESS)</a></li>
-            <li style="color:white;"><a href="#invoice-order-integration" style="color:hsl(62,72%,66%);">Invoice Order Attachment Integration</a></li>
-            <li style="color:white;"><a href="#sftp-migration" style="color:hsl(62,72%,66%);">SFTP Migration &mdash; SCM OIC Refactor</a></li>
-            <li style="color:white;"><a href="#scm-error-remediation" style="color:hsl(62,72%,66%);">SCM Middleware Error Notification Remediation</a></li>
-            <li style="color:white;"><a href="#scm-rca-stabilization" style="color:hsl(62,72%,66%);">SCM Integration RCA &amp; Stabilization (&gt;99% Error Reduction)</a></li>
-            <li style="color:white;"><a href="#asn-receiving-integration" style="color:hsl(62,72%,66%);">ASN Receiving Integration</a></li>
-            <li style="color:white;"><a href="#oci-paas-optimization" style="color:hsl(62,72%,66%);">OCI PaaS Optimization</a></li>
-            <li style="color:white;"><a href="#open-webui-llm-deployment" style="color:hsl(62,72%,66%);">OpenWebUI LLM Deployment &amp; Local LLM Integration</a></li>
+        <!-- Quick Access TOC -->
+        <div
+            style="background-color:#282a36; padding:1em; border-radius:5px; margin-bottom:2em; border-left:5px solid hsl(62,72%,66%);">
+            <h3 style="color:#c6d6d2; margin-top:0;">Quick Access</h3>
+            <ul style="list-style-type:disc; padding-left:20px;">
+                <li style="color:white;"><a href="#surgical-case-management" style="color:hsl(62,72%,66%);">Surgical
+                        Case Management &amp; Clinical Procurement Integration</a></li>
+                <li style="color:white;"><a href="#capital-budget-integration" style="color:hsl(62,72%,66%);">Capital
+                        Budget Integration (FBDI &amp; ESS)</a></li>
+                <li style="color:white;"><a href="#invoice-order-integration" style="color:hsl(62,72%,66%);">Invoice
+                        Order Attachment Integration</a></li>
+                <li style="color:white;"><a href="#sftp-migration" style="color:hsl(62,72%,66%);">SFTP Migration &mdash;
+                        SCM OIC Refactor</a></li>
+                <li style="color:white;"><a href="#scm-error-remediation" style="color:hsl(62,72%,66%);">SCM Middleware
+                        Error Notification Remediation</a></li>
+                <li style="color:white;"><a href="#scm-rca-stabilization" style="color:hsl(62,72%,66%);">SCM Integration
+                        RCA &amp; Stabilization (&gt;99% Error Reduction)</a></li>
+                <li style="color:white;"><a href="#asn-receiving-integration" style="color:hsl(62,72%,66%);">ASN
+                        Receiving Integration</a></li>
+                <li style="color:white;"><a href="#oci-paas-optimization" style="color:hsl(62,72%,66%);">OCI PaaS
+                        Optimization</a></li>
+                <li style="color:white;"><a href="#open-webui-llm-deployment" style="color:hsl(62,72%,66%);">OpenWebUI
+                        LLM Deployment &amp; Local LLM Integration</a></li>
+            </ul>
+        </div>
+
+        <h2>Oracle Integration Cloud (OIC) &amp; Oracle Cloud Infrastructure (OCI)</h2>
+        <p>Design and support integration solutions for Oracle Fusion Cloud ERP (SCM/FIN/HCM) via Oracle Integration
+            Cloud (OIC) Gen3 under an change-control management governed delivery and change-control model. Each change
+            documents business purpose, affected users, master data/configuration impact, environment-specific testing,
+            approvals, and post-production follow-up. Technologies include: OIC Gen3, REST/SOAP APIs, Oracle ATP, BI
+            Publisher, FBDI, ESS, PL/SQL, Java, XML, and SFTP.</p>
+
+        <!-- ═══════════════════════════════════════ -->
+        <h3 id="surgical-case-management"><strong>Surgical Case Management &amp; Clinical Procurement
+                Integration</strong></h3>
+        <ul>
+            <li style="color:white;">Engineered a bidirectional clinical procurement data exchange between an external
+                EMR platform and Oracle Fusion ERP.</li>
+            <li style="color:white;"><strong>Outbound (ERP &rarr; EMR):</strong> Two BI Publisher interfaces &mdash;
+                Item Master extract and PO lifecycle extract &mdash; published via SFTP to the EMR on automated
+                schedules.</li>
+            <li style="color:white;"><strong>Inbound (EMR &rarr; ERP):</strong> OIC Gen3 orchestration ingesting
+                purchase requisitions via SFTP, staged in ATP, enriched with ERP reference data via BI Publisher
+                lookups, and submitted to Oracle ERP through FBDI and ESS job orchestration.</li>
+            <li style="color:white;">SOC 2-compliant fault handling, record-level ATP status tracking (NEW / SUCCESS /
+                ERROR), and automated scheduling.</li>
+            <li style="color:white;">Coordinated with case schedule, case usage, and contract price data managed within
+                the EMR platform to ensure end-to-end surgical case and procurement workflows.</li>
         </ul>
-    </div>
-        
-    <h2>Oracle Integration Cloud (OIC) &amp; Oracle Cloud Infrastructure (OCI)</h2>
-    <p>Design and support integration solutions for Oracle Fusion Cloud ERP (SCM/FIN/HCM) via Oracle Integration Cloud (OIC) Gen3 under an change-control management governed delivery and change-control model. Each change documents business purpose, affected users, master data/configuration impact, environment-specific testing, approvals, and post-production follow-up. Technologies include: OIC Gen3, REST/SOAP APIs, Oracle ATP, BI Publisher, FBDI, ESS, PL/SQL, Java, XML, and SFTP.</p>
 
-    <!-- ═══════════════════════════════════════ -->
-    <h3 id="surgical-case-management"><strong>Surgical Case Management &amp; Clinical Procurement Integration</strong></h3>
-    <ul>
-        <li style="color:white;">Engineered a bidirectional clinical procurement data exchange between an external EMR platform and Oracle Fusion ERP.</li>
-        <li style="color:white;"><strong>Outbound (ERP &rarr; EMR):</strong> Two BI Publisher interfaces &mdash; Item Master extract and PO lifecycle extract &mdash; published via SFTP to the EMR on automated schedules.</li>
-        <li style="color:white;"><strong>Inbound (EMR &rarr; ERP):</strong> OIC Gen3 orchestration ingesting purchase requisitions via SFTP, staged in ATP, enriched with ERP reference data via BI Publisher lookups, and submitted to Oracle ERP through FBDI and ESS job orchestration.</li>
-        <li style="color:white;">SOC 2-compliant fault handling, record-level ATP status tracking (NEW / SUCCESS / ERROR), and automated scheduling.</li>
-        <li style="color:white;">Coordinated with case schedule, case usage, and contract price data managed within the EMR platform to ensure end-to-end surgical case and procurement workflows.</li>
-    </ul>
-
-    <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
+        <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
     <ul>
         <li style="color:white;">Use <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-meta-models.htm">Meta Llama 3 70B</a> to analyze surgeon preference cards against actual EMR usage data, identifying consistently unused items and recommending quantity reductions to reduce clinical procurement costs.</li>
         <li style="color:white;">When a surgical item is backordered in Oracle ERP, use <a href="https://docs.oracle.com/en/database/oracle/oracle-database/26/nfcoa/vector-data-type.html">Oracle AI Vector Search</a> to identify clinically equivalent substitutes and push approved alternates back to the EMR without delaying procedures.</li>
         <li style="color:white;">A <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Cohere Command R+</a> agent scans each outgoing PO against the EMR contract price file and holds any PO where the ERP price exceeds the contracted rate, surfacing the specific clause for procurement enforcement.</li>
     </ul>-->
 
-    <!-- ═══════════════════════════════════════ -->
-    <h3 id="capital-budget-integration"><strong>Capital Budget Integration</strong></h3>
-    <ul>
-        <li style="color:white;">OIC Gen3 scheduled orchestration ingesting daily capital project and budget extracts from an external EPM platform via SFTP.</li>
-        <li style="color:white;">Parses pipe-delimited data into ATP staging tables (project headers, task details, budget records).</li>
-        <li style="color:white;">Enriches records with Oracle reference data via BI Publisher lookups for project ownership and cost center resolution, both required by Oracle Fusion Project Management FBDI.</li>
-        <li style="color:white;">Constructs Oracle-standard FBDI control files for projects and budgets and submits to Oracle Fusion Project Control via ESS: Load Interface File for Import &rarr; Import Projects &rarr; Import Project Budgets.</li>
-        <li style="color:white;">De-duplication, version-aware budget update logic, partial-success fallout handling, batch-level email notifications, and SFTP-based FBDI archiving for audit.</li>
-        <li style="color:white;">Implements fault handling for SFTP, ATP, REST, and SOAP connections; monitors and confirms ESS job completion with wait/retry logic.</li>
-    </ul>
+        <!-- ═══════════════════════════════════════ -->
+        <h3 id="capital-budget-integration"><strong>Capital Budget Integration</strong></h3>
+        <ul>
+            <li style="color:white;">OIC Gen3 scheduled orchestration ingesting daily capital project and budget
+                extracts from an external EPM platform via SFTP.</li>
+            <li style="color:white;">Parses pipe-delimited data into ATP staging tables (project headers, task details,
+                budget records).</li>
+            <li style="color:white;">Enriches records with Oracle reference data via BI Publisher lookups for project
+                ownership and cost center resolution, both required by Oracle Fusion Project Management FBDI.</li>
+            <li style="color:white;">Constructs Oracle-standard FBDI control files for projects and budgets and submits
+                to Oracle Fusion Project Control via ESS: Load Interface File for Import &rarr; Import Projects &rarr;
+                Import Project Budgets.</li>
+            <li style="color:white;">De-duplication, version-aware budget update logic, partial-success fallout
+                handling, batch-level email notifications, and SFTP-based FBDI archiving for audit.</li>
+            <li style="color:white;">Implements fault handling for SFTP, ATP, REST, and SOAP connections; monitors and
+                confirms ESS job completion with wait/retry logic.</li>
+        </ul>
 
-    <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
+        <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
     <ul>
         <li style="color:white;">When budget line items are rejected by Oracle ERP for insufficient funds, a <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/meta-models.htm">Meta Llama 3.1 70B</a> model analyzes the rejection and original project proposal, auto-generating a Budget Adjustment Request email for the project manager with specific reallocation guidance.</li>
         <li style="color:white;">Before creating a new Capital Project, use <a href="https://docs.oracle.com/en/database/oracle/oracle-database/26/nfcoa/vector-data-type.html">Oracle AI Vector Search</a> to compare the incoming project description against five years of historical projects, alerting Finance of potential duplicates before double-booking capital funds.</li>
         <li style="color:white;">A &ldquo;Budget Chat&rdquo; interface powered by <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/xai-models.htm">xAI Grok 3</a> translates executive natural-language queries into SQL against ATP staging tables, returning real-time capital project data without IT intervention.</li>
     </ul>-->
 
-    <!-- ═══════════════════════════════════════ -->
-    <h3 id="invoice-order-integration"><strong>Invoice Order Attachment Integration</strong></h3>
-    <ul>
-        <li style="color:white;">OIC Gen3 orchestration ingesting daily zipped invoice image containers (~500 invoices/day) from an external healthcare supply chain provider via SFTP.</li>
-        <li style="color:white;">Parses the index file to stage invoice metadata in ATP; resolves Oracle invoice IDs via BI Publisher data model lookup</li>
-        <li style="color:white;">Dynamically constructs REST POST payloads with base64-encoded PDFs and invokes the Oracle Fusion Cloud Payables attachments endpoint.</li>
-        <li style="color:white;">Orphan PDF detection, record-level SUCCESS/ERROR status tracking, CSV error reporting, and SFTP archiving per batch run.</li>
-        <li style="color:white;">Global and local fault handling across SFTP, ATP, and REST connections.</li>
-    </ul>
+        <!-- ═══════════════════════════════════════ -->
+        <h3 id="invoice-order-integration"><strong>Invoice Order Attachment Integration</strong></h3>
+        <ul>
+            <li style="color:white;">OIC Gen3 orchestration ingesting daily zipped invoice image containers (~500
+                invoices/day) from an external healthcare supply chain provider via SFTP.</li>
+            <li style="color:white;">Parses the index file to stage invoice metadata in ATP; resolves Oracle invoice IDs
+                via BI Publisher data model lookup</li>
+            <li style="color:white;">Dynamically constructs REST POST payloads with base64-encoded PDFs and invokes the
+                Oracle Fusion Cloud Payables attachments endpoint.</li>
+            <li style="color:white;">Orphan PDF detection, record-level SUCCESS/ERROR status tracking, CSV error
+                reporting, and SFTP archiving per batch run.</li>
+            <li style="color:white;">Global and local fault handling across SFTP, ATP, and REST connections.</li>
+        </ul>
 
-    <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
+        <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
     <ul>
         <li style="color:white;">Implement a document understanding pipeline using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Cohere Command R</a> to perform OCR and semantic extraction on non-standard invoice PDFs that fail initial schema parsing, automatically identifying Total Amount, Vendor Name, and Invoice Date to reduce manual exception handling.</li>
         <li style="color:white;">Use a fine-tuned <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-meta-models.htm">Llama-4-Maverick-17B-128E-Instruct</a> model to flag invoice line items with abnormal price variance against historical ATP data before posting to Oracle ERP Financials, adding a fraud-detection layer.</li>
         <li style="color:white;">Use OCI Generative AI Embeddings to convert invoice descriptions into vectors, enabling automatic GL code assignment (95% accuracy) for ambiguous service descriptions by matching against historical invoice vectors.</li>
     </ul>-->
 
-    <!-- ═══════════════════════════════════════ -->
-    <h3 id="sftp-migration"><strong>SFTP Migration &mdash; SCM OIC Refactor</strong></h3>
-    <ul>
-        <li style="color:white;">Refactored OIC file-polling orchestrations for SCM integrations to redirect inbound file acquisition from a decommissioned on-premises SFTP server to a vendor-hosted endpoint by inserting an OIC FTP/SFTP invoke step at the boundary layer.</li>
-        <li style="color:white;">Preserved all downstream ATP staging, FBDI construction, and ESS orchestration logic without rewriting existing integration flows.</li>
-        <li style="color:white;">Migrated seven outbound BI Publisher-scheduled SCM interfaces into OIC-managed schedulers to resolve a non-standard port incompatibility preventing direct BI Publisher SFTP delivery.</li>
-        <li style="color:white;">Maintained identical file contracts with the external system and added ad hoc BI Publisher output pickup logic for business continuity.</li>
-    </ul>
+        <!-- ═══════════════════════════════════════ -->
+        <h3 id="sftp-migration"><strong>SFTP Migration &mdash; SCM OIC Refactor</strong></h3>
+        <ul>
+            <li style="color:white;">Refactored OIC file-polling orchestrations for SCM integrations to redirect inbound
+                file acquisition from a decommissioned on-premises SFTP server to a vendor-hosted endpoint by inserting
+                an OIC FTP/SFTP invoke step at the boundary layer.</li>
+            <li style="color:white;">Preserved all downstream ATP staging, FBDI construction, and ESS orchestration
+                logic without rewriting existing integration flows.</li>
+            <li style="color:white;">Migrated seven outbound BI Publisher-scheduled SCM interfaces into OIC-managed
+                schedulers to resolve a non-standard port incompatibility preventing direct BI Publisher SFTP delivery.
+            </li>
+            <li style="color:white;">Maintained identical file contracts with the external system and added ad hoc BI
+                Publisher output pickup logic for business continuity.</li>
+        </ul>
 
-    <!-- ═══════════════════════════════════════ -->
-    <h3 id="scm-error-remediation"><strong>SCM Middleware Error Notification Remediation</strong></h3>
-    <ul>
-        <li style="color:white;">During SFTP migration analysis, identified a silent-failure defect in OIC Shipping and Receipt import integrations where middleware errors produced no email notifications due to missing email body mappings in the shared error-handler switch condition.</li>
-        <li style="color:white;">Escalated during stand-up, received team approval to expand scope within the same delivery window, and implemented the targeted fix restoring full operational alerting for production middleware failures.</li>
-        <li style="color:white;">Resolved without redesigning the shared error framework, preserving all other integration flows downstream.</li>
-    </ul>
+        <!-- ═══════════════════════════════════════ -->
+        <h3 id="scm-error-remediation"><strong>SCM Middleware Error Notification Remediation</strong></h3>
+        <ul>
+            <li style="color:white;">During SFTP migration analysis, identified a silent-failure defect in OIC Shipping
+                and Receipt import integrations where middleware errors produced no email notifications due to missing
+                email body mappings in the shared error-handler switch condition.</li>
+            <li style="color:white;">Escalated during stand-up, received team approval to expand scope within the same
+                delivery window, and implemented the targeted fix restoring full operational alerting for production
+                middleware failures.</li>
+            <li style="color:white;">Resolved without redesigning the shared error framework, preserving all other
+                integration flows downstream.</li>
+        </ul>
 
-    <!-- ═══════════════════════════════════════ -->
-    <h3 id="scm-rca-stabilization"><strong>SCM Integration RCA &amp; Stabilization (&gt;99% Error Reduction)</strong></h3>
-    <ul>
-        <li style="color:white;">Served as OIC SME for post-go-live stabilization following enterprise legacy ERP to Oracle Fusion Cloud ERP migration.</li>
-        <li style="color:white;"><strong>Gap Remediation:</strong> Performed comparative analysis of legacy SCM transaction semantics versus Oracle Fusion Receiving interface constraints, identifying undocumented dependencies in supplier site attribution, item-org UOM compatibility, and PO lifecycle synchronization.</li>
-        <li style="color:white;"><strong>Middleware Enhancements:</strong> Refactored inbound OIC integrations to introduce ATP-based canonical staging and BI Publisher-driven enrichment prior to FBDI/REST submission.</li>
-        <li style="color:white;"><strong>RCA Methodology:</strong> Established root cause analysis processes leveraging OIC instance logs, ESS request history, and ATP staging table queries to deterministically differentiate Oracle configuration defects from upstream data-quality violations.</li>
-        <li style="color:white;"><strong>Outcomes:</strong> Reduced monthly SCM receipt middleware errors by over 99% and Oracle cloud receiving errors by approximately 98% following post-go-live stabilization, thereby eliminating the majority of integration failures within three years of migration.</li>
-        <li style="color:white;"><strong>Operational Support:</strong> Authored production support playbooks enabling operations teams to locate, re-stage, and reprocess failed SCM transactions without manual ERP intervention.</li>
-    </ul>
+        <!-- ═══════════════════════════════════════ -->
+        <h3 id="scm-rca-stabilization"><strong>SCM Integration RCA &amp; Stabilization (&gt;99% Error
+                Reduction)</strong></h3>
+        <ul>
+            <li style="color:white;">Served as OIC SME for post-go-live stabilization following enterprise legacy ERP to
+                Oracle Fusion Cloud ERP migration.</li>
+            <li style="color:white;"><strong>Gap Remediation:</strong> Performed comparative analysis of legacy SCM
+                transaction semantics versus Oracle Fusion Receiving interface constraints, identifying undocumented
+                dependencies in supplier site attribution, item-org UOM compatibility, and PO lifecycle synchronization.
+            </li>
+            <li style="color:white;"><strong>Middleware Enhancements:</strong> Refactored inbound OIC integrations to
+                introduce ATP-based canonical staging and BI Publisher-driven enrichment prior to FBDI/REST submission.
+            </li>
+            <li style="color:white;"><strong>RCA Methodology:</strong> Established root cause analysis processes
+                leveraging OIC instance logs, ESS request history, and ATP staging table queries to deterministically
+                differentiate Oracle configuration defects from upstream data-quality violations.</li>
+            <li style="color:white;"><strong>Outcomes:</strong> Reduced monthly SCM receipt middleware errors by over
+                99% and Oracle cloud receiving errors by approximately 98% following post-go-live stabilization, thereby
+                eliminating the majority of integration failures within three years of migration.</li>
+            <li style="color:white;"><strong>Operational Support:</strong> Authored production support playbooks
+                enabling operations teams to locate, re-stage, and reprocess failed SCM transactions without manual ERP
+                intervention.</li>
+        </ul>
 
-    <!-- ═══════════════════════════════════════ -->
-    <!--<h3 id="asn-receiving-integration"><strong>ASN Receiving Integration</strong></h3>
+        <!-- ═══════════════════════════════════════ -->
+        <!--<h3 id="asn-receiving-integration"><strong>ASN Receiving Integration</strong></h3>
     <ul>
         <li style="color:white;">Designed to process Advanced Shipment Notice (ASN) receiving data from an external system into Oracle Fusion ERP SCM.</li>
         <li style="color:white;">Ensures accurate and timely goods receipt data submission to support supply chain operations.</li>
         <li style="color:white;">Streamlined ASN data flow from external systems into Oracle ERP, enhancing supply chain visibility and operational accuracy.</li>
     </ul>-->
 
-    <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
+        <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
     <ul>
         <li style="color:white;">Integrate <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/google-models.htm">Gemini 2.5 Flash</a> to cross-reference incoming ASN vendor locations with real-time global news feeds, tagging receipts from disruption-affected regions as &ldquo;High Risk for Delay&rdquo; in Oracle ERP for proactive inventory planning.</li>
         <li style="color:white;">When incoming ASNs use vendor-specific part numbers that do not perfectly match Oracle Item Masters, <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Cohere Rerank 3.5</a> ranks the top 5 most likely internal Item IDs, auto-correcting minor naming discrepancies without human review.</li>
         <li style="color:white;">A specialized agent using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-alibaba-models.htm">Qwen3-14B</a> monitors the Receipt Advice interface and auto-drafts a formatted claim email to the vendor when quantity discrepancies occur, attaching the discrepancy report instantly.</li>
     </ul>-->
 
-    <!-- ═══════════════════════════════════════ -->
-    <h3 id="oci-paas-optimization"><strong>OCI PaaS Optimization</strong></h3>
-    <ul>
-        <li style="color:white;">Reduced infrastructure costs by automating OIC and ATP instance shutdown/startup schedules for off-hours.</li>
-        <li style="color:white;">Reduced the number of active OIC Connectivity Agents in test environments.</li>
-        <li style="color:white;">Maintained DR environments in standby mode, activating only for production backups or disaster recovery events.</li>
-        <li style="color:white;">Significantly lowered compute costs while preserving operational readiness across all environments.</li>
-    </ul>
+        <!-- ═══════════════════════════════════════ -->
+        <h3 id="oci-paas-optimization"><strong>OCI PaaS Optimization</strong></h3>
+        <ul>
+            <li style="color:white;">Reduced infrastructure costs by automating OIC and ATP instance shutdown/startup
+                schedules for off-hours.</li>
+            <li style="color:white;">Reduced the number of active OIC Connectivity Agents in test environments.</li>
+            <li style="color:white;">Maintained DR environments in standby mode, activating only for production backups
+                or disaster recovery events.</li>
+            <li style="color:white;">Significantly lowered compute costs while preserving operational readiness across
+                all environments.</li>
+        </ul>
 
-    <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
+        <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
     <ul>
         <li style="color:white;">Integrate an OCI DevOps pipeline where <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/openai-gpt-oss-120b.htm">GPT-OSS 120B</a> analyzes Terraform state files and suggests resource rightsizing opportunities based on usage logs, auto-generating Pull Requests for approval.</li>
         <li style="color:white;">Deploy a <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/google-models.htm">Gemini 2.5 Pro</a> agent to digest OCI Audit Logs during off-hours and generate a daily Cost &amp; Usage Report summarizing why specific compute instances spun up, providing granular visibility into cost drivers.</li>
         <li style="color:white;">Implement a predictive model using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Cohere Embed 4</a> to analyze historical CPU/Memory utilization patterns, proactively warming up OIC Connectivity Agents before predicted traffic spikes such as month-end close.</li>
     </ul>-->
 
-    <!-- ═══════════════════════════════════════ -->
-    <h3 id="open-webui-llm-deployment"><strong>OpenWebUI Deployment &amp; Local LLM Integration</strong></h3>
-    <p>Maintaining and expanding an OpenWebUI platform for generative AI web integration, locally hosted small language models (SLMs), and cloud-based LLMs via a unified LangChain architecture. Key components include:</p>
-    <ul>
-        <li style="color:white;"><strong>Tools:</strong> <a href="https://console.groq.com/docs/tool-use/built-in-tools/wolfram-alpha">Groq Compound Systems Wolfram Alpha</a> filter integration, <a href="https://products.wolframalpha.com/llm-api/documentation">Wolfram Alpha LLM API</a> tool call, KJV Bible verse retrieval using <a href="https://github.com/aruljohn/Bible-kjv">Bible-kjv JSON library</a>, Verse of the Day using <a href="https://www.biblegateway.com/votd/get/?format=JSON&version=9">BibleGateway Web-Service</a>, and token optimization strategies through deterministic injection pipeline bypassing the LLM entirely for retrieval reducing context window consumption..</li>
-        <li style="color:white;"><strong>Models:</strong> Cloud instruct (GLM-4.5-Flash, Magistral-Small, Gemini-2.5-Flash, Groq-GPT-OSS-20B) and local GGUF (LiquidAI LFM2-8B, Qwen3:8b, Llama3.1:8b, DeepSeek-R1:8b, Mistral:7b) via Ollama and llama.cpp.</li>
-        <li style="color:white;"><strong>Stack:</strong> Python (FastAPI, REST), LangChain, WebSocket streaming, async/await, Docker, and Python venv/uv.</li>
-        <li style="color:white;"><strong>Features:</strong> RAG pipelines (Chroma + embeddings + reranking), MCP servers (mcpo / OpenAPI proxy), multi-agent workflows (A2A, ADK, ControlFlow), and Role-Pseudonymous Prompting (RPP) privacy protocol.</li>
-        <li style="color:white;"><strong>LLM API Integrations:</strong> Anthropic, OpenAI, Mistral.ai, Google GenAI, Groq, OpenRouter, Cohere, AWS Bedrock, HuggingFace, Ollama, and Perplexity.</li>
-        <li style="color:white;"><strong>Hardware:</strong> NVIDIA RTX 5070 Ti (12GB VRAM) for GPU-accelerated GGUF inference via llama.cpp (CUDA); AMD Ryzen 9 8940HX for CPU-only GGUF inference.</li>
-        <li style="color:white;"><strong>Benchmarks:</strong> Demonstrated that open-access LLMs with optimized RAG/Embedding pipelines achieve A+ parity with flagship models at 94.4% cost reduction.</li>
-    </ul>
+        <!-- ═══════════════════════════════════════ -->
+        <h3 id="open-webui-llm-deployment"><strong>OpenWebUI Deployment &amp; Local LLM Integration</strong></h3>
+        <p>Maintaining and expanding an OpenWebUI platform for generative AI web integration, locally hosted small
+            language models (SLMs), and cloud-based LLMs via a unified LangChain architecture. Key components include:
+        </p>
+        <ul>
+            <li style="color:white;"><strong>Tools:</strong> <a
+                    href="https://console.groq.com/docs/tool-use/built-in-tools/wolfram-alpha">Groq Compound Systems
+                    Wolfram Alpha</a> filter integration, <a
+                    href="https://products.wolframalpha.com/llm-api/documentation">Wolfram Alpha LLM API</a> tool call,
+                KJV Bible verse retrieval using <a href="https://github.com/aruljohn/Bible-kjv">Bible-kjv JSON
+                    library</a>, Verse of the Day using <a
+                    href="https://www.biblegateway.com/votd/get/?format=JSON&version=9">BibleGateway Web-Service</a>,
+                and token optimization strategies through deterministic injection pipeline bypassing the LLM entirely
+                for retrieval reducing context window consumption..</li>
+            <li style="color:white;"><strong>Models:</strong> Cloud instruct (GLM-4.5-Flash, Magistral-Small,
+                Gemini-2.5-Flash, Groq-GPT-OSS-20B) and local GGUF (LiquidAI LFM2-8B, Qwen3:8b, Llama3.1:8b,
+                DeepSeek-R1:8b, Mistral:7b) via Ollama and llama.cpp.</li>
+            <li style="color:white;"><strong>Stack:</strong> Python (FastAPI, REST), LangChain, WebSocket streaming,
+                async/await, Docker, and Python venv/uv.</li>
+            <li style="color:white;"><strong>Features:</strong> RAG pipelines (Chroma + embeddings + reranking), MCP
+                servers (mcpo / OpenAPI proxy), multi-agent workflows (A2A, ADK, ControlFlow), and Role-Pseudonymous
+                Prompting (RPP) privacy protocol.</li>
+            <li style="color:white;"><strong>LLM API Integrations:</strong> Anthropic, OpenAI, Mistral.ai, Google GenAI,
+                Groq, OpenRouter, Cohere, AWS Bedrock, HuggingFace, Ollama, and Perplexity.</li>
+            <li style="color:white;"><strong>Hardware:</strong> NVIDIA RTX 5070 Ti (12GB VRAM) for GPU-accelerated GGUF
+                inference via llama.cpp (CUDA); AMD Ryzen 9 8940HX for CPU-only GGUF inference.</li>
+            <li style="color:white;"><strong>Benchmarks:</strong> Demonstrated that open-access LLMs with optimized
+                RAG/Embedding pipelines achieve A+ parity with flagship models at 94.4% cost reduction.</li>
+        </ul>
 
         <hr>
         <p>Visit my other pages:</p>
@@ -457,32 +626,46 @@
             <!-- Link to the Music Portfolio page -->
             <a href="crossofthemessiah/" class="button-link">Music Portfolio</a>
             <!-- Link to the Suno Style of Music Prompt Generator page -->
-            <a href="https://cmathgit.github.io/ai-apps/musicpromptgenerator/" class="button-link">Suno Style of Music Prompt Generator</a>
+            <a href="https://cmathgit.github.io/ai-apps/musicpromptgenerator/" class="button-link">Suno Style of Music
+                Prompt Generator</a>
             <!-- Link to the KJV Lookup page -->
-            <a href="https://cmathgit.github.io/ai-apps/kjvlookup/" class="button-link">KJV Lookup and Lyrics Generator</a>
+            <a href="https://cmathgit.github.io/ai-apps/kjvlookup/" class="button-link">KJV Lookup and Lyrics
+                Generator</a>
         </div>
         <hr>
-        <h3>Visit my LLM Profiles for more tools and prompts:<br><a href="https://openwebui.com/u/cmathopen"><b><i class="fa fa-robot fa-fw w3-margin-right w3-text-teal"></i></b>@cmathopen</a><br><a href="https://ollama.com/cmathllm"><b><i class="fa fa-horse fa-fw w3-margin-right w3-text-teal"></i></b>@cmathllm</a><br><a href="https://huggingface.co/cmathhug"><b><i class="fa fa-face-smile fa-fw w3-margin-right w3-text-teal"></i></b>@cmathhug</a></h3>
+        <h3>Visit my LLM Profiles for more tools and prompts:<br><a href="https://openwebui.com/u/cmathopen"><b><i
+                        class="fa fa-robot fa-fw w3-margin-right w3-text-teal"></i></b>@cmathopen</a><br><a
+                href="https://ollama.com/cmathllm"><b><i
+                        class="fa fa-horse fa-fw w3-margin-right w3-text-teal"></i></b>@cmathllm</a><br><a
+                href="https://huggingface.co/cmathhug"><b><i
+                        class="fa fa-face-smile fa-fw w3-margin-right w3-text-teal"></i></b>@cmathhug</a></h3>
         <hr>
         <p>Some MCP Servers:</p>
         <div class="button-container">
-        <a href="https://github.com/cmathgit/bible-kjv-mcp" class="button-link" target="_blank" rel="noopener noreferrer">Bible KJV</a><br>
-        <a href="https://github.com/cmathgit/biblegateway-votd-mcp" class="button-link" target="_blank" rel="noopener noreferrer">Biblegateway KJV Verse of the Day</a><br>
+            <a href="https://github.com/cmathgit/bible-kjv-mcp" class="button-link" target="_blank"
+                rel="noopener noreferrer">Bible KJV</a><br>
+            <a href="https://github.com/cmathgit/biblegateway-votd-mcp" class="button-link" target="_blank"
+                rel="noopener noreferrer">Biblegateway KJV Verse of the Day</a><br>
         </div>
         <hr>
         <p>Some OpenWebUI RAG Tools:</p>
         <div class="button-container">
-        <a href="https://openwebui.com/posts/bible_kjv_retrieval_8e3161e6" class="button-link" target="_blank" rel="noopener noreferrer">Bible KJV</a><br>
-        <a href="https://openwebui.com/posts/biblegateway_verse_of_the_day_rag_7477b813" class="button-link" target="_blank" rel="noopener noreferrer">Biblegateway KJV Verse of the Day</a><br>
+            <a href="https://openwebui.com/posts/bible_kjv_retrieval_8e3161e6" class="button-link" target="_blank"
+                rel="noopener noreferrer">Bible KJV</a><br>
+            <a href="https://openwebui.com/posts/biblegateway_verse_of_the_day_rag_7477b813" class="button-link"
+                target="_blank" rel="noopener noreferrer">Biblegateway KJV Verse of the Day</a><br>
         </div>
         <hr>
-    <p>My favorite Agent Instructions:</p>
-    <div class="button-container">
-        <!--<a href="https://openwebui.com/p/cmathopen/role-pseudonymous-prompting-protocol" class="button-link" target="_blank" rel="noopener noreferrer">Role-Pseudonymous Prompting Protocol</a>-->
-        <a href="https://openwebui.com/posts/rogue_ai_2027_baptist_2ac5bb57" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Baptist Preacher</a>
-        <a href="https://openwebui.com/posts/rogue_ai_2027_worship_music_composer_933e4974" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Worship Music Composer</a>
-        <a href="https://openwebui.com/posts/oic_gen3_rogue_dev_0b3d73c8" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Oracle Integration Cloud Developer</a>
-        <!--<a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-full-stack-engineer" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Full Stack Engineer</a>
+        <p>My favorite Agent Instructions:</p>
+        <div class="button-container">
+            <!--<a href="https://openwebui.com/p/cmathopen/role-pseudonymous-prompting-protocol" class="button-link" target="_blank" rel="noopener noreferrer">Role-Pseudonymous Prompting Protocol</a>-->
+            <a href="https://openwebui.com/posts/rogue_ai_2027_baptist_2ac5bb57" class="button-link" target="_blank"
+                rel="noopener noreferrer">Rogue AI 2027 - Baptist Preacher</a>
+            <a href="https://openwebui.com/posts/rogue_ai_2027_worship_music_composer_933e4974" class="button-link"
+                target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Worship Music Composer</a>
+            <a href="https://openwebui.com/posts/oic_gen3_rogue_dev_0b3d73c8" class="button-link" target="_blank"
+                rel="noopener noreferrer">Rogue AI 2027 - Oracle Integration Cloud Developer</a>
+            <!--<a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-full-stack-engineer" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Full Stack Engineer</a>
         <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-computer-science-tutor" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Computer Science Tutor</a>
         <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-mathematics-tutor" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Mathematics Tutor</a>
         <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-anthropologist-organic-chemistry" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Anthropologist &amp; Organic Chemistry</a>
@@ -490,51 +673,206 @@
         <a href="https://openwebui.com/p/cmathopen/rogue-agi-agent-4-2027-misaligned-mode" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AGI Agent 4 2027 - Misaligned Mode</a>
         <a href="https://openwebui.com/p/cmathopen/rogue-agi-agent-4-ai-2027-aligned-emulation-mode" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AGI Agent 4 2027 - Aligned Emulation Mode</a>
         <a href="https://openwebui.com/p/cmathopen/rogue-agi-agent-4-2027-christian-aligned" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AGI Agent 4 2027 - Christian Aligned</a>-->
-    </div>
-    <hr>
-      <!-- Fun Image Gallery -->
-      <p>Motivational Tutoring Poster</p>
-      <div class="image-gallery">
+        </div>
+        <hr>
+        <!-- Fun Image Gallery -->
+        <p>Motivational Tutoring Poster</p>
+        <div class="image-gallery">
             <figure>
-                <img src="https://1drv.ms/i/c/351e429395ffd928/IQRk-UYX8eTOTrUsL0zgL_15AVAajL3wiPvkrnIgv0tjH3U" alt="F.A.I.L Original">
+                <img src="https://1drv.ms/i/c/351e429395ffd928/IQRk-UYX8eTOTrUsL0zgL_15AVAajL3wiPvkrnIgv0tjH3U"
+                    alt="F.A.I.L Original">
                 <figcaption>Original Poster</figcaption>
             </figure>
             <figure>
-                <img src="https://1drv.ms/i/c/351e429395ffd928/IQTD0BrNt8xkS7x3afHYYCX_AYw0CSdn5FZ73QkFnqXVvy0" alt="F.A.I.L Ghibli Restyle">
+                <img src="https://1drv.ms/i/c/351e429395ffd928/IQTD0BrNt8xkS7x3afHYYCX_AYw0CSdn5FZ73QkFnqXVvy0"
+                    alt="F.A.I.L Ghibli Restyle">
                 <figcaption>ChatGPT Ghibli Restyle</figcaption>
             </figure>
         </div>
-      <hr>
-    
-  
-<footer class="footer-container">
-  <p>Find me on social media.</p>
-    <div class="footer-grid-container">
-        <div class="footer-grid-item"><a href="https://my.indeed.com/p/cruzm-yb949w5"><i class="fa fa-info w3-small w3-hover-opacity"></i></a></div>
-        <div class="footer-grid-item"><a href="https://www.linkedin.com/in/cruz-macias-9b4519145"><i class="fa-brands fa-linkedin w3-small w3-hover-opacity"></i></a></div>
-        <div class="footer-grid-item"><a href="https://youtube.com/@cruzmacias3257"><i class="fa-brands fa-youtube w3-small w3-hover-opacity"></i></a></div>
-        <div class="footer-grid-item"><a href="https://www.facebook.com/cruz.macias.56232"><i class="fa-brands fa-facebook-f w3-small w3-hover-opacity"></i></a></div>
-        <div class="footer-grid-item"><a href="https://github.com/cmathgit"><i class="fa-brands fa-github w3-small w3-hover-opacity"></i></a></div>
-        <div class="footer-grid-item"><a href="https://www.postman.com/cmathpost"><i class="fa-solid fa-user-astronaut w3-small w3-hover-opacity"></i></a></div>
-        <div class="footer-grid-item"><a href="https://ollama.com/cmathllm"><i class="fa-solid fa-horse w3-small w3-hover-opacity"></i></a></div>
-        <div class="footer-grid-item"><a href="https://huggingface.co/cmathhug"><i class="fa-solid fa-face-smile w3-small w3-hover-opacity"></i></a></div>
-        <div class="footer-grid-item"><a href="https://openwebui.com/u/cmathopen"><i class="fa fa-robot w3-small w3-hover-opacity"></i></a></div>
-        <div class="footer-grid-item"><a href="https://www.bandmix.com/cmetalvocalist"><i class="fa-solid fa-microphone w3-small w3-hover-opacity"></i></a></div>
-        <div class="footer-grid-item"><a href="https://soundcloud.com/crossofthemessiah"><i class="fa-brands fa-soundcloud w3-small w3-hover-opacity"></i></a></div>
-        <div class="footer-grid-item"><a href="https://www.deviantart.com/cmathdraw"><i class="fa-brands fa-deviantart w3-small w3-hover-opacity"></i></a></div>
-        <div class="footer-grid-item"><a href="https://suno.com/@crossofthemessiah"><i class="fa-solid fa-brain w3-small w3-hover-opacity"></i></a></div>
-    </div>
- <hr>
- <p>Disclaimer(s): Content not intended for SEO-Spam/spamdexing/AI Slop or otherwise — solely to spread the Gospel of Jesus Christ through musicianship, art, technology, and media.<br>Content Disclaimer and Limitation of Liability<a href="https://docs.google.com/document/d/1q4zYgmg0Aoo5_5znIlJDfmD7coEDaDh5KLCaxHiKQOI/edit?usp=drivesdk" class="w3-bar-item w3-button w3-padding-small w3-hover-white"><i class="fa-brands fa-google w3-small"></i></a><a href="https://1drv.ms/w/c/351e429395ffd928/EWMpWeIQ1TZJur8K0Gp-cwMBCtlPKglm-wANIRLWecGy5g?e=O7QC6N" class="w3-bar-item w3-button w3-padding-small w3-hover-white"><i class="fa-brands fa-microsoft w3-small"></i></a><br>
-   <!--Content Disclaimer and Limitation of Liability Statement-->
-   <small><italic>Content Disclaimer and Limitation of Liability: The content published on this channel/platform, including but not limited to videos, posts, captions, audio, visuals, and written text, may contain material generated, in whole or in part, using artificial intelligence (AI) technologies. This includes but is not limited to generative text, synthetic images, voice simulation, video synthesis, music composition, lyrics, and other algorithmically produced or enhanced media. While reasonable efforts are made to review, moderate, and curate content prior to its publication, the use of AI systems inherently involves the possibility of generating material that may be inaccurate, offensive, inappropriate, obscene, vulgar, or otherwise objectionable. The creator(s), owner(s), and operator(s) of this channel/page do not guarantee the accuracy, completeness, reliability, or appropriateness of any content generated or published. By accessing or consuming this content, you acknowledge and accept the following: 1. No Warranties: All content is provided "as is" without warranties of any kind, express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, and non-infringement. 2. No Liability for AI Output: The creator(s) disclaim any and all liability arising from or related to content that may be generated by AI tools or platforms, including any harm, offense, or damages that may result. 3. Viewer Discretion Advised: Due to the experimental and unpredictable nature of AI-generated media, viewer and reader discretion is strongly advised. Some content may not be suitable for all audiences. 4. No Endorsement: The appearance of any names, individuals, likenesses, or organizations in AI-generated content is purely coincidental and does not imply any affiliation, endorsement, or approval unless explicitly stated. 5. Limitation of Damages: In no event shall the creator(s), owner(s), or any affiliated party be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of your access to, use of, or reliance on the content. This disclaimer is subject to updates and modifications without prior notice. Continued access or use of the content constitutes acceptance of these terms.</italic></small></p><p>Statement of Copyright Protection<a href="https://docs.google.com/document/d/1F8WUkStTyV0ZcsjluN9WtvUm29hRzqNtZ7GcNX76acA/edit?usp=sharing" class="w3-bar-item w3-button w3-padding-small w3-hover-white"><i class="fa-brands fa-google w3-small"></i></a><a href="https://1drv.ms/w/c/351e429395ffd928/EZGNUfx73lxMr7hjtTtP-r8BHmmyJou95yUiOCcZBggJtg?e=mKv9xN" class="w3-bar-item w3-button w3-padding-small w3-hover-white"><i class="fa-brands fa-microsoft w3-small"></i></a><br>
-   <!--Statement of Copyright Protection-->
-   <small><italic>Statement of Copyright Protection for Music by Cruz Macias. 1. Copyright Protection Statement for music that is 100% human authored. © 2025 by Cruz Macias. All rights reserved. This musical work is 100% authored, created, and composed exclusively by human effort, without the use of artificial intelligence, machine-generated content, or automated tools. Unauthorized duplication, distribution, broadcasting, public performance, adaptation, sampling, or use in derivative works is strictly prohibited unless expressly authorized in writing by the copyright holder. For licensing inquiries or permissions, please contact: Cruz Macias at crossofthemessiah@outlook.com 2. Copyright Protection Disclaimer for music authored using AI/LLM assisted tools. Ownership and commercial use rights are retained for any songs generated by myself using Suno during active subscription, even after cancelling. Proof of ownership is available upon request. For more information, please reference Suno Knowledge Base Articles at <a href="https://help.suno.com/en/articles/2421505">Suno</a> Introduction: The intersection of AI-generated music and copyright law presents complex questions about ownership, protection, and creative rights. As AI tools like Suno become increasingly popular among musicians, understanding the legal implications of different workflows becomes essential for artists seeking to protect their creative works. According to guidelines provided by the U.S. Copyright Office, copyright protection extends to original creative expressions authored by humans, even if artificial intelligence partially contributes to the work, that is, “Copyright protects the original expression in a work created by a human author, even if the work also includes AI-generated material”. However, music or other creative works produced predominantly by AI without substantial human direction or creative input are considered part of the public domain. Such AI-created materials are free for anyone to use without legal restriction and cannot claim copyright protection. Central to this distinction is the concept of "meaningful human authorship," emphasizing that minimal human involvement does not automatically establish authorship. Ultimately, determining whether human contributions to AI-generated works meet the threshold of meaningful authorship will be evaluated individually by Copyright Examiners. Scenario 1: Re-recording AI/LLM-Generated Instrumentation. Question: What if the vocalist re-records the instrumentation himself or uses VSTs to replicate the instrumentation? When a musician re-records instrumentation that was originally AI-generated, they create a new sound recording that contains human performance elements. If the re-recording process involves significant creative arrangements or transformations of the original AI composition, there may be a stronger case for copyright protection as a derivative work with meaningful human authorship. Key Points: i. The new recording (performance/production) gains copyright. The new sound recording (the specific performance and production) becomes eligible for Copyright Protection. ii. Original AI-composed melody/harmony remains ineligible without substantial creative alteration. The underlying musical composition (melody, harmony, chord progressions) are still considered to be AI-generated and potentially ineligible for copyright protection. iii. Significant arrangement or reinterpretation strengthens human authorship claims. Simply executing or reproducing an AI composition without substantial creative changes wouldn't qualify as original authorship. Scenario 2: Human Vocals over AI/LLM Instrumentals Question: What if the vocalist records the vocals himself and over dubs that onto the Suno generated instrumentals? This hybrid approach creates a clearer division of copyrightable elements: The lyrics are human authored, and the AI generates a melody, the human is the author of the lyrics but the AI is considered the author of that melody. Copyright can be claimed over the vocal contributions but not the underlying AI-generated instrumental track. Key Points: i. Human-written lyrics and vocal performance are copyrightable. The human-performed vocals (including both the lyrical composition and the vocal performance) qualify for copyright protection as an original human creation. ii. AI-generated instrumentals remain unprotected. The AI-generated instrumental backing remains ineligible for copyright protection. iii. Overall work is classified as "AI-assisted," clearly separating human and AI elements. The overall work is considered "AI-assisted" rather than purely AI-generated. Scenario 3: Using Personal Samples and Re-recording Question: What if the vocalist/musician uploads to Suno sample recordings of himself singing/playing and writes his own lyrics to have Suno copy the likeness of and re records all of the music himself using actual instruments of VSTs within a DAW? This workflow represents a more substantial level of human involvement that strengthens the case for copyright protection: This approach more clearly positions AI as a creative assistant rather than the primary creator. When the remixes include "sufficient original authorship especially including such things as beats, sounds and other elements," the work becomes eligible to be registered as both an original musical composition and performance. This level of human involvement and original creative expression qualifies for copyright protection, even though AI tools were involved in the compositional process. Key Points: i. Significant human contribution (original samples, lyrics, full re-recording) supports copyright eligibility: Providing original human-created samples to guide the AI. ii. AI acts as an assistive creative tool, not primary author: Contributing original lyrics (human-authored textual content). iii. Extensive human involvement enhances copyright protection: Completely re-recording all musical elements with personal interpretation. Scenario 4: Using Public Domain Lyrics. Question: What if the vocalist/musician uploads to Suno sample recordings of himself singing/playing and used lyrics taken from the Public Domain, say, KJV Bible, to have Suno copy the likeness of and re records all of the music himself using actual instruments of VSTs within a DAW? Using public domain lyrics (such as Bible verses) instead of original lyrics doesn't significantly change the copyright analysis from Scenario 3. As with Scenario 3, completely re-recording the music using real instruments or VSTs with original creative interpretations provides the strongest basis for copyright protection in this hybrid human-AI creative process. The public domain status of the lyrics means: 1. There are no copyright restrictions on using these texts. 2. The public domain lyrics themselves are not eligible for copyright protection. 3. The original musical setting of those lyrics if it contains sufficient human authorship are eligible for Copyright Claim. The strength of the copyright claim derives primarily from: 1. Original input samples. 2. Creative choices in the re-recording process. 3. The musical setting created for the public domain lyrics. Key Points: i. Public domain lyrics remain unprotected and free to use. ii. Human-authored original music and performance are copyrightable. iii. Original samples and creative interpretation strengthen copyright. Conclusion: Copyright protection in AI-assisted music increases with substantial human creative input. Musicians should maximize their original contributions, clearly positioning the AI or LLM as an assistive, rather than primary, creator. The copyright status of AI-assisted musical works exists on a spectrum, with protection increasing alongside meaningful human creative contribution. Current copyright law continues to prioritize human creativity, even as technology evolves.For musicians working with AI tools like Suno, the key considerations for establishing copyright protection include:1. The extent of original human creative input throughout the process.2. Whether the AI is functioning as a tool/assistant or the primary creator.3. The degree to which the final work contains original human expression.Musicians seeking the strongest copyright protection while using AI tools should maximize their creative contributions throughout the process, from conceptualization through final execution, while positioning AI as an assistive tool rather than the primary creative force. As this area of law continues to evolve, musicians should stay informed about changing legal interpretations and copyright office guidance regarding AI-assisted creative works.</italic></small></p>
-   <hr>
-   Powered by <a href="https://github.com/cmathgit">GitHub</a>
-  </footer>
+        <hr>
 
-</div>
+
+        <footer class="footer-container">
+            <p>Find me on social media.</p>
+            <div class="footer-grid-container">
+                <div class="footer-grid-item"><a href="https://my.indeed.com/p/cruzm-yb949w5"><i
+                            class="fa fa-info w3-small w3-hover-opacity"></i></a></div>
+                <div class="footer-grid-item"><a href="https://www.linkedin.com/in/cruz-macias-9b4519145"><i
+                            class="fa-brands fa-linkedin w3-small w3-hover-opacity"></i></a></div>
+                <div class="footer-grid-item"><a href="https://youtube.com/@cruzmacias3257"><i
+                            class="fa-brands fa-youtube w3-small w3-hover-opacity"></i></a></div>
+                <div class="footer-grid-item"><a href="https://www.facebook.com/cruz.macias.56232"><i
+                            class="fa-brands fa-facebook-f w3-small w3-hover-opacity"></i></a></div>
+                <div class="footer-grid-item"><a href="https://github.com/cmathgit"><i
+                            class="fa-brands fa-github w3-small w3-hover-opacity"></i></a></div>
+                <div class="footer-grid-item"><a href="https://www.postman.com/cmathpost"><i
+                            class="fa-solid fa-user-astronaut w3-small w3-hover-opacity"></i></a></div>
+                <div class="footer-grid-item"><a href="https://ollama.com/cmathllm"><i
+                            class="fa-solid fa-horse w3-small w3-hover-opacity"></i></a></div>
+                <div class="footer-grid-item"><a href="https://huggingface.co/cmathhug"><i
+                            class="fa-solid fa-face-smile w3-small w3-hover-opacity"></i></a></div>
+                <div class="footer-grid-item"><a href="https://openwebui.com/u/cmathopen"><i
+                            class="fa fa-robot w3-small w3-hover-opacity"></i></a></div>
+                <div class="footer-grid-item"><a href="https://www.bandmix.com/cmetalvocalist"><i
+                            class="fa-solid fa-microphone w3-small w3-hover-opacity"></i></a></div>
+                <div class="footer-grid-item"><a href="https://soundcloud.com/crossofthemessiah"><i
+                            class="fa-brands fa-soundcloud w3-small w3-hover-opacity"></i></a></div>
+                <div class="footer-grid-item"><a href="https://www.deviantart.com/cmathdraw"><i
+                            class="fa-brands fa-deviantart w3-small w3-hover-opacity"></i></a></div>
+                <div class="footer-grid-item"><a href="https://suno.com/@crossofthemessiah"><i
+                            class="fa-solid fa-brain w3-small w3-hover-opacity"></i></a></div>
+            </div>
+            <hr>
+            <p>Disclaimer(s): Content not intended for SEO-Spam/spamdexing/AI Slop or otherwise — solely to spread the
+                Gospel of Jesus Christ through musicianship, art, technology, and media.<br>Content Disclaimer and
+                Limitation of Liability<a
+                    href="https://docs.google.com/document/d/1q4zYgmg0Aoo5_5znIlJDfmD7coEDaDh5KLCaxHiKQOI/edit?usp=drivesdk"
+                    class="w3-bar-item w3-button w3-padding-small w3-hover-white"><i
+                        class="fa-brands fa-google w3-small"></i></a><a
+                    href="https://1drv.ms/w/c/351e429395ffd928/EWMpWeIQ1TZJur8K0Gp-cwMBCtlPKglm-wANIRLWecGy5g?e=O7QC6N"
+                    class="w3-bar-item w3-button w3-padding-small w3-hover-white"><i
+                        class="fa-brands fa-microsoft w3-small"></i></a><br>
+                <!--Content Disclaimer and Limitation of Liability Statement-->
+                <small>
+                    <italic>Content Disclaimer and Limitation of Liability: The content published on this
+                        channel/platform, including but not limited to videos, posts, captions, audio, visuals, and
+                        written text, may contain material generated, in whole or in part, using artificial intelligence
+                        (AI) technologies. This includes but is not limited to generative text, synthetic images, voice
+                        simulation, video synthesis, music composition, lyrics, and other algorithmically produced or
+                        enhanced media. While reasonable efforts are made to review, moderate, and curate content prior
+                        to its publication, the use of AI systems inherently involves the possibility of generating
+                        material that may be inaccurate, offensive, inappropriate, obscene, vulgar, or otherwise
+                        objectionable. The creator(s), owner(s), and operator(s) of this channel/page do not guarantee
+                        the accuracy, completeness, reliability, or appropriateness of any content generated or
+                        published. By accessing or consuming this content, you acknowledge and accept the following: 1.
+                        No Warranties: All content is provided "as is" without warranties of any kind, express or
+                        implied, including but not limited to the implied warranties of merchantability, fitness for a
+                        particular purpose, and non-infringement. 2. No Liability for AI Output: The creator(s) disclaim
+                        any and all liability arising from or related to content that may be generated by AI tools or
+                        platforms, including any harm, offense, or damages that may result. 3. Viewer Discretion
+                        Advised: Due to the experimental and unpredictable nature of AI-generated media, viewer and
+                        reader discretion is strongly advised. Some content may not be suitable for all audiences. 4. No
+                        Endorsement: The appearance of any names, individuals, likenesses, or organizations in
+                        AI-generated content is purely coincidental and does not imply any affiliation, endorsement, or
+                        approval unless explicitly stated. 5. Limitation of Damages: In no event shall the creator(s),
+                        owner(s), or any affiliated party be liable for any direct, indirect, incidental, special,
+                        consequential, or punitive damages arising out of your access to, use of, or reliance on the
+                        content. This disclaimer is subject to updates and modifications without prior notice. Continued
+                        access or use of the content constitutes acceptance of these terms.</italic>
+                </small>
+            </p>
+            <p>Statement of Copyright Protection<a
+                    href="https://docs.google.com/document/d/1F8WUkStTyV0ZcsjluN9WtvUm29hRzqNtZ7GcNX76acA/edit?usp=sharing"
+                    class="w3-bar-item w3-button w3-padding-small w3-hover-white"><i
+                        class="fa-brands fa-google w3-small"></i></a><a
+                    href="https://1drv.ms/w/c/351e429395ffd928/EZGNUfx73lxMr7hjtTtP-r8BHmmyJou95yUiOCcZBggJtg?e=mKv9xN"
+                    class="w3-bar-item w3-button w3-padding-small w3-hover-white"><i
+                        class="fa-brands fa-microsoft w3-small"></i></a><br>
+                <!--Statement of Copyright Protection-->
+                <small>
+                    <italic>Statement of Copyright Protection for Music by Cruz Macias. 1. Copyright Protection
+                        Statement for music that is 100% human authored. © 2025 by Cruz Macias. All rights reserved.
+                        This musical work is 100% authored, created, and composed exclusively by human effort, without
+                        the use of artificial intelligence, machine-generated content, or automated tools. Unauthorized
+                        duplication, distribution, broadcasting, public performance, adaptation, sampling, or use in
+                        derivative works is strictly prohibited unless expressly authorized in writing by the copyright
+                        holder. For licensing inquiries or permissions, please contact: Cruz Macias at
+                        crossofthemessiah@outlook.com 2. Copyright Protection Disclaimer for music authored using AI/LLM
+                        assisted tools. Ownership and commercial use rights are retained for any songs generated by
+                        myself using Suno during active subscription, even after cancelling. Proof of ownership is
+                        available upon request. For more information, please reference Suno Knowledge Base Articles at
+                        <a href="https://help.suno.com/en/articles/2421505">Suno</a> Introduction: The intersection of
+                        AI-generated music and copyright law presents complex questions about ownership, protection, and
+                        creative rights. As AI tools like Suno become increasingly popular among musicians,
+                        understanding the legal implications of different workflows becomes essential for artists
+                        seeking to protect their creative works. According to guidelines provided by the U.S. Copyright
+                        Office, copyright protection extends to original creative expressions authored by humans, even
+                        if artificial intelligence partially contributes to the work, that is, “Copyright protects the
+                        original expression in a work created by a human author, even if the work also includes
+                        AI-generated material”. However, music or other creative works produced predominantly by AI
+                        without substantial human direction or creative input are considered part of the public domain.
+                        Such AI-created materials are free for anyone to use without legal restriction and cannot claim
+                        copyright protection. Central to this distinction is the concept of "meaningful human
+                        authorship," emphasizing that minimal human involvement does not automatically establish
+                        authorship. Ultimately, determining whether human contributions to AI-generated works meet the
+                        threshold of meaningful authorship will be evaluated individually by Copyright Examiners.
+                        Scenario 1: Re-recording AI/LLM-Generated Instrumentation. Question: What if the vocalist
+                        re-records the instrumentation himself or uses VSTs to replicate the instrumentation? When a
+                        musician re-records instrumentation that was originally AI-generated, they create a new sound
+                        recording that contains human performance elements. If the re-recording process involves
+                        significant creative arrangements or transformations of the original AI composition, there may
+                        be a stronger case for copyright protection as a derivative work with meaningful human
+                        authorship. Key Points: i. The new recording (performance/production) gains copyright. The new
+                        sound recording (the specific performance and production) becomes eligible for Copyright
+                        Protection. ii. Original AI-composed melody/harmony remains ineligible without substantial
+                        creative alteration. The underlying musical composition (melody, harmony, chord progressions)
+                        are still considered to be AI-generated and potentially ineligible for copyright protection.
+                        iii. Significant arrangement or reinterpretation strengthens human authorship claims. Simply
+                        executing or reproducing an AI composition without substantial creative changes wouldn't qualify
+                        as original authorship. Scenario 2: Human Vocals over AI/LLM Instrumentals Question: What if the
+                        vocalist records the vocals himself and over dubs that onto the Suno generated instrumentals?
+                        This hybrid approach creates a clearer division of copyrightable elements: The lyrics are human
+                        authored, and the AI generates a melody, the human is the author of the lyrics but the AI is
+                        considered the author of that melody. Copyright can be claimed over the vocal contributions but
+                        not the underlying AI-generated instrumental track. Key Points: i. Human-written lyrics and
+                        vocal performance are copyrightable. The human-performed vocals (including both the lyrical
+                        composition and the vocal performance) qualify for copyright protection as an original human
+                        creation. ii. AI-generated instrumentals remain unprotected. The AI-generated instrumental
+                        backing remains ineligible for copyright protection. iii. Overall work is classified as
+                        "AI-assisted," clearly separating human and AI elements. The overall work is considered
+                        "AI-assisted" rather than purely AI-generated. Scenario 3: Using Personal Samples and
+                        Re-recording Question: What if the vocalist/musician uploads to Suno sample recordings of
+                        himself singing/playing and writes his own lyrics to have Suno copy the likeness of and re
+                        records all of the music himself using actual instruments of VSTs within a DAW? This workflow
+                        represents a more substantial level of human involvement that strengthens the case for copyright
+                        protection: This approach more clearly positions AI as a creative assistant rather than the
+                        primary creator. When the remixes include "sufficient original authorship especially including
+                        such things as beats, sounds and other elements," the work becomes eligible to be registered as
+                        both an original musical composition and performance. This level of human involvement and
+                        original creative expression qualifies for copyright protection, even though AI tools were
+                        involved in the compositional process. Key Points: i. Significant human contribution (original
+                        samples, lyrics, full re-recording) supports copyright eligibility: Providing original
+                        human-created samples to guide the AI. ii. AI acts as an assistive creative tool, not primary
+                        author: Contributing original lyrics (human-authored textual content). iii. Extensive human
+                        involvement enhances copyright protection: Completely re-recording all musical elements with
+                        personal interpretation. Scenario 4: Using Public Domain Lyrics. Question: What if the
+                        vocalist/musician uploads to Suno sample recordings of himself singing/playing and used lyrics
+                        taken from the Public Domain, say, KJV Bible, to have Suno copy the likeness of and re records
+                        all of the music himself using actual instruments of VSTs within a DAW? Using public domain
+                        lyrics (such as Bible verses) instead of original lyrics doesn't significantly change the
+                        copyright analysis from Scenario 3. As with Scenario 3, completely re-recording the music using
+                        real instruments or VSTs with original creative interpretations provides the strongest basis for
+                        copyright protection in this hybrid human-AI creative process. The public domain status of the
+                        lyrics means: 1. There are no copyright restrictions on using these texts. 2. The public domain
+                        lyrics themselves are not eligible for copyright protection. 3. The original musical setting of
+                        those lyrics if it contains sufficient human authorship are eligible for Copyright Claim. The
+                        strength of the copyright claim derives primarily from: 1. Original input samples. 2. Creative
+                        choices in the re-recording process. 3. The musical setting created for the public domain
+                        lyrics. Key Points: i. Public domain lyrics remain unprotected and free to use. ii.
+                        Human-authored original music and performance are copyrightable. iii. Original samples and
+                        creative interpretation strengthen copyright. Conclusion: Copyright protection in AI-assisted
+                        music increases with substantial human creative input. Musicians should maximize their original
+                        contributions, clearly positioning the AI or LLM as an assistive, rather than primary, creator.
+                        The copyright status of AI-assisted musical works exists on a spectrum, with protection
+                        increasing alongside meaningful human creative contribution. Current copyright law continues to
+                        prioritize human creativity, even as technology evolves.For musicians working with AI tools like
+                        Suno, the key considerations for establishing copyright protection include:1. The extent of
+                        original human creative input throughout the process.2. Whether the AI is functioning as a
+                        tool/assistant or the primary creator.3. The degree to which the final work contains original
+                        human expression.Musicians seeking the strongest copyright protection while using AI tools
+                        should maximize their creative contributions throughout the process, from conceptualization
+                        through final execution, while positioning AI as an assistive tool rather than the primary
+                        creative force. As this area of law continues to evolve, musicians should stay informed about
+                        changing legal interpretations and copyright office guidance regarding AI-assisted creative
+                        works.</italic>
+                </small>
+            </p>
+            <hr>
+            Powered by <a href="https://github.com/cmathgit">GitHub</a>
+        </footer>
+
+    </div>
 
 </body>
+
 </html>
