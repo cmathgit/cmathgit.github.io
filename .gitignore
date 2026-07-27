@@ -74,9 +74,3 @@ ai-apps/bible-news-digest/archives/*
 !ai-apps/blobo/art/thumb.png
 !ai-apps/blobo/art/screencapture_2026-07-18_14-25-00.png
 !ai-apps/blobo/art/screencapture_2026-07-18_14-23-04.png
-ai-apps/vectormath/embeddings/**/*.json
-!ai-apps/vectormath/embeddings/qwen3/king.json
-!ai-apps/vectormath/embeddings/qwen3/queen.json
-!ai-apps/vectormath/embeddings/qwen3/man.json
-!ai-apps/vectormath/embeddings/qwen3/woman.json
-!ai-apps/vectormath/analyzeEmbeddings.py
