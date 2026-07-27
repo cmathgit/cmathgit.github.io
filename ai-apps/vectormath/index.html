@@ -322,15 +322,17 @@
             <h4 style="margin-top: 1.5rem;">1. Clone the Repository</h4>
             <p>First, clone the source code repository containing the Python engine to your local machine:</p>
             <div class="code-block">git clone https://github.com/cmathgit/vector-math.git
-                cd vector-math</div>
+                <br>cd vector-math
+            </div>
 
             <h4 style="margin-top: 1.5rem;">2. Model Acquisition</h4>
             <p>Download and install <a href="https://ollama.com" target="_blank"
                     style="color:var(--primary)">Ollama</a>, then pull the required state-of-the-art embedding models to
                 ensure cross-architecture validity:</p>
             <div class="code-block">ollama pull qwen3-embedding:0.6b
-                ollama pull embeddinggemma:300m
-                ollama pull granite-embedding:30m</div>
+                <br>ollama pull embeddinggemma:300m
+                <br>ollama pull granite-embedding:30m
+            </div>
 
             <h4 style="margin-top: 1.5rem;">3. Vector Generation</h4>
             <p>Generate JSON embedding files for 11 specific target tokens: <code>King</code>, <code>Man</code>,
@@ -338,12 +340,10 @@
                 <code>Son</code>, <code>Jesus</code>, <code>Savior</code>, <code>Anointed</code>.
             </p>
             <p>Using native Windows CMD (cURL):</p>
-            <div class="code-block">curl http://localhost:11434/api/embed -d "{\"model\": \"qwen3-embedding:0.6b\",
-                \"input\": \"King\"}" > "embeddings/qwen3/king.json"
-                curl http://localhost:11434/api/embed -d "{\"model\": \"qwen3-embedding:0.6b\", \"input\": \"Man\"}" >
-                "embeddings/qwen3/man.json"
-                curl http://localhost:11434/api/embed -d "{\"model\": \"qwen3-embedding:0.6b\", \"input\": \"Woman\"}" >
-                "embeddings/qwen3/woman.json"</div>
+            <div class="code-block">curl http://localhost:11434/api/embed -d "{\"model\": \"qwen3-embedding:0.6b\", \"input\": \"King\"}" > "embeddings/qwen3/king.json"
+                <br>curl http://localhost:11434/api/embed -d "{\"model\": \"qwen3-embedding:0.6b\", \"input\": \"Man\"}" > "embeddings/qwen3/man.json"
+                <br>curl http://localhost:11434/api/embed -d "{\"model\": \"qwen3-embedding:0.6b\", \"input\": \"Woman\"}" > "embeddings/qwen3/woman.json"
+            </div>
             <p style="font-size: 0.9rem; color: var(--text-main); opacity: 0.8;">Repeat across all tokens and models.
                 Alternatively, utilize Postman to POST to the <code>/api/embed</code> endpoint and save the raw JSON
                 responses.</p>
