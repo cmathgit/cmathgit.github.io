@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="A formal academic presentation on LLM Embedding Geometry, highlighting a theological case study and the mathematics behind Large Language Models.">
+    <title>LLM Embedding Geometry | Academic Research</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --surface: rgba(31, 40, 51, 0.6);
+            --surface-hover: rgba(31, 40, 51, 0.9);
+            --primary: #66fcf1;
+            --primary-glow: rgba(102, 252, 241, 0.4);
+            --secondary: #45a29e;
+            --text-main: #c5c6c7;
+            --text-heading: #ffffff;
+            --border: rgba(102, 252, 241, 0.2);
+            --gradient: linear-gradient(135deg, #66fcf1 0%, #45a29e 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(69, 162, 158, 0.1) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        header {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 1;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .glass-card {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px var(--primary-glow);
+            background: var(--surface-hover);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .bio-section {
+            border-left: 4px solid var(--primary);
+            padding-left: 2rem;
+            margin: 3rem 0;
+        }
+
+        .code-block {
+            background: #111;
+            color: #45a29e;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: monospace;
+            overflow-x: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 1rem 0;
+            white-space: pre;
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        ul li::before {
+            content: '▹';
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(11, 12, 16, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Outfit', sans-serif;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .footer-text {
+            text-align: center;
+            padding: 3rem;
+            font-size: 0.9rem;
+            color: rgba(197, 198, 199, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#concepts">Concepts</a>
+        <a href="#research">Research</a>
+        <a href="#replication">Replication</a>
+        <a href="#results">Results</a>
+    </nav>
+
+    <header>
+        <div class="hero-content">
+            <h1>LLM Embedding Geometry</h1>
+            <h2>A Theological Case Study in Distributional Semantics</h2>
+            <p>Exploring the mathematical realities of "word-math" across high-dimensional vector space.</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <section id="about" class="glass-card bio-section">
+            <h3>About the Principal Investigator</h3>
+            <p>
+                Welcome to this formal exposition. I approach this research drawing upon a multifaceted academic and
+                professional foundation.
+                Holding an undergraduate degree in Mathematics, I proceeded to earn a Graduate degree in Computer
+                Science, complemented by
+                two distinct Graduate Certificates in <strong>Artificial Intelligence</strong> and <strong>Cyber
+                    Security & Digital Forensics</strong>.
+            </p>
+            <p style="margin-top: 1rem;">
+                Over the past decade, I have architected and developed enterprise-grade integrations within the Oracle
+                Cloud Tech-Stack.
+                Simultaneously, I have dedicated the last ten years to academia as an adjunct faculty member, teaching
+                both mathematics and computer science.
+                This dual immersion in theoretical rigor and practical enterprise application deeply informs my
+                perspective on Natural Language Processing (NLP) and vector mathematics.
+            </p>
+        </section>
+
+        <section id="concepts" class="glass-card">
+            <h2>Core Concepts & Definitions</h2>
+            <p>To fully grasp the methodology of this research, we must first establish the foundational vocabulary of
+                Distributional Semantics.</p>
+            <div class="grid" style="margin-top: 1.5rem;">
+                <div>
+                    <h4 class="highlight">Distributional Semantics</h4>
+                    <p>The linguistic theory positing that words occurring in similar contexts tend to have similar
+                        meanings. In our research, this forms the theoretical bedrock for why neural networks cluster
+                        related tokens together.</p>
+                </div>
+                <div>
+                    <h4 class="highlight">Vector Embeddings</h4>
+                    <p>High-dimensional mathematical representations of human language. Rather than treating words as
+                        isolated strings, an LLM maps them into a dense spatial coordinate system (ranging from 768 to
+                        1024 dimensions in this study).</p>
+                </div>
+                <div>
+                    <h4 class="highlight">Cosine Similarity</h4>
+                    <p>A statistical metric used to measure how similar two vectors are irrespective of their magnitude.
+                        It calculates the cosine of the angle between two vectors projected in multi-dimensional space,
+                        proving invaluable for semantic search as it ignores raw length and focuses purely on
+                        trajectory.</p>
+                </div>
+                <div>
+                    <h4 class="highlight">Semantic Bias & Geometric Drag</h4>
+                    <p>Phenomena occurring when generalized contexts skew mathematical precision within specialized
+                        semantic spaces. "Geometric drag" happens when heavily generalized words possess wide
+                        gravitational pulls, resisting precise mathematical isolation in niche use cases.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="research" class="glass-card">
+            <h2>Objective & Hypotheses</h2>
+            <p>
+                <strong>The Objective:</strong> This project serves as a practical laboratory to verify the underlying
+                geometry of LLM embeddings. We seek to empirically demonstrate why <em>Cosine Similarity</em> remains
+                the undisputed industry standard for semantic search, whilst providing a masterclass in semantic bias.
+                We intend to prove that when arithmetic perfectly aligns with highly specific contextual usage within a
+                training corpus, an embedding model's spatial logic becomes brutally precise.
+            </p>
+            <p style="margin-top: 1rem;">
+                <strong>The Hypotheses:</strong>
+            <ul>
+                <li><strong>Hypothesis I (The Control):</strong> Standard spatial relationships (e.g.,
+                    <code>King - Man + Woman = Queen</code>) will hold true across different model architectures,
+                    validating basic semantic clustering algorithms.
+                </li>
+                <li><strong>Hypothesis II (The Theological Test):</strong> Applying spatial math to complex,
+                    contextually-dense theological concepts (culminating in an attempt to pinpoint the "Christ" vector
+                    using biblical corpus context, such as <code>God - Father + Son</code>) will reveal distinct
+                    geometric drag, emphasizing the semantic bias innate in generalized training data.</li>
+            </ul>
+            </p>
+        </section>
+
+        <section id="replication" class="glass-card">
+            <h2>Replication Methodology</h2>
+            <p>To guarantee the integrity of this case study, pre-calculated weights are intentionally omitted. Peer
+                researchers must generate the raw semantic data directly from the models.</p>
+
+            <h4 style="margin-top: 1.5rem;">1. Clone the Repository</h4>
+            <p>First, clone the source code repository containing the Python engine to your local machine:</p>
+            <div class="code-block">git clone https://github.com/cmathgit/vector-math.git
+                cd vector-math</div>
+
+            <h4 style="margin-top: 1.5rem;">2. Model Acquisition</h4>
+            <p>Download and install <a href="https://ollama.com" target="_blank"
+                    style="color:var(--primary)">Ollama</a>, then pull the required state-of-the-art embedding models to
+                ensure cross-architecture validity:</p>
+            <div class="code-block">ollama pull qwen3-embedding:0.6b
+                ollama pull embeddinggemma:300m
+                ollama pull granite-embedding:30m</div>
+
+            <h4 style="margin-top: 1.5rem;">3. Vector Generation</h4>
+            <p>Generate JSON embedding files for 11 specific target tokens: <code>King</code>, <code>Man</code>,
+                <code>Woman</code>, <code>Queen</code>, <code>God</code>, <code>Christ</code>, <code>Father</code>,
+                <code>Son</code>, <code>Jesus</code>, <code>Savior</code>, <code>Anointed</code>.
+            </p>
+            <p>Using native Windows CMD (cURL):</p>
+            <div class="code-block">curl http://localhost:11434/api/embed -d "{\"model\": \"qwen3-embedding:0.6b\",
+                \"input\": \"King\"}" > "embeddings/qwen3/king.json"
+                curl http://localhost:11434/api/embed -d "{\"model\": \"qwen3-embedding:0.6b\", \"input\": \"Man\"}" >
+                "embeddings/qwen3/man.json"
+                curl http://localhost:11434/api/embed -d "{\"model\": \"qwen3-embedding:0.6b\", \"input\": \"Woman\"}" >
+                "embeddings/qwen3/woman.json"</div>
+            <p style="font-size: 0.9rem; color: var(--text-main); opacity: 0.8;">Repeat across all tokens and models.
+                Alternatively, utilize Postman to POST to the <code>/api/embed</code> endpoint and save the raw JSON
+                responses.</p>
+
+            <h4 style="margin-top: 1.5rem;">4. Mathematical Execution</h4>
+            <p>Run the provided Python math engine (<code>analyzeEmbeddings.py</code>) to calculate resulting spatial
+                coordinates using Cosine Similarity, Dot Product (Inner), Euclidean Distance (L2), and Manhattan
+                Distance (L1).</p>
+            <div class="code-block">python analyzeEmbeddings.py</div>
+        </section>
+
+        <section id="results" class="glass-card">
+            <h2>Experimental Results: Successes & Failures</h2>
+
+            <h3>The Control Success: Classic Analogy</h3>
+            <p>Our execution of the classic equation <code>King - Man + Woman</code> against the target
+                <code>Queen</code> perfectly validated the efficacy of Cosine Similarity across architectures.
+            </p>
+
+            <div class="code-block">==================================================
+                Granite Ollama API METRIC ANALYSIS: Calculated vs Target 'Queen'
+                ==================================================
+                1. Cosine Similarity: 0.863722
+                2. Dot Product: 0.936024
+                3. Euclidean Dist: 0.549890
+                4. Manhattan Dist: 11.907438</div>
+
+            <p style="margin-top: 1rem;"><strong>The Winner:</strong> IBM's <strong>Granite (768 dimensions)</strong>
+                captured this specific semantic relationship most effectively, demonstrating the highest structural
+                precision among the tested models.</p>
+
+            <h3 style="margin-top: 2rem;">The Theological Complexities (Failures & Insights)</h3>
+            <p>When the engine was tasked with calculating highly abstract and contextually isolated
+                concepts—specifically pinpointing the Christ vector—we encountered structural <em>failures</em>
+                indicative of severe geometric drag.</p>
+            <ul>
+                <li><strong>Sparse Contextual Representation:</strong> While "King" and "Queen" share dense, uniform
+                    proximities in general web text, theological words like "Anointed" or "Savior" are heavily
+                    overloaded and sparse.</li>
+                <li><strong>Mathematical Divergence:</strong> Attempts to calculate relationships like
+                    <code>God - Father + Son</code> yielded vectors that, while pointing generally toward the
+                    theological vicinity, suffered from significant L2 Distance expansion. The target vector became
+                    "stretched" by the generalized usages of terms like "Father" and "Son" outside of strictly biblical
+                    contexts.
+                </li>
+                <li><strong>Conclusion on Semantic Bias:</strong> The failure to achieve >0.9 Cosine Similarity for the
+                    theological vectors acts as proof that when a training corpus favors broad generalizations, highly
+                    specialized semantic arithmetic breaks down. It demonstrates why bespoke embeddings or Fine-Tuning
+                    are critical for domain-specific enterprise applications.</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <footer class="footer-text">
+        <p>&copy; 2026 Academic Research Presentation | Prepared using Gemini 3.1 Pro | Developed for distribution via
+            GitHub Pages</p>
+    </footer>
+
+</body>
+
+</html>
