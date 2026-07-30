@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinematic Audio Visualizer</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Load Three.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="visualizer-wrapper">
+            <!-- 3D Render Target -->
+            <canvas id="gl-canvas"></canvas>
+            
+            <!-- HUD & Controls -->
+            <div class="hud">
+                <div class="header">
+                    <div class="badge">✨ Pro Audio B-Roll Renderer</div>
+                    <div id="recording-badge" class="recording-badge hidden">🎥 RECORDING B-ROLL</div>
+                    <div id="status-text" class="status-text">DSP: IDLE</div>
+                </div>
+
+                <div class="controls">
+                    <button id="play-btn" class="play-btn" disabled>▶</button>
+                    
+                    <div class="track-info">
+                        <div id="file-name" class="file-name">No track loaded</div>
+                        <div id="status-subtext" class="status-subtext">Upload audio track first</div>
+                    </div>
+
+                    <button id="export-btn" class="export-btn hidden">⬇ EXPORT VIDEO</button>
+                    
+                    <label class="upload-btn">
+                        ⇧ LOAD AUDIO
+                        <input type="file" id="file-upload" accept="audio/*" class="hidden">
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Hidden Audio Element -->
+            <audio id="audio-player" crossorigin="anonymous"></audio>
+        </div>
+    </div>
+    
+    <!-- Load application logic -->
+    <script src="js/app.js"></script>
+</body>
+</html>

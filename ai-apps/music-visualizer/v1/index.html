@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noir Stream Tunnel Visualizer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <canvas id="visualizer-canvas"></canvas>
+
+    <div class="hud">
+      <div class="header">
+        <span class="badge">NOIR STREAM TUNNEL ENGINE</span>
+        <span id="status-text" class="status">STATUS: IDLE</span>
+      </div>
+
+      <div class="controls">
+        <button id="play-btn" disabled>PLAY & RECORD</button>
+        <div class="track-info">
+          <span id="file-name">No track loaded</span>
+        </div>
+        <label class="upload-btn">
+          LOAD TRACK
+          <input type="file" id="audio-input" accept="audio/*">
+        </label>
+        <a id="download-btn" class="download-btn" style="display: none;">EXPORT NOIR B-ROLL</a>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audio-player" crossorigin="anonymous"></audio>
+  <script src="js/app.js"></script>
+</body>
+</html>
