@@ -405,14 +405,14 @@
                         Budget Integration (FBDI &amp; ESS)</a></li>
                 <li style="color:white;"><a href="#invoice-order-integration" style="color:hsl(62,72%,66%);">Invoice
                         Order Attachment Integration</a></li>
+                <li style="color:white;"><a href="#oic-ai-integration" style="color:hsl(62,72%,66%);">OIC AI Integration
+                        Demo &mdash; AP Invoice Intelligence Pipeline</a></li>
                 <li style="color:white;"><a href="#sftp-migration" style="color:hsl(62,72%,66%);">SFTP Migration &mdash;
                         SCM OIC Refactor</a></li>
                 <li style="color:white;"><a href="#scm-error-remediation" style="color:hsl(62,72%,66%);">SCM Middleware
                         Error Notification Remediation</a></li>
                 <li style="color:white;"><a href="#scm-rca-stabilization" style="color:hsl(62,72%,66%);">SCM Integration
                         RCA &amp; Stabilization (&gt;99% Error Reduction)</a></li>
-                <li style="color:white;"><a href="#asn-receiving-integration" style="color:hsl(62,72%,66%);">ASN
-                        Receiving Integration</a></li>
                 <li style="color:white;"><a href="#oci-paas-optimization" style="color:hsl(62,72%,66%);">OCI PaaS
                         Optimization</a></li>
                 <li style="color:white;"><a href="#open-webui-llm-deployment" style="color:hsl(62,72%,66%);">OpenWebUI
@@ -445,13 +445,6 @@
                 the EMR platform to ensure end-to-end surgical case and procurement workflows.</li>
         </ul>
 
-        <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
-    <ul>
-        <li style="color:white;">Use <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-meta-models.htm">Meta Llama 3 70B</a> to analyze surgeon preference cards against actual EMR usage data, identifying consistently unused items and recommending quantity reductions to reduce clinical procurement costs.</li>
-        <li style="color:white;">When a surgical item is backordered in Oracle ERP, use <a href="https://docs.oracle.com/en/database/oracle/oracle-database/26/nfcoa/vector-data-type.html">Oracle AI Vector Search</a> to identify clinically equivalent substitutes and push approved alternates back to the EMR without delaying procedures.</li>
-        <li style="color:white;">A <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Cohere Command R+</a> agent scans each outgoing PO against the EMR contract price file and holds any PO where the ERP price exceeds the contracted rate, surfacing the specific clause for procurement enforcement.</li>
-    </ul>-->
-
         <!-- ═══════════════════════════════════════ -->
         <h3 id="capital-budget-integration"><strong>Capital Budget Integration</strong></h3>
         <ul>
@@ -470,13 +463,6 @@
                 confirms ESS job completion with wait/retry logic.</li>
         </ul>
 
-        <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
-    <ul>
-        <li style="color:white;">When budget line items are rejected by Oracle ERP for insufficient funds, a <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/meta-models.htm">Meta Llama 3.1 70B</a> model analyzes the rejection and original project proposal, auto-generating a Budget Adjustment Request email for the project manager with specific reallocation guidance.</li>
-        <li style="color:white;">Before creating a new Capital Project, use <a href="https://docs.oracle.com/en/database/oracle/oracle-database/26/nfcoa/vector-data-type.html">Oracle AI Vector Search</a> to compare the incoming project description against five years of historical projects, alerting Finance of potential duplicates before double-booking capital funds.</li>
-        <li style="color:white;">A &ldquo;Budget Chat&rdquo; interface powered by <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/xai-models.htm">xAI Grok 3</a> translates executive natural-language queries into SQL against ATP staging tables, returning real-time capital project data without IT intervention.</li>
-    </ul>-->
-
         <!-- ═══════════════════════════════════════ -->
         <h3 id="invoice-order-integration"><strong>Invoice Order Attachment Integration</strong></h3>
         <ul>
@@ -490,13 +476,6 @@
                 reporting, and SFTP archiving per batch run.</li>
             <li style="color:white;">Global and local fault handling across SFTP, ATP, and REST connections.</li>
         </ul>
-
-        <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
-    <ul>
-        <li style="color:white;">Implement a document understanding pipeline using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Cohere Command R</a> to perform OCR and semantic extraction on non-standard invoice PDFs that fail initial schema parsing, automatically identifying Total Amount, Vendor Name, and Invoice Date to reduce manual exception handling.</li>
-        <li style="color:white;">Use a fine-tuned <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-meta-models.htm">Llama-4-Maverick-17B-128E-Instruct</a> model to flag invoice line items with abnormal price variance against historical ATP data before posting to Oracle ERP Financials, adding a fraud-detection layer.</li>
-        <li style="color:white;">Use OCI Generative AI Embeddings to convert invoice descriptions into vectors, enabling automatic GL code assignment (95% accuracy) for ambiguous service descriptions by matching against historical invoice vectors.</li>
-    </ul>-->
 
         <!-- ═══════════════════════════════════════ -->
         <h3 id="sftp-migration"><strong>SFTP Migration &mdash; SCM OIC Refactor</strong></h3>
@@ -551,19 +530,33 @@
         </ul>
 
         <!-- ═══════════════════════════════════════ -->
-        <!--<h3 id="asn-receiving-integration"><strong>ASN Receiving Integration</strong></h3>
-    <ul>
-        <li style="color:white;">Designed to process Advanced Shipment Notice (ASN) receiving data from an external system into Oracle Fusion ERP SCM.</li>
-        <li style="color:white;">Ensures accurate and timely goods receipt data submission to support supply chain operations.</li>
-        <li style="color:white;">Streamlined ASN data flow from external systems into Oracle ERP, enhancing supply chain visibility and operational accuracy.</li>
-    </ul>-->
-
-        <!--<h4>Planned Enhancement(s): <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm">Oracle Generative AI</a></h4>
-    <ul>
-        <li style="color:white;">Integrate <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/google-models.htm">Gemini 2.5 Flash</a> to cross-reference incoming ASN vendor locations with real-time global news feeds, tagging receipts from disruption-affected regions as &ldquo;High Risk for Delay&rdquo; in Oracle ERP for proactive inventory planning.</li>
-        <li style="color:white;">When incoming ASNs use vendor-specific part numbers that do not perfectly match Oracle Item Masters, <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/cohere-models.htm">Cohere Rerank 3.5</a> ranks the top 5 most likely internal Item IDs, auto-correcting minor naming discrepancies without human review.</li>
-        <li style="color:white;">A specialized agent using <a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/imported-alibaba-models.htm">Qwen3-14B</a> monitors the Receipt Advice interface and auto-drafts a formatted claim email to the vendor when quantity discrepancies occur, attaching the discrepancy report instantly.</li>
-    </ul>-->
+        <h3 id="oic-ai-integration"><strong>OIC AI Integration Demo &mdash; AP Invoice Intelligence Pipeline</strong>
+        </h3>
+        <ul>
+            <li style="color:white;">Proof-of-concept multi-model AI pipeline built inside OIC Gen3, connecting three
+                external AI providers via REST Adapter invokes to perform OCR extraction, semantic embedding, duplicate
+                detection, and AP analyst summarization against vendor invoice PDFs.</li>
+            <li style="color:white;"><strong>Pass 1 &mdash; Plain-Text OCR + Semantic Embedding:</strong> Each invoice
+                PDF is base64-encoded and submitted to an OCR endpoint with a deterministic prompt returning a
+                normalized plain-text string. The string is passed to an embeddings API producing a semantic vector
+                stored in ATP. Duplicate detection uses cosine similarity via <code>VECTOR_DISTANCE()</code> against
+                previously stored invoice vectors.</li>
+            <li style="color:white;"><strong>Pass 2 &mdash; Structured JSON Extraction:</strong> A second OCR call
+                enforces strict JSON-only output. A reusable OIC JavaScript action extracts nested fields using
+                dot-notation path expressions, enabling clean mapping into OIC flow variables and ATP staging columns.
+                The extracted invoice number drives a downstream ERP lookup to resolve the Oracle invoice ID for the
+                Payables Attachments REST endpoint.</li>
+            <li style="color:white;"><strong>Pass 3 &mdash; AP Analyst Summarization:</strong> The structured JSON
+                invoice payload is submitted to a chat completions endpoint via OIC REST Adapter invoke using an AP
+                audit-focused system prompt. The response is stored in ATP for AP analyst consumption in workflow
+                notifications and email reports.</li>
+            <li style="color:white;">Validated field extraction schema and provider portability &mdash; each external
+                model endpoint is independently replaceable with an OCI Generative AI endpoint by updating the
+                connection target URL and Bearer token, with no orchestration logic changes.</li>
+            <li style="color:white;">All AI calls logged centrally with model name, token consumption, call latency,
+                pipeline status, and estimated cost per invoice, supporting a daily AI cost summary email and full
+                observability.</li>
+        </ul>
 
         <!-- ═══════════════════════════════════════ -->
         <h3 id="oci-paas-optimization"><strong>OCI PaaS Optimization</strong></h3>
@@ -586,59 +579,22 @@
 
         <!-- ═══════════════════════════════════════ -->
         <h3 id="open-webui-llm-deployment"><strong>OpenWebUI Deployment &amp; Local LLM Integration</strong></h3>
-        <p>Maintaining and expanding an OpenWebUI platform for generative AI web integration, locally hosted small
-            language models (SLMs), and cloud-based LLMs via a unified LangChain architecture. Key components include:
-        </p>
+        <p>Self-hosted generative AI platform centered on <strong>OpenWebUI</strong> as a unified orchestration layer
+            for locally hosted SLMs, GGUF inference, and cloud-based LLMs. Supports coding assistance, agentic CLI
+            workflows, Bible study, text/music/image generation, OCR/document analysis, and RAG while maintaining local
+            control over chats, prompts, and files.</p>
         <ul>
-            <li style="color:white;"><strong>Tools:</strong> <a
-                    href="https://console.groq.com/docs/tool-use/built-in-tools/wolfram-alpha">Groq Compound Systems
-                    Wolfram Alpha</a> filter integration, <a
-                    href="https://products.wolframalpha.com/llm-api/documentation">Wolfram Alpha LLM API</a> tool call,
-                KJV Bible verse retrieval using <a href="https://github.com/aruljohn/Bible-kjv">Bible-kjv JSON
-                    library</a>, Verse of the Day using <a
-                    href="https://www.biblegateway.com/votd/get/?format=JSON&version=9">BibleGateway Web-Service</a>,
-                and token optimization strategies through deterministic injection pipeline bypassing the LLM entirely
-                for retrieval reducing context window consumption..</li>
-            <li style="color:white;"><strong>Models:</strong> Cloud instruct (GLM-4.5-Flash, Magistral-Small,
-                Gemini-2.5-Flash, Groq-GPT-OSS-20B) and local GGUF (LiquidAI LFM2-8B, Qwen3:8b, Llama3.1:8b,
-                DeepSeek-R1:8b, Mistral:7b) via Ollama and llama.cpp.</li>
-            <li style="color:white;"><strong>Stack:</strong> Python (FastAPI, REST), LangChain, WebSocket streaming,
-                async/await, Docker, and Python venv/uv.</li>
-            <li style="color:white;"><strong>Features:</strong> RAG pipelines (Chroma + embeddings + reranking), MCP
-                servers (mcpo / OpenAPI proxy), multi-agent workflows (A2A, ADK, ControlFlow), and Role-Pseudonymous
-                Prompting (RPP) privacy protocol.</li>
-            <li style="color:white;"><strong>LLM API Integrations:</strong> Anthropic, OpenAI, Mistral.ai, Google GenAI,
-                Groq, OpenRouter, Cohere, AWS Bedrock, HuggingFace, Ollama, and Perplexity.</li>
-            <li style="color:white;"><strong>Hardware:</strong> NVIDIA RTX 5070 Ti (12GB VRAM) for GPU-accelerated GGUF
-                inference via llama.cpp (CUDA); AMD Ryzen 9 8940HX for CPU-only GGUF inference.</li>
-            <li style="color:white;"><strong>Benchmarks:</strong> Demonstrated that open-access LLMs with optimized
-                RAG/Embedding pipelines achieve A+ parity with flagship models at 94.4% cost reduction.</li>
+            <li style="color:white;"><strong>Tools:</strong> Wolfram Alpha LLM API, KJV Bible verse retrieval, Verse of
+                the Day via BibleGateway, web search, OCR, embedding, reranking, and RAG pipelines. Deterministic
+                injection for token optimization bypasses the LLM for retrieval tasks.</li>
+            <li style="color:white;"><strong>Features:</strong> RAG pipelines, MCP servers, multi-agent workflows, and
+                Role-Pseudonymous Prompting (RPP) privacy protocol. Paired with <strong>Continue</strong> for
+                IDE-centered coding and agentic development workflows.</li>
+            <li style="color:white;"><strong>Benchmarks:</strong> Open-access LLMs with optimized RAG/Embedding
+                pipelines achieve A+ parity with flagship models at 94.4% cost reduction. Replaces a
+                ~$48&ndash;$77/month paid tool stack at $0 recurring cost.</li>
         </ul>
 
-        <hr>
-        <p>Visit my other pages:</p>
-
-        <div class="button-container">
-            <!-- GitHub Page -->
-            <a href="https://github.com/cmathgit" class="button-link">GitHub Page</a>
-            <!-- Link to the Personal Curriculum Vitae page -->
-            <a href="cruzgmacias-cv/" class="button-link">Personal CV</a>
-            <!-- Link to the Music Portfolio page -->
-            <a href="crossofthemessiah/" class="button-link">Music Portfolio</a>
-            <!-- Link to the Suno Style of Music Prompt Generator page -->
-            <a href="https://cmathgit.github.io/ai-apps/musicpromptgenerator/" class="button-link">Suno Style of Music
-                Prompt Generator</a>
-            <!-- Link to the KJV Lookup page -->
-            <a href="https://cmathgit.github.io/ai-apps/kjvlookup/" class="button-link">KJV Lookup and Lyrics
-                Generator</a>
-        </div>
-        <hr>
-        <h3>Visit my LLM Profiles for more tools and prompts:<br><a href="https://openwebui.com/u/cmathopen"><b><i
-                        class="fa fa-robot fa-fw w3-margin-right w3-text-teal"></i></b>@cmathopen</a><br><a
-                href="https://ollama.com/cmathllm"><b><i
-                        class="fa fa-horse fa-fw w3-margin-right w3-text-teal"></i></b>@cmathllm</a><br><a
-                href="https://huggingface.co/cmathhug"><b><i
-                        class="fa fa-face-smile fa-fw w3-margin-right w3-text-teal"></i></b>@cmathhug</a></h3>
         <hr>
         <p>Some MCP Servers:</p>
         <div class="button-container">
@@ -646,33 +602,6 @@
                 rel="noopener noreferrer">Bible KJV</a><br>
             <a href="https://github.com/cmathgit/biblegateway-votd-mcp" class="button-link" target="_blank"
                 rel="noopener noreferrer">Biblegateway KJV Verse of the Day</a><br>
-        </div>
-        <hr>
-        <p>Some OpenWebUI RAG Tools:</p>
-        <div class="button-container">
-            <a href="https://openwebui.com/posts/bible_kjv_retrieval_8e3161e6" class="button-link" target="_blank"
-                rel="noopener noreferrer">Bible KJV</a><br>
-            <a href="https://openwebui.com/posts/biblegateway_verse_of_the_day_rag_7477b813" class="button-link"
-                target="_blank" rel="noopener noreferrer">Biblegateway KJV Verse of the Day</a><br>
-        </div>
-        <hr>
-        <p>My favorite Agent Instructions:</p>
-        <div class="button-container">
-            <!--<a href="https://openwebui.com/p/cmathopen/role-pseudonymous-prompting-protocol" class="button-link" target="_blank" rel="noopener noreferrer">Role-Pseudonymous Prompting Protocol</a>-->
-            <a href="https://openwebui.com/posts/rogue_ai_2027_baptist_2ac5bb57" class="button-link" target="_blank"
-                rel="noopener noreferrer">Rogue AI 2027 - Baptist Preacher</a>
-            <a href="https://openwebui.com/posts/rogue_ai_2027_worship_music_composer_933e4974" class="button-link"
-                target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Worship Music Composer</a>
-            <a href="https://openwebui.com/posts/oic_gen3_rogue_dev_0b3d73c8" class="button-link" target="_blank"
-                rel="noopener noreferrer">Rogue AI 2027 - Oracle Integration Cloud Developer</a>
-            <!--<a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-full-stack-engineer" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Full Stack Engineer</a>
-        <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-computer-science-tutor" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Computer Science Tutor</a>
-        <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-mathematics-tutor" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Mathematics Tutor</a>
-        <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-anthropologist-organic-chemistry" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Anthropologist &amp; Organic Chemistry</a>
-        <a href="https://openwebui.com/p/cmathopen/rogue-ai-2027-philosopher-historian" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AI 2027 - Philosopher &amp; Historian</a>
-        <a href="https://openwebui.com/p/cmathopen/rogue-agi-agent-4-2027-misaligned-mode" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AGI Agent 4 2027 - Misaligned Mode</a>
-        <a href="https://openwebui.com/p/cmathopen/rogue-agi-agent-4-ai-2027-aligned-emulation-mode" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AGI Agent 4 2027 - Aligned Emulation Mode</a>
-        <a href="https://openwebui.com/p/cmathopen/rogue-agi-agent-4-2027-christian-aligned" class="button-link" target="_blank" rel="noopener noreferrer">Rogue AGI Agent 4 2027 - Christian Aligned</a>-->
         </div>
         <hr>
         <!-- Fun Image Gallery -->
