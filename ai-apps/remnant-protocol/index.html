@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0f14">
+    <title>REMNANT: PROTOCOL 66</title>
+    <link rel="stylesheet" href="./css/style.css">
+
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+
+<body>
+    <canvas id="game" aria-label="REMNANT game viewport"></canvas>
+
+    <main id="hud">
+        <div class="vitals">
+            <div class="eyebrow">EPHESIAN REMNANT</div>
+            <label>HEALTH <span id="hpText"></span></label>
+            <div class="bar">
+                <div id="hp" class="health"></div>
+            </div>
+
+            <label>STAMINA <span id="staminaText"></span></label>
+            <div class="bar">
+                <div id="stamina" class="stamina"></div>
+            </div>
+
+            <p id="resources"></p>
+        </div>
+
+        <div id="reticle" hidden>◇</div>
+        <div id="toast" role="status" aria-live="polite"></div>
+        <div id="hint"></div>
+
+        <div class="bottom">
+            <span id="load"></span>
+            <span id="state"></span>
+        </div>
+
+        <div id="bossHud" hidden>
+            <div id="bossName"></div>
+            <div class="bar boss-bar">
+                <div id="bossHP" class="health"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            WASD Move · Mouse Look · Shift Sprint · Space Roll · Tab Lock<br>
+            LMB Attack / Hold Heavy · RMB Guard · Q Parry · R Flask<br>
+            F Deliver · E Altar / Recover Grace · I Equipment at altar · Esc Pause
+        </div>
+    </main>
+
+    <section id="menu">
+        <div id="panel" class="panel"></div>
+    </section>
+
+    <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>
