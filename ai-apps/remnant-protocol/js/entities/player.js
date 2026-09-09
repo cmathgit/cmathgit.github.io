@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { AnimationController } from '../engine/animation-controller.js';
 
 // Shared procedural rig. Faces local +Z.
 export function makeRig(color = 0x8393a5, glow = 0xffd700, scale = 1) {
@@ -75,6 +76,7 @@ export class Player {
         this.position = this.body.position;
         this.rig = makeRig();
         scene.add(this.rig.root);
+        this.animations = new AnimationController(scene, this.rig);
 
         this.facing = new THREE.Vector3(0, 0, -1);
         this.rollDirection = this.facing.clone();
@@ -302,6 +304,14 @@ export class Player {
     }
 
     animate(dt, game) {
+        const animationState = this.animationState(game);
+        const animationSpeed = this.animationSpeed();
+        this.animations.root.position.copy(this.position);
+        this.animations.root.rotation.y = Math.atan2(this.facing.x, this.facing.z);
+        this.animations.update(dt, animationState, animationSpeed);
+
+        if (this.animations.ready) return;
+
         const rig = this.rig;
         rig.root.position.copy(this.position);
         rig.root.rotation.y = Math.atan2(this.facing.x, this.facing.z);
@@ -354,5 +364,21 @@ export class Player {
         }
 
         rig.light.emissiveIntensity = this.invulnerable ? 5 : 1.8;
+    }
+
+    animationState(game) {
+        if (this.state === 'guardBreak') return 'stagger';
+        if (this.state === 'idle' && this.moving && this.actionable) return 'run';
+        if (game.input.attackHeld && this.actionable) return 'heavy';
+        return this.state;
+    }
+
+    animationSpeed() {
+        if (this.state === 'roll' && this.rollTier) return 1.15;
+        if (this.state === 'heavy') return 0.85 + this.charge * 0.3;
+        if (this.state === 'light') return this.combo ? 1.08 : 1;
+        if (this.state === 'block') return 0.85;
+        if (this.state === 'heal') return 0.8;
+        return 1;
     }
 }

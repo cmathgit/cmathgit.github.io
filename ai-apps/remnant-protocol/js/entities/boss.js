@@ -98,6 +98,7 @@ export class Boss extends Enemy {
 
         if (!this.engaged && game.player.position.z < -18) {
             this.engaged = true;
+            game.sound.setMusicMode('bossPhase1');
             game.toast('PRINCE RAHU-KETU — HERALD OF THE ECLIPSE');
         }
 
@@ -107,6 +108,7 @@ export class Boss extends Enemy {
             this.frame = 0;
             this.cancelExtras();
             game.world.eclipse(true);
+            game.sound.setMusicMode('bossPhase2');
             game.sound.playBossPhase2();
             game.toast('THE FALSE ECLIPSE');
         }

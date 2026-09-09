@@ -168,6 +168,7 @@ function showTitle() {
     $('start').onclick = () => {
         game.difficulty = Number($('difficulty').value);
         started = true;
+        sound.setMusicMode('main');
         resume();
     };
 }
@@ -195,6 +196,7 @@ function respawn() {
     }
 
     world.eclipse(false);
+    sound.setMusicMode('main');
 }
 
 function rest() {
@@ -207,6 +209,7 @@ function rest() {
     }
 
     world.eclipse(false);
+    sound.setMusicMode('main');
     sound.playPrayer();
     showAltar();
 }

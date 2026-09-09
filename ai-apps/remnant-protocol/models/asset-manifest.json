@@ -1,0 +1,18 @@
+{
+  "player": {
+    "url": "./models/ephesian-remnant.glb",
+    "fallback": "procedural",
+    "expectedClips": [
+      "idle",
+      "run",
+      "roll",
+      "light",
+      "heavy",
+      "block",
+      "parry",
+      "heal",
+      "stagger",
+      "dead"
+    ]
+  }
+}

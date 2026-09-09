@@ -2,6 +2,24 @@ export class Sound {
     constructor() {
         this.context = null;
         this.master = null;
+        this.music = new Audio();
+        this.music.preload = 'auto';
+        this.music.volume = 0.28;
+        this.musicMode = null;
+        this.musicIndex = 0;
+        this.musicUnlocked = false;
+
+        this.playlists = {
+            main: ['./audio/pa-bgm-2.mp3'],
+            bossPhase1: [
+                './audio/be-phase1-1.mp3'
+            ],
+            bossPhase2: [
+                './audio/be-phase2-2.mp3'
+            ]
+        };
+
+        this.music.addEventListener('ended', () => this.playNextMusicTrack());
     }
 
     async unlock() {
@@ -17,9 +35,46 @@ export class Sound {
             }
 
             await this.context.resume();
+            this.musicUnlocked = true;
+            await this.playMusic();
         } catch {
             // Audio availability should never stop gameplay.
         }
+    }
+
+    setMusicMode(mode) {
+        if (!this.playlists[mode] || this.musicMode === mode) return;
+
+        this.musicMode = mode;
+        this.musicIndex = 0;
+        this.loadMusicTrack();
+    }
+
+    loadMusicTrack() {
+        const playlist = this.playlists[this.musicMode];
+        if (!playlist) return;
+
+        this.music.src = playlist[this.musicIndex];
+        this.music.load();
+        this.playMusic();
+    }
+
+    async playMusic() {
+        if (!this.musicUnlocked || !this.musicMode) return;
+
+        try {
+            await this.music.play();
+        } catch {
+            // A later player interaction retries if autoplay is unavailable.
+        }
+    }
+
+    playNextMusicTrack() {
+        const playlist = this.playlists[this.musicMode];
+        if (!playlist) return;
+
+        this.musicIndex = (this.musicIndex + 1) % playlist.length;
+        this.loadMusicTrack();
     }
 
     tone(startHz, endHz, duration, type = 'sine', volume = 0.5) {
