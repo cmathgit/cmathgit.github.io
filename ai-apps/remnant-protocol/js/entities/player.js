@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import {
     AnimationController,
-    makeRig
+    makeRig,
+    applyPlayerEquipmentVisuals
 } from '../engine/animation-controller.js';
 
 // Preserve the original import location used by other game files.
@@ -16,6 +17,7 @@ export class Player {
         this.position = this.body.position;
 
         this.rig = makeRig(0x8393a5, 0xffd700, 1, 'player');
+        this.updateEquipmentVisuals();
         scene.add(this.rig.root);
         this.animations = new AnimationController(scene, this.rig);
 
@@ -35,6 +37,10 @@ export class Player {
         this.lastAttackTick = -100;
         this.hit = new Set();
         this.moving = false;
+    }
+
+    updateEquipmentVisuals() {
+        applyPlayerEquipmentVisuals(this.rig, this.inventory);
     }
 
     get alive() {

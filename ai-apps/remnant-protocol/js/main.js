@@ -309,6 +309,7 @@ function showEquipment() {
 
         select.onchange = () => {
             inventory.equip(select.dataset.slot, select.value);
+            player.updateEquipmentVisuals();
             showEquipment();
         };
     });

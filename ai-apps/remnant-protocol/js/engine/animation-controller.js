@@ -348,6 +348,279 @@ function makeAppendages(parent, m) {
     return appendages;
 }
 
+function buildPlayerEquipmentLayers(rig) {
+    const layers = {
+        head: { helmet: [] },
+        torso: { breastplate: [], iron: [], siege: [] },
+        waist: { belt: [] },
+        legs: { greaves: [] }
+    };
+
+    // Move only decorative meshes. Animated joints remain in place.
+    function collect(parent, destination, predicate = () => true) {
+        const group = joint(parent, 'equipment-layer');
+        for (const child of [...parent.children]) {
+            if (child.isMesh && predicate(child)) group.add(child);
+        }
+        destination.push(group);
+        return group;
+    }
+
+    collect(rig.head, layers.head.helmet);
+
+    // The existing belt consists of two meshes at local Y = -0.23.
+    collect(
+        rig.torso,
+        layers.waist.belt,
+        mesh => Math.abs(mesh.position.y + 0.23) < 0.001
+    );
+    collect(rig.hips, layers.waist.belt);
+    collect(rig.torso, layers.torso.breastplate);
+
+    for (const side of ['left', 'right']) {
+        const shoulder = rig[`${side}Shoulder`];
+        collect(shoulder, layers.torso.breastplate);
+
+        const pauldron = shoulder.getObjectByName('pauldron');
+        if (pauldron) collect(pauldron, layers.torso.breastplate);
+
+        collect(rig[`${side}Elbow`], layers.torso.breastplate);
+        collect(rig[`${side}Hand`], layers.torso.breastplate);
+
+        collect(rig[`${side}Hip`], layers.legs.greaves);
+        collect(rig[`${side}Knee`], layers.legs.greaves);
+        collect(rig[`${side}Foot`], layers.legs.greaves);
+    }
+
+    const iron = {
+        armor: metal(0x343639, 0.76),
+        trim: metal(0x65534a, 0.7),
+        light: energy(0xff4926, 1.8)
+    };
+    const siege = {
+        armor: metal(0x222b36, 0.57),
+        trim: metal(0x81715b, 0.6),
+        light: energy(0xe5a747, 1.5)
+    };
+
+    function variant(id, palette, width, depth) {
+        for (const original of layers.torso.breastplate) {
+            const copy = original.clone(true);
+            copy.name = `${id}-layer`;
+            copy.scale.set(width, 1, depth);
+
+            copy.traverse(mesh => {
+                if (!mesh.isMesh) return;
+                if (mesh.material === rig.materials.armor) {
+                    mesh.material = palette.armor;
+                } else if (mesh.material === rig.materials.trim) {
+                    mesh.material = palette.trim;
+                } else if (
+                    mesh.material === rig.materials.light ||
+                    mesh.material === rig.materials.aura
+                ) {
+                    mesh.material = palette.light;
+                }
+            });
+
+            original.parent.add(copy);
+            layers.torso[id].push(copy);
+        }
+
+        const chest = joint(rig.torso, `${id}-reinforcement`);
+        layers.torso[id].push(chest);
+
+        for (const sign of [-1, 1]) {
+            for (let i = 0; i < 3; i++) {
+                const slab = plate(
+                    chest, palette.armor,
+                    sign * 0.18, 0.29 - i * 0.13, 0.29,
+                    id === 'siege' ? 0.38 : 0.3,
+                    0.115, id === 'siege' ? 0.16 : 0.1,
+                    true
+                );
+                slab.rotation.z = sign * 0.07;
+                plate(
+                    chest, palette.light,
+                    sign * 0.18, 0.245 - i * 0.13, 0.38,
+                    0.23, 0.012, 0.018
+                );
+            }
+
+            const shoulder = joint(
+                sign < 0 ? rig.leftShoulder : rig.rightShoulder,
+                `${id}-shoulder`
+            );
+            layers.torso[id].push(shoulder);
+
+            for (let i = 0; i < (id === 'siege' ? 3 : 2); i++) {
+                plate(
+                    shoulder, palette.armor,
+                    sign * (0.035 + i * 0.035), 0.12 - i * 0.095, 0,
+                    id === 'siege' ? 0.43 : 0.32,
+                    0.11, id === 'siege' ? 0.48 : 0.35,
+                    true
+                );
+            }
+
+            if (id === 'siege') {
+                plate(
+                    chest, palette.trim,
+                    sign * 0.31, 0.39, 0,
+                    0.12, 0.22, 0.39
+                );
+            }
+        }
+    }
+
+    variant('iron', iron, 1.09, 1.12);
+    variant('siege', siege, 1.22, 1.23);
+
+    const flesh = new THREE.MeshStandardMaterial({
+        color: 0x777e79, roughness: 0.83, metalness: 0.05
+    });
+    const sinew = new THREE.MeshStandardMaterial({
+        color: 0x242f32, roughness: 0.55, metalness: 0.12
+    });
+    const bone = new THREE.MeshStandardMaterial({
+        color: 0xc5c8b8, roughness: 0.57, metalness: 0.08
+    });
+    const shell = new THREE.MeshPhysicalMaterial({
+        color: 0xdce1ce,
+        roughness: 0.3,
+        metalness: 0.05,
+        transparent: true,
+        opacity: 0.82,
+        depthWrite: false,
+        clearcoat: 0.7
+    });
+    const corruption = energy(0x80d6cc, 1.2);
+    const husk = { head: [], torso: [], waist: [], legs: [] };
+
+    function bodyGroup(parent, slot) {
+        const group = joint(parent, `husk-${slot}`);
+        husk[slot].push(group);
+        return group;
+    }
+
+    function tendon(parent, x, y, z, length, radius = 0.022) {
+        return orb(parent, sinew, x, y, z, radius, length / 2, radius);
+    }
+
+    const skull = bodyGroup(rig.head, 'head');
+    orb(skull, flesh, 0, 0, -0.025, 0.155, 0.225, 0.145);
+    orb(skull, shell, 0, 0.075, -0.025, 0.174, 0.19, 0.153);
+    orb(skull, bone, 0, -0.055, 0.1, 0.12, 0.15, 0.06);
+    plate(skull, sinew, 0, -0.015, 0.162, 0.018, 0.19, 0.012);
+    plate(skull, corruption, 0, 0.035, 0.17, 0.007, 0.085, 0.008);
+
+    for (const sign of [-1, 1]) {
+        tendon(skull, sign * 0.085, -0.12, 0.08, 0.19);
+    }
+
+    const chest = bodyGroup(rig.torso, 'torso');
+    orb(chest, flesh, 0, 0.08, 0, 0.235, 0.29, 0.155);
+    tendon(chest, 0, 0.09, -0.155, 0.53, 0.035);
+    orb(chest, corruption, 0, 0.2, 0.145, 0.045, 0.09, 0.025);
+
+    for (const sign of [-1, 1]) {
+        for (let i = 0; i < 5; i++) {
+            const rib = orb(
+                chest, bone,
+                sign * (0.115 - i * 0.009), 0.3 - i * 0.075, 0.12,
+                0.145 - i * 0.012, 0.022, 0.065
+            );
+            rib.rotation.z = sign * (0.18 + i * 0.035);
+        }
+        orb(chest, shell, sign * 0.19, 0.31, -0.015, 0.085, 0.12, 0.16);
+        tendon(chest, sign * 0.075, -0.13, 0.13, 0.22);
+    }
+
+    const pelvis = bodyGroup(rig.hips, 'waist');
+    orb(pelvis, sinew, 0, -0.06, 0, 0.2, 0.16, 0.13);
+    orb(pelvis, bone, 0, -0.08, 0.11, 0.105, 0.12, 0.045);
+
+    for (const sign of [-1, 1]) {
+        orb(pelvis, shell, sign * 0.16, -0.035, 0, 0.065, 0.12, 0.13);
+        const scrap = plate(
+            pelvis, rig.materials.cloth,
+            sign * 0.12, -0.22, 0.135,
+            0.09, 0.24, 0.022
+        );
+        scrap.rotation.z = sign * 0.17;
+    }
+
+    for (const side of ['left', 'right']) {
+        const upper = bodyGroup(rig[`${side}Shoulder`], 'torso');
+        orb(upper, flesh, 0, -0.1, 0, 0.085, 0.19, 0.09);
+        orb(upper, shell, 0, 0.02, -0.015, 0.11, 0.1, 0.105);
+        tendon(upper, 0, -0.15, 0.08, 0.26);
+
+        const forearm = bodyGroup(rig[`${side}Elbow`], 'torso');
+        orb(forearm, bone, 0, 0, 0, 0.073);
+        orb(forearm, flesh, 0, -0.13, 0, 0.07, 0.14, 0.075);
+        tendon(forearm, 0.04, -0.12, 0.055, 0.25);
+
+        const hand = bodyGroup(rig[`${side}Hand`], 'torso');
+        orb(hand, flesh, 0, -0.03, 0, 0.064, 0.075, 0.06);
+        for (const x of [-0.04, 0, 0.04]) {
+            orb(hand, bone, x, -0.085, 0.035, 0.015, 0.055, 0.019);
+        }
+
+        const thigh = bodyGroup(rig[`${side}Hip`], 'legs');
+        orb(thigh, flesh, 0, -0.17, 0, 0.085, 0.2, 0.095);
+        orb(thigh, shell, 0, -0.12, -0.045, 0.09, 0.14, 0.065);
+        tendon(thigh, 0, -0.19, 0.085, 0.32);
+
+        const shin = bodyGroup(rig[`${side}Knee`], 'legs');
+        orb(shin, bone, 0, 0, 0.025, 0.075, 0.08, 0.085);
+        orb(shin, flesh, 0, -0.19, 0, 0.065, 0.18, 0.07);
+        tendon(shin, -0.035, -0.18, 0.055, 0.33);
+        tendon(shin, 0.035, -0.18, 0.055, 0.33);
+
+        const foot = bodyGroup(rig[`${side}Foot`], 'legs');
+        orb(foot, flesh, 0, -0.045, 0.06, 0.085, 0.075, 0.16);
+        for (const x of [-0.06, 0, 0.06]) {
+            orb(foot, bone, x, -0.07, 0.19, 0.025, 0.035, 0.095);
+        }
+    }
+
+    rig.equipmentVisuals = {
+        layers,
+        husk,
+        corruption,
+        damageMaterials: [iron.armor, siege.armor, bone],
+        current: Object.create(null)
+    };
+}
+
+export function applyPlayerEquipmentVisuals(rig, inventory) {
+    const visuals = rig.equipmentVisuals;
+    if (!visuals || !inventory?.equipped) return;
+
+    const equipped = inventory.equipped;
+
+    for (const slot of ['head', 'torso', 'waist', 'legs']) {
+        const id = equipped[slot] || null;
+        if (visuals.current[slot] === id) continue;
+
+        visuals.current[slot] = id;
+        for (const [item, groups] of Object.entries(visuals.layers[slot])) {
+            for (const group of groups) group.visible = item === id;
+        }
+
+        const armored = Boolean(id && visuals.layers[slot][id]);
+        for (const group of visuals.husk[slot]) {
+            group.visible = !armored;
+        }
+    }
+
+    rig.cape.visible = Boolean(equipped.torso);
+    rig.shield.visible = equipped.offhand === 'shield';
+    rig.weapon.visible = equipped.weapon === 'sword';
+    if (!rig.weapon.visible) rig.trail.visible = false;
+}
+
 // Compatible with the original makeRig(color, glow, scale) signature.
 // The optional fourth argument selects a deliberate character variant.
 export function makeRig(
@@ -515,6 +788,10 @@ export function makeRig(
 
     for (const [index, item] of appendages.entries()) {
         item.base.visible = index < 2;
+    }
+
+    if (kind === 'player') {
+        buildPlayerEquipmentLayers(rig);
     }
 
     return rig;
@@ -863,6 +1140,18 @@ export function animateRig(rig, actor, game, speed = 0) {
 
     setEnergy(m.light, color, brightness);
     rig.trail.material.color.setHex(color);
+
+    if (rig.equipmentVisuals) {
+        const visuals = rig.equipmentVisuals;
+
+        for (const material of visuals.damageMaterials) {
+            material.emissive.setHex(0xff445e);
+            material.emissiveIntensity = damageFlash * 0.7;
+        }
+
+        visuals.corruption.emissiveIntensity = brightness * 0.65;
+        if (!rig.weapon.visible) rig.trail.visible = false;
+    }
 }
 
 // Retains the existing constructor/root/ready/update interface.
