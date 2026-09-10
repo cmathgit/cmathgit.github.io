@@ -1,3 +1,5 @@
+const HERALD_TRADER_THEME = './audio/herald-bgm-1.mp3';
+
 export class Sound {
     constructor() {
         this.context = null;
@@ -18,6 +20,8 @@ export class Sound {
                 './audio/be-phase2-2.mp3'
             ]
         };
+
+        this.playlists.heraldTrader = [HERALD_TRADER_THEME];
 
         this.music.addEventListener('ended', () => this.playNextMusicTrack());
     }
@@ -48,6 +52,15 @@ export class Sound {
         this.musicMode = mode;
         this.musicIndex = 0;
         this.loadMusicTrack();
+    }
+
+    playHeraldTraderTheme() {
+        if (this.musicMode === 'heraldTrader') {
+            if (this.music.paused) this.playMusic();
+            return;
+        }
+
+        this.setMusicMode('heraldTrader');
     }
 
     loadMusicTrack() {

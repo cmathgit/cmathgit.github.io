@@ -94,6 +94,7 @@ const game = {
     awardHeraldSoul() {
         inventory.awardHeraldSoul();
         heraldTrader.reveal();
+        sound.playHeraldTraderTheme();
     },
 
     onDeath() {
@@ -455,7 +456,11 @@ function respawn() {
     }
 
     world.eclipse(false);
-    sound.setMusicMode('main');
+    if (game.victory && heraldTrader.root.visible) {
+        sound.playHeraldTraderTheme();
+    } else {
+        sound.setMusicMode('main');
+    }
 }
 
 function rest() {
@@ -468,7 +473,11 @@ function rest() {
     }
 
     world.eclipse(false);
-    sound.setMusicMode('main');
+    if (game.victory && heraldTrader.root.visible) {
+        sound.playHeraldTraderTheme();
+    } else {
+        sound.setMusicMode('main');
+    }
     sound.playPrayer();
     showAltar();
 }
