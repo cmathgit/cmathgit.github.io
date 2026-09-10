@@ -1,5 +1,9 @@
 import * as THREE from 'three';
 import { makeRig } from './player.js';
+import {
+    animateRig,
+    resetRig
+} from '../engine/animation-controller.js';
 
 export class Enemy {
     constructor(scene, physics, position, kind = 'initiate') {
@@ -15,10 +19,12 @@ export class Enemy {
         );
 
         this.position = this.body.position;
+
         this.rig = makeRig(
             kind === 'enforcer' ? 0x344456 : 0x382a40,
             0xff2a5f,
-            this.boss ? 1.65 : 1
+            this.boss ? 1.65 : 1,
+            kind
         );
 
         this.rig.shield.visible = kind === 'enforcer';
@@ -53,7 +59,25 @@ export class Enemy {
         this.frame = 0;
         this.cooldown = 0.6;
         this.removed = false;
+
+        resetRig(this.rig);
         this.rig.root.visible = true;
+        this.rig.previousHP = this.hp;
+        this.rig.damagedAt = -Infinity;
+        this.rig.previousState = '';
+
+        // boss.js resets phase immediately after super.reset().
+        // Restore the visual phase-one presentation as well.
+        this.rig.materials.aura.color.setHex(
+            this.boss ? 0xc9984e : this.rig.glow
+        );
+        this.rig.materials.aura.emissive.copy(
+            this.rig.materials.aura.color
+        );
+
+        for (let i = 0; i < this.rig.appendages.length; i++) {
+            this.rig.appendages[i].base.visible = i < 2;
+        }
     }
 
     stanceBreak(game) {
@@ -92,6 +116,7 @@ export class Enemy {
 
     update(dt, game) {
         if (!this.alive) {
+            // Preserve the existing immediate enemy-removal behavior.
             this.rig.root.visible = false;
             return;
         }
@@ -101,6 +126,7 @@ export class Enemy {
 
         const offset = game.player.position.clone().sub(this.position);
         offset.y = 0;
+
         const distance = offset.length();
         const velocity = new THREE.Vector3();
 
@@ -113,7 +139,7 @@ export class Enemy {
         } else if (this.state === 'attack') {
             const first = this.moves[0];
 
-            // Tracking stops before impact so attacks can be sidestepped.
+            // Original tracking cutoff: attacks can still be sidestepped.
             if (this.frame < first.at - 12 && distance > 0.01) {
                 this.facing.lerp(offset.normalize(), 0.12).normalize();
             }
@@ -127,6 +153,7 @@ export class Enemy {
                 if (this.frame >= move.at &&
                     this.frame < move.at + move.active) {
                     game.combat.enemySwing(this, move);
+
                     if (this.state !== 'attack') break;
                 }
             }
@@ -145,7 +172,9 @@ export class Enemy {
                 this.facing.copy(offset.normalize());
 
                 if (distance > (this.boss ? 4 : 2.2)) {
-                    velocity.copy(this.facing).multiplyScalar(this.boss ? 2.7 : 2);
+                    velocity.copy(this.facing).multiplyScalar(
+                        this.boss ? 2.7 : 2
+                    );
                 } else if (this.cooldown <= 0) {
                     this.chooseAttack(game);
                 }
@@ -156,44 +185,8 @@ export class Enemy {
         this.animate(game, velocity.length());
     }
 
+    // Boss.update() also calls this during transition and laser states.
     animate(game, speed) {
-        const rig = this.rig;
-
-        rig.root.position.copy(this.position);
-        rig.root.rotation.y = Math.atan2(this.facing.x, this.facing.z);
-        rig.pivot.rotation.set(0, 0, 0);
-        rig.pivot.position.y = 0.95;
-        rig.rightArm.rotation.set(0, 0, 0);
-        rig.leftLeg.rotation.x = Math.sin(game.time * 8) * speed * 0.2;
-        rig.rightLeg.rotation.x = -rig.leftLeg.rotation.x;
-
-        let color = 0xff2a5f;
-
-        if (this.broken) {
-            rig.pivot.position.y = 0.55;
-            rig.pivot.rotation.x = 0.5;
-            color = 0xffd700;
-        }
-
-        if (this.state === 'attack') {
-            const upcoming = this.moves.find(
-                move => this.frame < move.at + move.active
-            );
-
-            if (upcoming) {
-                const windup = this.frame < upcoming.at;
-                color = upcoming.unblockable ? 0xff174d : 0xffd700;
-                rig.rightArm.rotation.x = windup ? -2.1 : -0.5;
-                rig.rightArm.rotation.y = windup ? -0.8 : 1.2;
-
-                if (upcoming.unblockable && windup) {
-                    rig.pivot.position.y = 0.75;
-                }
-            }
-        }
-
-        rig.light.color.setHex(color);
-        rig.light.emissive.setHex(color);
-        rig.light.emissiveIntensity = this.state === 'attack' ? 3.5 : 1.5;
+        animateRig(this.rig, this, game, speed);
     }
 }
