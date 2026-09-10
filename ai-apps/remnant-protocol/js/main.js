@@ -7,7 +7,7 @@ import { FollowCamera } from './engine/camera.js';
 import { Sound } from './engine/audio.js';
 
 import { Player } from './entities/player.js';
-import { Enemy } from './entities/enemy.js';
+import { Enemy, rollEnemyArmorDrop } from './entities/enemy.js';
 import { Boss } from './entities/boss.js';
 
 import { Inventory, ITEMS } from './systems/inventory.js';
@@ -78,6 +78,15 @@ const game = {
         $('toast').textContent = message;
         $('toast').style.opacity = '1';
         toastRemaining = duration;
+    },
+
+    awardEnemyArmor(enemy) {
+        const id = rollEnemyArmorDrop(enemy, inventory);
+        if (!id || !inventory.acquire(id)) return;
+
+        game.toast(`ARMOR ACQUIRED — ${ITEMS[id].name}`, 3.5);
+
+        if (mode === 'equipment') showEquipment();
     },
 
     onDeath() {
@@ -283,7 +292,9 @@ function showEquipment() {
         <select data-slot="${slot}">
           ${slot !== 'weapon' ? '<option value="">Unequipped</option>' : ''}
           ${Object.entries(ITEMS)
-            .filter(([, item]) => item.slot === slot)
+            .filter(([id, item]) =>
+                item.slot === slot && inventory.owns(id)
+            )
             .map(([id, item]) => `
               <option value="${id}"
                 ${inventory.equipped[slot] === id ? 'selected' : ''}>
@@ -295,7 +306,8 @@ function showEquipment() {
     `).join('')}
 
     <p class="small">
-      All listed equipment is available for prototype testing.
+      Only acquired equipment is listed. Defeat cathedral soldiers
+      for a chance to acquire their armor.
       Under 30% is light; 30–69.99% medium; 70–100% heavy.
       Above 100%, rolling is disabled.
     </p>

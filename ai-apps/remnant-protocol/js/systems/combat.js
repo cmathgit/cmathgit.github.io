@@ -203,6 +203,10 @@ export class Combat {
         }
 
         this.burst(enemy.position, converted ? 0xfff8e7 : 0xffd700, 2);
+
+        if (!enemy.boss && !converted) {
+            game.awardEnemyArmor(enemy);
+        }
     }
 
     burst(position, color, scale = 1) {

@@ -1,4 +1,60 @@
 export const ITEMS = {
+    initiate_mask: {
+        name: 'Initiate Mask',
+        slot: 'head',
+        weight: 2,
+        armor: 0.015,
+        poise: 3
+    },
+    initiate_vestments: {
+        name: 'Initiate Vestments',
+        slot: 'torso',
+        weight: 8,
+        armor: 0.07,
+        poise: 12
+    },
+    initiate_sash: {
+        name: 'Initiate Sash',
+        slot: 'waist',
+        weight: 1,
+        armor: 0.005,
+        poise: 1
+    },
+    initiate_wrappings: {
+        name: 'Initiate Wrappings',
+        slot: 'legs',
+        weight: 3.5,
+        armor: 0.03,
+        poise: 5
+    },
+    enforcer_helm: {
+        name: 'Enforcer Helm',
+        slot: 'head',
+        weight: 5,
+        armor: 0.04,
+        poise: 9
+    },
+    enforcer_cuirass: {
+        name: 'Enforcer Cuirass',
+        slot: 'torso',
+        weight: 21,
+        armor: 0.18,
+        poise: 34
+    },
+    enforcer_warbelt: {
+        name: 'Enforcer Warbelt',
+        slot: 'waist',
+        weight: 3.5,
+        armor: 0.015,
+        poise: 4
+    },
+    enforcer_greaves: {
+        name: 'Enforcer Greaves',
+        slot: 'legs',
+        weight: 9,
+        armor: 0.075,
+        poise: 16
+    },
     helmet: {
         name: 'Helmet of Salvation',
         slot: 'head',
@@ -106,6 +162,11 @@ export class Inventory {
             offhand: 'shield',
             weapon: 'sword'
         };
+
+        this.owned = new Set([
+            'helmet', 'breastplate', 'iron', 'siege',
+            'belt', 'greaves', 'shield', 'sword'
+        ]);
     }
 
     get items() {
@@ -128,9 +189,23 @@ export class Inventory {
         return Object.values(this.equipped).includes(id);
     }
 
+    owns(id) {
+        return this.owned.has(id);
+    }
+
+    acquire(id) {
+        if (!Object.prototype.hasOwnProperty.call(ITEMS, id)) return false;
+        if (this.owns(id)) return false;
+
+        this.owned.add(id);
+        return true;
+    }
+
     equip(slot, id) {
+        if (!Object.prototype.hasOwnProperty.call(this.equipped, slot)) return;
         if (slot === 'weapon' && !id) return;
-        if (id && ITEMS[id]?.slot !== slot) return;
+        if (id && (!this.owns(id) || ITEMS[id]?.slot !== slot)) return;
+
         this.equipped[slot] = id || null;
     }
 

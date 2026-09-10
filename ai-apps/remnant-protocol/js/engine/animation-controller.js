@@ -348,6 +348,144 @@ function makeAppendages(parent, m) {
     return appendages;
 }
 
+function addEnemyArmorLayers(rig) {
+    const visuals = rig.equipmentVisuals;
+    if (!visuals || visuals.layers.head.initiate_mask) return;
+
+    const sources = {
+        head: 'helmet',
+        torso: 'breastplate',
+        waist: 'belt',
+        legs: 'greaves'
+    };
+
+    const sets = [
+        {
+            ids: {
+                head: 'initiate_mask',
+                torso: 'initiate_vestments',
+                waist: 'initiate_sash',
+                legs: 'initiate_wrappings'
+            },
+            armor: 0x382a40,
+            trim: 0x76616b,
+            glow: 0xff2a5f,
+            cloth: 0x3b182b,
+            width: 0.91,
+            depth: 0.94,
+            initiate: true
+        },
+        {
+            ids: {
+                head: 'enforcer_helm',
+                torso: 'enforcer_cuirass',
+                waist: 'enforcer_warbelt',
+                legs: 'enforcer_greaves'
+            },
+            armor: 0x344456,
+            trim: 0x9a7956,
+            glow: 0xc34a48,
+            cloth: 0x251d27,
+            width: 1.13,
+            depth: 1.12,
+            initiate: false
+        }
+    ];
+
+    for (const set of sets) {
+        const palette = new Map();
+
+        for (const key of ['armor', 'dark', 'trim', 'light', 'aura', 'cloth']) {
+            const original = rig.materials[key];
+            const material = original.clone();
+
+            if (key === 'light' || key === 'aura') {
+                material.color.setHex(set.glow);
+                material.emissive.setHex(set.glow);
+                material.emissiveIntensity = set.initiate ? 1.8 : 1.35;
+            } else {
+                const color = key === 'armor' ? set.armor
+                    : key === 'trim' ? set.trim
+                    : key === 'cloth' ? set.cloth
+                    : 0x17191f;
+
+                material.color.setHex(color);
+                material.roughness = set.initiate ? 0.78 : 0.62;
+            }
+
+            palette.set(original, material);
+        }
+
+        visuals.damageMaterials.push(
+            palette.get(rig.materials.armor)
+        );
+
+        for (const [slot, source] of Object.entries(sources)) {
+            const id = set.ids[slot];
+            const destination = [];
+            visuals.layers[slot][id] = destination;
+
+            for (const original of visuals.layers[slot][source]) {
+                const copy = original.clone(true);
+                copy.name = `${id}-layer`;
+                copy.visible = false;
+                copy.scale.x *= set.width;
+                copy.scale.z *= set.depth;
+
+                copy.traverse(mesh => {
+                    if (!mesh.isMesh) return;
+
+                    const originalMaterial = mesh.material;
+                    mesh.material = palette.get(originalMaterial)
+                        || originalMaterial;
+
+                    // Leave gaps between initiate plates to expose the husk.
+                    if (set.initiate &&
+                        originalMaterial === rig.materials.armor) {
+                        mesh.scale.y *= slot === 'head' ? 0.86 : 0.72;
+                        mesh.scale.x *= 0.94;
+                    }
+                });
+
+                original.parent.add(copy);
+                destination.push(copy);
+            }
+        }
+
+        if (!set.initiate) {
+            for (const side of ['left', 'right']) {
+                const sign = side === 'left' ? -1 : 1;
+                const reinforcement = joint(
+                    rig[`${side}Shoulder`],
+                    `enforcer-${side}-reinforcement`
+                );
+
+                reinforcement.visible = false;
+                visuals.layers.torso.enforcer_cuirass.push(reinforcement);
+
+                for (let i = 0; i < 2; i++) {
+                    plate(
+                        reinforcement,
+                        palette.get(rig.materials.armor),
+                        sign * (0.025 + i * 0.035),
+                        0.1 - i * 0.095,
+                        0,
+                        0.35, 0.1, 0.39,
+                        true
+                    );
+                }
+
+                plate(
+                    reinforcement,
+                    palette.get(rig.materials.light),
+                    0, 0.105, 0.205,
+                    0.23, 0.018, 0.018
+                );
+            }
+        }
+    }
+}
+
 function buildPlayerEquipmentLayers(rig) {
     const layers = {
         head: { helmet: [] },
@@ -592,6 +730,8 @@ function buildPlayerEquipmentLayers(rig) {
         damageMaterials: [iron.armor, siege.armor, bone],
         current: Object.create(null)
     };
+
+    addEnemyArmorLayers(rig);
 }
 
 export function applyPlayerEquipmentVisuals(rig, inventory) {
@@ -611,7 +751,7 @@ export function applyPlayerEquipmentVisuals(rig, inventory) {
 
         const armored = Boolean(id && visuals.layers[slot][id]);
         for (const group of visuals.husk[slot]) {
-            group.visible = !armored;
+            group.visible = !armored || id.startsWith('initiate_');
         }
     }
 

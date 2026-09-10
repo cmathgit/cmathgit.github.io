@@ -5,6 +5,39 @@ import {
     resetRig
 } from '../engine/animation-controller.js';
 
+export const ENEMY_ARMOR_DROPS = {
+    initiate: {
+        chance: 0.35,
+        items: [
+            'initiate_mask',
+            'initiate_vestments',
+            'initiate_sash',
+            'initiate_wrappings'
+        ]
+    },
+    enforcer: {
+        chance: 0.45,
+        items: [
+            'enforcer_helm',
+            'enforcer_cuirass',
+            'enforcer_warbelt',
+            'enforcer_greaves'
+        ]
+    }
+};
+
+export function rollEnemyArmorDrop(enemy, inventory, random = Math.random) {
+    if (enemy.boss) return null;
+
+    const table = ENEMY_ARMOR_DROPS[enemy.kind];
+    if (!table) return null;
+
+    const available = table.items.filter(id => !inventory.owns(id));
+    if (!available.length || random() >= table.chance) return null;
+
+    return available[Math.floor(random() * available.length)];
+}
+
 export class Enemy {
     constructor(scene, physics, position, kind = 'initiate') {
         this.physics = physics;
