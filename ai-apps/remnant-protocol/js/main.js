@@ -35,6 +35,8 @@ const enemies = world.enemies.map(definition => new Enemy(
 const boss = new Boss(scene, physics, world.bossSpawn);
 enemies.push(boss);
 
+const heraldTrader = createHeraldTrader(scene, world.bossSpawn);
+
 let mode = 'title';
 let started = false;
 let accumulator = 0;
@@ -89,6 +91,11 @@ const game = {
         if (mode === 'equipment') showEquipment();
     },
 
+    awardHeraldSoul() {
+        inventory.awardHeraldSoul();
+        heraldTrader.reveal();
+    },
+
     onDeath() {
         if (deathTimer > 0) return;
 
@@ -110,6 +117,249 @@ const game = {
 };
 
 game.combat = new Combat(game);
+
+function createHeraldTrader(scene, bossSpawn) {
+    const root = new THREE.Group();
+    root.name = 'MALAKH OF THE LAMPSTANDS';
+
+    // Clear central arena floor, toward the entrance from the boss spawn.
+    root.position.copy(bossSpawn);
+    root.position.z += 4;
+    root.visible = false;
+
+    const figure = new THREE.Group();
+    root.add(figure);
+
+    const ivory = new THREE.MeshStandardMaterial({
+        color: 0xe5e0ce,
+        metalness: 0.55,
+        roughness: 0.4
+    });
+    const gold = new THREE.MeshStandardMaterial({
+        color: 0xcda957,
+        metalness: 0.8,
+        roughness: 0.3
+    });
+    const dark = new THREE.MeshStandardMaterial({
+        color: 0x24232c,
+        metalness: 0.5,
+        roughness: 0.6
+    });
+    const radiance = new THREE.MeshStandardMaterial({
+        color: 0xfff4cc,
+        emissive: 0xffe7a0,
+        emissiveIntensity: 2,
+        roughness: 0.35
+    });
+
+    const box = new THREE.BoxGeometry(1, 1, 1);
+    const sphere = new THREE.SphereGeometry(1, 12, 8);
+    const torus = new THREE.TorusGeometry(1, 0.035, 6, 40);
+    const robe = new THREE.CylinderGeometry(0.28, 0.7, 1.5, 10);
+
+    function mesh(parent, geometry, material, x, y, z, sx, sy, sz) {
+        const object = new THREE.Mesh(geometry, material);
+        object.position.set(x, y, z);
+        object.scale.set(sx, sy, sz);
+        parent.add(object);
+        return object;
+    }
+
+    mesh(figure, robe, ivory, 0, 0.95, 0, 1, 1, 1);
+    mesh(figure, box, gold, 0, 1.48, 0.02, 0.62, 0.12, 0.4);
+    mesh(figure, sphere, ivory, 0, 1.85, 0, 0.35, 0.46, 0.24);
+    mesh(figure, sphere, radiance, 0, 1.9, 0.24, 0.13, 0.2, 0.06);
+
+    // Sealed face and luminous brow.
+    mesh(figure, sphere, dark, 0, 2.46, 0, 0.21, 0.29, 0.18);
+    mesh(figure, box, ivory, 0, 2.44, 0.16, 0.28, 0.32, 0.07);
+    mesh(figure, box, radiance, 0, 2.48, 0.205, 0.22, 0.018, 0.015);
+
+    for (let i = 0; i < 8; i++) {
+        const angle = i * Math.PI / 4;
+        const panel = mesh(
+            figure, box, i % 2 ? ivory : gold,
+            Math.sin(angle) * 0.4, 0.95, Math.cos(angle) * 0.4,
+            0.12, 1.25, 0.07
+        );
+        panel.rotation.y = angle;
+    }
+
+    for (const side of [-1, 1]) {
+        const arm = mesh(
+            figure, box, ivory,
+            side * 0.39, 1.75, 0.08,
+            0.18, 0.6, 0.2
+        );
+        arm.rotation.z = side * 0.28;
+
+        mesh(
+            figure, sphere, gold,
+            side * 0.23, 1.54, 0.29,
+            0.12, 0.08, 0.12
+        );
+    }
+
+    const halo = new THREE.Group();
+    halo.position.set(0, 2.48, -0.12);
+    figure.add(halo);
+
+    mesh(halo, torus, gold, 0, 0, 0, 0.51, 0.51, 0.51);
+    mesh(halo, torus, radiance, 0, 0, 0, 0.57, 0.57, 0.57);
+
+    // Seven lights echo the lampstand imagery in the NPC's title.
+    for (let i = 0; i < 7; i++) {
+        const angle = i * Math.PI * 2 / 7;
+        mesh(
+            halo, sphere, radiance,
+            Math.sin(angle) * 0.57, Math.cos(angle) * 0.57, 0.025,
+            0.055, 0.055, 0.035
+        );
+    }
+
+    const wings = [];
+
+    for (const side of [-1, 1]) {
+        const wing = new THREE.Group();
+        wing.position.set(side * 0.28, 1.95, -0.22);
+        wing.rotation.z = -side * 0.18;
+        figure.add(wing);
+        wings.push({ object: wing, side });
+
+        for (let i = 0; i < 6; i++) {
+            const x = side * (0.22 + i * 0.18);
+            const y = 0.16 + i * 0.1;
+
+            const feather = mesh(
+                wing, box, i % 2 ? ivory : gold,
+                x, y, -i * 0.025,
+                0.17, 0.9 - i * 0.065, 0.065
+            );
+            feather.rotation.z = -side * (0.3 + i * 0.065);
+
+            mesh(
+                wing, sphere, gold,
+                x, y + 0.12, 0.055 - i * 0.025,
+                0.075, 0.045, 0.025
+            );
+            mesh(
+                wing, sphere, radiance,
+                x, y + 0.12, 0.078 - i * 0.025,
+                0.025, 0.027, 0.012
+            );
+        }
+    }
+
+    const groundSeal = mesh(
+        root, torus, gold,
+        0, 0.025, 0,
+        0.9, 0.9, 0.9
+    );
+    groundSeal.rotation.x = -Math.PI / 2;
+
+    scene.add(root);
+
+    return {
+        root,
+        position: root.position,
+
+        reveal() {
+            root.visible = true;
+        },
+
+        update(time) {
+            if (!root.visible) return;
+
+            figure.position.y = 0.08 + Math.sin(time * 1.2) * 0.055;
+            halo.rotation.z = time * 0.08;
+            radiance.emissiveIntensity = 2 + Math.sin(time * 1.8) * 0.25;
+
+            for (const wing of wings) {
+                wing.object.rotation.z =
+                    -wing.side * (0.18 + Math.sin(time) * 0.025);
+            }
+        }
+    };
+}
+
+function nearHeraldTrader() {
+    return heraldTrader.root.visible &&
+        player.alive &&
+        player.position.distanceTo(heraldTrader.position) < 3 &&
+        game.combat.clearPath(player, heraldTrader);
+}
+
+function showHeraldTrade() {
+    if (!nearHeraldTrader()) return;
+
+    const available = inventory.hasHeraldSoul;
+    const chosen = inventory.heraldSoul.reward;
+    const chosenItem = chosen ? ITEMS[chosen] : null;
+
+    setMenu('heraldTrade', `
+        <div class="eyebrow">SERVANT OF GOD · WITNESS OF VICTORY</div>
+        <h2>MALAKH OF THE LAMPSTANDS</h2>
+
+        <p>“Fear not. I am sent to witness what was overcome.”</p>
+        <p>“Give glory to God. I am His servant.”</p>
+
+        <p>${available
+            ? '“The herald’s soul may be surrendered for a remembrance of victory.”'
+            : inventory.heraldSoul.spent
+                ? '“The exchange is sealed. Walk faithfully.”'
+                : '“No soul of the herald remains in your keeping.”'
+        }</p>
+
+        <p class="small">
+            Soul of the Herald of the Eclipse: ${available ? '1' : '0'}
+            ${chosenItem ? `<br>Relic received: ${chosenItem.name}` : ''}
+        </p>
+
+        ${available ? `
+            <p>“Choose one relic. The soul will be consumed.”</p>
+
+            <div class="row">
+                <span>
+                    Eclipse Herald Blade<br>
+                    <small>4 kg · Existing sword moves and damage</small>
+                </span>
+                <button data-herald-reward="eclipse_herald_blade">
+                    TRADE SOUL FOR BLADE
+                </button>
+            </div>
+
+            <div class="row">
+                <span>
+                    Crown of the Eclipse Herald<br>
+                    <small>5.5 kg · 4.5% armor · 10 poise</small>
+                </span>
+                <button data-herald-reward="rahu_ketu_crown">
+                    TRADE SOUL FOR CROWN
+                </button>
+            </div>
+
+            <p class="small">
+                One soul grants one relic. Equip acquired relics at the sanctuary altar.
+            </p>
+        ` : ''}
+
+        <button id="leaveHerald">LEAVE</button>
+    `);
+
+    $('panel').querySelectorAll('[data-herald-reward]').forEach(button => {
+        button.onclick = () => {
+            if (mode !== 'heraldTrade' || !nearHeraldTrader()) return;
+
+            const id = button.dataset.heraldReward;
+            if (!inventory.tradeHeraldSoul(id)) return;
+
+            game.toast(`RELIC ACQUIRED — ${ITEMS[id].name}`, 4);
+            showHeraldTrade();
+        };
+    });
+
+    $('leaveHerald').onclick = resume;
+}
 
 function nearAltar() {
     return player.position.distanceTo(world.altar) < 4.2;
@@ -390,6 +640,12 @@ function updateHUD() {
         `FLASKS ${player.flasks}/3 · GRACE ${progression.grace}` +
         ` · SCRAP ${progression.scrap} · FREED ${progression.converts}`;
 
+    if (inventory.heraldSoul.awarded) {
+        $('resources').textContent += inventory.hasHeraldSoul
+            ? ' · HERALD SOUL 1'
+            : ' · HERALD SOUL EXCHANGED';
+    }
+
     $('load').textContent =
         `LOAD ${(inventory.weight / progression.maxLoad * 100).toFixed(1)}%` +
         ` · ${player.tier.name}`;
@@ -429,6 +685,12 @@ function updateHUD() {
         hint = '[E] REST & LEVEL UP · [I] EQUIPMENT';
     }
 
+    if (nearHeraldTrader()) {
+        hint = inventory.hasHeraldSoul
+            ? '[E] SPEAK TO MALAKH · BOSS SOUL ACQUIRED · CHOOSE ONE RELIC'
+            : '[E] SPEAK TO MALAKH OF THE LAMPSTANDS';
+    }
+
     const broken = enemies.find(enemy =>
         enemy.alive &&
         enemy.broken &&
@@ -451,6 +713,7 @@ function updateHUD() {
 
 function tick(dt) {
     game.time += dt;
+    heraldTrader.update(game.time);
     input.advance();
 
     if (input.take('lock') && player.alive) toggleLock();
@@ -470,6 +733,9 @@ function tick(dt) {
                 droppedGrace = null;
                 graceMarker.visible = false;
                 game.toast('GRACE RECOVERED');
+            } else if (nearHeraldTrader()) {
+                showHeraldTrade();
+                return;
             } else if (nearAltar()) {
                 rest();
                 return;

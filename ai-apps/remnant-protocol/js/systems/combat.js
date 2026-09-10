@@ -191,6 +191,7 @@ export class Combat {
             game.world.eclipse(false);
             game.toast('ARCHON VANQUISHED', 6);
             game.sound.playPrayer();
+            game.awardHeraldSoul();
         } else if (converted) {
             progression.grace += 120;
             progression.converts++;

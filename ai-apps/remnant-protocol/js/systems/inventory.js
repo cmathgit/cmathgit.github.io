@@ -1,4 +1,18 @@
 export const ITEMS = {
+    rahu_ketu_crown: {
+        name: 'Crown of the Eclipse Herald',
+        slot: 'head',
+        weight: 5.5,
+        armor: 0.045,
+        poise: 10
+    },
+    eclipse_herald_blade: {
+        name: 'Eclipse Herald Blade',
+        slot: 'weapon',
+        weight: 4,
+        armor: 0,
+        poise: 0
+    },
     initiate_mask: {
         name: 'Initiate Mask',
         slot: 'head',
@@ -167,6 +181,13 @@ export class Inventory {
             'helmet', 'breastplate', 'iron', 'siege',
             'belt', 'greaves', 'shield', 'sword'
         ]);
+
+        // Kept through death/rest; recreated on browser refresh.
+        this.heraldSoul = {
+            awarded: false,
+            spent: false,
+            reward: null
+        };
     }
 
     get items() {
@@ -198,6 +219,35 @@ export class Inventory {
         if (this.owns(id)) return false;
 
         this.owned.add(id);
+        return true;
+    }
+
+    get hasHeraldSoul() {
+        return this.heraldSoul.awarded && !this.heraldSoul.spent;
+    }
+
+    awardHeraldSoul() {
+        if (this.heraldSoul.awarded) return false;
+
+        this.heraldSoul.awarded = true;
+        return true;
+    }
+
+    tradeHeraldSoul(id) {
+        const allowed = (
+            id === 'rahu_ketu_crown' ||
+            id === 'eclipse_herald_blade'
+        );
+
+        if (!allowed || !this.hasHeraldSoul || this.owns(id)) {
+            return false;
+        }
+
+        // Synchronous exchange: repeated clicks cannot grant another reward.
+        if (!this.acquire(id)) return false;
+
+        this.heraldSoul.spent = true;
+        this.heraldSoul.reward = id;
         return true;
     }
 

@@ -486,6 +486,84 @@ function addEnemyArmorLayers(rig) {
     }
 }
 
+function addHeraldRewardLayers(rig) {
+    const visuals = rig.equipmentVisuals;
+    if (!visuals || visuals.layers.head.rahu_ketu_crown) return;
+
+    const palette = {
+        armor: metal(0x302c45, 0.35),
+        dark: metal(0x11121d, 0.6),
+        trim: metal(0xc9a354, 0.3),
+        light: energy(0xb87cff, 2.2)
+    };
+
+    // Helmet decoration follows the existing animated head joint.
+    const crown = joint(rig.head, 'rahu-ketu-crown');
+    makeHelmet(crown, palette, 'boss');
+    ring(crown, palette.trim, 0, 0.16, -0.12, 0.31);
+
+    for (const side of [-1, 1]) {
+        orb(
+            crown, palette.light,
+            side * 0.19, 0.08, 0.21,
+            0.035, 0.025, 0.018
+        );
+    }
+
+    crown.visible = false;
+    visuals.layers.head.rahu_ketu_crown = [crown];
+
+    // Keep rig.weapon itself intact: animations still use the same joint.
+    const sword = joint(rig.weapon, 'original-sword-layer');
+
+    for (const child of [...rig.weapon.children]) {
+        if (child !== sword) sword.add(child);
+    }
+
+    const blade = joint(rig.weapon, 'eclipse-herald-blade-layer');
+
+    plate(blade, palette.dark, 0, 0, 0.03, 0.075, 0.09, 0.23);
+    plate(blade, palette.trim, 0, 0, 0.17, 0.44, 0.08, 0.08);
+
+    // Matches the original sword's approximate length and grip.
+    plate(blade, palette.armor, 0, 0, 0.805, 0.18, 0.065, 1.15);
+    plate(blade, palette.light, 0, 0.04, 0.805, 0.035, 0.018, 1.15);
+
+    for (const side of [-1, 1]) {
+        plate(
+            blade, palette.trim,
+            side * 0.09, 0, 0.78,
+            0.025, 0.075, 1.05
+        );
+
+        const guard = part(
+            blade, GEO.cone, palette.trim,
+            side * 0.2, 0, 0.23,
+            0.045, 0.22, 0.045
+        );
+        guard.rotation.x = Math.PI / 2;
+    }
+
+    const tip = part(
+        blade, GEO.cone, palette.light,
+        0, 0, 1.4,
+        0.09, 0.2, 0.035
+    );
+    tip.rotation.x = Math.PI / 2;
+
+    const seal = ring(blade, palette.trim, 0, 0.045, 0.36, 0.12);
+    seal.rotation.x = Math.PI / 2;
+
+    blade.visible = false;
+
+    visuals.weaponLayers = {
+        sword,
+        eclipse_herald_blade: blade
+    };
+
+    visuals.damageMaterials.push(palette.armor);
+}
+
 function buildPlayerEquipmentLayers(rig) {
     const layers = {
         head: { helmet: [] },
@@ -732,6 +810,7 @@ function buildPlayerEquipmentLayers(rig) {
     };
 
     addEnemyArmorLayers(rig);
+    addHeraldRewardLayers(rig);
 }
 
 export function applyPlayerEquipmentVisuals(rig, inventory) {
@@ -757,7 +836,22 @@ export function applyPlayerEquipmentVisuals(rig, inventory) {
 
     rig.cape.visible = Boolean(equipped.torso);
     rig.shield.visible = equipped.offhand === 'shield';
-    rig.weapon.visible = equipped.weapon === 'sword';
+
+    const weaponLayers = visuals.weaponLayers;
+
+    if (weaponLayers) {
+        for (const [id, group] of Object.entries(weaponLayers)) {
+            group.visible = equipped.weapon === id;
+        }
+
+        rig.weapon.visible = Object.prototype.hasOwnProperty.call(
+            weaponLayers,
+            equipped.weapon
+        );
+    } else {
+        rig.weapon.visible = equipped.weapon === 'sword';
+    }
+
     if (!rig.weapon.visible) rig.trail.visible = false;
 }
 
