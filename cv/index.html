@@ -541,7 +541,7 @@
             <br>
 
             <ul>
-              <b>Notable Integration Builds:</b>
+              <b>Notable Integrations:</b>
 
               <li><b>Surgical Case Management &amp; Clinical Procurement Integration:</b> Engineered a bidirectional
                 clinical procurement data exchange between an external EMR platform and Oracle Fusion ERP delivering two
@@ -570,10 +570,6 @@
                 Publisher data models, dynamically constructing REST POST payloads with base64-encoded PDFs,
                 and invoking the Oracle Fusion Cloud Payables attachments endpoint with orphan PDF detection,
                 record-level SUCCESS/ERROR status tracking, CSV error reporting, and SFTP archiving per batch run.</li>
-
-              <!--<li><b>ASN Receiving Integration:</b> Designed an Advanced Shipment Notice receiving integration processing
-        inbound shipment data from an external system into Oracle Fusion ERP SCM, ensuring accurate and timely
-        goods receipt data submission to support supply chain operations.</li>-->
 
               <li><b>SFTP Migration SCM OIC Refactor:</b> Refactored OIC file-polling orchestrations for SCM
                 integrations to redirect inbound file acquisition from a decommissioned on-premises SFTP server to a
@@ -644,19 +640,19 @@
               <font color="teal">Primary Tech-Stack: Oracle</font><br>
               <i class="fa fa-terminal fa-fw w3-margin-right w3-small w3-text-teal"></i>
               <small>
-                APEX &nbsp;|&nbsp; Oracle PL/SQL &nbsp;|&nbsp;
-                Oracle ATP Database (On-Premises &amp; Cloud) &nbsp;|&nbsp;
-                Oracle SQL Developer &nbsp;|&nbsp; SQLcl &nbsp;|&nbsp;
-                Oracle Cloud ERP (SaaS) &nbsp;|&nbsp;
-                Oracle Fusion Cloud Applications: FSCM, HCM, SCM &nbsp;|&nbsp;
-                Oracle Visual Builder Cloud Service (VBCS) &nbsp;|&nbsp;
-                Oracle BI Publisher (Interfaces &amp; Data Modeling) &nbsp;|&nbsp;
-                Oracle Cloud FBDI (Sales Orders &amp; FSCM) &nbsp;|&nbsp;
-                Oracle Integration Cloud (OIC) Gen3 (PaaS) &nbsp;|&nbsp;
-                Oracle Integration Cloud (OIC) Connectivity Agents &nbsp;|&nbsp;
+                Oracle APEX &nbsp;|&nbsp; 
+                APEXlang &nbsp;|&nbsp;
+                PL/SQL &nbsp;|&nbsp;
+                Oracle Autonomous Database (ADB) &nbsp;|&nbsp;
+                SQL Developer &nbsp;|&nbsp; 
+                SQLcl &nbsp;|&nbsp;
+                Oracle REST Data Services (ORDS) &nbsp;|&nbsp;
+                Oracle Cloud ERP (SaaS): Fusion Cloud Modules - Procurement / Financials (P2P / Sales Orders), Descriptive / Extensible Flexfields (DFF/EFF) &nbsp;|&nbsp;
+                Oracle BI Publisher (Report Development, Data Models, Layouts, Bursting & Delivery: SOAP/FTP/EMAIL)  &nbsp;|&nbsp;
+                Oracle Integration Cloud (OIC) Gen3 (PaaS) - Connectivity Agents &nbsp;|&nbsp;
                 RESTful &amp; SOAP Web Service APIs &nbsp;|&nbsp;
-                Oracle Enterprise Scheduler (ESS) &nbsp;|&nbsp;
-                Oracle Cloud Infrastructure (OCI) Compute, IaaS 
+                Oracle Enterprise Scheduler (ESS) - FBDI &nbsp;|&nbsp;
+                Oracle Cloud Infrastructure (OCI) Compute (IaaS) 
               </small>
 
               <br><br>
@@ -665,12 +661,15 @@
               <font color="teal">Other Technological Stacks and (Web) Frameworks:</font><br>
               <i class="fa fa-terminal fa-fw w3-margin-right w3-small w3-text-teal"></i>
               <small>
-                VS Code x (SQL Developer + OCI) &nbsp;|&nbsp;
+                Claude Code (Commands, Skills, Subagent, Script definitions scoped to Oracle Fusion/BI Publisher/APEX/OIC domains) &nbsp;|&nbsp;
+                VS Code x SQL Developer &nbsp;|&nbsp;
                 XSLT (Data Formatting &amp; Schemas) &nbsp;|&nbsp;
-                Cygwin POSIX Linux Distribution (CLTs) &nbsp;|&nbsp;
-                JRE (Java Runtime Environment) &nbsp;|&nbsp; JDK 11+ &nbsp;|&nbsp;
-                Linux Process Scheduler &nbsp;|&nbsp; Windows Task Scheduler &nbsp;|&nbsp;
-                MobaXterm &nbsp;|&nbsp; FileZilla &nbsp;|&nbsp; Postman
+                JRE (Java Runtime Environment) &nbsp;|&nbsp; 
+                JDK 11+ &nbsp;|&nbsp;
+                Git (Branch Management in Automated Workflows) &nbsp;|&nbsp; 
+                Confluence/Jira (Atlassian PM) &nbsp;|&nbsp;
+                WinSCP &nbsp;|&nbsp; 
+                Bruno (API CLI Client)
               </small>
 
               <br><br>
@@ -686,18 +685,24 @@
               <font color="teal">Server-Side (Backend) Development:</font><br>
               <i class="fa fa-terminal fa-fw w3-margin-right w3-small w3-text-teal"></i>
               <small>
-                XML Translation &nbsp;|&nbsp; FBDI &nbsp;|&nbsp;
-                Oracle SQL Developer &nbsp;|&nbsp; Java &nbsp;|&nbsp; Python &nbsp;|&nbsp;
-                PL/SQL Stored Procedures &nbsp;|&nbsp; Enterprise Scheduler Job Definition Management &nbsp;|&nbsp;
-                Batch Scripting &nbsp;|&nbsp; Shell Scripting (BASH) &nbsp;|&nbsp;
-                Process &amp; Service Management &nbsp;|&nbsp; SFTP &nbsp;|&nbsp; SSH &nbsp;|&nbsp;
-                ESS &nbsp;|&nbsp; RESTful API &nbsp;|&nbsp; SOAP &nbsp;|&nbsp; XSLT
+                PL/SQL Stored Procedures &amp; Oracle APEX Automation Pipelines (BI Publisher Output to ADB) in APEXlang &nbsp;|&nbsp;
+                ADB Table Design by Data Lifecycle &nbsp;|&nbsp;
+                SQL (Join Tracing, Legacy-to-Fusion Status Reconciliation) &nbsp;|&nbsp;
+                Java &nbsp;|&nbsp; Python &nbsp;|&nbsp;
+                RESTful APIs &amp; SOAP Integrations (Fusion Ingestion/Retrieval &amp; LLM Provider APIs) &nbsp;|&nbsp;
+                JSON Schema Structured Transformation &nbsp;|&nbsp;
+                XML Transformation &amp; Translation (XSLT) &nbsp;|&nbsp;
+                FBDI &amp; Enterprise Scheduler (ESS) Job Definition Management &nbsp;|&nbsp;
+                Shell Scripting (BASH / Shell Wrapper Scripts for Credential Handoff, Environment Allow-Listing, Path Normalization) &nbsp;|&nbsp;
+                Batch Scripting &nbsp;|&nbsp;
+                SFTP &amp; SSH &nbsp;|&nbsp;
+                Process &amp; Service Management
               </small>
 
               <br><br>
 
               <i class="fa fa-user-graduate fa-fw w3-margin-right w3-small w3-text-teal"></i>
-              <font color="teal">Notable Project Builds:</font><br>
+              <font color="teal">Notable Contributions:</font><br>
               <small>
                 <ul>
                   <li><b>TBD</b>
@@ -722,27 +727,14 @@
               <font color="teal">Developer Responsibilities:</font><br>
               <small>
                 <ul>
-                  <li>Implement and support Oracle Cloud Fusion Integration Applications</li>
-                  <li>Develop integrations, extensions, and custom applications using Oracle Integration Cloud (OIC), Oracle Visual Builder, and Oracle APEX to support order management processes end to end.</li>
-                  <li>Provide legacy ERP to Oracle Fusion Cloud ERP Post-Go-Live Support</li>
-                  <li>Collaborate with functional analysts, developers, and business stakeholders to deliver technical solutions aligned with business objectives and operational needs.</li>
-                  <li>Support Oracle Cloud Fusion users and day-to-day business processes.</li>
-                  <li>Build, test, and maintain integrations and custom applications using Oracle Integration Cloud (OIC), REST and SOAP APIs, file-based imports, Oracle Visual Builder, and Oracle APEX.</li>
-                  <li>Analyze and resolve production issues, including root cause analysis, data corrections, and reprocessing support.</li>
-                  <li>Partner with functional analysts and business users to understand requirements and implement technical solutions.</li>
-                  <li>Support troubleshooting, testing, and deployment of integrations and extensions across environments.</li>
-                  <li>Maintain technical documentation and supporting knowledge transfer for ongoing support.</li>
-                  <li>ERP technical development, including integrations, custom applications, and extensions.</li>
-                  <li>Acquiring hands-on experience with Oracle Fusion Cloud ERP and Oracle Integration Cloud (OIC).</li>
-                  <li>Building knowledge of Oracle Fusion Cloud ERP architecture and APIs</li>
-                  <li>Building Oracle Integration Cloud (OIC) and REST and SOAP web services</li>
-                  <li>Building applications with Oracle Visual Builder and Oracle APEX development and related REST and SOAP based integrations including use of SQL, PL/SQ and Groocy for configurations and extension development.</li>
-                  <li>Building knowledge of Order Management business processes within Oracle Fusion ERP.</li>
-                  <li>Demonstrating strong analytical, troubleshooting, and communication skills.</li>
-                  <li>Building knowledge of event-driven architecture and middleware platforms</li>
-                  <li>Oracle certifications in OIC, Visual Builder, or Fusion ERP.</li>
-                  <li>Live out Lifeways mission and values, showing deep commitment to Kingdom work.</li>
-                  <li>Remain actively involved in an evangelical Christian church.</li>
+                  <li><b>Oracle Fusion Implementation &amp; Integration:</b> Served as key contributor and go-live product integration support owner of the Oracle Fusion Cloud ERP implementation; spearheaded legacy system migration to Oracle Fusion SCM/FIN/HCM utilizing code-first development principles.</li>
+                  <li><b>End-to-End Application &amp; Integration Development:</b> Engineered, tested, and maintained robust integrations, custom extensions, and applications across Oracle Integration Cloud (OIC Gen3), Oracle APEX, and Oracle Fusion Cloud ERP modules supporting order management, procurement, and financial lifecycles via REST/SOAP APIs and FBDI/ESS file imports.</li>
+                  <li><b>AI &amp; Agentic Automation Engineering:</b> Designed agent-driven rapid-build pipelines using Claude Code commands, custom skills, hooks, and subagents to automate story-to-build-to-document lifecycles; engineered least-privilege guardrails (credential handoff, environment allow-listing, read-only enforcement) for autonomous agent access to CLI tools including SQLcl and Bruno.</li>
+                  <li><b>Real-Time Metadata Resolvers &amp; Live API Inspection:</b> Built agentic ERP configuration and Descriptive Flexfield (DFF) segment resolvers querying live Fusion REST/SOAP endpoints; diagnosed and resolved complex schema defects and REST parameter quoting discrepancies via paired testing against official Oracle documentation.</li>
+                  <li><b>Data Pipelines &amp; Autonomous Database (ADB) Architecture:</b> Designed ADP cache tables structured around entity lifecycles and built automated PL/SQL pipelines in Oracle APEX and APEXlang to ingest and transform Oracle BI Publisher extracts; built custom REST (ORDS) integrations with JSON-schema extraction for LLM-based OCR and document intelligence with real-time per-call token cost tracking.</li>
+                  <li><b>DevOps, Git Fleet &amp; Documentation Governance:</b> Managed GitHub fleet repositories, GitHub Actions CI/CD workflows, pull request reviews, and dedicated per-story branching workflows; established API-driven Confluence documentation with confirm-before-write promotion workflows.</li>
+                  <li><b>Enterprise Standards &amp; Architecture Guidelines:</b> Co-authored and established team engineering standards for Oracle Cloud integrations, including exploded BI Publisher template versioning, OIC .iar export management in GitHub, standardized catalog/project organization, and lookup conventions.</li>
+                  <li><b>Post-Go-Live Support, RCA &amp; Cross-Functional Collaboration:</b> Partnered with functional analysts and business stakeholders to translate operational needs into technical specifications; delivered post-go-live production support, root-cause analysis, data reconciliation, and reprocessing across DEV, TEST, and PROD environments.</li>
                 </ul>
               </small>
             </p>
@@ -829,7 +821,7 @@
               <br><br>
 
               <i class="fa fa-user-graduate fa-fw w3-margin-right w3-small w3-text-teal"></i>
-              <font color="teal">Notable OIC Contributions &amp; Accomplishments:</font><br>
+              <font color="teal">Notable Contributions:</font><br>
               <small>
                 <ul>
                   <li><b>Surgical Case Management &amp; Clinical Procurement Integration</b>
@@ -879,13 +871,6 @@
                         a complete audit trail per run.</li>
                     </ul>
                   </li>
-
-                  <!--<li><b>ASN Receiving Integration</b>
-          <ul>
-            <li>Designed an Advanced Shipment Notice (ASN) receiving integration processing inbound shipment data from an external system into Oracle Fusion ERP SCM, ensuring accurate and timely goods receipt data submission to support supply chain operations.</li>
-          </ul>
-        </li>-->
-
                   <li><b>SFTP Migration SCM OIC Refactor</b>
                     <ul>
                       <li>Refactored OIC file-polling orchestrations for SCM integrations to redirect inbound file
@@ -1299,14 +1284,6 @@
             <p><i>Diploma, Unofficial Graduate Transcript, and Certificate available upon request</i></p>
             <hr>
           </div>
-
-          <!--<div class="w3-container">
-          <h5 class="w3-opacity"><i class="fa fa-graduation-cap fa-fw w3-margin-right w3-small w3-text-teal"></i><b>Studied Master of Science in Computer Science / Northern Illinois University</b></h5>
-		  <h6 class="w3-text-teal"><i class="fa fa-building fa-fw w3-margin-right w3-small"></i>DeKalb, IL </h6>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right w3-small"></i> 2016 - 2017</h6>
-          <p>Studied Master of Science in Computer Science | completed 12 out of 30 credits Relational Database Management Systems Emphasis Software Analysis &amp; Design Emphasis</p>
-          <hr>
-        </div>-->
           <div class="w3-container">
             <h5 class="w3-opacity"><i
                 class="fa fa-graduation-cap fa-fw w3-margin-right w3-small w3-text-teal"></i><b>Bachelor's Degree in
